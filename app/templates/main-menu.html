@@ -1,0 +1,39 @@
+<ion-side-menus enable-menu-with-back-views="false">
+
+  <ion-side-menu-content drag-content="true" edge-drag-threshold="true">
+
+    <ion-nav-bar class="nav-title-slide-ios bar-base_color">
+      <ion-nav-back-button class="button-clear back-button">
+        <i class="icon ion-ios-arrow-left"></i>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <!--Left-menu for fix on device-width >= 768px-->
+  <!--<ion-side-menu side="left" id="main-menu-fix" width="200" expose-aside-when="large">-->
+  <ion-side-menu side="left">
+    <!--<div class="bar bar-header bar-royal">-->
+      <!--<div class="row row-center" style="text-align: center; padding-top: 8px">-->
+        <!--<div class="col"><img src="images/UbinxtAutomationLogo_Light2.png" width="26px"></div>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<ion-content class="has-header">-->
+    <ion-content>
+      <ion-list>
+
+        <ion-item nav-clear menu-close ui-sref="mainMenu.doors" ui-sref-active="menu-active" class="item-menu">
+          Doors
+        </ion-item>
+
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+
+</ion-side-menus>

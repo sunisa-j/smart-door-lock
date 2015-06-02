@@ -1,0 +1,16 @@
+//************** ionic **************
+// **** your ionic variable changes can go here ****
+
+$energized:	#FFC022;
+$font-family-base: raleway, THfont, Thonburi, "Browallia New", Arial;
+$font-family-light-sans-serif: raleway, THfont, Thonburi, "Browallia New", Arial;
+$font-size-base: 15px;
+
+// *******************************************
+@import "../bower_components/ionic/scss/ionic";
+//****************** ionic *******************
+
+// **** your variable changes can go here ****
+$base_color: $energized;
+// Your application styles go here
+
