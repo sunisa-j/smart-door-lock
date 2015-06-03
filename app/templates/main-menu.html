@@ -1,39 +1,98 @@
 <ion-side-menus enable-menu-with-back-views="false">
 
-  <ion-side-menu-content drag-content="true" edge-drag-threshold="true">
+    <ion-side-menu-content drag-content="true" edge-drag-threshold="true">
 
-    <ion-nav-bar class="nav-title-slide-ios bar-base_color">
-      <ion-nav-back-button class="button-clear back-button">
-        <i class="icon ion-ios-arrow-left"></i>
-      </ion-nav-back-button>
+        <ion-nav-bar class="nav-title-slide-ios bar-base_color">
+            <ion-nav-back-button class="button-clear back-button">
+                <i class="icon ion-ios-arrow-left"></i>
+            </ion-nav-back-button>
 
-      <ion-nav-buttons side="left">
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-      </ion-nav-buttons>
-    </ion-nav-bar>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
 
-    <ion-nav-view name="menuContent"></ion-nav-view>
-  </ion-side-menu-content>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
 
-  <!--Left-menu for fix on device-width >= 768px-->
-  <!--<ion-side-menu side="left" id="main-menu-fix" width="200" expose-aside-when="large">-->
-  <ion-side-menu side="left">
-    <!--<div class="bar bar-header bar-royal">-->
-      <!--<div class="row row-center" style="text-align: center; padding-top: 8px">-->
-        <!--<div class="col"><img src="images/UbinxtAutomationLogo_Light2.png" width="26px"></div>-->
-      <!--</div>-->
-    <!--</div>-->
+    <ion-side-menu side="left" expose-aside-when="large">
 
-    <!--<ion-content class="has-header">-->
-    <ion-content>
-      <ion-list>
+        <div class="bar bar-header menu-bar-header">
+            <div class="row row-center">
+                <div class="col col-90 relative-position">
+                    <div class="menu-bar-header-badge-position"><i class="badge badge-assertive">{{unreadMsg}}</i></div>
+                    <div>{{loginName}}</div>
+                </div>
+                <div class="col col-10"><i class="ion-ios-bell-outline" style="font-size: 28px;"></i></div>
+            </div>
+        </div>
 
-        <ion-item nav-clear menu-close ui-sref="mainMenu.doors" ui-sref-active="menu-active" class="item-menu">
-          Doors
-        </ion-item>
+        <ion-content class="has-header menu-ion-content">
+            <ul>
+                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                    <div class="col col-20">
+                        <i class="ion-ios-pie-outline menu-icon-outline" style="font-size: 30px;"></i>
+                        <i class="ion-ios-pie energized menu-icon-filled" style="font-size: 30px;"></i>
+                    </div>
+                    <div class="col col-80">
+                        Dashboard
+                    </div>
+                </li>
+                <li nav-clear menu-close ui-sref="mainMenu.doors" ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                    <div class="col col-20">
+                        <i class="flaticon-opened37 menu-icon-outline" style="font-size: 30px;"></i>
+                        <i class="flaticon-opened37 energized menu-icon-filled" style="font-size: 30px;"></i>
+                    </div>
+                    <div class="col col-80">
+                        Doors
+                    </div>
+                </li>
+                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                    <div class="col col-20">
+                        <i class="ion-ios-paper-outline menu-icon-outline" style="font-size: 30px;"></i>
+                        <i class="ion-ios-paper energized menu-icon-filled" style="font-size: 30px;"></i>
+                    </div>
+                    <div class="col col-80">
+                        Doors Request
+                    </div>
+                </li>
+                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                    <div class="col col-20">
+                        <i class="ion-ios-gear-outline menu-icon-outline" style="font-size: 32px;"></i>
+                        <i class="ion-ios-gear energized menu-icon-filled" style="font-size: 32px;"></i>
+                    </div>
+                    <div class="col col-80">
+                        Settings
+                    </div>
+                </li>
+                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                    <div class="col col-20">
+                        <i class="flaticon-power117 menu-icon-outline" style="font-size: 25px; color: #d7d7d7;"></i>
+                        <i class="flaticon-power117 energized menu-icon-filled" style="font-size: 25px;"></i>
+                    </div>
+                    <div class="col col-80">
+                        Log out
+                    </div>
+                </li>
+            </ul>
+        </ion-content>
 
-      </ion-list>
-    </ion-content>
-  </ion-side-menu>
+        <div class="bar bar-footer menu-bar-footer">
+            <ul style="width: 100%;">
+                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list-footer">
+                    <div class="col col-20">
+                        <i class="ion-ios-paper-outline menu-icon-outline" style="font-size: 30px;"></i>
+                        <i class="ion-ios-paper energized menu-icon-filled" style="font-size: 30px;"></i>
+                    </div>
+                    <div class="col col-60">
+                        Doors Approval
+                    </div>
+                    <div class="col col-20">
+                        <i class="badge badge-assertive">{{approveMsg}}</i>
+                    </div>
+                </li>
+            </ul>
+        </div>
 
+    </ion-side-menu>
 </ion-side-menus>
