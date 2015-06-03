@@ -1,10 +1,11 @@
 //************** ionic **************
 // **** your ionic variable changes can go here ****
 
-$energized:	#FFC022;
+$energized:	#FFD500;
+$assertive: #FF0700;
 $font-family-base: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: raleway, THfont, Thonburi, "Browallia New", Arial;
-$font-size-base: 15px;
+$font-size-base: 16px;
 
 // *******************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -12,8 +13,71 @@ $font-size-base: 15px;
 
 // **** your variable changes can go here ****
 $base_color: $energized;
-// Your application styles go here
+$menu-list-height: 50px;
 
-.test {
-  color: #ff0000;
+// Your application styles go here
+.badge {
+  padding: 2px 4px;
+}
+.relative-position {
+  position: relative;
+}
+.item-menu {
+  cursor: pointer;
+}
+.item-menu .col-20 {
+  text-align: center;
+}
+.menu-bar-header {
+   background: #222;
+   color: $light;
+   border: 0;
+ }
+.menu-bar-header-badge-position {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: -2px -14px 0 0;
+}
+.menu-ion-content {
+  margin-right: -2px;
+  background: #333;
+}
+.menu-list {
+  background: #333;
+  border-bottom: solid 1px #5e5e5e;
+  height: $menu-list-height;
+  color: #fff;
+}
+.menu-active {
+  border-right: solid 7px $energized;
+}
+.menu-icon-outline {
+  display: block;
+}
+.menu-icon-filled {
+  display: none;
+}
+.menu-active .menu-icon-outline {
+  display: none !important;
+}
+.menu-active .menu-icon-filled {
+  display: block !important;
+}
+.row + .row {
+  padding-top: 6px;
+  margin-top: 0;
+}
+.menu-bar-footer {
+  padding: 0;
+  background: transparent;
+  border: 0;
+  z-index: $z-index-menu-bar-header;
+  height: $menu-list-height !important;
+}
+.menu-list-footer {
+  background: #333;
+  border-top: solid 1px #5e5e5e;
+  height: $menu-list-height;
+  color: #fff;
 }
