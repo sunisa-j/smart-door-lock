@@ -48,6 +48,16 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         templateUrl: 'templates/dashboard.html'
                     }
                 }
+            },
+            {
+                name: 'settings',
+                url: '/settings',
+                views: {
+                    menuContent: {
+                        controller: 'SettingsController',
+                        templateUrl: 'templates/settings.html'
+                    }
+                }
             }
         ]
     });
