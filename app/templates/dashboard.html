@@ -1,0 +1,76 @@
+<ion-view view-title="Dashboard">
+    <ion-content style="padding-top: 4px">
+
+        <div class="row" style="padding: 3px 5px 0 5px">
+            <div class="col col-50">
+                <div class="card" style="margin: 0 2px 0 0;">
+                    <div class="item">
+                        <div class="dashboard-card-title">Doors</div>
+                        <div class="dashboard-card-desc">I can access</div>
+                        <div class="dashboard-card-icon"><i class="flaticon-opened37" style="font-size: 56px"></i></div>
+                        <div class="dashboard-card-info">In Robot <span class="dashboard-green-number">{{accessDoors}}</span> doors</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50">
+                <div class="card" style="margin: 0 2px 0 0;">
+                    <div class="item">
+                        <div class="dashboard-card-title">Unread msgs</div>
+                        <div class="dashboard-card-desc">my notifications</div>
+                        <div class="dashboard-card-icon"><i class="ion-ios-bell-outline" style="font-size: 62px"></i></div>
+                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{unreadMsgs}}</span> msgs</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding: 3px 5px 0 5px">
+            <div class="col col-50">
+                <div class="card" style="margin: 0 2px 0 0;">
+                    <div class="item">
+                        <div class="dashboard-card-title">My request</div>
+                        <div class="dashboard-card-desc">waiting for approval</div>
+                        <div class="dashboard-card-icon"><i class="ion-ios-paper-outline" style="font-size: 58px"></i></div>
+                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{thisUserRequest}}</span> req.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-50">
+                <div class="card" style="margin: 0 2px 0 0;">
+                    <div class="item">
+                        <div class="dashboard-card-title">Unread msgs</div>
+                        <div class="dashboard-card-desc">my notifications</div>
+                        <div class="dashboard-card-icon"><i class="ion-ios-checkmark-outline" style="font-size: 50px"></i></div>
+                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{peopleRequest}}</span> req.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="padding: 3px 5px 0 5px">
+            <div class="col">
+                <div class="card" style="margin: 0 2px 0 0;">
+                    <div class="item">
+                        <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expired & nearly expire</div>
+                        <div class="dashboard-card-desc flex">
+                            <span style="flex: 3;">R201, Robot</span>
+                            <span style="flex: 3;">expire: 12 Apr 2015</span>
+                            <span style="flex: 2;">&nbsp;<span class="dashboard-expire-number assertive">2</span> days ago</span>
+                        </div>
+                        <div class="dashboard-card-desc flex">
+                            <span style="flex: 3;">R300, Robot</span>
+                            <span style="flex: 3;">expire: 21 Apr 2015</span>
+                            <span style="flex: 2;">&nbsp;<span class="dashboard-expire-number calm">7</span> days later</span>
+                        </div>
+                        <div class="dashboard-card-desc flex">
+                            <span style="flex: 3;">WSN, Robot</span>
+                            <span style="flex: 3;">expire: 19 Apr 2015</span>
+                            <span style="flex: 2;">&nbsp;<span class="dashboard-expire-number calm">5</span> days later</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
