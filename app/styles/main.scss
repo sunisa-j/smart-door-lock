@@ -5,7 +5,7 @@ $energized:	#FFD500; // yellow
 $assertive: #FF0700; // red
 $balanced: #00C90D; // green
 $calm: #BFA730; // dark energized (dark yellow)
-$dark: #5E5E5E; // grey
+$dark: #5E5E5E; // dark grey
 $bar-dark-border: #525252;
 $font-family-base: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: raleway, THfont, Thonburi, "Browallia New", Arial;
@@ -33,6 +33,12 @@ ion-content {
 }
 .row, .flex {
   padding: 0px;
+}
+.item-icon-left {
+  padding-left: 74px;
+}
+.item-icon-left .icon {
+  left: 21px;
 }
 .flex {
   display: flex;
@@ -180,6 +186,9 @@ ion-content {
 .menu-active {
   border-right: solid 7px $energized;
 }
+.menu-active-footer {
+  border-right: solid 5px $energized;
+}
 .menu-icon-outline {
   display: block;
   color: #d7d7d7;
@@ -194,7 +203,6 @@ ion-content {
   display: block !important;
 }
 .row + .row {
-  padding-top: 6px;
   margin-top: 0;
 }
 .menu-bar-footer {
