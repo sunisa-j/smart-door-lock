@@ -1,21 +1,142 @@
 //************** ionic **************
 // **** your ionic variable changes can go here ****
 
-$energized:	#FFD500;
-$assertive: #FF0700;
+$energized:	#FFD500; // yellow
+$assertive: #FF0700; // red
+$balanced: #00C90D; // green
+$calm: #BFA730; // dark energized (dark yellow)
+$dark: #5E5E5E; // grey
+$bar-dark-border: #525252;
 $font-family-base: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-size-base: 16px;
+$bar-title-font-size: 20px;
+$z-index-badge: 1px;
 
 // *******************************************
 @import "../bower_components/ionic/scss/ionic";
 //****************** ionic *******************
 
 // **** your variable changes can go here ****
-$base_color: $energized;
-$menu-list-height: 50px;
+$dark_color_font: #222;
+$menu_list_height: 50px;
+$button_icon_color: $dark_color_font;
+$menu_bg: #333;
 
 // Your application styles go here
+ion-content {
+  background-color: #F5F5F5;
+}
+.card {
+  margin: 8px;
+  box-shadow: 0 1px 3px #E5E5E5;
+}
+.row, .flex {
+  padding: 0px;
+}
+.flex {
+  display: flex;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+}
+.flex-wrap {
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap;
+}
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+  -webkit-flex-wrap: wrap-reverse;
+  -moz-flex-wrap: wrap-reverse;
+  -ms-flex-wrap: wrap-reverse;
+}
+.justify-content-center {
+  justify-content: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  text-align: center;
+}
+.justify-content-flex-start {
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+}
+.justify-content-flex-end {
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
+  -moz-justify-content: flex-end;
+  -ms-justify-content: flex-end;
+}
+.justify-content-space-between {
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+}
+.justify-content-space-around {
+  justify-content: space-around;
+  -webkit-justify-content: space-around;
+  -moz-justify-content: space-around;
+  -ms-justify-content: space-around;
+}
+.align-items-center {
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -ms-align-items: center;
+}
+.align-items-flex-start {
+  align-items: flex-start;
+  -webkit-align-items: flex-start;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
+}
+.align-items-flex-end {
+  align-items: flex-end;
+  -webkit-align-items: flex-end;
+  -moz-align-items: flex-end;
+  -ms-align-items: flex-end;
+}
+.flex-direction-row {
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  -moz-flex-direction: row;
+  -ms-flex-direction: row;
+}
+.flex-direction-column {
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+}
+.align-self-center {
+  align-self: auto;
+  -webkit-align-self: auto;
+  -moz-align-self: auto;
+  -ms-align-self: auto;
+}
+.align-self-flex-start {
+  align-self: flex-start;
+  -webkit-align-self: flex-start;
+  -moz-align-self: flex-start;
+  -ms-align-self: flex-start;
+}
+.align-self-flex-end {
+  align-self: flex-end;
+  -webkit-align-self: flex-end;
+  -moz-align-self: flex-end;
+  -ms-align-self: flex-end;
+}
 .badge {
   padding: 2px 4px;
 }
@@ -33,20 +154,27 @@ $menu-list-height: 50px;
    color: $light;
    border: 0;
  }
+.menu-bar-header-notif-icon {
+  position: fixed;
+  top: 10px;
+  z-index: -1;
+  font-size: 28px;
+}
 .menu-bar-header-badge-position {
   position: absolute;
   top: 0;
   right: 0;
   margin: -2px -14px 0 0;
+  z-index: $z-index-badge;
 }
 .menu-ion-content {
   margin-right: -2px;
-  background: #333;
+  background: $menu_bg;
 }
 .menu-list {
-  background: #333;
-  border-bottom: solid 1px #5e5e5e;
-  height: $menu-list-height;
+  background: $menu_bg;
+  border-bottom: solid 1px $dark;
+  height: $menu_list_height;
   color: #fff;
 }
 .menu-active {
@@ -54,6 +182,7 @@ $menu-list-height: 50px;
 }
 .menu-icon-outline {
   display: block;
+  color: #d7d7d7;
 }
 .menu-icon-filled {
   display: none;
@@ -73,11 +202,46 @@ $menu-list-height: 50px;
   background: transparent;
   border: 0;
   z-index: $z-index-menu-bar-header;
-  height: $menu-list-height !important;
+  height: $menu_list_height !important;
 }
 .menu-list-footer {
-  background: #333;
-  border-top: solid 1px #5e5e5e;
-  height: $menu-list-height;
+  background: $menu_bg;
+  border-top: solid 1px $dark;
+  height: $menu_list_height;
   color: #fff;
+}
+.dashboard-card-title {
+  font-size: 18px;
+  color: $dark_color_font;
+  text-align: left;
+}
+.dashboard-card-desc {
+  font-size: 14px;
+  color: $dark_color_font;
+  text-align: left;
+}
+.dashboard-card-icon {
+  text-align: center;
+  height: 90px;
+  line-height: 60px;
+  padding-top: 15px;
+}
+.dashboard-card-info {
+  text-align: center;
+  font-size: 14px;
+  margin-top: -4px;
+}
+.dashboard-green-number {
+  color: $balanced;
+  font-size: 28px;
+}
+.dashboard-red-number {
+  color: $assertive;
+  font-size: 28px;
+}
+.dashboard-card-desc {
+  font-size: 12px;
+}
+.dashboard-expire-number {
+  font-size: 16px;
 }
