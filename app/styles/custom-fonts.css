@@ -1,14 +1,4 @@
 @font-face {
-  font-family: 'ralewayregular';
-  src: url('../fonts/raleway/Raleway-Medium-webfont.eot');
-  src: url('../fonts/raleway/Raleway-Medium-webfont.eot?#iefix') format('embedded-opentype'),
-  url('../fonts/raleway/Raleway-Medium-webfont.woff') format('woff'),
-  url('../fonts/raleway/Raleway-Medium-webfont.ttf') format('truetype'),
-  url('../fonts/raleway/Raleway-Medium-webfont.svg#ralewayregular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
   font-family: 'THfont';
   src: url('../fonts/THfont/thsarabunnew-webfont.eot');
   src: url('../fonts/THfont/thsarabunnew-webfont.eot?#iefix') format('embedded-opentype'),
