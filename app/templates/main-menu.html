@@ -2,13 +2,13 @@
 
     <ion-side-menu-content drag-content="true" edge-drag-threshold="true">
 
-        <ion-nav-bar class="nav-title-slide-ios bar-base_color">
+        <ion-nav-bar class="nav-title-slide-ios bar-dark">
             <ion-nav-back-button class="button-clear back-button">
                 <i class="icon ion-ios-arrow-left"></i>
             </ion-nav-back-button>
 
             <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left" style="color: #222"></button>
             </ion-nav-buttons>
         </ion-nav-bar>
 
@@ -23,13 +23,13 @@
                     <div class="menu-bar-header-badge-position"><i class="badge badge-assertive">{{unreadMsg}}</i></div>
                     <div>{{loginName}}</div>
                 </div>
-                <div class="col col-10"><i class="ion-ios-bell-outline" style="font-size: 28px;"></i></div>
+                <div class="col col-10"><i class="ion-ios-bell-outline menu-bar-header-notif-icon"></i></div>
             </div>
         </div>
 
         <ion-content class="has-header menu-ion-content">
             <ul>
-                <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                <li nav-clear menu-close ui-sref="mainMenu.dashboard" ui-sref-active="menu-active" class="item-menu row row-center menu-list">
                     <div class="col col-20">
                         <i class="ion-ios-pie-outline menu-icon-outline" style="font-size: 30px;"></i>
                         <i class="ion-ios-pie energized menu-icon-filled" style="font-size: 30px;"></i>
@@ -67,7 +67,7 @@
                 </li>
                 <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">
                     <div class="col col-20">
-                        <i class="flaticon-power117 menu-icon-outline" style="font-size: 25px; color: #d7d7d7;"></i>
+                        <i class="flaticon-power117 menu-icon-outline" style="font-size: 25px;"></i>
                         <i class="flaticon-power117 energized menu-icon-filled" style="font-size: 25px;"></i>
                     </div>
                     <div class="col col-80">
@@ -81,8 +81,8 @@
             <ul style="width: 100%;">
                 <li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list-footer">
                     <div class="col col-20">
-                        <i class="ion-ios-paper-outline menu-icon-outline" style="font-size: 30px;"></i>
-                        <i class="ion-ios-paper energized menu-icon-filled" style="font-size: 30px;"></i>
+                        <i class="ion-ios-checkmark-outline menu-icon-outline" style="font-size: 30px;"></i>
+                        <i class="ion-ios-checkmark energized menu-icon-filled" style="font-size: 30px;"></i>
                     </div>
                     <div class="col col-60">
                         Doors Approval
