@@ -68,6 +68,26 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 templateUrl: 'templates/change-passcode.html'
                             }
                         }
+                    },
+                    {
+                        name: 'manageCard',
+                        url: '/manage-card',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'SettingsController',
+                                templateUrl: 'templates/manage-card.html'
+                            }
+                        }
+                    },
+                    {
+                        name: 'about',
+                        url: '/about',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'SettingsController',
+                                templateUrl: 'templates/about.html'
+                            }
+                        }
                     }
                 ]
             }
