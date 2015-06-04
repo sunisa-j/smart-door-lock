@@ -2,9 +2,9 @@
 // **** your ionic variable changes can go here ****
 
 $energized:	#FFD500; // yellow
+$calm: #BFA730; // dark yellow
 $assertive: #FF0700; // red
 $balanced: #00C90D; // green
-$calm: #BFA730; // dark yellow
 $dark: #5E5E5E; // dark grey
 $stable: #C6C6C6; // light grey
 $bar-dark-border: #525252;
@@ -16,6 +16,9 @@ $z-index-badge: 1px;
 $button-stable-border: $stable;
 $button-font-size: 18px;
 $button-icon-size: 32px;
+$button-small-font-size: 14px !important;
+$button-small-padding: 0 10px !important;
+$button-small-icon-size: 18px;
 
 // *******************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -35,14 +38,32 @@ a {
 ion-content {
   background-color: $light;
 }
+.list {
+  padding-top: 0;
+}
 .list, .button {
   margin: 0px;
+}
+.list .title-more-than-2-lines-height {
+  height: 72px;
 }
 .list-inset {
   margin: 0 5px;
 }
 .button.button-stable.button-outline {
   color: $stable_text_color;
+}
+.list .item-button-right .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.icon-right:before {
+  margin: 5px 0px !important;
+}
+.list .item-button-right button {
+  margin: 10px 0;
+}
+.list-status-font {
+  font-size: 14px;
+}
+.list-status-font > i {
+  font-size: 18px;
 }
 .card {
   margin: 8px;
@@ -62,6 +83,14 @@ ion-content {
 }
 .item-icon-left .icon {
   left: 21px;
+  font-size: 34px;
+}
+.popup-head {
+  background-color: #eeeeee;
+  text-align: left;
+}
+.popup-title {
+  font-size: 18px;
 }
 .flex {
   display: flex;
