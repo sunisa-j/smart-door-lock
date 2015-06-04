@@ -1,4 +1,33 @@
 <ion-view view-title="Manage Card">
     <ion-content>
+
+        <div class="list">
+            <a class="item item-icon-left item-button-right title-more-than-2-lines-height">
+                <i class="icon flaticon-debit"></i>
+
+                5310240218
+                <div class="list-status-font">
+                    <i class="ion-ios-checkmark balanced"></i>
+                    &nbsp;<span class="balanced">Enabled</span>
+                </div>
+
+                <button class="button button-small button-outline icon-left ion-ios-close-outline button-assertive" ng-click="confirmEnableCard()">Disable</button>
+            </a>
+        </div>
+
+        <div class="list">
+            <a class="item item-icon-left item-button-right title-more-than-2-lines-height" style="background: lightgrey">
+                <i class="icon flaticon-debit"></i>
+
+                5310240218
+                <div class="list-status-font">
+                    <i class="ion-ios-checkmark dark"></i>
+                    &nbsp;<span class="dark">Void</span>
+                </div>
+
+                <button class="button button-small button-outline icon-left ion-ios-close-outline button-assertive" style="display:none">Disable</button>
+            </a>
+        </div>
+
     </ion-content>
 </ion-view>
