@@ -55,7 +55,19 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 views: {
                     menuContent: {
                         controller: 'SettingsController',
-                        templateUrl: 'templates/settings.html'
+                        templateUrl: 'templates/settings.html',
+                        children: [
+                            {
+                                name: 'changePasscode',
+                                url: '/change-passcode',
+                                views: {
+                                    menuContent: {
+                                        controller: 'SettingsController',
+                                        templateUrl: 'templates/change-passcode.html'
+                                    }
+                                }
+                            }
+                        ]
                     }
                 }
             }
