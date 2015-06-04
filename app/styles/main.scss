@@ -35,6 +35,10 @@ $border_color: #BCBEC0;
 
 .pointer { cursor: pointer; }
 a {  @extend .pointer; }
+// Background Class *************************************
+.stable-bg {
+  background-color: $stable;
+}
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
@@ -58,12 +62,6 @@ a {  @extend .pointer; }
 .list {
   padding: 0;
   margin: 0;
-}
-.list-status-font {
-  font-size: 14px;
-}
-.list-status-font > i {
-  font-size: 18px;
 }
 // Card *************************************************
 .card {
@@ -207,7 +205,7 @@ a {  @extend .pointer; }
 .custom-row {
   @extend .flex, .justify-content-center, .align-items-center, .pointer;
   border: solid 1px $border_color;
-  height: 56px;
+  height: 65px;
   margin-top: -1px;
 }
 .custom-row-icon {
@@ -221,12 +219,28 @@ a {  @extend .pointer; }
   text-align: left;
   padding: 0 5px;
 }
+.custom-row-font-status {
+  font-size: 13px;
+}
+.custom-row-status-icon {
+  font-size: 16px;
+}
 .custom-row-arrow {
   flex-basis: 30px;
   -webkit-flex-basis: 30px;
   -moz-flex-basis: 30px;
   font-size: 20px;
   color: $border_color;
+}
+.custom-row-button {
+  flex-basis: 84px;
+  -webkit-flex-basis: 84px;
+  -moz-flex-basis: 84px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.custom-row-button .button {
+  padding: 0 7px;
 }
 // Custom Main Menu in main-menu.html *******************
 .menu-bar-header {
