@@ -1,12 +1,12 @@
-//************** ionic **************
-// **** your ionic variable changes can go here ****
+// ************** ionic *********************************
+// **** your ionic variable changes can go here *********
 
-$energized:	#FFD500; // yellow
-$calm: #BFA730; // dark yellow
-$assertive: #FF0700; // red
-$balanced: #00C90D; // green
-$dark: #5E5E5E; // dark grey
-$stable: #C6C6C6; // light grey
+$energized:	#FFD500;  // yellow
+$calm: #BFA730;       // dark yellow
+$assertive: #FF0700;  // red
+$balanced: #00C90D;   // green
+$dark: #5E5E5E;       // dark grey
+$stable: #C6C6C6;     // light grey
 $bar-dark-border: #525252;
 $font-family-base: THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: THfont, Thonburi, "Browallia New", Arial;
@@ -16,36 +16,36 @@ $z-index-badge: 1px;
 $button-stable-border: $stable;
 $button-font-size: 18px;
 $button-icon-size: 32px;
-$button-small-font-size: 14px !important;
-$button-small-padding: 0 10px !important;
 $button-small-icon-size: 18px;
 $base-background-color: #fff;
 
-// *******************************************
+// ******************************************************
 @import "../bower_components/ionic/scss/ionic";
-//****************** ionic *******************
+// ****************** ionic *****************************
 
-// **** your variable changes can go here ****
-$dark_color_font: #222;
+// **** your variable changes can go here ***************
+$dark_font_color: #222;
+$stable_font_color: #A7A7A7;
+$menu_bg_color: #333;
 $menu_list_height: 50px;
-$button_icon_color: $dark_color_font;
-$menu_bg: #333;
-$stable_text_color: #A7A7A7;
 $custom_ion_content_bg: #F5F5F5;
+$border_color: #BCBEC0;
 
-// Your application styles go here
+// Your application styles go here **********************
 
-// <a>
-a {
-  cursor: pointer;
-}
+.pointer { cursor: pointer; }
+a {  @extend .pointer; }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
 }
-// Edit [button-stable] text color (because not variable in _variables.scss for edit) ***
+// Edit [button-stable] text color **********************
 .button.button-stable.button-outline {
-  color: $stable_text_color;
+  color: $stable_font_color;
+}
+// Button Theme *****************************************
+.button-theme {
+  @extend .button, .button-outline, .button-block, .icon-left;
 }
 // Reset row padding ************************************
 .row, .flex {
@@ -74,10 +74,13 @@ a {
 .back-text {
   visibility: hidden;
 }
-// Custom button group **********************************
-.button-div-padding {
-  padding: 0 5px;
-  width: 100%;
+// Badge ************************************************
+.badge {
+  padding: 2px 4px;
+}
+// Position *********************************************
+.relative-position {
+  position: relative;
 }
 // Popup ************************************************
 .popup-head {
@@ -86,6 +89,11 @@ a {
 }
 .popup-title {
   font-size: 18px;
+}
+// Custom button group **********************************
+.button-div-padding {
+  padding: 0 5px;
+  width: 100%;
 }
 // Flex for Scale DOM ***********************************
 .flex {
@@ -194,21 +202,33 @@ a {
 .flex-1 {
   flex: 1; -webkit-flex: 1; -moz-flex: 1; -ms-flex: 1;
 }
-// Badge ************************************************
-.badge {
-  padding: 2px 4px;
+
+// Custom Row
+.custom-row {
+  @extend .flex, .justify-content-center, .align-items-center, .pointer;
+  border: solid 1px $border_color;
+  height: 56px;
+  margin-top: -1px;
 }
-// Position *********************************************
-.relative-position {
-  position: relative;
+.custom-row-icon {
+  flex-basis: 90px;
+  -webkit-flex-basis: 90px;
+  -moz-flex-basis: 90px;
+  font-size: 40px;
+}
+.custom-row-title {
+  @extend .flex-1;
+  text-align: left;
+  padding: 0 5px;
+}
+.custom-row-arrow {
+  flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+  -moz-flex-basis: 30px;
+  font-size: 20px;
+  color: $border_color;
 }
 // Custom Main Menu in main-menu.html *******************
-.item-menu {
-  cursor: pointer;
-}
-.item-menu .col-20 {
-  text-align: center;
-}
 .menu-bar-header {
    background: #222;
    color: $light;
@@ -229,10 +249,10 @@ a {
 }
 .menu-ion-content {
   margin-right: -2px;
-  background: $menu_bg;
+  background: $menu_bg_color;
 }
 .menu-list {
-  background: $menu_bg;
+  background: $menu_bg_color;
   border-bottom: solid 1px $dark;
   height: $menu_list_height;
   color: #fff;
@@ -264,7 +284,7 @@ a {
   height: $menu_list_height !important;
 }
 .menu-list-footer {
-  background: $menu_bg;
+  background: $menu_bg_color;
   border-top: solid 1px $dark;
   height: $menu_list_height;
   color: #fff;
@@ -278,12 +298,12 @@ a {
 }
 .dashboard-card-title {
   font-size: 18px;
-  color: $dark_color_font;
+  color: $dark_font_color;
   text-align: left;
 }
 .dashboard-card-desc {
   font-size: 14px;
-  color: $dark_color_font;
+  color: $dark_font_color;
   text-align: left;
 }
 .dashboard-card-icon {
