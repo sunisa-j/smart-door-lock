@@ -4,14 +4,18 @@
 $energized:	#FFD500; // yellow
 $assertive: #FF0700; // red
 $balanced: #00C90D; // green
-$calm: #BFA730; // dark energized (dark yellow)
+$calm: #BFA730; // dark yellow
 $dark: #5E5E5E; // dark grey
+$stable: #C6C6C6; // light grey
 $bar-dark-border: #525252;
 $font-family-base: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: raleway, THfont, Thonburi, "Browallia New", Arial;
 $font-size-base: 16px;
 $bar-title-font-size: 20px;
 $z-index-badge: 1px;
+$button-stable-border: $stable;
+$button-font-size: 18px;
+$button-icon-size: 32px;
 
 // *******************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -22,17 +26,33 @@ $dark_color_font: #222;
 $menu_list_height: 50px;
 $button_icon_color: $dark_color_font;
 $menu_bg: #333;
+$stable_text_color: #A7A7A7;
 
 // Your application styles go here
 a {
   cursor: pointer;
 }
 ion-content {
-  background-color: #F5F5F5;
+  background-color: $light;
+}
+.list, .button {
+  margin: 0px;
+}
+.list-inset {
+  margin: 0 5px;
+}
+.button.button-stable.button-outline {
+  color: $stable_text_color;
 }
 .card {
   margin: 8px;
   box-shadow: 0 1px 3px #E5E5E5;
+}
+.back-text {
+  display: none;
+}
+.button-div-padding {
+  padding: 5px;
 }
 .row, .flex {
   padding: 0px;
@@ -145,6 +165,12 @@ ion-content {
   -webkit-align-self: flex-end;
   -moz-align-self: flex-end;
   -ms-align-self: flex-end;
+}
+.flex-1 {
+  flex: 1;
+  -webkit-flex: 1;
+  -moz-flex: 1;
+  -ms-flex: 1;
 }
 .badge {
   padding: 2px 4px;
