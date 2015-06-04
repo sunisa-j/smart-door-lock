@@ -90,6 +90,28 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         }
                     }
                 ]
+            },
+            {
+                name: 'notifications',
+                url: '/notifications',
+                views: {
+                    menuContent: {
+                        controller: 'NotificationsController',
+                        templateUrl: 'templates/notifications.html'
+                    }
+                },
+                children: [
+                    {
+                        name: 'notification',
+                        url: '/notification/:notificationId',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'NotificationsController',
+                                templateUrl: 'templates/notification.html'
+                            }
+                        }
+                    }
+                ]
             }
         ]
     });
