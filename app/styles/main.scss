@@ -24,6 +24,9 @@ $button_icon_color: $dark_color_font;
 $menu_bg: #333;
 
 // Your application styles go here
+a {
+  cursor: pointer;
+}
 ion-content {
   background-color: #F5F5F5;
 }
