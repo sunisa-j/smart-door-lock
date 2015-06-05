@@ -19,11 +19,16 @@
 
         <div class="bar bar-header menu-bar-header">
             <div class="row row-center">
-                <div class="col col-90 relative-position">
-                    <div class="menu-bar-header-badge-position"><i class="badge badge-assertive">{{unreadMsg}}</i></div>
+                <div class="col col-80 relative-position">
+                    <div class="menu-bar-header-badge-position pointer" nav-clear menu-close ui-sref="mainMenu.notifications">
+                        <i class="badge badge-assertive">{{unreadMsg}}</i>
+                    </div>
                     <div>&nbsp;{{loginName}}</div>
                 </div>
-                <div class="col col-10"><i class="ion-ios-bell-outline menu-bar-header-notif-icon"></i></div>
+                <div class="col col-20 notif-div" nav-clear menu-close ui-sref="mainMenu.notifications" ui-sref-active="notif-menu-active">
+                    <i class="ion-ios-bell-outline menu-bar-header-notif-icon notif-icon-outline"></i>
+                    <i class="ion-ios-bell energized menu-bar-header-notif-icon notif-icon-filled"></i>
+                </div>
             </div>
         </div>
 
