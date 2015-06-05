@@ -37,7 +37,29 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         controller: 'DoorsController',
                         templateUrl: 'templates/doors.html'
                     }
-                }
+                },
+                children: [
+                    {
+                        name: 'doorInfo',
+                        url: '/door-info/:doorId',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'DoorInfoController',
+                                templateUrl: 'templates/door-info.html'
+                            }
+                        }
+                    },
+                    {
+                        name: 'configDoor',
+                        url: '/config-door',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'DoorInfoController',
+                                templateUrl: 'templates/config-door.html'
+                            }
+                        }
+                    }
+                ]
             },
             {
                 name: 'dashboard',
