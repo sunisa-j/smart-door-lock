@@ -18,6 +18,7 @@ $button-font-size: 18px;
 $button-icon-size: 32px;
 $button-small-icon-size: 18px;
 $base-background-color: #fff;
+$popup-width: 300px;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -51,6 +52,12 @@ a {  @extend .pointer; }
 .button-theme {
   @extend .button, .button-outline, .button-block, .icon-left;
 }
+.button-icon-size {
+  font-size: $button-icon-size;
+}
+.button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.button-theme:before, .button-small.icon-right:before {
+  line-height: 100%;
+}
 // Reset row padding ************************************
 .row, .flex {
   padding: 0px;
@@ -83,7 +90,7 @@ a {  @extend .pointer; }
 // Popup ************************************************
 .popup-head {
   background-color: #eeeeee;
-  text-align: left;
+  text-align: center;
 }
 .popup-title {
   font-size: 18px;
@@ -200,6 +207,12 @@ a {  @extend .pointer; }
 .flex-1 {
   flex: 1; -webkit-flex: 1; -moz-flex: 1; -ms-flex: 1;
 }
+.flex-basis-30 {
+  flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+  -moz-flex-basis: 30px;
+  -ms-flex-basis: 30px;
+}
 
 // Custom Row
 .custom-row {
@@ -280,9 +293,11 @@ a {  @extend .pointer; }
 .menu-icon-outline {
   display: block;
   color: #d7d7d7;
+  text-align: center;
 }
 .menu-icon-filled {
   display: none;
+  text-align: center;
 }
 .menu-active .menu-icon-outline {
   display: none !important;
