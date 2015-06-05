@@ -1,5 +1,5 @@
 'use strict';
 
-window.app.controller('DoorsController', function ($scope) {
-  $scope.hi = 'Hi!';
+window.app.controller('DoorsController', function () {
+
 });
