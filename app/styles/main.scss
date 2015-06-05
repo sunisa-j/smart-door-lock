@@ -27,6 +27,7 @@ $popup-width: 300px;
 // **** your variable changes can go here ***************
 $dark_font_color: #222;
 $stable_font_color: #A7A7A7;
+$medium_font_size: 14px;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F5F5F5;
@@ -37,6 +38,13 @@ $custom_row_base_height: 65px;
 
 .pointer { cursor: pointer; }
 a {  @extend .pointer; }
+.overflow-hidden-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stable-font-color { color: $stable_font_color; }
+.medium-font-size { font-size: $medium_font_size; }
 // Background Class *************************************
 .stable-bg {
   background-color: $stable;
@@ -232,6 +240,9 @@ a {  @extend .pointer; }
   @extend .flex-1;
   text-align: left;
   padding: 0 5px;
+}
+.custom-row-title div {
+  @extend .overflow-hidden-text;
 }
 .custom-row-font-status {
   font-size: 13px;
