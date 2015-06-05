@@ -1,0 +1,111 @@
+<ion-view view-title="WSN">
+    <ion-content>
+
+        <div class="item item-divider">Door Information</div>
+
+        <div class="door-custom-row">
+            <div class="custom-row-icon">
+                <div class="door-status-icon" ng-hide="true">
+                    <i class="ion-ios-locked balanced"></i>
+                </div>
+                <i class="flaticon-closed42"></i>
+            </div>
+            <div class="custom-row-title">
+                <div>R101, Robot</div>
+                <div class="custom-row-desc">1st floor</div>
+                <div class="custom-row-font-status balanced" ng-hide="true">
+                    Locked
+                </div>
+            </div>
+            <div class="custom-row-button" ng-hide="true">
+                <button class="button-theme button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
+            </div>
+        </div>
+
+        <div class="item item-divider">My Access Time</div>
+
+        <div style="padding: 5px">
+            <!--custom time-->
+            <div class="flex" style="font-size: 13px; padding: 10px;">
+                <div style="flex-basis: 168px;">
+                    1 Apr 2015 - 30 Apr 2015
+                </div>
+                <div class="flex-1 flex flex-direction-column" style="border-left: solid 1px #e5e5e5; padding-left: 5px;">
+                    <div class="flex-1" style="height: 24px;">
+                        <span class="day-circle energized-bg">M</span>
+                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
+                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
+                        <span class="day-circle orange-bg thursday-circle-margin">Th</span>
+                        <span class="day-circle positive-bg friday-circle-margin">F</span>
+                        <span class="day-circle violet-bg saturday-circle-margin">Sa</span>
+                        <span class="day-circle assertive-bg sunday-circle-margin">S</span>
+                    </div>
+                    <div class="flex-1">01.30 am - 04.30 pm</div>
+                </div>
+            </div>
+            <!--privacy time-->
+            <div class="flex" style="font-size: 13px; padding: 10px;">
+                <div style="flex-basis: 168px;">
+                    Term 1/2015<br>
+                    <span style="font-size: 11px; color: #a7a7a7; margin-top: -5px; position: absolute;">1 Apr 2015 - 30 Apr 2015</span>
+                </div>
+                <div class="flex-1 flex flex-direction-column" style="border-left: solid 1px #e5e5e5; padding-left: 5px;">
+                    <div class="flex-1" style="height: 24px;">
+                        <span class="day-circle energized-bg">M</span>
+                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
+                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
+                        <span class="day-circle orange-bg thursday-circle-margin">Th</span>
+                        <span class="day-circle positive-bg friday-circle-margin">F</span>
+                        <span class="day-circle violet-bg saturday-circle-margin">Sa</span>
+                        <span class="day-circle assertive-bg sunday-circle-margin">S</span>
+                    </div>
+                    <div class="flex-1" style="height: 34px;">
+                        Working Time<br>
+                        <span style="font-size: 11px; color: #a7a7a7; margin-top: -5px; position: absolute;">08.30 am - 04.30 pm</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="item item-divider">My Recent Activity</div>
+
+        <div style="padding: 15px">
+            <div class="flex" style="font-size: 14px; padding: 5px 0;">
+                <div style="flex-basis: 168px;">10 Apr 2015 08:30:00</div>
+                <div class="flex-1" style="color: #666;">Unlocked door by card</div>
+            </div>
+            <div class="flex" style="font-size: 14px; padding: 5px 0;">
+                <div style="flex-basis: 168px;">10 Apr 2015 00:10:44</div>
+                <div class="flex-1" style="color: #666;">Unlocked door by mobile</div>
+            </div>
+            <div class="flex" style="font-size: 14px; padding: 5px 0;">
+                <div style="flex-basis: 168px;">09 Apr 2015 08:30:00</div>
+                <div class="flex-1" style="color: #666;">Unlocked door by card</div>
+            </div>
+            <button class="button-theme button-stable" style="width: 200px; margin: auto; margin-top: 10px;">More Activity ...</button>
+        </div>
+
+    </ion-content>
+
+    <div class="tabs-striped tabs-color-energized tabs-background-dark">
+        <div class="tabs">
+            <a class="tab-item active" href="#">
+                <i class="icon flaticon-opened37" style="font-size: 26px;"></i>
+                Door Info
+            </a>
+            <a class="tab-item" href="#">
+                <i class="icon ion-ios-gear"></i>
+                Config Door
+            </a>
+            <a class="tab-item" href="#">
+                <i class="icon ion-ios-paper"></i>
+                Log
+            </a>
+            <a class="tab-item" href="#">
+                <i class="icon ion-ios-personadd"></i>
+                Manage User
+            </a>
+        </div>
+    </div>
+
+</ion-view>
