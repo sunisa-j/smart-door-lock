@@ -4,9 +4,11 @@
 $energized:	#FFD500;  // yellow
 $calm: #BFA730;       // dark yellow
 $assertive: #FF0700;  // red
+$royal: #FDF7F7;      // light red
 $balanced: #00C90D;   // green
 $dark: #5E5E5E;       // dark grey
 $stable: #C6C6C6;     // light grey
+$positive: #0382BF;   // blue
 $bar-dark-border: #525252;
 $font-family-base: THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: THfont, Thonburi, "Browallia New", Arial;
@@ -19,6 +21,9 @@ $button-icon-size: 32px;
 $button-small-icon-size: 18px;
 $base-background-color: #fff;
 $popup-width: 300px;
+//$tabs-height: 56px;
+//$tabs-icon-size: 24px;
+//$tabs-text-font-size: 11px;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -33,6 +38,7 @@ $menu_list_height: 50px;
 $custom_ion_content_bg: #F5F5F5;
 $border_color: #BCBEC0;
 $custom_row_base_height: 65px;
+$doors_custom_row_height: 76px;
 
 // Your application styles go here **********************
 
@@ -47,7 +53,31 @@ a {  @extend .pointer; }
 .medium-font-size { font-size: $medium_font_size; }
 // Background Class *************************************
 .stable-bg {
-  background-color: $stable;
+  background-color: $stable !important;
+}
+.royal-bg {
+  background-color: $royal !important;
+}
+.energized-bg {
+  background-color: $energized !important;
+}
+.pink-bg {
+  background-color: #FF4540 !important;
+}
+.balanced-bg {
+  background-color: $balanced !important;
+}
+.orange-bg {
+  background-color: #FFAB00 !important;
+}
+.positive-bg {
+  background-color: $positive !important;
+}
+.violet-bg {
+  background-color: #3B14AF !important;
+}
+.assertive-bg {
+  background-color: $assertive !important;
 }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
@@ -67,6 +97,14 @@ a {  @extend .pointer; }
 .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.button-theme:before, .button-small.icon-right:before {
   line-height: 100%;
 }
+// item, item-divider ***********************************
+.item-divider {
+  height: 28px;
+  font-size: 14px;
+  padding-top: 4px;
+  border-left: 0;
+  border-right: 0;
+}
 // Reset row padding ************************************
 .row, .flex {
   padding: 0px;
@@ -84,6 +122,14 @@ a {  @extend .pointer; }
   margin: 8px;
   box-shadow: 0 1px 3px #E5E5E5;
 }
+// tabs *************************************************
+//.tab-item .icon {
+//  margin-top: -8px;
+//  height: 20px;
+//}
+//.tab-item {
+//  font-family: $font-family-base;
+//}
 // Hidden back text (show back button only)
 .back-text {
   visibility: hidden;
@@ -224,17 +270,41 @@ a {  @extend .pointer; }
 }
 
 // Custom Row
+.door-custom-row {
+  @extend .flex, .justify-content-center, .align-items-center, .pointer;
+  border: solid 1px $border_color;
+  height: $doors_custom_row_height;
+  margin-top: -1px;
+  line-height: 17px;
+  border-left: 0;
+  border-right: 0;
+}
+.door-status-icon {
+  position: absolute;
+  top: 12px;
+  left: 49px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50px;
+  border: solid 1px #ddd;
+  background: #fff;
+  font-size: 24px;
+}
 .custom-row {
   @extend .flex, .justify-content-center, .align-items-center, .pointer;
   border: solid 1px $border_color;
   height: $custom_row_base_height;
   margin-top: -1px;
+  border-left: 0;
+  border-right: 0;
 }
 .custom-row-icon {
+  @extend .relative-position;
   flex-basis: 90px;
   -webkit-flex-basis: 90px;
   -moz-flex-basis: 90px;
   font-size: 40px;
+  color: $dark;
 }
 .custom-row-title {
   @extend .flex-1;
@@ -261,11 +331,17 @@ a {  @extend .pointer; }
   flex-basis: 84px;
   -webkit-flex-basis: 84px;
   -moz-flex-basis: 84px;
-  font-size: 16px;
   margin-right: 10px;
 }
 .custom-row-button .button {
   padding: 0 7px;
+}
+.custom-row-button .button-small {
+  font-size: 14px;
+}
+.custom-row-desc {
+  font-size: 12px;
+  color: $dark_font_color;
 }
 // Custom Main Menu in main-menu.html *******************
 .menu-bar-header {
@@ -400,3 +476,23 @@ a {  @extend .pointer; }
 .dashboard-expire-row3 {
   flex: 2; -webkit-flex: 2; -moz-flex: 2;
 }
+// Custome Access Time Row ******************************
+.day-circle {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50px;
+  padding-top: 1px;
+  font-size: 15px;
+  color: $light;
+  text-align: center;
+  font-weight: bold;
+  border: solid 1px #eee;
+  background-color: #ddd;
+}
+.tuesday-circle-margin { margin-left: 28px; }
+.wednesday-circle-margin { margin-left: 56px; }
+.thursday-circle-margin { margin-left: 84px; }
+.friday-circle-margin { margin-left: 112px; }
+.saturday-circle-margin { margin-left: 140px; }
+.sunday-circle-margin { margin-left: 168px; }
