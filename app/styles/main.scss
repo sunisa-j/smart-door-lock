@@ -31,6 +31,7 @@ $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F5F5F5;
 $border_color: #BCBEC0;
+$custom_row_base_height: 65px;
 
 // Your application styles go here **********************
 
@@ -218,7 +219,7 @@ a {  @extend .pointer; }
 .custom-row {
   @extend .flex, .justify-content-center, .align-items-center, .pointer;
   border: solid 1px $border_color;
-  height: 65px;
+  height: $custom_row_base_height;
   margin-top: -1px;
 }
 .custom-row-icon {
@@ -271,7 +272,7 @@ a {  @extend .pointer; }
   position: absolute;
   top: 0;
   right: 0;
-  margin: -2px -14px 0 0;
+  margin: -2px -38px 0 0;
   z-index: $z-index-badge;
 }
 .menu-ion-content {
@@ -279,6 +280,7 @@ a {  @extend .pointer; }
   background: $menu_bg_color;
 }
 .menu-list {
+  @extend .pointer;
   background: $menu_bg_color;
   border-bottom: solid 1px $dark;
   height: $menu_list_height;
@@ -317,6 +319,24 @@ a {  @extend .pointer; }
   border-top: solid 1px $dark;
   height: $menu_list_height;
   color: #fff;
+}
+.notif-icon-outline {
+  visibility: visible;
+  color: #d7d7d7;
+}
+.notif-icon-filled {
+  visibility: hidden;
+}
+.notif-div {
+  @extend .pointer;
+  text-align: center;
+  height: 40px;
+}
+.notif-menu-active .notif-icon-outline {
+  visibility: hidden !important;
+ }
+.notif-menu-active .notif-icon-filled {
+  visibility: visible !important;
 }
 // Custom dashboard.html ********************************
 .dashboard-row {
