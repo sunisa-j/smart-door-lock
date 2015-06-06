@@ -21,9 +21,6 @@ $button-icon-size: 32px;
 $button-small-icon-size: 18px;
 $base-background-color: #fff;
 $popup-width: 300px;
-//$tabs-height: 56px;
-//$tabs-icon-size: 24px;
-//$tabs-text-font-size: 11px;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -37,6 +34,7 @@ $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F5F5F5;
 $border_color: #BCBEC0;
+$light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
 $doors_custom_row_height: 76px;
 
@@ -88,9 +86,6 @@ a {  @extend .pointer; }
   color: $stable_font_color;
 }
 // Button Theme *****************************************
-.button-theme {
-  @extend .button, .button-outline, .button-block, .icon-left;
-}
 .button-icon-size {
   font-size: $button-icon-size;
 }
@@ -120,16 +115,10 @@ a {  @extend .pointer; }
 // Card *************************************************
 .card {
   margin: 8px;
-  box-shadow: 0 1px 3px #E5E5E5;
+  box-shadow: 0 1px 3px $light_border_color;
 }
 // tabs *************************************************
-//.tab-item .icon {
-//  margin-top: -8px;
-//  height: 20px;
-//}
-//.tab-item {
-//  font-family: $font-family-base;
-//}
+
 // Hidden back text (show back button only)
 .back-text {
   visibility: hidden;
@@ -154,6 +143,11 @@ a {  @extend .pointer; }
 .button-div-padding {
   padding: 0 5px;
   width: 100%;
+}
+.more-button {
+  width: 200px !important;
+  margin: auto;
+  margin-top: 10px;
 }
 // Flex for Scale DOM ***********************************
 .flex {
@@ -476,7 +470,33 @@ a {  @extend .pointer; }
 .dashboard-expire-row3 {
   flex: 2; -webkit-flex: 2; -moz-flex: 2;
 }
-// Custome Access Time Row ******************************
+// Custom Access Time Row ******************************
+.access-time-container {
+  padding: 5px;
+}
+.access-time-padding {
+  font-size: 13px;
+  padding: 10px;
+}
+.access-time-column {
+  flex-basis: 168px;
+  -webkit-flex-basis: 168px;
+  -moz-flex-basis: 168px;
+  -ms-flex-basis: 168px;
+}
+.access-time-detail-column {
+  border-left: solid 1px $light_border_color;
+  padding-left: 5px;
+}
+.access-time-desc {
+  font-size: 11px;
+  color: $stable_font_color;
+  margin-top: -5px;
+  position: absolute;
+}
+.access-time-privacy-height {
+  height: 34px;
+}
 .day-circle {
   position: absolute;
   width: 24px;
@@ -496,3 +516,17 @@ a {  @extend .pointer; }
 .friday-circle-margin { margin-left: 112px; }
 .saturday-circle-margin { margin-left: 140px; }
 .sunday-circle-margin { margin-left: 168px; }
+.day-circle-height {
+  height: 24px;
+}
+// Log style *******************************************
+.log-container {
+  padding: 15px;
+  font-size: 14px;
+}
+.log-row-padding {
+  padding: 5px 0;
+}
+.log-detail-color {
+  color: #666;
+}
