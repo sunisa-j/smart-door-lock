@@ -1,100 +1,97 @@
 <ion-view view-title="WSN">
-    <ion-content>
 
-        <!--Door Info Content-->
-        <div ng-show="doorMenu.name=='doorInfo'">
+    <!--Door Info Content-->
+    <ion-content ng-show="doorMenu.name=='doorInfo'">
 
-            <div class="item item-divider">Door Information</div>
-            <div class="door-custom-row">
-                <div class="custom-row-icon">
-                    <div class="door-status-icon" ng-hide="true">
-                        <i class="ion-ios-locked balanced"></i>
-                    </div>
-                    <i class="flaticon-closed42"></i>
+        <div class="item item-divider">Door Information</div>
+        <div class="door-custom-row">
+            <div class="custom-row-icon">
+                <div class="door-status-icon" ng-hide="true">
+                    <i class="ion-ios-locked balanced"></i>
                 </div>
-                <div class="custom-row-title">
-                    <div>R101, Robot</div>
-                    <div class="custom-row-desc">1st floor</div>
-                    <div class="custom-row-font-status balanced" ng-hide="true">
-                        Locked
-                    </div>
-                </div>
-                <div class="custom-row-button" ng-hide="true">
-                    <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
+                <i class="flaticon-closed42"></i>
+            </div>
+            <div class="custom-row-title">
+                <div>R101, Robot</div>
+                <div class="custom-row-desc">1st floor</div>
+                <div class="custom-row-font-status balanced" ng-hide="true">
+                    Locked
                 </div>
             </div>
-
-            <div class="item item-divider">My Access Time</div>
-            <div class="access-time-container">
-                <!--custom time-->
-                <div class="flex access-time-padding">
-                    <div class="access-time-column">
-                        1 Apr 2015 - 30 Apr 2015
-                    </div>
-                    <div class="flex-1 flex flex-direction-column access-time-detail-column">
-                        <div class="flex-1 day-circle-height">
-                            <span class="day-circle energized-bg">M</span>
-                            <span class="day-circle pink-bg tuesday-circle-margin">T</span>
-                            <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
-                            <span class="day-circle thursday-circle-margin">Th</span>
-                            <span class="day-circle friday-circle-margin">F</span>
-                            <span class="day-circle saturday-circle-margin">Sa</span>
-                            <span class="day-circle sunday-circle-margin">S</span>
-                        </div>
-                        <div class="flex-1">01.30 am - 04.30 pm</div>
-                    </div>
-                </div>
-                <!--privacy time-->
-                <div class="flex access-time-padding">
-                    <div class="access-time-column">
-                        Term 1/2015<br>
-                        <span class="access-time-desc">1 Apr 2015 - 30 Apr 2015</span>
-                    </div>
-                    <div class="flex-1 flex flex-direction-column access-time-detail-column">
-                        <div class="flex-1 day-circle-height">
-                            <span class="day-circle energized-bg">M</span>
-                            <span class="day-circle pink-bg tuesday-circle-margin">T</span>
-                            <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
-                            <span class="day-circle orange-bg thursday-circle-margin">Th</span>
-                            <span class="day-circle positive-bg friday-circle-margin">F</span>
-                            <span class="day-circle violet-bg saturday-circle-margin">Sa</span>
-                            <span class="day-circle assertive-bg sunday-circle-margin">S</span>
-                        </div>
-                        <div class="flex-1 access-time-privacy-height">
-                            Working Time<br>
-                            <span class="access-time-desc">08.30 am - 04.30 pm</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="custom-row-button" ng-hide="true">
+                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
             </div>
-
-            <div class="item item-divider">My Recent Activity</div>
-            <div class="log-container">
-                <div class="flex log-row-padding">
-                    <div class="access-time-column">10 Apr 2015 08:30:00</div>
-                    <div class="flex-1 log-detail-color">Unlocked door by card</div>
-                </div>
-                <div class="flex log-row-padding">
-                    <div class="access-time-column">10 Apr 2015 00:10:44</div>
-                    <div class="flex-1 log-detail-color">Unlocked door by mobile</div>
-                </div>
-                <div class="flex log-row-padding">
-                    <div class="access-time-column">09 Apr 2015 08:30:00</div>
-                    <div class="flex-1 log-detail-color">Unlocked door by card</div>
-                </div>
-                <button class="button button-outline button-block icon-left button-stable more-button">More Activity ...</button>
-            </div>
-
         </div>
-        <!--End Door Info Content-->
 
-        <!--Config Door Content-->
-        <div ng-show="doorMenu.name=='ConfigDoor'">
-
+        <div class="item item-divider">My Access Time</div>
+        <div class="access-time-container">
+            <!--custom time-->
+            <div class="flex access-time-padding">
+                <div class="access-time-column">
+                    1 Apr 2015 - 30 Apr 2015
+                </div>
+                <div class="flex-1 flex flex-direction-column access-time-detail-column">
+                    <div class="flex-1 day-circle-height">
+                        <span class="day-circle energized-bg">M</span>
+                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
+                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
+                        <span class="day-circle thursday-circle-margin">Th</span>
+                        <span class="day-circle friday-circle-margin">F</span>
+                        <span class="day-circle saturday-circle-margin">Sa</span>
+                        <span class="day-circle sunday-circle-margin">S</span>
+                    </div>
+                    <div class="flex-1">01.30 am - 04.30 pm</div>
+                </div>
+            </div>
+            <!--privacy time-->
+            <div class="flex access-time-padding">
+                <div class="access-time-column">
+                    Term 1/2015<br>
+                    <span class="access-time-desc">1 Apr 2015 - 30 Apr 2015</span>
+                </div>
+                <div class="flex-1 flex flex-direction-column access-time-detail-column">
+                    <div class="flex-1 day-circle-height">
+                        <span class="day-circle energized-bg">M</span>
+                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
+                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
+                        <span class="day-circle orange-bg thursday-circle-margin">Th</span>
+                        <span class="day-circle positive-bg friday-circle-margin">F</span>
+                        <span class="day-circle violet-bg saturday-circle-margin">Sa</span>
+                        <span class="day-circle assertive-bg sunday-circle-margin">S</span>
+                    </div>
+                    <div class="flex-1 access-time-privacy-height">
+                        Working Time<br>
+                        <span class="access-time-desc">08.30 am - 04.30 pm</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!--End Config Door Content-->
+
+        <div class="item item-divider">My Recent Activity</div>
+        <div class="log-container">
+            <div class="flex log-row-padding">
+                <div class="access-time-column">10 Apr 2015 08:30:00</div>
+                <div class="flex-1 log-detail-color">Unlocked door by card</div>
+            </div>
+            <div class="flex log-row-padding">
+                <div class="access-time-column">10 Apr 2015 00:10:44</div>
+                <div class="flex-1 log-detail-color">Unlocked door by mobile</div>
+            </div>
+            <div class="flex log-row-padding">
+                <div class="access-time-column">09 Apr 2015 08:30:00</div>
+                <div class="flex-1 log-detail-color">Unlocked door by card</div>
+            </div>
+            <button class="button button-outline button-block icon-left button-stable more-button">More Activity ...</button>
+        </div>
 
     </ion-content>
+    <!--End Door Info Content-->
+
+    <!--Config Door Content-->
+    <ion-content ng-show="doorMenu.name=='ConfigDoor'" class="custom-ion-content-bg">
+        Test
+    </ion-content>
+    <!--End Config Door Content-->
 
     <!--<div class="tabs-striped tabs-color-energized tabs-background-dark taps-top">-->
         <!--<div class="tabs">-->
