@@ -48,16 +48,6 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 templateUrl: 'templates/door-info.html'
                             }
                         }
-                    },
-                    {
-                        name: 'configDoor',
-                        url: '/config-door',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'DoorInfoController',
-                                templateUrl: 'templates/config-door.html'
-                            }
-                        }
                     }
                 ]
             },
