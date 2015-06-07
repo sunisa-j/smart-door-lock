@@ -26,11 +26,11 @@
         <div class="item item-divider">My Access Time</div>
         <div class="access-time-container">
             <!--custom time-->
-            <div class="flex access-time-padding">
+            <div class="flex access-time-padding flex-wrap">
                 <div class="access-time-column">
                     1 Apr 2015 - 30 Apr 2015
                 </div>
-                <div class="flex-1 flex flex-direction-column access-time-detail-column">
+                <div class="flex flex-direction-column access-time-detail-column">
                     <div class="flex-1 day-circle-height">
                         <span class="day-circle energized-bg">M</span>
                         <span class="day-circle pink-bg tuesday-circle-margin">T</span>
@@ -44,12 +44,12 @@
                 </div>
             </div>
             <!--privacy time-->
-            <div class="flex access-time-padding">
-                <div class="access-time-column">
+            <div class="flex access-time-padding flex-wrap">
+                <div class="access-time-column access-time-privacy-height">
                     Term 1/2015<br>
                     <span class="access-time-desc">1 Apr 2015 - 30 Apr 2015</span>
                 </div>
-                <div class="flex-1 flex flex-direction-column access-time-detail-column">
+                <div class="flex flex-direction-column access-time-detail-column">
                     <div class="flex-1 day-circle-height">
                         <span class="day-circle energized-bg">M</span>
                         <span class="day-circle pink-bg tuesday-circle-margin">T</span>
@@ -69,21 +69,22 @@
 
         <div class="item item-divider">My Recent Activity</div>
         <div class="log-container">
-            <div class="flex log-row-padding">
+            <div class="flex log-row-padding flex-wrap">
                 <div class="access-time-column">10 Apr 2015 08:30:00</div>
-                <div class="flex-1 log-detail-color">Unlocked door by card</div>
+                <div class="log-detail">Unlocked door by card</div>
             </div>
-            <div class="flex log-row-padding">
+            <div class="flex log-row-padding flex-wrap">
                 <div class="access-time-column">10 Apr 2015 00:10:44</div>
-                <div class="flex-1 log-detail-color">Unlocked door by mobile</div>
+                <div class="log-detail">Unlocked door by mobile</div>
             </div>
-            <div class="flex log-row-padding">
+            <div class="flex log-row-padding flex-wrap">
                 <div class="access-time-column">09 Apr 2015 08:30:00</div>
-                <div class="flex-1 log-detail-color">Unlocked door by card</div>
+                <div class="log-detail">Unlocked door by card</div>
             </div>
             <button class="button button-outline button-block icon-left button-stable more-button">More Activity ...</button>
         </div>
 
+        <div class="footer-tabs-height"></div>
     </ion-content>
     <!--End Door Info Content-->
 
@@ -141,27 +142,86 @@
             Set date & time to unlock the door
         </div>
 
+        <div class="footer-tabs-height"></div>
     </ion-content>
     <!--End Config Door Content-->
 
-    <div class="tabs-striped tabs-color-energized tabs-background-dark taps-top">
-        <div class="tabs">
-            <a class="tab-item" ng-class="{'active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
-                <i class="icon flaticon-opened37" style="font-size: 26px;"></i>
-                Door Info
-            </a>
-            <a class="tab-item" ng-class="{'active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'">
-                <i class="icon ion-ios-gear"></i>
-                Config Door
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-ios-paper"></i>
-                Log
-            </a>
-            <a class="tab-item" href="#">
-                <i class="icon ion-ios-personadd"></i>
-                Manage User
-            </a>
+    <!--Log Content-->
+    <ion-content ng-show="doorMenu.name=='log'">
+        <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0;">
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; padding-top: 2px;">
+                <input type="date" style="width: 100%;">
+            </div>
+            <div style="flex-basis: 30px; padding-top: 2px;">
+                to
+            </div>
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-right: 0; padding-top: 2px;">
+                <input type="date" style="width: 100%;">
+            </div>
+        </div>
+        <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0; margin-top: -1px;">
+            <div style="flex-basis: 28px; padding: 10px;">
+                <i class="ion-ios-search" style="font-size: 24px;"></i>
+            </div>
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; padding-top: 2px;">
+                <input type="text" placeholder="Search Activity (unlocked, changed passcode, ..." style="width: 100%;">
+            </div>
+            <div style="padding-top: 2px;">
+                <button class="button button-stable button-small" style="border: 0; height: 42px; margin-top: -2px; border-radius: 0;">Search</button>
+            </div>
+        </div>
+
+        <div class="log-container">
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">10 Apr 2015 08:30:00</div>
+                <div class="log-detail">Unlocked door by card by 4910110555</div>
+            </div>
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">10 Apr 2015 00:10:44</div>
+                <div class="log-detail">Unlocked door by mobile by 4812346228</div>
+            </div>
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">09 Apr 2015 08:30:00</div>
+                <div class="log-detail">Unlocked door by card by 5010524884</div>
+            </div>
+        </div>
+    </ion-content>
+
+    <!--End Log Content-->
+
+    <!--User Content-->
+    <ion-content ng-show="doorMenu.name=='manageUser'" class="custom-ion-content-bg">
+    </ion-content>
+    <!--End User Content-->
+
+    <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center">
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+             ng-class="{'footer-tab-active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
+
+            <div class="footer-tab-icon tab-outline"><i class="flaticon-opened37" style="font-size: 21px;"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="flaticon-opened37" style="font-size: 21px;"></i></div>
+            <div class="footer-tab-title">Door Info</div>
+        </div>
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+             ng-class="{'footer-tab-active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'">
+
+            <div class="footer-tab-icon tab-outline"><i class="ion-ios-gear-outline"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="ion-ios-gear"></i></div>
+            <div class="footer-tab-title">Config Door</div>
+        </div>
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+             ng-class="{'footer-tab-active': doorMenu.name=='log'}" ng-click="doorMenu.name='log'">
+
+            <div class="footer-tab-icon tab-outline"><i class="ion-ios-paper-outline"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="ion-ios-paper"></i></div>
+            <div class="footer-tab-title">Log</div>
+        </div>
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+             ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'">
+
+            <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="ion-ios-personadd" style="font-size: 27px;"></i></div>
+            <div class="footer-tab-title">Manage User</div>
         </div>
     </div>
 
