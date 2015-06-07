@@ -48,6 +48,16 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 templateUrl: 'templates/door-info.html'
                             }
                         }
+                    },
+                    {
+                        name: 'myActivityLog',
+                        url: '/my-activity-log/:doorId',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'DoorInfoController',
+                                templateUrl: 'templates/my-activity-log.html'
+                            }
+                        }
                     }
                 ]
             },
