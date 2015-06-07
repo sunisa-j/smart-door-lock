@@ -7,7 +7,7 @@ $assertive: #FF0700;  // red
 $royal: #FDF7F7;      // light red
 $balanced: #00C90D;   // green
 $dark: #5E5E5E;       // dark grey
-$stable: #C6C6C6;     // light grey
+$stable: #D8D8D8;     // light grey
 $positive: #0382BF;   // blue
 $bar-dark-border: #525252;
 $font-family-base: THfont, Thonburi, "Browallia New", Arial;
@@ -22,6 +22,9 @@ $button-small-icon-size: 18px;
 $base-background-color: #fff;
 $popup-width: 300px;
 $base-color: #222;
+$tabs-height: 49px;
+$tabs-icon-size: 28px;
+$input-height-base: 42px;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -53,6 +56,23 @@ a {  @extend .pointer; }
 }
 .stable-font-color { color: $stable_font_color; }
 .medium-font-size { font-size: $medium_font_size; }
+input {
+  padding: 0 10px !important;
+}
+.bar .title {
+  left: 40px;
+  right: 40px;
+}
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  @extend .overflow-hidden-text;
+  padding-top: 7px;
+  font-size: 15px;
+  color: $dark
+}
+input::-webkit-datetime-edit, #date-time-edit {
+  color: $dark;
+  font-size: 15px;
+}
 // Background Class *************************************
 .stable-bg {
   background-color: $stable !important;
@@ -104,6 +124,7 @@ a {  @extend .pointer; }
 }
 .custom-button-right-text {
   margin-right: -10px;
+  margin-top: 3px;
   white-space: normal !important;
 }
 .custom-button-right-text .text-before-arrow-right{
@@ -153,10 +174,50 @@ a {  @extend .pointer; }
   box-shadow: 0 1px 3px $light_border_color;
 }
 // tabs *************************************************
-
+.footer-tabs-height {
+  height: $tabs-height;
+}
+.footer-tab-title {
+  @extend .flex-1;
+  font-size: 10px;
+  text-align: center;
+  padding-top: 1px;
+  height: 10px;
+}
+.footer-tab-column {
+  padding-top: 6px;
+  color: $light;
+}
+.footer-tab-column i {
+  font-size: 25px;
+}
+.footer-tab-icon {
+  @extend .flex-1;
+  height: 22px;
+}
+.footer-tab-active {
+  color: $energized;
+  border-top: solid 2px $energized;
+}
+.footer-tab-active i {
+  color: $energized;
+}
+.tab-outline {
+  display: block;
+}
+.tab-filled {
+  display: none;
+}
+.footer-tab-active .tab-outline {
+  display: none !important;
+}
+.footer-tab-active .tab-filled {
+  display: block !important;
+}
 // Hidden back text (show back button only)
 .back-text {
   visibility: hidden;
+  width: 40px;
 }
 // Badge ************************************************
 .badge {
@@ -471,6 +532,9 @@ a {  @extend .pointer; }
   color: $base-color;
   text-align: left;
 }
+.dashboard-card-desc i {
+  font-size: 14px;
+}
 .dashboard-card-icon {
   text-align: center;
   height: 90px;
@@ -514,14 +578,18 @@ a {  @extend .pointer; }
   padding: 10px;
 }
 .access-time-column {
-  flex-basis: 160px;
-  -webkit-flex-basis: 160px;
-  -moz-flex-basis: 160px;
-  -ms-flex-basis: 160px;
+  flex-basis: 162px;
+  -webkit-flex-basis: 162px;
+  -moz-flex-basis: 162px;
+  -ms-flex-basis: 162px;
 }
 .access-time-detail-column {
   border-left: solid 1px $light_border_color;
   padding-left: 5px;
+  flex-basis: 180px;
+  -webkit-flex-basis: 180px;
+  -moz-flex-basis: 180px;
+  -ms-flex-basis: 180px;
 }
 .access-time-desc {
   font-size: 11px;
@@ -530,7 +598,7 @@ a {  @extend .pointer; }
   position: absolute;
 }
 .access-time-privacy-height {
-  height: 34px;
+  height: 38px;
 }
 .day-circle {
   position: absolute;
@@ -545,12 +613,12 @@ a {  @extend .pointer; }
   border: solid 1px #eee;
   background-color: #ddd;
 }
-.tuesday-circle-margin { margin-left: 28px; }
-.wednesday-circle-margin { margin-left: 56px; }
-.thursday-circle-margin { margin-left: 84px; }
-.friday-circle-margin { margin-left: 112px; }
-.saturday-circle-margin { margin-left: 140px; }
-.sunday-circle-margin { margin-left: 168px; }
+.tuesday-circle-margin { margin-left: 27px; }
+.wednesday-circle-margin { margin-left: 54px; }
+.thursday-circle-margin { margin-left: 81px; }
+.friday-circle-margin { margin-left: 108px; }
+.saturday-circle-margin { margin-left: 135px; }
+.sunday-circle-margin { margin-left: 162px; }
 .day-circle-height {
   height: 24px;
 }
@@ -562,6 +630,6 @@ a {  @extend .pointer; }
 .log-row-padding {
   padding: 5px 0;
 }
-.log-detail-color {
+.log-detail {
   color: #666;
 }
