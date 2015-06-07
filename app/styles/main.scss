@@ -21,13 +21,14 @@ $button-icon-size: 32px;
 $button-small-icon-size: 18px;
 $base-background-color: #fff;
 $popup-width: 300px;
+$base-color: #222;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
 // ****************** ionic *****************************
 
 // **** your variable changes can go here ***************
-$dark_font_color: #222;
+$dark_font_color: #000;
 $stable_font_color: #A7A7A7;
 $medium_font_size: 14px;
 $menu_bg_color: #333;
@@ -46,6 +47,9 @@ a {  @extend .pointer; }
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.normal-white-space {
+  white-space: normal;
 }
 .stable-font-color { color: $stable_font_color; }
 .medium-font-size { font-size: $medium_font_size; }
@@ -85,12 +89,30 @@ a {  @extend .pointer; }
 .button.button-stable.button-outline {
   color: $stable_font_color;
 }
-// Button Theme *****************************************
+// Button & Toggle **************************************
 .button-icon-size {
   font-size: $button-icon-size;
 }
 .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.button-theme:before, .button-small.icon-right:before {
   line-height: 100%;
+}
+.toggle .track {
+  background-color: $light_border_color;
+}
+.toggle .handle {
+  box-shadow: none;
+}
+.custom-button-right-text {
+  margin-right: -10px;
+  white-space: normal !important;
+}
+.custom-button-right-text .text-before-arrow-right{
+  font-size: $font-size-base;
+  min-width: 100px;
+  padding: 0 10px;
+}
+.custom-button-right-text i {
+  color: $bar-dark-border;
 }
 // item, item-divider ***********************************
 .item-divider {
@@ -99,6 +121,19 @@ a {  @extend .pointer; }
   padding-top: 4px;
   border-left: 0;
   border-right: 0;
+}
+.item-note {
+  font-size: $font-size-base;
+  color: $dark_font_color;
+}
+.item-desc {
+  @extend .normal-white-space;
+  font-size: 12px;
+  color: $dark;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  background-color: transparent;
+  border: 0;
 }
 // Reset row padding ************************************
 .row, .flex {
@@ -319,7 +354,7 @@ a {  @extend .pointer; }
   -webkit-flex-basis: 30px;
   -moz-flex-basis: 30px;
   font-size: 20px;
-  color: $border_color;
+  color: $bar-dark-border;
 }
 .custom-row-button {
   flex-basis: 84px;
@@ -335,7 +370,7 @@ a {  @extend .pointer; }
 }
 .custom-row-desc {
   font-size: 12px;
-  color: $dark_font_color;
+  color: $base-color;
 }
 // Custom Main Menu in main-menu.html *******************
 .menu-bar-header {
@@ -428,12 +463,12 @@ a {  @extend .pointer; }
 }
 .dashboard-card-title {
   font-size: 18px;
-  color: $dark_font_color;
+  color: $base-color;
   text-align: left;
 }
 .dashboard-card-desc {
   font-size: 14px;
-  color: $dark_font_color;
+  color: $base-color;
   text-align: left;
 }
 .dashboard-card-icon {
@@ -479,10 +514,10 @@ a {  @extend .pointer; }
   padding: 10px;
 }
 .access-time-column {
-  flex-basis: 168px;
-  -webkit-flex-basis: 168px;
-  -moz-flex-basis: 168px;
-  -ms-flex-basis: 168px;
+  flex-basis: 160px;
+  -webkit-flex-basis: 160px;
+  -moz-flex-basis: 160px;
+  -ms-flex-basis: 160px;
 }
 .access-time-detail-column {
   border-left: solid 1px $light_border_color;
@@ -499,8 +534,8 @@ a {  @extend .pointer; }
 }
 .day-circle {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 23px;
+  height: 23px;
   border-radius: 50px;
   padding-top: 1px;
   font-size: 15px;
