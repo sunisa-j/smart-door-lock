@@ -149,25 +149,25 @@
     <!--Log Content-->
     <ion-content ng-show="doorMenu.name=='log'">
         <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0;">
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; padding-top: 2px;">
-                <input type="date" style="width: 100%;">
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0;">
+                <label><input type="date"></label>
             </div>
-            <div style="flex-basis: 30px; padding-top: 2px;">
+            <div style="flex-basis: 30px; width: 30px; font-size: 15px;">
                 to
             </div>
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-right: 0; padding-top: 2px;">
-                <input type="date" style="width: 100%;">
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-right: 0;">
+                <label><input type="date"></label>
             </div>
         </div>
         <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0; margin-top: -1px;">
-            <div style="flex-basis: 28px; padding: 10px;">
+            <div style="flex-basis: 28px; padding: 12px 10px 10px 10px; width: 28px;">
                 <i class="ion-ios-search" style="font-size: 24px;"></i>
             </div>
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; padding-top: 2px;">
-                <input type="text" placeholder="Search Activity (unlocked, changed passcode, ..." style="width: 100%;">
+            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0;">
+                <input type="text" placeholder="Search Activity (unlocked, changed passcode, ...">
             </div>
             <div style="padding-top: 2px;">
-                <button class="button button-stable button-small" style="border: 0; height: 42px; margin-top: -2px; border-radius: 0;">Search</button>
+                <button class="button button-stable button-small" style="border: 0; height: 42px; margin-top: -2px; border-radius: 0; background: #d8d8d8;">Search</button>
             </div>
         </div>
 
@@ -195,28 +195,28 @@
     <!--End User Content-->
 
     <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center">
-        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
 
             <div class="footer-tab-icon tab-outline"><i class="flaticon-opened37" style="font-size: 21px;"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="flaticon-opened37" style="font-size: 21px;"></i></div>
             <div class="footer-tab-title">Door Info</div>
         </div>
-        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-gear-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-gear"></i></div>
             <div class="footer-tab-title">Config Door</div>
         </div>
-        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='log'}" ng-click="doorMenu.name='log'">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-paper-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-paper"></i></div>
             <div class="footer-tab-title">Log</div>
         </div>
-        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column footer-tabs-height"
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
