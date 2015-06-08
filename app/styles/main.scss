@@ -78,7 +78,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   -webkit-border-radius: 0;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  padding: 6px 0px;
+  padding: 5px 0px;
   font-size: $mmedium_font_size;
   color: $stable_font_color;
 }
@@ -681,11 +681,14 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-basis: 28px;
   -ms-flex-basis: 28px;
   width: 28px;
-  padding: 12px 10px 10px 10px;
+  padding: 8px 10px;
+  background-color: $light;
+  height: 100%;
 }
 .search-icon-div i {
   font-size: 24px;
   color: $stable_font_color;
+  height: $input-height-base;
 }
 .search-input-div {
   @extend .input-height-and-border;
