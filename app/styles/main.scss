@@ -34,6 +34,7 @@ $input-height-base: 42px;
 $dark_font_color: #000;
 $stable_font_color: #A7A7A7;
 $medium_font_size: 14px;
+$mmedium_font_size: 15px;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F5F5F5;
@@ -72,18 +73,18 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   border: 0;
   height: 100%;
   width: 100%;
-  font-size: 15px;
+  font-size: $mmedium_font_size;
   -webkit-appearance: none;
   -webkit-border-radius: 0;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   padding: 6px 0px;
-  font-size: 15px;
-  color: $dark;
+  font-size: $mmedium_font_size;
+  color: $stable_font_color;
 }
 input::-webkit-datetime-edit, #date-time-edit {
-  font-size: 15px;
-  padding: 10px !important;
+  font-size: $mmedium_font_size;
+  padding: 10px 0 !important;
 }
 // Background Class *************************************
 .stable-bg {
@@ -146,6 +147,18 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .custom-button-right-text i {
   color: $bar-dark-border;
+}
+.search-button-div { padding-top: 2px; }
+.custom-search-button {
+  border: 0;
+  height: $input-height-base;
+  margin-top: -2px;
+  border-radius: 0;
+  background-color: #d8d8d8 !important;
+  padding: 10px;
+}
+.custom-search-button i {
+  font-size: 22px;
 }
 // item, item-divider ***********************************
 .item-divider {
@@ -242,7 +255,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 // Popup ************************************************
 .popup-head {
-  background-color: #eeeeee;
+  background-color: #eee;
   text-align: center;
 }
 .popup-title {
@@ -619,7 +632,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   height: 23px;
   border-radius: 50px;
   padding-top: 1px;
-  font-size: 15px;
+  font-size: $mmedium_font_size;
   color: $light;
   text-align: center;
   font-weight: bold;
@@ -645,4 +658,52 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .log-detail {
   color: #666;
+}
+// Custom Input ****************************************
+.input-height-and-border {
+  border: solid 1px $light_border_color;
+  height: $input-height-base;
+}
+.search-container-first {
+  @extend .input-height-and-border;
+  border-left: 0;
+  border-right: 0;
+}
+.search-container {
+  @extend .input-height-and-border;
+  border-left: 0;
+  border-right: 0;
+  margin-top: -1px;
+}
+.search-icon-div {
+  flex-basis: 28px;
+  -webkit-flex-basis: 28px;
+  -moz-flex-basis: 28px;
+  -ms-flex-basis: 28px;
+  width: 28px;
+  padding: 12px 10px 10px 10px;
+}
+.search-icon-div i {
+  font-size: 24px;
+  color: $stable_font_color;
+}
+.search-input-div {
+  @extend .input-height-and-border;
+  border-left: 0;
+}
+.start-date-div {
+  @extend .input-height-and-border;
+  border-left: 0;
+}
+.to-div {
+  flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+  -moz-flex-basis: 30px;
+  -ms-flex-basis: 30px;
+  width: 30px;
+  font-size: $mmedium_font_size;
+}
+.end-date-div {
+  @extend .input-height-and-border;
+  border-right: 0;
 }
