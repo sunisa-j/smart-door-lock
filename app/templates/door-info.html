@@ -148,26 +148,22 @@
 
     <!--Log Content-->
     <ion-content ng-show="doorMenu.name=='log'">
-        <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0;">
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0;">
-                <label><input type="date"></label>
-            </div>
-            <div style="flex-basis: 30px; width: 30px; font-size: 15px;">
-                to
-            </div>
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-right: 0;">
-                <label><input type="date"></label>
-            </div>
+        <div class="flex justify-content-center align-items-center search-container-first">
+            <div class="flex-1 start-date-div"><label><input type="date"></label></div>
+            <div class="to-div">to</div>
+            <div class="flex-1 end-date-div"><label><input type="date"></label></div>
         </div>
-        <div class="flex justify-content-center align-items-center" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0; border-right: 0; margin-top: -1px;">
-            <div style="flex-basis: 28px; padding: 12px 10px 10px 10px; width: 28px;">
-                <i class="ion-ios-search" style="font-size: 24px;"></i>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-icon-div">
+                <i class="ion-ios-paper-outline"></i>
             </div>
-            <div class="flex-1" style="border: solid 1px #e5e5e5; height: 42px; border-left: 0;">
-                <input type="text" placeholder="Search Activity (unlocked, changed passcode, ...">
+            <div class="flex-1 search-input-div">
+                <input type="text" placeholder="Search Activity">
             </div>
-            <div style="padding-top: 2px;">
-                <button class="button button-stable button-small" style="border: 0; height: 42px; margin-top: -2px; border-radius: 0; background: #d8d8d8;">Search</button>
+            <div class="search-button-div">
+                <button class="button button-stable button-small custom-search-button">
+                    <i class="ion-ios-search"></i>
+                </button>
             </div>
         </div>
 
