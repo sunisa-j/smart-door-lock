@@ -229,7 +229,13 @@
         <div class="item item-divider item-bg-color-on-grey-bg" style="padding: 0">
             <div class="flex">
                 <span class="manage-user-item-divider-icon">
-                    <i class="ion-edit"></i>
+                    <span class="manage-user-edit" ng-click="showDelButton.value=true" ng-hide="showDelButton.value==true">
+                        <i class="ion-edit"></i>
+                    </span>
+                    <span class="manage-user-del" ng-hide="showDelButton.value==false">
+                        <span class="manage-user-del-button" ng-click="confirmDelBox()"><i class="ion-ios-minus-outline assertive"></i></span>
+                        <span class="manage-user-done" ng-click="showDelButton.value=false">Done</span>
+                    </span>
                 </span>
                 <span class="manage-user-item-divider-count">
                     <span class="line-separate-column">|</span> 3 Members
@@ -245,69 +251,97 @@
             </div>
         </div>
 
-        <div style="padding-top: 3px;"></div>
-        <div class="row card-row-padding">
-            <div class="col">
-                <div class="card card-margin card-padding relative-position">
-                    <div class="flex align-items-center card-expiry-date-position">
-                        <span class="card-expiry-date-icon"><i class="ion-ios-clock balanced"></i></span>
-                        <span class="card-expiry-date-text">31 Jun 2015</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">User ID</span>
-                        <span class="card-value">4910110547</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">Name</span>
-                        <span class="card-value">สุนิสา จุลรัตน์</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">E-mail</span>
-                        <span class="card-value">sunisa.j@icloud.com</span>
+        <div style="padding-top: 3px;" ng-class="{'manage-user-margin-left': showDelButton.value==true}">
+            <div class="row card-row-padding relative-position">
+
+                <div class="manage-user-row-checkbox">
+                    <label class="checkbox checkbox-assertive">
+                        <input type="checkbox">
+                    </label>
+                </div>
+
+                <div class="col">
+                    <div class="card card-margin card-padding relative-position">
+
+                        <div class="flex align-items-center card-expiry-date-position">
+                            <span class="card-expiry-date-icon"><i class="ion-ios-clock balanced"></i></span>
+                            <span class="card-expiry-date-text">31 Jun 2015</span>
+                        </div>
+
+                        <div class="flex">
+                            <span class="card-title">User ID</span>
+                            <span class="card-value">4910110547</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">Name</span>
+                            <span class="card-value">สุนิสา จุลรัตน์</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">E-mail</span>
+                            <span class="card-value">sunisa.j@icloud.com</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row card-row-padding">
-            <div class="col">
-                <div class="card card-margin card-padding relative-position">
-                    <div class="flex align-items-center card-expiry-date-position">
-                        <span class="card-expiry-date-icon"><i class="ion-ios-clock energized"></i></span>
-                        <span class="card-expiry-date-text">7 days later</span>
+            <div class="row card-row-padding relative-position">
+                <div class="col">
+
+                    <div class="manage-user-row-checkbox">
+                        <label class="checkbox checkbox-assertive">
+                            <input type="checkbox">
+                        </label>
                     </div>
-                    <div class="flex">
-                        <span class="card-title">User ID</span>
-                        <span class="card-value">5312120554</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">Name</span>
-                        <span class="card-value">จิรศักดิ์ นพรัตน์</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">E-mail</span>
-                        <span class="card-value">jirasak.r@me.com</span>
+
+                    <div class="card card-margin card-padding relative-position">
+
+                        <div class="flex align-items-center card-expiry-date-position">
+                            <span class="card-expiry-date-icon"><i class="ion-ios-clock energized"></i></span>
+                            <span class="card-expiry-date-text">7 days later</span>
+                        </div>
+
+                        <div class="flex">
+                            <span class="card-title">User ID</span>
+                            <span class="card-value">5312120554</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">Name</span>
+                            <span class="card-value">จิรศักดิ์ นพรัตน์</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">E-mail</span>
+                            <span class="card-value">jirasak.r@me.com</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="row card-row-padding">
-            <div class="col">
-                <div class="card card-margin card-padding relative-position royal-bg">
-                    <div class="flex align-items-center card-expiry-date-position">
-                        <span class="card-expiry-date-icon"><i class="ion-ios-clock assertive"></i></span>
-                        <span class="card-expiry-date-text">2 days ago</span>
+            <div class="row card-row-padding relative-position">
+                <div class="col">
+
+                    <div class="manage-user-row-checkbox">
+                        <label class="checkbox checkbox-assertive">
+                            <input type="checkbox">
+                        </label>
                     </div>
-                    <div class="flex">
-                        <span class="card-title">User ID</span>
-                        <span class="card-value">4910110067</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">Name</span>
-                        <span class="card-value">จิรศักดิ์ นพรัตน์</span>
-                    </div>
-                    <div class="flex">
-                        <span class="card-title">E-mail</span>
-                        <span class="card-value">jirasak@hotmail.com</span>
+
+                    <div class="card card-margin card-padding relative-position royal-bg">
+
+                        <div class="flex align-items-center card-expiry-date-position">
+                            <span class="card-expiry-date-icon"><i class="ion-ios-clock assertive"></i></span>
+                            <span class="card-expiry-date-text">2 days ago</span>
+                        </div>
+
+                        <div class="flex">
+                            <span class="card-title">User ID</span>
+                            <span class="card-value">4910110067</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">Name</span>
+                            <span class="card-value">จิรศักดิ์ นพรัตน์</span>
+                        </div>
+                        <div class="flex">
+                            <span class="card-title">E-mail</span>
+                            <span class="card-value">jirasak@hotmail.com</span>
+                        </div>
                     </div>
                 </div>
             </div>
