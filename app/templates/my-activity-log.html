@@ -1,0 +1,37 @@
+<ion-view title="My Activity Log in WSN">
+    <ion-content>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="flex-1 start-date-div"><label><input type="date"></label></div>
+            <div class="to-div">to</div>
+            <div class="flex-1 end-date-div"><label><input type="date"></label></div>
+        </div>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-icon-div">
+                <i class="ion-ios-paper-outline"></i>
+            </div>
+            <div class="flex-1 search-input-div">
+                <input type="text" placeholder="Search Activity">
+            </div>
+            <div class="search-button-div">
+                <button class="button button-stable button-small custom-search-button">
+                    <i class="ion-ios-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="log-container">
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">10 Apr 2015 08:30:00</div>
+                <div class="log-detail">Unlocked door by card</div>
+            </div>
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">10 Apr 2015 00:10:44</div>
+                <div class="log-detail">Unlocked door by mobile</div>
+            </div>
+            <div class="flex log-row-padding flex-wrap">
+                <div class="access-time-column">09 Apr 2015 08:30:00</div>
+                <div class="log-detail">Unlocked door by card</div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
