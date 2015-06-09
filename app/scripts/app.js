@@ -51,11 +51,21 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                     },
                     {
                         name: 'myActivityLog',
-                        url: '/my-activity-log/:doorId',
+                        url: '/my-activity-log',
                         views: {
                             'menuContent@mainMenu': {
                                 controller: 'DoorInfoController',
                                 templateUrl: 'templates/my-activity-log.html'
+                            }
+                        }
+                    },
+                    {
+                        name: 'addUser',
+                        url: '/add-user',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'DoorInfoController',
+                                templateUrl: 'templates/add-user.html'
                             }
                         }
                     }
