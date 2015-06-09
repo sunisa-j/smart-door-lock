@@ -1,10 +1,18 @@
 <ion-view view-title="WSN">
 
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear" ng-show="doorMenu.name=='manageUser'">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
     <!--Door Info Content-->
     <ion-content ng-show="doorMenu.name=='doorInfo'">
 
         <div class="item item-divider">Door Information</div>
-        <div class="door-custom-row">
+        <div class="door-custom-row" style="border: 0">
             <div class="custom-row-icon">
                 <div class="door-status-icon" ng-hide="true">
                     <i class="ion-ios-locked balanced"></i>
@@ -20,6 +28,16 @@
             </div>
             <div class="custom-row-button" ng-hide="true">
                 <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
+            </div>
+        </div>
+        <div style="padding: 0 15px;">
+            <div class="flex align-items-center custom-setting-row-with-right-button" style="margin-top: -1px;">
+                <div class="custom-row-title">
+                    <div>Passcode Require</div>
+                </div>
+                <div class="custom-row-button">
+                    <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-checkmark-outline">Enable</button>
+                </div>
             </div>
         </div>
 
@@ -101,15 +119,18 @@
             Set time to lock the door after the door unlocked.
         </div>
 
-        <div class="list">
-            <div class="item item-toggle">
-                Passcode Require
-                <label class="toggle toggle-energized">
-                    <input type="checkbox">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
+        <div class="flex align-items-center custom-setting-row-with-right-button">
+            <div class="custom-row-title">
+                <div>Passcode Require</div>
+            </div>
+            <div class="custom-row-button">
+                <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-checkmark-outline">Enable</button>
+            </div>
+            <div class="custom-row-button" style="text-align: center; font-size: 28px;" ng-hide="true">
+                <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
+            </div>
+            <div class="custom-row-button" ng-hide="true">
+                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-close-outline">Enable</button>
             </div>
         </div>
         <div class="item item-desc">
