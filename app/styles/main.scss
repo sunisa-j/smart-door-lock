@@ -25,6 +25,7 @@ $base-color: #222;
 $tabs-height: 49px;
 $tabs-icon-size: 28px;
 $input-height-base: 42px;
+$item-padding: 15px;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -72,7 +73,7 @@ a {
   right: 40px !important;
 }
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-  padding: 12px 5px 10px 10px !important;
+  padding: 12px 5px 10px 15px !important;
   color: $base-color;
   background-color: $light;
   border: 0;
@@ -145,6 +146,9 @@ input::-webkit-datetime-edit, #date-time-edit {
 .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.button-theme:before, .button-small.icon-right:before {
   line-height: 100%;
 }
+.button-bar {
+  padding: 0 5px;
+}
 .toggle .track {
   background-color: $light_border_color;
 }
@@ -199,6 +203,17 @@ input::-webkit-datetime-edit, #date-time-edit {
   padding-bottom: 10px;
   background-color: transparent;
   border: 0;
+}
+.item-divider-icon {
+  color: $stable_font_color;
+  font-size: 17px;
+  position: fixed;
+  padding-left: 5px;
+}
+.item-divider-right-button {
+  float: right;
+  font-size: 25px;
+  margin-top: -3px;
 }
 // Custom Manage User Content ***************************
 .manage-user-margin-left {
@@ -532,7 +547,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-left: 0;
   border-right: 0;
   background-color: $light;
-  padding: 0 5px 0 10px;
+  padding: 0 0 0 5px;
   height: 56px;
 }
 // Card *************************************************
@@ -786,12 +801,12 @@ input::-webkit-datetime-edit, #date-time-edit {
   margin-top: -1px;
 }
 .search-icon-div {
-  flex-basis: 28px;
-  -webkit-flex-basis: 28px;
-  -moz-flex-basis: 28px;
-  -ms-flex-basis: 28px;
-  width: 28px;
-  padding: 8px 10px;
+  flex-basis: 33px;
+  -webkit-flex-basis: 33px;
+  -moz-flex-basis: 33px;
+  -ms-flex-basis: 33px;
+  width: 33px;
+  padding: 8px 15px;
   background-color: $light;
   height: 100%;
 }
@@ -822,16 +837,17 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .search-title-div {
   @extend .input-height-and-border;
-  flex-basis: 110px;
-  -webkit-flex-basis: 110px;
-  -moz-flex-basis: 110px;
-  -ms-flex-basis: 110px;
+  flex-basis: 114px;
+  -webkit-flex-basis: 114px;
+  -moz-flex-basis: 114px;
+  -ms-flex-basis: 114px;
   width: 110px;
   font-size: $mmedium_font_size;
   color: $dark;
   text-align: left;
-  padding: 10px;
+  padding: 10px 15px;
   border-right: 0;
+  border-left: 0;
   background-color: $light;
 }
 .select-div {
