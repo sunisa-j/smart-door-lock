@@ -4,7 +4,7 @@
 $energized:	#FFD500;  // yellow
 $calm: #BFA730;       // dark yellow
 $assertive: #FF0700;  // red
-$royal: #FDF7F7;      // light red
+$royal: #FDEFEF;      // light red
 $balanced: #00C90D;   // green
 $dark: #5E5E5E;       // dark grey
 $stable: #C6C6C6;     // light grey
@@ -37,7 +37,7 @@ $medium_font_size: 14px;
 $mmedium_font_size: 15px;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
-$custom_ion_content_bg: #F5F5F5;
+$custom_ion_content_bg: #F7F7F7;
 $border_color: #BCBEC0;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
@@ -70,12 +70,22 @@ a {
 textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
   padding: 12px 5px 10px 10px !important;
   color: $base-color;
+  background-color: $light;
   border: 0;
   height: 100%;
   width: 100%;
   font-size: $mmedium_font_size;
+  border-radius: 0;
   -webkit-appearance: none;
-  -webkit-border-radius: 0;
+}
+select {
+  border-radius: 0 !important;
+  border: 0;
+  padding: 0 10px;
+  background-color: $light !important;
+  height: 100%;
+  font-size: $mmedium_font_size;
+  -webkit-appearance: none;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   padding: 5px 0px;
@@ -85,6 +95,7 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 input::-webkit-datetime-edit, #date-time-edit {
   font-size: $mmedium_font_size;
   padding: 10px 0 !important;
+  background-color: $light;
 }
 // Background Class *************************************
 .stable-bg {
@@ -114,6 +125,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 .assertive-bg {
   background-color: $assertive !important;
 }
+.item-bg-color-on-grey-bg { background-color: #EFEFEF; }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
@@ -180,6 +192,27 @@ input::-webkit-datetime-edit, #date-time-edit {
   padding-bottom: 10px;
   background-color: transparent;
   border: 0;
+}
+.manage-user-item-divider-icon {
+  width: 24px;
+  font-size: 16px;
+  color: $dark;
+  padding: 5px 10px;
+}
+.manage-user-item-divider-count {
+  @extend .flex-1;
+  font-size: 12px;
+  color: $base-color;
+  padding: 5px;
+}
+.manage-user-item-divider-count .line-separate-column {
+  color: $border_color;
+}
+.select-div select.manage-user-item-divider-select {
+  font-size: 12px;
+  height: 30px;
+  background-color: #F5F5F5 !important;
+  border-left: solid 1px #ddd;
 }
 // Reset row padding ************************************
 .row, .flex {
@@ -459,6 +492,45 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: 12px;
   color: $stable_font_color;
 }
+// Card *************************************************
+.card-row-padding {
+  padding: 3px 5px 0 5px;
+}
+.card-padding {
+  padding: 7px 10px;
+  line-height: 24px;
+}
+.card-margin {
+  margin: 0;
+}
+.card-title {
+   flex-basis: 80px;
+   -webkit-flex-basis: 80px;
+   -moz-flex-basis: 80px;
+   -ms-flex-basis: 80px;
+   font-size: $medium_font_size;
+   color: $dark;
+   text-align: left;
+ }
+.card-value {
+  @extend .flex-1;
+  font-size: $medium_font_size;
+}
+.card-expiry-date-position {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.card-expiry-date-icon {
+  width: 22px;
+  font-size: 18px;
+}
+.card-expiry-date-text {
+  width: 70px;
+  font-size: 11px;
+  color: $dark;
+  line-height: 14px;
+}
 // Custom Main Menu in main-menu.html *******************
 .menu-bar-header {
    background: #222;
@@ -543,10 +615,10 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 // Custom dashboard.html ********************************
 .dashboard-row {
-  padding: 3px 5px 0 5px;
+  @extend .card-row-padding;
 }
 .dashboard-card {
-  margin: 0 2px 0 0;
+  margin: 0;
 }
 .dashboard-card-title {
   font-size: 18px;
@@ -664,11 +736,6 @@ input::-webkit-datetime-edit, #date-time-edit {
   border: solid 1px $light_border_color;
   height: $input-height-base;
 }
-.search-container-first {
-  @extend .input-height-and-border;
-  border-left: 0;
-  border-right: 0;
-}
 .search-container {
   @extend .input-height-and-border;
   border-left: 0;
@@ -710,3 +777,24 @@ input::-webkit-datetime-edit, #date-time-edit {
   @extend .input-height-and-border;
   border-right: 0;
 }
+.search-title-div {
+  @extend .input-height-and-border;
+  flex-basis: 110px;
+  -webkit-flex-basis: 110px;
+  -moz-flex-basis: 110px;
+  -ms-flex-basis: 110px;
+  width: 110px;
+  font-size: $mmedium_font_size;
+  color: $dark;
+  text-align: left;
+  padding: 10px;
+  border-right: 0;
+  background-color: $light;
+}
+.select-div {
+  height: 100%;
+}
+.select-div select {
+  width: 100%;
+}
+
