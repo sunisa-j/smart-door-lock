@@ -148,7 +148,7 @@
 
     <!--Log Content-->
     <ion-content ng-show="doorMenu.name=='log'">
-        <div class="flex justify-content-center align-items-center search-container-first">
+        <div class="flex justify-content-center align-items-center search-container">
             <div class="flex-1 start-date-div"><label><input type="date"></label></div>
             <div class="to-div">to</div>
             <div class="flex-1 end-date-div"><label><input type="date"></label></div>
@@ -182,11 +182,136 @@
             </div>
         </div>
     </ion-content>
-
     <!--End Log Content-->
 
-    <!--User Content-->
+    <!--Manage User Content-->
     <ion-content ng-show="doorMenu.name=='manageUser'" class="custom-ion-content-bg">
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-icon-div">
+                <i class="ion-ios-person-outline"></i>
+            </div>
+            <div class="flex-1 search-input-div">
+                <input type="text" placeholder="User ID or Name">
+            </div>
+            <div class="select-div" style="width: 100px;">
+                <select>
+                    <option>By User ID</option>
+                    <option>By Name</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-title-div">
+                Department
+            </div>
+            <div class="flex-1 select-div">
+                <select style="width: 100%;">
+                    <option>Computer Engineering</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-title-div">
+                Faculty
+            </div>
+            <div class="flex-1 select-div">
+                <select style="width: 100%;">
+                    <option>Engineering</option>
+                </select>
+            </div>
+            <div class="search-button-div">
+                <button class="button button-stable button-small custom-search-button">
+                    <i class="ion-ios-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="item item-divider item-bg-color-on-grey-bg" style="padding: 0">
+            <div class="flex">
+                <span class="manage-user-item-divider-icon">
+                    <i class="ion-edit"></i>
+                </span>
+                <span class="manage-user-item-divider-count">
+                    <span class="line-separate-column">|</span> 3 Members
+                </span>
+                <span class="select-div">
+                    <select class="manage-user-item-divider-select">
+                        <option>All Status</option>
+                        <option>Normal</option>
+                        <option>Near Expiry</option>
+                        <option>Expired</option>
+                    </select>
+                </span>
+            </div>
+        </div>
+
+        <div style="padding-top: 3px;"></div>
+        <div class="row card-row-padding">
+            <div class="col">
+                <div class="card card-margin card-padding relative-position">
+                    <div class="flex align-items-center card-expiry-date-position">
+                        <span class="card-expiry-date-icon"><i class="ion-ios-clock balanced"></i></span>
+                        <span class="card-expiry-date-text">31 Jun 2015</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">User ID</span>
+                        <span class="card-value">4910110547</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">Name</span>
+                        <span class="card-value">สุนิสา จุลรัตน์</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">E-mail</span>
+                        <span class="card-value">sunisa.j@icloud.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row card-row-padding">
+            <div class="col">
+                <div class="card card-margin card-padding relative-position">
+                    <div class="flex align-items-center card-expiry-date-position">
+                        <span class="card-expiry-date-icon"><i class="ion-ios-clock energized"></i></span>
+                        <span class="card-expiry-date-text">7 days later</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">User ID</span>
+                        <span class="card-value">5312120554</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">Name</span>
+                        <span class="card-value">จิรศักดิ์ นพรัตน์</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">E-mail</span>
+                        <span class="card-value">jirasak.r@me.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row card-row-padding">
+            <div class="col">
+                <div class="card card-margin card-padding relative-position royal-bg">
+                    <div class="flex align-items-center card-expiry-date-position">
+                        <span class="card-expiry-date-icon"><i class="ion-ios-clock assertive"></i></span>
+                        <span class="card-expiry-date-text">2 days ago</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">User ID</span>
+                        <span class="card-value">4910110067</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">Name</span>
+                        <span class="card-value">จิรศักดิ์ นพรัตน์</span>
+                    </div>
+                    <div class="flex">
+                        <span class="card-title">E-mail</span>
+                        <span class="card-value">jirasak@hotmail.com</span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </ion-content>
     <!--End User Content-->
 
