@@ -38,7 +38,7 @@ $mmedium_font_size: 15px;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F7F7F7;
-$border_color: #BCBEC0;
+$border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
 $doors_custom_row_height: 76px;
@@ -470,8 +470,8 @@ input::-webkit-datetime-edit, #date-time-edit {
   width: 28px;
   height: 28px;
   border-radius: 50px;
-  border: solid 1px #ddd;
-  background: #fff;
+  border: solid 1px $border_color;
+  background-color: $light;
   font-size: 24px;
 }
 .custom-row {
@@ -526,6 +526,14 @@ input::-webkit-datetime-edit, #date-time-edit {
 .custom-row-desc {
   font-size: 12px;
   color: $stable_font_color;
+}
+.custom-setting-row-with-right-button {
+  border: solid 1px $border_color;
+  border-left: 0;
+  border-right: 0;
+  background-color: $light;
+  padding: 0 5px 0 10px;
+  height: 56px;
 }
 // Card *************************************************
 .card-row-padding {
@@ -744,7 +752,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   text-align: center;
   font-weight: bold;
   border: solid 1px #eee;
-  background-color: #ddd;
+  background-color: $border_color;
 }
 .tuesday-circle-margin { margin-left: 27px; }
 .wednesday-circle-margin { margin-left: 54px; }
