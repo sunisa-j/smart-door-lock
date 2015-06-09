@@ -35,11 +35,11 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup) {
                 },{
                     text: '<div class="flex align-items-center">' +
                     '<span class="flex-basis-30">' +
-                    '<i class="button-icon-size ion-ios-checkmark-outline"></i>' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
                     '</span>' +
-                    '<span class="flex-1">Confirm</span>' +
+                    '<span class="flex-1">Delete</span>' +
                     '</div>',
-                    type: 'button-outline button-balanced',
+                    type: 'button-outline button-assertive',
                     onTap: function() {
                         $scope.deleteSelected();
                     }
