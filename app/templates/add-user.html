@@ -1,0 +1,79 @@
+<ion-view title="Add User">
+    <ion-content>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-icon-div">
+                <i class="ion-ios-person-outline"></i>
+            </div>
+            <div class="flex-1 search-input-div">
+                <input type="text" placeholder="User ID or Name">
+            </div>
+            <div class="select-div" style="width: 100px;">
+                <select>
+                    <option>By User ID</option>
+                    <option>By Name</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-title-div">
+                Department
+            </div>
+            <div class="flex-1 select-div">
+                <select style="width: 100%;">
+                    <option>Computer Engineering</option>
+                </select>
+            </div>
+        </div>
+        <div class="flex justify-content-center align-items-center search-container">
+            <div class="search-title-div">
+                Faculty
+            </div>
+            <div class="flex-1 select-div">
+                <select style="width: 100%;">
+                    <option>Engineering</option>
+                </select>
+            </div>
+            <div class="search-button-div">
+                <button class="button button-stable button-small custom-search-button">
+                    <i class="ion-ios-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="item item-divider">User Info</div>
+        <div style="padding: 10px 28px;">
+            <div class="flex">
+                <span class="card-title">User ID</span>
+                <span class="card-value">4910110547</span>
+            </div>
+            <div class="flex">
+                <span class="card-title">Name</span>
+                <span class="card-value">สุนิสา จุลรัตน์</span>
+            </div>
+            <div class="flex">
+                <span class="card-title">E-mail</span>
+                <span class="card-value">sunisa.j@icloud.com</span>
+            </div>
+        </div>
+
+        <div class="item item-divider">Permission <i class="ion-ios-information-outline item-divider-icon"></i></div>
+        <div>
+            Door access
+        </div>
+        <div>
+            Administration
+        </div>
+
+        <div class="item item-divider">Access Time <i class="ion-ios-plus-outline item-divider-right-button balanced"></i></div>
+
+        <!--Cancel & Done Button-->
+        <div class="button-bar">
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline">Cancel</button>
+            </div>
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline">Done</button>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
