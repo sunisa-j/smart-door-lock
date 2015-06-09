@@ -7,4 +7,9 @@ window.app.controller('DoorInfoController', function ($scope) {
         name: 'doorInfo'
     };
 
+    // Set Default Display Delete Button
+    $scope.showDelButton = {
+        value: false
+    };
+
 });
