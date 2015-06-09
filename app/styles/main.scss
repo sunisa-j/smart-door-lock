@@ -180,6 +180,9 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-left: 0;
   border-right: 0;
 }
+.item-divider .flex {
+  height: 28px;
+}
 .item-note {
   font-size: $font-size-base;
   color: $dark_font_color;
@@ -193,11 +196,39 @@ input::-webkit-datetime-edit, #date-time-edit {
   background-color: transparent;
   border: 0;
 }
+// Custom Manage User Content ***************************
+.manage-user-margin-left {
+  margin-left: 37px;
+}
+.manage-user-done {
+  width: 30px;
+  font-size: 14px;
+  font-weight: bold;
+  color: $balanced;
+}
 .manage-user-item-divider-icon {
+   font-size: 16px;
+   color: $dark;
+   padding: 5px 2px 5px 10px;
+ }
+.manage-user-edit {
   width: 24px;
-  font-size: 16px;
-  color: $dark;
-  padding: 5px 10px;
+}
+.manage-user-del {
+  @extend .flex, .align-items-center;
+  width: 60px;
+  height: 19px !important;
+}
+.manage-user-del-button {
+  width: 28px;
+  font-size: 24px;
+}
+.manage-user-row-checkbox {
+  @extend .flex, .align-items-center;
+  position: absolute;
+  top: 0;
+  left: -35px;
+  height: 100%;
 }
 .manage-user-item-divider-count {
   @extend .flex-1;
