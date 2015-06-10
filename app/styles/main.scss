@@ -633,6 +633,12 @@ input::-webkit-datetime-edit, #date-time-edit {
 .menu-active-footer {
   border-right: solid 5px $energized;
 }
+.menu-active-footer .menu-icon-outline {
+  display: none !important;
+}
+.menu-active-footer .menu-icon-filled {
+  display: block !important;
+}
 .menu-icon-outline {
   display: block;
   color: #d7d7d7;
