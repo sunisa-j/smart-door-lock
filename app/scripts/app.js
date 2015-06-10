@@ -144,6 +144,26 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         }
                     }
                 ]
+            },
+            {
+                name: 'doorsRequest',
+                url: '/doors-request',
+                views: {
+                    menuContent: {
+                        controller: 'DoorsRequestController',
+                        templateUrl: 'templates/doors-request.html'
+                    }
+                }
+            },
+            {
+                name: 'doorsApproval',
+                url: '/doors-approval',
+                views: {
+                    menuContent: {
+                        controller: 'DoorsApprovalController',
+                        templateUrl: 'templates/doors-approval.html'
+                    }
+                }
             }
         ]
     });
