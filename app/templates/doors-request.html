@@ -1,0 +1,139 @@
+<ion-view title="Doors Request">
+
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
+    <ion-content ng-show="doorReqMenu.name=='waitingApprove'">
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-paper-outline dark"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 103
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;1 day ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-paper-outline dark"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 102
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;2 weeks ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-paper-outline dark"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 101
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;1 week ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-content ng-show="doorReqMenu.name=='approved'">
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-checkmark balanced"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 100
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;1 day ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-checkmark balanced"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 99
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;2 weeks ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+        <div class="custom-row">
+            <div class="custom-row-icon">
+                <i class="ion-ios-checkmark balanced"></i>
+            </div>
+            <div class="custom-row-title medium-font-size">
+                <div>
+                    Req. 98
+                </div>
+                <div class="custom-row-font-status stable-font-color">
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;1 week ago
+                </div>
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <!--Tabs Menu-->
+    <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center">
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
+             ng-class="{'footer-tab-active': doorReqMenu.name=='waitingApprove'}" ng-click="doorReqMenu.name='waitingApprove'">
+
+            <div class="footer-tab-icon tab-outline"><i class="ion-ios-paper-outline"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="ion-ios-paper"></i></div>
+            <div class="footer-tab-title">Waiting Approve</div>
+        </div>
+        <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
+             ng-class="{'footer-tab-active': doorReqMenu.name=='approved'}" ng-click="doorReqMenu.name='approved'">
+
+            <div class="footer-tab-icon tab-outline"><i class="ion-ios-checkmark-outline" style="font-size: 27px;"></i></div>
+            <div class="footer-tab-icon tab-filled"><i class="ion-ios-checkmark" style="font-size: 27px;"></i></div>
+            <div class="footer-tab-title">Approved</div>
+        </div>
+    </div>
+
+</ion-view>
