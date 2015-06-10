@@ -1,5 +1,6 @@
 <ion-view title="Add User">
     <ion-content>
+        <!--User Id or Name Search-->
         <div class="flex justify-content-center align-items-center search-container">
             <div class="search-icon-div">
                 <i class="ion-ios-person-outline"></i>
@@ -14,6 +15,7 @@
                 </select>
             </div>
         </div>
+        <!--Department Select-->
         <div class="flex justify-content-center align-items-center search-container">
             <div class="search-title-div">
                 Department
@@ -24,6 +26,7 @@
                 </select>
             </div>
         </div>
+        <!--Faculty Select-->
         <div class="flex justify-content-center align-items-center search-container">
             <div class="search-title-div">
                 Faculty
@@ -40,40 +43,111 @@
             </div>
         </div>
 
-        <div class="item item-divider">User Info</div>
-        <div style="padding: 10px 28px;">
-            <div class="flex">
-                <span class="card-title">User ID</span>
-                <span class="card-value">4910110547</span>
+        <div ng-show="true">
+            <!--User Info-->
+            <div class="item item-divider">User Info</div>
+            <div style="padding: 10px 28px; line-height: 28px;">
+                <div class="flex">
+                    <span class="card-title">User ID</span>
+                    <span class="card-value">4910110547</span>
+                </div>
+                <div class="flex">
+                    <span class="card-title">Name</span>
+                    <span class="card-value">สุนิสา จุลรัตน์</span>
+                </div>
+                <div class="flex">
+                    <span class="card-title">E-mail</span>
+                    <span class="card-value">sunisa.j@icloud.com</span>
+                </div>
             </div>
-            <div class="flex">
-                <span class="card-title">Name</span>
-                <span class="card-value">สุนิสา จุลรัตน์</span>
+
+            <!--Permission-->
+            <div class="item item-divider">Permission <i class="ion-ios-information-outline item-divider-icon"></i></div>
+            <div class="flex flex-wrap permission-flex-container">
+
+                <div class="permission-title">Door access</div>
+
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        Unlock
+                    </li>
+                </div>
+
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        View Log
+                    </li>
+                </div>
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        View Status
+                    </li>
+                </div>
+
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        Remote Control
+                    </li>
+                </div>
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        Configuration
+                    </li>
+                </div>
+
             </div>
-            <div class="flex">
-                <span class="card-title">E-mail</span>
-                <span class="card-value">sunisa.j@icloud.com</span>
+            <div class="flex flex-wrap permission-flex-container permission-flex-border-top">
+
+                <div class="permission-title">Administration</div>
+
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        Manage User
+                    </li>
+                </div>
+
+                <div class="permission-column-height permission-column-width">
+                    <li class="item item-checkbox permission-item-checkbox">
+                        <label class="checkbox checkbox-energized">
+                            <input type="checkbox">
+                        </label>
+                        Admin Privilege
+                    </li>
+                </div>
             </div>
+
+            <!--Access Time-->
+            <div class="item item-divider">Access Time <i class="ion-ios-plus-outline item-divider-right-button balanced"></i></div>
+
+            <!--Cancel & Done Button-->
+            <div class="button-bar">
+                <div class="button-div-padding">
+                    <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline">Cancel</button>
+                </div>
+                <div class="button-div-padding">
+                    <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline">Done</button>
+                </div>
+            </div>
+
         </div>
 
-        <div class="item item-divider">Permission <i class="ion-ios-information-outline item-divider-icon"></i></div>
-        <div>
-            Door access
-        </div>
-        <div>
-            Administration
-        </div>
-
-        <div class="item item-divider">Access Time <i class="ion-ios-plus-outline item-divider-right-button balanced"></i></div>
-
-        <!--Cancel & Done Button-->
-        <div class="button-bar">
-            <div class="button-div-padding">
-                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline">Cancel</button>
-            </div>
-            <div class="button-div-padding">
-                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline">Done</button>
-            </div>
-        </div>
     </ion-content>
 </ion-view>
