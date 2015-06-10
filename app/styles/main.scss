@@ -207,13 +207,21 @@ input::-webkit-datetime-edit, #date-time-edit {
 .item-divider-icon {
   color: $stable_font_color;
   font-size: 17px;
-  position: fixed;
-  padding-left: 5px;
+  padding-left: 2px;
 }
 .item-divider-right-button {
   float: right;
   font-size: 25px;
   margin-top: -3px;
+}
+.item-checkbox {
+  padding-left: 45px;
+  border: 0 !important;
+  font-size: 13px;
+}
+.item-checkbox input {
+  height: 20px;
+  width: 20px;
 }
 // Custom Manage User Content ***************************
 .manage-user-margin-left {
@@ -856,4 +864,34 @@ input::-webkit-datetime-edit, #date-time-edit {
 .select-div select {
   width: 100%;
 }
-
+// Permission Menu *************************************
+.permission-flex-container {
+  line-height: 16px;
+  padding: 15px 0 5px 0;
+}
+.permission-column-width {
+  flex-basis: 142px;
+  -webkit-flex-basis: 142px;
+  -moz-flex-basis: 142px;
+  -ms-flex-basis: 142px;
+  min-width: 142px;
+  flex-grow: 1;
+}
+.permission-column-height {
+  height: 30px;
+}
+.permission-title {
+  @extend .permission-column-width;
+  padding: 0 5px 0 15px;
+  font-size: $mmedium_font_size;
+  text-align: left;
+  border-bottom: solid 1px $energized;
+  height: 19px;
+}
+.permission-item-checkbox {
+  margin-top: -6px;
+  padding: 7px 5px 10px 42px;
+}
+.permission-flex-border-top {
+  border-top: solid 1px $border_color;
+}
