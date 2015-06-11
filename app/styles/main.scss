@@ -797,6 +797,24 @@ input::-webkit-datetime-edit, #date-time-edit {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
 }
+.dashboard-access-doors-row {
+  flex-basis: 160px;
+  -webkit-flex-basis: 160px;
+  -moz-flex-basis: 160px;
+  min-width: 160px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+}
+.dashboard-access-doors-number {
+  font-size: 16px;
+  color: $balanced;
+}
+.dashboard-access-doors-unit {
+  float: right;
+  padding-right: 15px;
+  color: $stable_font_color;
+}
 // Custom Access Time Row ******************************
 .access-time-container {
   padding: 5px;
