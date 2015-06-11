@@ -1,56 +1,58 @@
 <ion-view view-title="Dashboard">
     <ion-content style="padding-top: 4px;" class="custom-ion-content-bg">
 
-        <div class="row dashboard-row">
-            <div class="col col-50">
-                <div class="card dashboard-card">
-                    <div class="item">
-                        <div class="dashboard-card-title">Doors</div>
-                        <div class="dashboard-card-desc">I can access</div>
-                        <div class="dashboard-card-icon"><i class="flaticon-opened37" style="font-size: 56px"></i></div>
-                        <div class="dashboard-card-info">In Robot <span class="dashboard-green-number">{{accessDoors}}</span> doors</div>
+        <div class="flex dashboard-row">
+            <div class="flex dashboard-row-group-2col">
+                <div class="dashboard-col-padding">
+                    <div class="card dashboard-card">
+                        <div class="item card-item-overflow">
+                            <div class="dashboard-card-title">Doors</div>
+                            <div class="dashboard-card-desc">I can access</div>
+                            <div class="dashboard-card-icon"><i class="flaticon-opened37" style="font-size: 50px"></i></div>
+                            <div class="dashboard-card-info">In Robot <span class="dashboard-green-number">{{accessDoors}}</span> doors</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-col-padding">
+                    <div class="card dashboard-card">
+                        <div class="item card-item-overflow">
+                            <div class="dashboard-card-title">Unread msgs</div>
+                            <div class="dashboard-card-desc">my notifications</div>
+                            <div class="dashboard-card-icon"><i class="ion-ios-bell-outline" style="font-size: 62px"></i></div>
+                            <div class="dashboard-card-info"><span class="dashboard-red-number">{{unreadMsgs}}</span> msgs</div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-50">
-                <div class="card dashboard-card">
-                    <div class="item">
-                        <div class="dashboard-card-title">Unread msgs</div>
-                        <div class="dashboard-card-desc">my notifications</div>
-                        <div class="dashboard-card-icon"><i class="ion-ios-bell-outline" style="font-size: 62px"></i></div>
-                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{unreadMsgs}}</span> msgs</div>
+
+            <div class="flex dashboard-row-group-2col">
+                <div class="dashboard-col-padding">
+                    <div class="card dashboard-card">
+                        <div class="item card-item-overflow">
+                            <div class="dashboard-card-title">My request</div>
+                            <div class="dashboard-card-desc">waiting for approval</div>
+                            <div class="dashboard-card-icon"><i class="ion-ios-paper-outline" style="font-size: 58px"></i></div>
+                            <div class="dashboard-card-info"><span class="dashboard-red-number">{{thisUserRequest}}</span> req.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-col-padding">
+                    <div class="card dashboard-card">
+                        <div class="item card-item-overflow">
+                            <div class="dashboard-card-title">Unread msgs</div>
+                            <div class="dashboard-card-desc">waiting for approval</div>
+                            <div class="dashboard-card-icon"><i class="ion-ios-checkmark-outline" style="font-size: 50px"></i></div>
+                            <div class="dashboard-card-info"><span class="dashboard-red-number">{{peopleRequest}}</span> req.</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row dashboard-row">
-            <div class="col col-50">
+        <div class="flex dashboard-row">
+            <div class="dashboard-col-padding">
                 <div class="card dashboard-card">
-                    <div class="item">
-                        <div class="dashboard-card-title">My request</div>
-                        <div class="dashboard-card-desc">waiting for approval</div>
-                        <div class="dashboard-card-icon"><i class="ion-ios-paper-outline" style="font-size: 58px"></i></div>
-                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{thisUserRequest}}</span> req.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="col col-50">
-                <div class="card dashboard-card">
-                    <div class="item">
-                        <div class="dashboard-card-title">Unread msgs</div>
-                        <div class="dashboard-card-desc">waiting for approval</div>
-                        <div class="dashboard-card-icon"><i class="ion-ios-checkmark-outline" style="font-size: 50px"></i></div>
-                        <div class="dashboard-card-info"><span class="dashboard-red-number">{{peopleRequest}}</span> req.</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row dashboard-row">
-            <div class="col">
-                <div class="card dashboard-card">
-                    <div class="item">
+                    <div class="item card-item-overflow">
                         <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expiry date</div>
                         <div class="dashboard-card-desc flex">
                             <span class="dashboard-expire-row1">R201, Robot</span>
