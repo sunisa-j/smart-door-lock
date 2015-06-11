@@ -12,7 +12,7 @@ $positive: #0382BF;   // blue
 $bar-dark-border: #525252;
 $font-family-base: THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: THfont, Thonburi, "Browallia New", Arial;
-$font-size-base: 16px;
+$font-size-base: 15px;
 $bar-title-font-size: 20px;
 $z-index-badge: 1px;
 $button-stable-border: $stable;
@@ -35,7 +35,7 @@ $item-padding: 15px;
 $dark_font_color: #000;
 $stable_font_color: #A7A7A7;
 $medium_font_size: 14px;
-$mmedium_font_size: 15px;
+$custom_row_font_size: 16px;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F7F7F7;
@@ -62,8 +62,15 @@ a {
 .normal-white-space {
   white-space: normal;
 }
-.stable-font-color { color: $stable_font_color; }
-.medium-font-size { font-size: $medium_font_size; }
+.stable-font-color {
+  color: $stable_font_color;
+}
+.custom-row-font-size {
+  font-size: $custom_row_font_size !important;
+}
+.medium-font-size {
+  font-size: $medium_font_size !important;
+}
 .bar .title {
    left: 40px;
    right: 40px;
@@ -79,7 +86,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   border: 0;
   height: 100%;
   width: 100%;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   border-radius: 0;
   -webkit-appearance: none;
 }
@@ -89,16 +96,16 @@ select {
   padding: 0 10px;
   background-color: $light !important;
   height: 100%;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   -webkit-appearance: none;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   padding: 5px 0px;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   color: $stable_font_color;
 }
 input::-webkit-datetime-edit, #date-time-edit {
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   padding: 10px 0 !important;
   background-color: $light;
 }
@@ -283,11 +290,6 @@ input::-webkit-datetime-edit, #date-time-edit {
 .list {
   padding: 0;
   margin: 0;
-}
-// Card *************************************************
-.card {
-  margin: 8px;
-  box-shadow: 0 1px 3px $light_border_color;
 }
 // tabs *************************************************
 .footer-tabs-height {
@@ -517,12 +519,13 @@ input::-webkit-datetime-edit, #date-time-edit {
   @extend .flex-1;
   text-align: left;
   padding: 0 5px;
+  font-size: $custom_row_font_size;
 }
 .custom-row-title div {
   @extend .overflow-hidden-text;
 }
 .custom-row-font-status {
-  font-size: 13px;
+  font-size: 12px;
 }
 .custom-row-status-icon {
   font-size: 16px;
@@ -559,11 +562,15 @@ input::-webkit-datetime-edit, #date-time-edit {
   height: 56px;
 }
 // Card *************************************************
+.card {
+  margin: 8px;
+  box-shadow: 0 1px 3px $light_border_color;
+}
 .card-row-padding {
   padding: 3px 5px 0 5px;
 }
 .card-padding {
-  padding: 7px 10px;
+  padding: 7px 15px;
   line-height: 24px;
 }
 .card-margin {
@@ -597,6 +604,11 @@ input::-webkit-datetime-edit, #date-time-edit {
   color: $dark;
   line-height: 14px;
 }
+.card-item-overflow {
+  @extend .flex-1;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
 // Custom Main Menu in main-menu.html *******************
 .menu-bar-header {
    background: #222;
@@ -626,6 +638,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-bottom: solid 1px $dark;
   height: $menu_list_height;
   color: #fff;
+  font-size: $custom_row_font_size;
 }
 .menu-active {
   border-right: solid 7px $energized;
@@ -687,7 +700,36 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 // Custom dashboard.html ********************************
 .dashboard-row {
-  @extend .card-row-padding;
+  @extend .card-row-padding, .flex-wrap;
+}
+.dashboard-col-padding {
+  padding: 5px;
+  min-width: 160px;
+  flex-basis: 160px;
+  -webkit-flex-basis: 160px;
+  -moz-flex-basis: 160px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+}
+.dashboard-col-padding-2x {
+  padding: 5px;
+  min-width: 320px;
+  flex-basis: 320px;
+  -webkit-flex-basis: 320px;
+  -moz-flex-basis: 320px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+}
+.dashboard-row-group-2col {
+  @extend .flex-wrap;
+  flex-basis: 300px;
+  flex-basis: 300px;
+  -webkit-flex-basis: 300px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
 }
 .dashboard-card {
   margin: 0;
@@ -706,15 +748,13 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: 14px;
 }
 .dashboard-card-icon {
-  text-align: center;
+  @extend .flex, .justify-content-center, .align-items-center;
   height: 90px;
-  line-height: 60px;
-  padding-top: 15px;
+  padding: 15px 0;
 }
 .dashboard-card-info {
   text-align: center;
   font-size: 14px;
-  margin-top: -4px;
 }
 .dashboard-green-number {
   color: $balanced;
@@ -731,13 +771,31 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: 16px;
 }
 .dashboard-expire-row1 {
-  flex: 3; -webkit-flex: 3; -moz-flex: 3;
+  flex-basis: 110px;
+  -webkit-flex-basis: 110px;
+  -moz-flex-basis: 110px;
+  min-width: 110px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
 }
 .dashboard-expire-row2 {
-  flex: 3; -webkit-flex: 3; -moz-flex: 3;
+  flex-basis: 110px;
+  -webkit-flex-basis: 110px;
+  -moz-flex-basis: 110px;
+  min-width: 110px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
 }
 .dashboard-expire-row3 {
-  flex: 2; -webkit-flex: 2; -moz-flex: 2;
+  flex-basis: 80px;
+  -webkit-flex-basis: 80px;
+  -moz-flex-basis: 80px;
+  min-width: 80px;
+  flex-grow: 1;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
 }
 // Custom Access Time Row ******************************
 .access-time-container {
@@ -776,7 +834,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   height: 23px;
   border-radius: 50px;
   padding-top: 1px;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   color: $light;
   text-align: center;
   font-weight: bold;
@@ -832,6 +890,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 .search-input-div {
   @extend .input-height-and-border;
   border-left: 0;
+  border-right: 0;
 }
 .start-date-div {
   @extend .input-height-and-border;
@@ -843,7 +902,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-basis: 30px;
   -ms-flex-basis: 30px;
   width: 30px;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
 }
 .end-date-div {
   @extend .input-height-and-border;
@@ -856,7 +915,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-basis: 114px;
   -ms-flex-basis: 114px;
   width: 110px;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   color: $dark;
   text-align: left;
   padding: 10px 15px;
@@ -889,7 +948,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 .permission-title {
   @extend .permission-column-width;
   padding: 0 5px 0 15px;
-  font-size: $mmedium_font_size;
+  font-size: $font-size-base;
   text-align: left;
   border-bottom: solid 1px $energized;
   height: 19px;
