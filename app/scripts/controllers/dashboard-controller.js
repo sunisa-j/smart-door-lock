@@ -1,29 +1,39 @@
 'use strict';
 
-window.app.controller('DashboardController', function ($scope) {
+window.app.controller('DashboardController', function ($scope, doorsAccess) {
 
     // get count of access doors & access doors information
-    //$scope.accessDoorsInfo = {
-    //    "Robot": {
-    //        "numberOfAcccessDoors": 3,
-    //        "doorsInfo": {
-    //            "1": {
-    //                "name": "R200",
-    //                "desc": "classroom on 2nd floor",
-    //                "accessTime": {
-    //                    "type": "custom",
-    //                    "beginDate": "1-4-2015",
-    //                    "endDate": "30-4-2015",
-    //                    "time": {
-    //                        "1": { "beginTime": "1:30 am", "endTime": "4.30 pm", "days": [M,T]},
-    //                        "2": { "beginTime": "1:30 am", "endTime": "4.30 pm", "days": [M,T]}
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
-    //};
-    $scope.accessDoors = 3;
+    $scope.doorsAccess = doorsAccess('array');
+    $scope.doorsNumber = doorsAccess('count');
+
+    $scope.dateNow = new Date();
+    $scope.getTimeDateNow = $scope.dateNow.getTime();
+
+    $scope.groupDoorsExpireDate = function(doorsAccessData) {
+        var doorsExpireData = [];
+
+        angular.forEach(doorsAccessData, function (building) {
+
+            angular.forEach(building.doorsAccess, function (door) {
+                var tmp = {
+                    doorId: door.$id,
+                    doorName: door.name,
+                    buildingId: building.$id,
+                    buildingName: building.name,
+                    expireDate: door.expire,
+                    getTimeExpireDate : (door.expire).getTime()
+                };
+                doorsExpireData.push(tmp);
+            });
+        });
+        return doorsExpireData;
+    };
+    $scope.doorsExpireData = $scope.groupDoorsExpireDate($scope.doorsAccess);
+    console.log($scope.doorsExpireData);
+
+
+    // month
+    $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 
     // get count of unread msg (notifications)
     $scope.unreadMsgs = 2;
