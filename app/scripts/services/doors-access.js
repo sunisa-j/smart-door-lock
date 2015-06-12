@@ -74,7 +74,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'unlocked'
                     },
-                    expire: new Date('20 Jun 2010')
+                    expire: new Date('20 Jun 2014')
                 }
             }
         }
