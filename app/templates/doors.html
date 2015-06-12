@@ -1,123 +1,38 @@
 <ion-view view-title="Doors">
     <ion-content>
 
-        <!--Ex. Door is locked while opened.-->
-        <div class="door-custom-row royal-bg" ui-sref="mainMenu.doors.doorInfo">
-            <div class="custom-row-icon">
-                <div class="door-status-icon">
-                    <i class="ion-ios-locked balanced"></i>
-                </div>
-                <i class="flaticon-open203"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>WSN, Robot</div>
-                <div class="custom-row-desc">3rd floor</div>
-                <div class="custom-row-font-status assertive">
-                    ! Locked while opened.
-                </div>
-            </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
-            </div>
-        </div>
+        <div ng-repeat="building in doorsAccess">
+            <div class="item item-divider">{{building.name}}</div>
 
-        <!--Ex. Door is unlocked while closed-->
-        <div class="door-custom-row">
-            <div class="custom-row-icon">
-                <div class="door-status-icon">
-                    <i class="ion-ios-unlocked assertive"></i>
-                </div>
-                <i class="flaticon-closed42"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>COE Office, Robot</div>
-                <div class="custom-row-desc">2nd floor</div>
-                <div class="custom-row-font-status assertive">
-                    Unlocked
-                </div>
-            </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-locked-outline">Lock</button>
-            </div>
-        </div>
+            <div ng-repeat="door in building.doorsAccess" class="door-custom-row" ui-sref="mainMenu.doors.doorInfo({doorInfo: door})"
+                    ng-class="{'royal-bg': (door.status.door=='opened')&&(door.status.lock=='locked')}">
 
-        <!--Ex. Door is locked while closed-->
-        <div class="door-custom-row">
-            <div class="custom-row-icon">
-                <div class="door-status-icon">
-                    <i class="ion-ios-locked balanced"></i>
+                <div class="custom-row-icon">
+                    <div class="door-status-icon">
+                        <i class="ion-ios-locked balanced" ng-show="door.status.lock=='locked'"></i>
+                        <i class="ion-ios-unlocked assertive" ng-show="door.status.lock=='unlocked'"></i>
+                    </div>
+                    <i class="flaticon-open203" ng-show="door.status.door=='opened'"></i>
+                    <i class="flaticon-closed42" ng-show="door.status.door=='closed'"></i>
                 </div>
-                <i class="flaticon-closed42"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>R301, Robot</div>
-                <div class="custom-row-desc">3rd floor</div>
-                <div class="custom-row-font-status balanced">
-                    Locked
-                </div>
-            </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
-            </div>
-        </div>
 
-        <!--Ex. Door is unlocked while opened-->
-        <div class="door-custom-row">
-            <div class="custom-row-icon">
-                <div class="door-status-icon">
-                    <i class="ion-ios-unlocked assertive"></i>
+                <div class="custom-row-title">
+                    <div>{{door.name}}</div>
+                    <div class="custom-row-desc">{{door.desc}}</div>
+                    <div class="custom-row-font-status">
+                        <span ng-show="(door.status.door=='opened')&&(door.status.lock=='locked')" class="assertive">Locked while opened !</span>
+                        <span ng-show="(door.status.door!='opened')&&(door.status.lock=='locked')" class="balanced">Locked</span>
+                        <span ng-show="door.status.lock=='unlocked'" class="assertive">Unlocked</span>
+                    </div>
                 </div>
-                <i class="flaticon-open203"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>COE Office, Robot</div>
-                <div class="custom-row-desc">2nd floor</div>
-                <div class="custom-row-font-status assertive">
-                    Unlocked
-                </div>
-            </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-locked-outline">Lock</button>
-            </div>
-        </div>
 
-        <!--Ex. show status only -->
-        <div class="door-custom-row">
-            <div class="custom-row-icon">
-                <div class="door-status-icon">
-                    <i class="ion-ios-locked balanced"></i>
+                <div class="custom-row-button">
+                    <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-locked-outline"
+                            ng-show="door.status.lock=='unlocked'">Lock</button>
+                    <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline"
+                            ng-show="door.status.lock=='locked'">Unlock</button>
                 </div>
-                <i class="flaticon-closed42"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>R101, Robot</div>
-                <div class="custom-row-desc">1st floor</div>
-                <div class="custom-row-font-status balanced">
-                    Locked
-                </div>
-            </div>
-            <div class="custom-row-button" ng-hide="true">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
-            </div>
-        </div>
 
-        <!--Ex. hide status & control button -->
-        <div class="door-custom-row">
-            <div class="custom-row-icon">
-                <div class="door-status-icon" ng-hide="true">
-                    <i class="ion-ios-locked balanced"></i>
-                </div>
-                <i class="flaticon-closed42"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>R101, Robot</div>
-                <div class="custom-row-desc">1st floor</div>
-                <div class="custom-row-font-status balanced" ng-hide="true">
-                    Locked
-                </div>
-            </div>
-            <div class="custom-row-button" ng-hide="true">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
             </div>
         </div>
 
