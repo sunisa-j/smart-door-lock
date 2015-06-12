@@ -1001,3 +1001,14 @@ input::-webkit-datetime-edit, #date-time-edit {
 .permission-flex-border-top {
   border-top: solid 1px $border_color;
 }
+// media query *****************************************
+@media (max-width: 767px) {
+  .main-menu-button {
+    visibility: visible;
+  }
+}
+@media (min-width: 768px) {
+  .main-menu-button {
+    visibility: hidden;
+  }
+}
