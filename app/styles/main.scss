@@ -744,6 +744,11 @@ input::-webkit-datetime-edit, #date-time-edit {
   color: $base-color;
   text-align: left;
 }
+.dashboard-card-row-content {
+  @extend .dashboard-card-desc;
+  border-bottom: dashed 1px $light_border_color;
+  margin-bottom: 5px;
+}
 .dashboard-card-desc i {
   font-size: 14px;
 }
@@ -798,21 +803,15 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-grow: 1;
 }
 .dashboard-access-doors-row {
-  flex-basis: 160px;
-  -webkit-flex-basis: 160px;
-  -moz-flex-basis: 160px;
-  min-width: 160px;
-  flex-grow: 1;
-  -webkit-flex-grow: 1;
-  -moz-flex-grow: 1;
+  @extend .flex-1;
 }
 .dashboard-access-doors-number {
   font-size: 16px;
   color: $balanced;
 }
 .dashboard-access-doors-unit {
+  padding-left: 10px;
   float: right;
-  padding-right: 15px;
   color: $stable_font_color;
 }
 // Custom Access Time Row ******************************
