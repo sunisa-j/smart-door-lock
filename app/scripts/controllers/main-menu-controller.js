@@ -3,7 +3,7 @@
 window.app.controller('MainMenuController', function ($scope) {
 
     // get login name
-    $scope.loginName = "สุนิสา จุลรัตน์";
+    $scope.loginName = 'สุนิสา จุลรัตน์';
 
     // get count of unread message (notification)
     $scope.unreadMsg = 20;
