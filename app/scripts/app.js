@@ -1,3 +1,4 @@
+'use strict';
 // Ionic Starter App
 
 // angular.module is a global place for creating, registering and retrieving Angular modules
@@ -41,33 +42,35 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 children: [
                     {
                         name: 'doorInfo',
-                        url: '/door-info/:doorId',
+                        url: '/door-info/:buildingId/:doorId',
                         views: {
                             'menuContent@mainMenu': {
                                 controller: 'DoorInfoController',
                                 templateUrl: 'templates/door-info.html'
                             }
-                        }
-                    },
-                    {
-                        name: 'myActivityLog',
-                        url: '/my-activity-log',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'DoorInfoController',
-                                templateUrl: 'templates/my-activity-log.html'
+                        },
+                        children: [
+                            {
+                                name: 'myActivityLog',
+                                url: '/my-activity-log',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'DoorInfoController',
+                                        templateUrl: 'templates/my-activity-log.html'
+                                    }
+                                }
+                            },
+                            {
+                                name: 'addUser',
+                                url: '/add-user',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'DoorInfoController',
+                                        templateUrl: 'templates/add-user.html'
+                                    }
+                                }
                             }
-                        }
-                    },
-                    {
-                        name: 'addUser',
-                        url: '/add-user',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'DoorInfoController',
-                                templateUrl: 'templates/add-user.html'
-                            }
-                        }
+                        ]
                     }
                 ]
             },
@@ -144,27 +147,27 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         }
                     }
                 ]
-            },
-            {
-                name: 'doorsRequest',
-                url: '/doors-request',
-                views: {
-                    menuContent: {
-                        controller: 'DoorsRequestController',
-                        templateUrl: 'templates/doors-request.html'
-                    }
-                }
-            },
-            {
-                name: 'doorsApproval',
-                url: '/doors-approval',
-                views: {
-                    menuContent: {
-                        controller: 'DoorsApprovalController',
-                        templateUrl: 'templates/doors-approval.html'
-                    }
-                }
             }
+            //{
+            //    name: 'doorsRequest',
+            //    url: '/doors-request',
+            //    views: {
+            //        menuContent: {
+            //            controller: 'DoorsRequestController',
+            //            templateUrl: 'templates/doors-request.html'
+            //        }
+            //    }
+            //},
+            //{
+            //    name: 'doorsApproval',
+            //    url: '/doors-approval',
+            //    views: {
+            //        menuContent: {
+            //            controller: 'DoorsApprovalController',
+            //            templateUrl: 'templates/doors-approval.html'
+            //        }
+            //    }
+            //}
         ]
     });
 
