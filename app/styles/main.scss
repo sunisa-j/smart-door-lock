@@ -65,8 +65,9 @@ a {
 .stable-font-color {
   color: $stable_font_color;
 }
-.custom-row-font-size {
+select.custom-row-font-size {
   font-size: $custom_row_font_size !important;
+  padding-right: 0;
 }
 .medium-font-size {
   font-size: $medium_font_size !important;
@@ -538,10 +539,10 @@ input::-webkit-datetime-edit, #date-time-edit {
   color: $bar-dark-border;
 }
 .custom-row-button {
-  flex-basis: 84px;
-  -webkit-flex-basis: 84px;
-  -moz-flex-basis: 84px;
-  margin-right: 10px;
+  flex-basis: 85px;
+  -webkit-flex-basis: 85px;
+  -moz-flex-basis: 85px;
+  margin-right: 15px;
 }
 .custom-row-button .button {
   padding: 0 7px;
@@ -558,8 +559,26 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-left: 0;
   border-right: 0;
   background-color: $light;
-  padding: 0 0 0 5px;
+  padding: 0 0 0 10px;
   height: 56px;
+}
+.custom-row-inset-with-button-div {
+  padding: 0 15px;
+}
+.custom-row-inset-with-button {
+  border: solid 1px $border_color;
+  border-left: 0;
+  border-right: 0;
+  background-color: $light;
+  padding: 0px;
+  height: 56px;
+  margin-top: -1px;
+}
+.custom-row-inset-with-button .custom-row-title {
+  padding: 0;
+}
+.custom-row-inset-with-button .custom-row-button {
+  margin-right: 0;
 }
 // Card *************************************************
 .card {
@@ -680,6 +699,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   height: $menu_list_height !important;
 }
 .menu-list-footer {
+  @extend .pointer;
   background: $menu_bg_color;
   border-top: solid 1px $dark;
   height: $menu_list_height;
@@ -730,7 +750,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 .dashboard-row-group-2col {
   @extend .flex-wrap;
   flex-basis: 300px;
-  flex-basis: 300px;
+  -moz-flex-basis: 300px;
   -webkit-flex-basis: 300px;
   flex-grow: 1;
   -webkit-flex-grow: 1;
@@ -829,7 +849,6 @@ input::-webkit-datetime-edit, #date-time-edit {
   flex-basis: 47px;
   -webkit-flex-basis: 47px;
   -moz-flex-basis: 47px;
-//  color: $stable_font_color;
 }
 .dashboard-access-doors-count {
   flex-basis: 30px;
