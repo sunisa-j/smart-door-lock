@@ -29,8 +29,6 @@ window.app.controller('DashboardController', function ($scope, doorsAccess) {
         return doorsExpireData;
     };
     $scope.doorsExpireData = $scope.groupDoorsExpireDate($scope.doorsAccess);
-    console.log($scope.doorsExpireData);
-
 
     // month
     $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
