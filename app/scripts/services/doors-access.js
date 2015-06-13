@@ -14,7 +14,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'unlocked'
                     },
-                    expire: new Date('30 Jun 2015')
+                    expire: new Date('30 Jun 2015'),
+                    permission: ['unlock','viewLog','viewStatus','remoteControl','configuration','manageUser']
                 },
                 'door2': {
                     name: 'R200',
@@ -23,7 +24,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'locked'
                     },
-                    expire: new Date('19 Jun 2015')
+                    expire: new Date('19 Jun 2015'),
+                    permission: ['unlock','viewLog','viewStatus','remoteControl','configuration','manageUser']
                 },
                 'door3': {
                     name: 'WSN',
@@ -32,7 +34,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'locked'
                     },
-                    expire: new Date('12 Jun 2015')
+                    expire: new Date('12 Jun 2015'),
+                    permission: ['unlock','viewStatus']
                 },
                 'door4': {
                     name: 'R300',
@@ -41,7 +44,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'unlocked'
                     },
-                    expire: new Date('10 Jun 2015')
+                    expire: new Date('10 Jun 2015'),
+                    permission: ['unlock']
                 }
             }
         },
@@ -56,7 +60,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'unlocked'
                     },
-                    expire: new Date('22 Jun 2015')
+                    expire: new Date('22 Jun 2015'),
+                    permission: ['unlock','viewStatus']
                 },
                 'door2': {
                     name: 'R2-200',
@@ -65,7 +70,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'locked'
                     },
-                    expire: new Date('27 Jun 2015')
+                    expire: new Date('27 Jun 2015'),
+                    permission: ['unlock','viewStatus']
                 },
                 'door4': {
                     name: 'R4-403',
@@ -74,7 +80,8 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'unlocked'
                     },
-                    expire: new Date('20 Jun 2014')
+                    expire: new Date('20 Jun 2014'),
+                    permission: ['unlock','viewStatus']
                 }
             }
         }
@@ -118,11 +125,11 @@ window.app.factory('doorsAccess', function () {
     }
 
     return function(data){
-        if(data == 'object'){
+        if(data === 'object'){
             return doorsAccess;
-        }else if (data == 'array') {
+        }else if (data === 'array') {
             return doorsAccessArr;
-        }else if (data == 'count') {
+        }else if (data === 'count') {
             return doorsCount;
         }
     };
