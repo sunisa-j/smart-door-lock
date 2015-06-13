@@ -1,36 +1,35 @@
 <ion-view view-title="Doors">
     <ion-content>
 
-        <div ng-repeat="building in doorsAccess">
+        <div ng-repeat="building in doorsAccessData">
             <div class="item item-divider">{{building.name}}</div>
 
-            <div ng-repeat="door in building.doorsAccess" class="door-custom-row" ui-sref="mainMenu.doors.doorInfo({doorInfo: door})"
-                    ng-class="{'royal-bg': (door.status.door=='opened')&&(door.status.lock=='locked')}">
+            <div ng-repeat="doorData in building.doorsAccess" class="door-custom-row" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
 
-                <div class="custom-row-icon">
+                <div class="custom-row-icon" ui-sref="mainMenu.doors.doorInfo({buildingId: building.$id, doorId: doorData.$id})">
                     <div class="door-status-icon">
-                        <i class="ion-ios-locked balanced" ng-show="door.status.lock=='locked'"></i>
-                        <i class="ion-ios-unlocked assertive" ng-show="door.status.lock=='unlocked'"></i>
+                        <i class="ion-ios-locked balanced" ng-show="doorData.status.lock=='locked'"></i>
+                        <i class="ion-ios-unlocked assertive" ng-show="doorData.status.lock=='unlocked'"></i>
                     </div>
-                    <i class="flaticon-open203" ng-show="door.status.door=='opened'"></i>
-                    <i class="flaticon-closed42" ng-show="door.status.door=='closed'"></i>
+                    <i class="flaticon-open203" ng-show="doorData.status.door=='opened'"></i>
+                    <i class="flaticon-closed42" ng-show="doorData.status.door=='closed'"></i>
                 </div>
 
-                <div class="custom-row-title">
-                    <div>{{door.name}}</div>
-                    <div class="custom-row-desc">{{door.desc}}</div>
+                <div class="custom-row-title" ui-sref="mainMenu.doors.doorInfo({buildingId: building.$id, doorId: doorData.$id})">
+                    <div>{{doorData.name}}</div>
+                    <div class="custom-row-desc">{{doorData.desc}}</div>
                     <div class="custom-row-font-status">
-                        <span ng-show="(door.status.door=='opened')&&(door.status.lock=='locked')" class="assertive">Locked while opened !</span>
-                        <span ng-show="(door.status.door!='opened')&&(door.status.lock=='locked')" class="balanced">Locked</span>
-                        <span ng-show="door.status.lock=='unlocked'" class="assertive">Unlocked</span>
+                        <span ng-show="(doorData.status.door=='opened')&&(doorData.status.lock=='locked')" class="assertive">Locked while opened !</span>
+                        <span ng-show="(doorData.status.door!='opened')&&(doorData.status.lock=='locked')" class="balanced">Locked</span>
+                        <span ng-show="doorData.status.lock=='unlocked'" class="assertive">Unlocked</span>
                     </div>
                 </div>
 
                 <div class="custom-row-button">
                     <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-locked-outline"
-                            ng-show="door.status.lock=='unlocked'">Lock</button>
+                            ng-show="doorData.status.lock=='unlocked'">Lock</button>
                     <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline"
-                            ng-show="door.status.lock=='locked'">Unlock</button>
+                            ng-show="doorData.status.lock=='locked'">Unlock</button>
                 </div>
 
             </div>
