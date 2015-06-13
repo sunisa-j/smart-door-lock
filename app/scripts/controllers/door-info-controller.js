@@ -1,6 +1,48 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess) {
+
+    var buildingId = $stateParams.buildingId;
+    var doorId = $stateParams.doorId;
+    var doorsAccessObj = doorsAccess('object');
+    $scope.buildingName = doorsAccessObj[buildingId].name;
+    $scope.doorData = doorsAccessObj[buildingId].doorsAccess[doorId];
+
+    $scope.permission = {
+        unlock: false,
+        viewLog: false,
+        viewStatus: false,
+        remoteControl: false,
+        configuration: false,
+        manageUser: false,
+        adminPrivillage: false
+    };
+    var checkPermission = function() {
+        angular.forEach($scope.doorData.permission, function(value){
+            if(value === 'unlock') {
+                $scope.permission.unlock = true;
+
+            } else if(value === 'viewLog') {
+                $scope.permission.viewLog = true;
+
+            } else if(value === 'viewStatus') {
+                $scope.permission.viewStatus = true;
+
+            } else if(value === 'remoteControl') {
+                $scope.permission.remoteControl = true;
+
+            } else if(value === 'configuration') {
+                $scope.permission.configuration = true;
+
+            } else if(value === 'manageUser') {
+                $scope.permission.manageUser = true;
+
+            } else if(value === 'adminPrivillage') {
+                $scope.permission.adminPrivillage = true;
+            }
+        });
+    };
+    checkPermission();
 
     // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageUser')
     $scope.doorMenu = {
@@ -14,14 +56,14 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup) {
 
     $scope.deleteSelected = function() {
         $scope.showDelButton.value = false;
-        console.log("deleted");
+        console.log('deleted');
     };
 
     // Confirm Delete Box
     $scope.confirmDelBox = function() {
 
-        var myPopup = $ionicPopup.show({
-            title: "Confirm",
+        $ionicPopup.show({
+            title: 'Confirm',
             template: 'Do you confirm to delete all user you selected ?',
             buttons: [
                 {
@@ -46,5 +88,5 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup) {
                 }
             ]
         });
-    }
+    };
 });
