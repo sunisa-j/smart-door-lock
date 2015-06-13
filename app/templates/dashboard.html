@@ -5,7 +5,7 @@
             <div class="flex dashboard-row-group-2col">
                 <div class="dashboard-col-padding">
                     <!--Show doors number user can access in first building only-->
-                    <div class="card dashboard-card">
+                    <div class="card dashboard-card pointer" ui-sref="mainMenu.doors">
                         <div class="item card-item-overflow">
                             <div class="dashboard-card-title">Doors</div>
                             <div class="dashboard-card-desc">I can access</div>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="dashboard-col-padding">
-                    <div class="card dashboard-card">
+                    <div class="card dashboard-card pointer" ui-sref="mainMenu.notifications">
                         <div class="item card-item-overflow">
                             <div class="dashboard-card-title">Unread msgs</div>
                             <div class="dashboard-card-desc">my notifications</div>
@@ -65,7 +65,9 @@
                     <div class="item card-item-overflow">
                         <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expiry date</div>
 
-                        <div class="dashboard-card-row-content flex" ng-repeat="data in doorsExpireData | orderBy:'expireDate'">
+                        <div class="dashboard-card-row-content flex pointer" ng-repeat="data in doorsExpireData | orderBy:'expireDate'"
+                             ui-sref="mainMenu.doors.doorInfo({buildingId: data.buildingId, doorId: data.doorId})">
+
                             <span class="dashboard-expire-row1">{{data.doorName}}, {{data.buildingName}}</span>
                             <span class="dashboard-expire-row2">
                                 <i class="ion-ios-clock-outline"></i>
