@@ -8,41 +8,41 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.buildingName = doorsAccessObj[buildingId].name;
     $scope.doorData = doorsAccessObj[buildingId].doorsAccess[doorId];
 
-    $scope.permission = {
-        unlock: false,
-        viewLog: false,
-        viewStatus: false,
-        remoteControl: false,
-        configuration: false,
-        manageUser: false,
-        adminPrivillage: false
-    };
-    var checkPermission = function() {
-        angular.forEach($scope.doorData.permission, function(value){
-            if(value === 'unlock') {
-                $scope.permission.unlock = true;
-
-            } else if(value === 'viewLog') {
-                $scope.permission.viewLog = true;
-
-            } else if(value === 'viewStatus') {
-                $scope.permission.viewStatus = true;
-
-            } else if(value === 'remoteControl') {
-                $scope.permission.remoteControl = true;
-
-            } else if(value === 'configuration') {
-                $scope.permission.configuration = true;
-
-            } else if(value === 'manageUser') {
-                $scope.permission.manageUser = true;
-
-            } else if(value === 'adminPrivillage') {
-                $scope.permission.adminPrivillage = true;
-            }
-        });
-    };
-    checkPermission();
+    //$scope.permission = {
+    //    unlock: false,
+    //    viewLog: false,
+    //    viewStatus: false,
+    //    remoteControl: false,
+    //    configuration: false,
+    //    manageUser: false,
+    //    adminPrivillage: false
+    //};
+    //var checkPermission = function() {
+    //    angular.forEach($scope.doorData.permission, function(value){
+    //        if(value === 'unlock') {
+    //            $scope.permission.unlock = true;
+    //
+    //        } else if(value === 'viewLog') {
+    //            $scope.permission.viewLog = true;
+    //
+    //        } else if(value === 'viewStatus') {
+    //            $scope.permission.viewStatus = true;
+    //
+    //        } else if(value === 'remoteControl') {
+    //            $scope.permission.remoteControl = true;
+    //
+    //        } else if(value === 'configuration') {
+    //            $scope.permission.configuration = true;
+    //
+    //        } else if(value === 'manageUser') {
+    //            $scope.permission.manageUser = true;
+    //
+    //        } else if(value === 'adminPrivillage') {
+    //            $scope.permission.adminPrivillage = true;
+    //        }
+    //    });
+    //};
+    //checkPermission();
 
     // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageUser')
     $scope.doorMenu = {
