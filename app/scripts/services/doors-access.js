@@ -3,7 +3,7 @@
 window.app.factory('doorsAccess', function () {
 
     var doorsAccess = {
-        'building1': {
+        'group1': {
             name: 'Robot',
             desc: 'Computer Engineering near reservoir',
             doorsAccess: {
@@ -15,7 +15,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'unlocked'
                     },
                     expire: new Date('30 Jun 2015'),
-                    permission: ['unlock','viewLog','viewStatus','remoteControl','configuration','manageUser']
+                    permission: {
+                        unlock: true,
+                        viewLog: true,
+                        viewStatus: true,
+                        remoteControl: true,
+                        configuration: true,
+                        manageUser: true,
+                        adminPrivillage: true
+                    }
                 },
                 'door2': {
                     name: 'R200',
@@ -25,7 +33,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'locked'
                     },
                     expire: new Date('19 Jun 2015'),
-                    permission: ['unlock','viewLog','viewStatus','remoteControl','configuration','manageUser']
+                    permission: {
+                        unlock: true,
+                        viewLog: true,
+                        viewStatus: true,
+                        remoteControl: true,
+                        configuration: true,
+                        manageUser: true,
+                        adminPrivillage: true
+                    }
                 },
                 'door3': {
                     name: 'WSN',
@@ -35,7 +51,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'locked'
                     },
                     expire: new Date('12 Jun 2015'),
-                    permission: ['unlock','viewStatus']
+                    permission: {
+                        unlock: true,
+                        viewLog: false,
+                        viewStatus: true,
+                        remoteControl: false,
+                        configuration: false,
+                        manageUser: false,
+                        adminPrivillage: false
+                    }
                 },
                 'door4': {
                     name: 'R300',
@@ -45,11 +69,19 @@ window.app.factory('doorsAccess', function () {
                         lock: 'unlocked'
                     },
                     expire: new Date('10 Jun 2015'),
-                    permission: ['unlock']
+                    permission: {
+                        unlock: true,
+                        viewLog: false,
+                        viewStatus: false,
+                        remoteControl: false,
+                        configuration: false,
+                        manageUser: false,
+                        adminPrivillage: false
+                    }
                 }
             }
         },
-        'building2': {
+        'group2': {
             name: 'Robot 2',
             desc: 'Computer Engineering 2',
             doorsAccess: {
@@ -61,7 +93,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'unlocked'
                     },
                     expire: new Date('22 Jun 2015'),
-                    permission: ['unlock','viewStatus']
+                    permission: {
+                        unlock: true,
+                        viewLog: false,
+                        viewStatus: true,
+                        remoteControl: false,
+                        configuration: false,
+                        manageUser: false,
+                        adminPrivillage: false
+                    }
                 },
                 'door2': {
                     name: 'R2-200',
@@ -71,7 +111,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'locked'
                     },
                     expire: new Date('27 Jun 2015'),
-                    permission: ['unlock','viewStatus']
+                    permission: {
+                        unlock: true,
+                        viewLog: false,
+                        viewStatus: true,
+                        remoteControl: false,
+                        configuration: false,
+                        manageUser: false,
+                        adminPrivillage: false
+                    }
                 },
                 'door4': {
                     name: 'R4-403',
@@ -81,7 +129,15 @@ window.app.factory('doorsAccess', function () {
                         lock: 'unlocked'
                     },
                     expire: new Date('20 Jun 2014'),
-                    permission: ['unlock','viewStatus']
+                    permission: {
+                        unlock: true,
+                        viewLog: false,
+                        viewStatus: true,
+                        remoteControl: false,
+                        configuration: false,
+                        manageUser: false,
+                        adminPrivillage: false
+                    }
                 }
             }
         }
