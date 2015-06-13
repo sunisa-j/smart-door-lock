@@ -1,11 +1,11 @@
 'use strict';
 
-window.app.controller('NotificationsController', function ($scope, $ionicPopup, $stateParams) {
+window.app.controller('NotificationsController', function ($scope, $ionicPopup) {
 
     $scope.confirmEnableCard = function() {
 
-        var myPopup = $ionicPopup.show({
-            title: "Confirm",
+        $ionicPopup.show({
+            title: 'Confirm',
             template: 'Are you sure to enable this card ?',
             buttons: [{
                 text: 'Cancel',
@@ -15,7 +15,7 @@ window.app.controller('NotificationsController', function ($scope, $ionicPopup, 
                 type: 'button-outline button-balanced'
             }
             ]
-        })
-    }
+        });
+    };
 
 });
