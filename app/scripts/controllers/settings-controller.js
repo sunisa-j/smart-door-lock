@@ -4,8 +4,8 @@ window.app.controller('SettingsController', function ($scope, $ionicPopup) {
 
     $scope.confirmEnableCard = function() {
 
-        var myPopup = $ionicPopup.show({
-            title: "Confirm",
+        $ionicPopup.show({
+            title: 'Confirm',
             template: 'Are you sure to enable this card ?',
             buttons: [
                 {
@@ -26,7 +26,7 @@ window.app.controller('SettingsController', function ($scope, $ionicPopup) {
                     type: 'button-outline button-balanced'
                 }
             ]
-        })
-    }
+        });
+    };
 
 });
