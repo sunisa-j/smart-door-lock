@@ -2,7 +2,7 @@
 
     <ion-nav-buttons side="right">
         <div style="margin-top: -3px;">
-            <button class="button button-clear" ng-show="doorMenu.name=='manageUser'" ui-sref="mainMenu.doors.addUser">
+            <button class="button button-clear" ng-show="doorMenu.name=='manageUser'" ui-sref="mainMenu.doors.doorInfo.addUser">
                 <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
             </button>
         </div>
@@ -13,25 +13,30 @@
 
         <div class="item item-divider">Door Information</div>
         <div class="door-custom-row" style="border: 0">
-            <div class="custom-row-icon">
-                <div class="door-status-icon" ng-hide="true">
-                    <i class="ion-ios-locked balanced"></i>
-                </div>
+            <div class="custom-row-icon" ng-show="permission.viewStatus==false">
                 <i class="flaticon-closed42"></i>
             </div>
+            <div class="custom-row-icon" ng-show="permission.viewStatus==true">
+                <div class="door-status-icon">
+                    <i class="ion-ios-locked balanced" ng-show="doorData.status.lock=='locked'"></i>
+                    <i class="ion-ios-unlocked assertive" ng-show="doorData.status.lock=='unlocked'"></i>
+                </div>
+                <i class="flaticon-open203" ng-show="doorData.status.door=='opened'"></i>
+                <i class="flaticon-closed42" ng-show="doorData.status.door=='closed'"></i>
+            </div>
             <div class="custom-row-title">
-                <div>R101, Robot</div>
+                <div>{{doorData.name}}, {{buildingName}}</div>
                 <div class="custom-row-desc">1st floor</div>
-                <div class="custom-row-font-status balanced" ng-hide="true">
+                <div class="custom-row-font-status balanced" ng-show="permission.viewStatus==true">
                     Locked
                 </div>
             </div>
-            <div class="custom-row-button" ng-hide="true">
+            <div class="custom-row-button" ng-show="permission.remoteControl==true">
                 <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
             </div>
         </div>
-        <div style="padding: 0 15px;">
-            <div class="flex align-items-center custom-setting-row-with-right-button" style="margin-top: -1px;">
+        <div class="custom-row-inset-with-button-div" ng-show="permission.configuration==true">
+            <div class="flex align-items-center custom-row-inset-with-button">
                 <div class="custom-row-title">
                     <div>Passcode Require</div>
                 </div>
@@ -99,7 +104,7 @@
                 <div class="access-time-column">09 Apr 2015 08:30:00</div>
                 <div class="log-detail">Unlocked door by card</div>
             </div>
-            <button class="button button-outline button-block icon-left button-stable more-button" ui-sref="mainMenu.doors.myActivityLog">More Activity ...</button>
+            <button class="button button-outline button-block icon-left button-stable more-button" ui-sref="mainMenu.doors.doorInfo.myActivityLog">More Activity ...</button>
         </div>
 
         <div class="footer-tabs-height"></div>
@@ -380,7 +385,9 @@
     </ion-content>
     <!--End User Content-->
 
-    <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center">
+    <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center"
+         ng-hide="(permission.configuration==false)&&(permission.viewLog==false)&&(permission.manageUser==false)">
+
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
 
@@ -389,21 +396,24 @@
             <div class="footer-tab-title">Door Info</div>
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
-             ng-class="{'footer-tab-active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'">
+             ng-class="{'footer-tab-active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'"
+             ng-show="permission.configuration==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-gear-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-gear"></i></div>
             <div class="footer-tab-title">Config Door</div>
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
-             ng-class="{'footer-tab-active': doorMenu.name=='log'}" ng-click="doorMenu.name='log'">
+             ng-class="{'footer-tab-active': doorMenu.name=='log'}" ng-click="doorMenu.name='log'"
+             ng-show="permission.viewLog==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-paper-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-paper"></i></div>
             <div class="footer-tab-title">Log</div>
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
-             ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'">
+             ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'"
+             ng-show="permission.manageUser==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-personadd" style="font-size: 27px;"></i></div>
