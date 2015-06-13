@@ -12,11 +12,11 @@
     <ion-content ng-show="doorMenu.name=='doorInfo'">
 
         <div class="item item-divider">Door Information</div>
-        <div class="door-custom-row" style="border: 0">
-            <div class="custom-row-icon" ng-show="permission.viewStatus==false">
+        <div class="door-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
+            <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false">
                 <i class="flaticon-closed42"></i>
             </div>
-            <div class="custom-row-icon" ng-show="permission.viewStatus==true">
+            <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true">
                 <div class="door-status-icon">
                     <i class="ion-ios-locked balanced" ng-show="doorData.status.lock=='locked'"></i>
                     <i class="ion-ios-unlocked assertive" ng-show="doorData.status.lock=='unlocked'"></i>
@@ -26,16 +26,18 @@
             </div>
             <div class="custom-row-title">
                 <div>{{doorData.name}}, {{buildingName}}</div>
-                <div class="custom-row-desc">1st floor</div>
-                <div class="custom-row-font-status balanced" ng-show="permission.viewStatus==true">
-                    Locked
+                <div class="custom-row-desc">{{doorData.desc}}</div>
+                <div class="custom-row-font-status" ng-show="doorData.permission.viewStatus==true">
+                    <span ng-show="(doorData.status.door=='opened')&&(doorData.status.lock=='locked')" class="assertive">Locked while opened !</span>
+                    <span ng-show="(doorData.status.door!='opened')&&(doorData.status.lock=='locked')" class="balanced">Locked</span>
+                    <span ng-show="doorData.status.lock=='unlocked'" class="assertive">Unlocked</span>
                 </div>
             </div>
-            <div class="custom-row-button" ng-show="permission.remoteControl==true">
+            <div class="custom-row-button" ng-show="doorData.permission.remoteControl==true">
                 <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
             </div>
         </div>
-        <div class="custom-row-inset-with-button-div" ng-show="permission.configuration==true">
+        <div class="custom-row-inset-with-button-div" ng-show="doorData.permission.configuration==true">
             <div class="flex align-items-center custom-row-inset-with-button">
                 <div class="custom-row-title">
                     <div>Passcode Require</div>
@@ -386,7 +388,7 @@
     <!--End User Content-->
 
     <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center"
-         ng-hide="(permission.configuration==false)&&(permission.viewLog==false)&&(permission.manageUser==false)">
+         ng-hide="(doorData.permission.configuration==false)&&(doorData.permission.viewLog==false)&&(doorData.permission.manageUser==false)">
 
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
@@ -397,7 +399,7 @@
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='configDoor'}" ng-click="doorMenu.name='configDoor'"
-             ng-show="permission.configuration==true">
+             ng-show="doorData.permission.configuration==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-gear-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-gear"></i></div>
@@ -405,7 +407,7 @@
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='log'}" ng-click="doorMenu.name='log'"
-             ng-show="permission.viewLog==true">
+             ng-show="doorData.permission.viewLog==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-paper-outline"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-paper"></i></div>
@@ -413,7 +415,7 @@
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'"
-             ng-show="permission.manageUser==true">
+             ng-show="doorData.permission.manageUser==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-personadd" style="font-size: 27px;"></i></div>
