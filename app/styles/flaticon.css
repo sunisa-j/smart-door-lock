@@ -1,16 +1,16 @@
 @font-face {
-	font-family: "Flaticon";
-	src: url("../fonts/flaticon/flaticon.eot");
-	src: url("../fonts/flaticon/flaticon.eot#iefix") format("embedded-opentype"),
-	url("../fonts/flaticon/flaticon.woff") format("woff"),
-	url("../fonts/flaticon/flaticon.ttf") format("truetype"),
-	url("../fonts/flaticon/flaticon.svg") format("svg");
-	font-weight: normal;
-	font-style: normal;
+    font-family: "Flaticon";
+    src: url("../fonts/flaticon/flaticon.eot");
+    src: url("../fonts/flaticon/flaticon.eot#iefix") format("embedded-opentype"),
+    url("../fonts/flaticon/flaticon.woff") format("woff"),
+    url("../fonts/flaticon/flaticon.ttf") format("truetype"),
+    url("../fonts/flaticon/flaticon.svg") format("svg");
+    font-weight: normal;
+    font-style: normal;
 }
 [class^="flaticon-"]:before, [class*=" flaticon-"]:before,
 [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
-	font-family: Flaticon;
+    font-family: Flaticon;
     font-style: normal;
     margin-left: 0px;
     margin-top: 3px;
@@ -366,192 +366,195 @@
 .flaticon-mailbox30:before {
 	content: "\e074";
 }
-.flaticon-medical7:before {
+.flaticon-maleuser:before {
 	content: "\e075";
 }
-.flaticon-mobile30:before {
+.flaticon-medical7:before {
 	content: "\e076";
 }
-.flaticon-mobile55:before {
+.flaticon-mobile30:before {
 	content: "\e077";
 }
-.flaticon-mobile63:before {
+.flaticon-mobile55:before {
 	content: "\e078";
 }
-.flaticon-mobilephone1:before {
+.flaticon-mobile63:before {
 	content: "\e079";
 }
-.flaticon-modern6:before {
+.flaticon-mobilephone1:before {
 	content: "\e07a";
 }
-.flaticon-money-card1:before {
+.flaticon-modern6:before {
 	content: "\e07b";
 }
-.flaticon-money217:before {
+.flaticon-money-card1:before {
 	content: "\e07c";
 }
-.flaticon-office17:before {
+.flaticon-money217:before {
 	content: "\e07d";
 }
-.flaticon-office21:before {
+.flaticon-office17:before {
 	content: "\e07e";
 }
-.flaticon-open129:before {
+.flaticon-office21:before {
 	content: "\e07f";
 }
-.flaticon-open203:before {
+.flaticon-open129:before {
 	content: "\e080";
 }
-.flaticon-open204:before {
+.flaticon-open203:before {
 	content: "\e081";
 }
-.flaticon-open9:before {
+.flaticon-open204:before {
 	content: "\e082";
 }
-.flaticon-opened33:before {
+.flaticon-open9:before {
 	content: "\e083";
 }
-.flaticon-opened34:before {
+.flaticon-opened33:before {
 	content: "\e084";
 }
-.flaticon-opened36:before {
+.flaticon-opened34:before {
 	content: "\e085";
 }
-.flaticon-opened37:before {
+.flaticon-opened36:before {
 	content: "\e086";
 }
-.flaticon-opened38:before {
+.flaticon-opened37:before {
 	content: "\e087";
 }
-.flaticon-padlock36:before {
+.flaticon-opened38:before {
 	content: "\e088";
 }
-.flaticon-pen11:before {
+.flaticon-padlock36:before {
 	content: "\e089";
 }
-.flaticon-pen18:before {
+.flaticon-pen11:before {
 	content: "\e08a";
 }
-.flaticon-pen52:before {
+.flaticon-pen18:before {
 	content: "\e08b";
 }
-.flaticon-pencil52:before {
+.flaticon-pen52:before {
 	content: "\e08c";
 }
-.flaticon-pencil78:before {
+.flaticon-pencil52:before {
 	content: "\e08d";
 }
-.flaticon-pencil79:before {
+.flaticon-pencil78:before {
 	content: "\e08e";
 }
-.flaticon-pencil80:before {
+.flaticon-pencil79:before {
 	content: "\e08f";
 }
-.flaticon-perfusion:before {
+.flaticon-pencil80:before {
 	content: "\e090";
 }
-.flaticon-person193:before {
+.flaticon-perfusion:before {
 	content: "\e091";
 }
-.flaticon-phone399:before {
+.flaticon-person193:before {
 	content: "\e092";
 }
-.flaticon-plan:before {
+.flaticon-phone399:before {
 	content: "\e093";
 }
-.flaticon-plan1:before {
+.flaticon-plan:before {
 	content: "\e094";
 }
-.flaticon-plate13:before {
+.flaticon-plan1:before {
 	content: "\e095";
 }
-.flaticon-power117:before {
+.flaticon-plate13:before {
 	content: "\e096";
 }
-.flaticon-professor10:before {
+.flaticon-power117:before {
 	content: "\e097";
 }
-.flaticon-protected3:before {
+.flaticon-professor10:before {
 	content: "\e098";
 }
-.flaticon-protected9:before {
+.flaticon-protected3:before {
 	content: "\e099";
 }
-.flaticon-rectangular23:before {
+.flaticon-protected9:before {
 	content: "\e09a";
 }
-.flaticon-rest:before {
+.flaticon-rectangular23:before {
 	content: "\e09b";
 }
-.flaticon-restaurant26:before {
+.flaticon-rest:before {
 	content: "\e09c";
 }
-.flaticon-restaurant29:before {
+.flaticon-restaurant26:before {
 	content: "\e09d";
 }
-.flaticon-school1:before {
+.flaticon-restaurant29:before {
 	content: "\e09e";
 }
-.flaticon-sciences:before {
+.flaticon-school1:before {
 	content: "\e09f";
 }
-.flaticon-shelf1:before {
+.flaticon-sciences:before {
 	content: "\e0a0";
 }
-.flaticon-shut-down1:before {
+.flaticon-shelf1:before {
 	content: "\e0a1";
 }
-.flaticon-skyscraper1:before {
+.flaticon-shut-down1:before {
 	content: "\e0a2";
 }
-.flaticon-smartphone14:before {
+.flaticon-skyscraper1:before {
 	content: "\e0a3";
 }
-.flaticon-sofa5:before {
+.flaticon-smartphone14:before {
 	content: "\e0a4";
 }
-.flaticon-stick-man:before {
+.flaticon-sofa5:before {
 	content: "\e0a5";
 }
-.flaticon-students3:before {
+.flaticon-stick-man:before {
 	content: "\e0a6";
 }
-.flaticon-swiping:before {
+.flaticon-students3:before {
 	content: "\e0a7";
 }
-.flaticon-tick18:before {
+.flaticon-swiping:before {
 	content: "\e0a8";
 }
-.flaticon-toilet10:before {
+.flaticon-tick18:before {
 	content: "\e0a9";
 }
-.flaticon-toilet13:before {
+.flaticon-toilet10:before {
 	content: "\e0aa";
 }
-.flaticon-touchscreen4:before {
+.flaticon-toilet13:before {
 	content: "\e0ab";
 }
-.flaticon-tower-block:before {
+.flaticon-touchscreen4:before {
 	content: "\e0ac";
 }
-.flaticon-tower22:before {
+.flaticon-tower-block:before {
 	content: "\e0ad";
 }
-.flaticon-two210:before {
+.flaticon-tower22:before {
 	content: "\e0ae";
 }
-.flaticon-university:before {
+.flaticon-two210:before {
 	content: "\e0af";
 }
-.flaticon-warning45:before {
+.flaticon-university:before {
 	content: "\e0b0";
 }
-.flaticon-window15:before {
+.flaticon-warning45:before {
 	content: "\e0b1";
 }
-.flaticon-yoga:before {
+.flaticon-window15:before {
 	content: "\e0b2";
 }
-.flaticon-yoga12:before {
+.flaticon-yoga:before {
 	content: "\e0b3";
+}
+.flaticon-yoga12:before {
+	content: "\e0b4";
 }
