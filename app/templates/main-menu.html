@@ -17,9 +17,13 @@
 
     <ion-side-menu side="left" expose-aside-when="large">
 
-        <div class="bar bar-header menu-bar-header">
+        <div class="bar bar-header menu-bar-header" style="padding-left: 0">
             <div class="row row-center">
-                <div class="col col-80 relative-position">
+                <div class="col col-20 profile-div" nav-clear menu-close ui-sref="mainMenu.profile" ui-sref-active="profile-menu-active">
+                    <i class="flaticon-maleuser profile-icon-outline" style="font-size: 28px"></i>
+                    <i class="flaticon-maleuser energized profile-icon-filled" style="font-size: 28px"></i>
+                </div>
+                <div class="col col-60 relative-position" style="padding-left: 0">
                     <div class="menu-bar-header-badge-position pointer" nav-clear menu-close ui-sref="mainMenu.notifications">
                         <i class="badge badge-assertive">{{unreadMsg}}</i>
                     </div>
@@ -52,33 +56,24 @@
                         Doors
                     </div>
                 </li>
-                <!--<li nav-clear menu-close ui-sref="mainMenu.doorsRequest" ui-sref-active="menu-active" class="item-menu row row-center menu-list">-->
-                    <!--<div class="col col-20">-->
-                        <!--<i class="ion-ios-paper-outline menu-icon-outline" style="font-size: 30px;"></i>-->
-                        <!--<i class="ion-ios-paper energized menu-icon-filled" style="font-size: 30px;"></i>-->
-                    <!--</div>-->
-                    <!--<div class="col col-80">-->
-                        <!--Doors Request-->
-                    <!--</div>-->
-                <!--</li>-->
-                <li nav-clear menu-close ui-sref="mainMenu.settings" ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                <li nav-clear menu-close ui-sref="mainMenu.calendars" ui-sref-active="menu-active" class="item-menu row row-center menu-list">
                     <div class="col col-20">
-                        <i class="ion-ios-gear-outline menu-icon-outline" style="font-size: 32px;"></i>
-                        <i class="ion-ios-gear energized menu-icon-filled" style="font-size: 32px;"></i>
+                        <i class="ion-ios-calendar-outline menu-icon-outline" style="font-size: 32px;"></i>
+                        <i class="ion-ios-calendar-outline energized menu-icon-filled" style="font-size: 32px;"></i>
                     </div>
                     <div class="col col-80">
-                        Settings
+                        Calendars
                     </div>
                 </li>
-                <!--<li nav-clear menu-close ui-sref-active="menu-active" class="item-menu row row-center menu-list">-->
-                    <!--<div class="col col-20">-->
-                        <!--<i class="flaticon-power117 menu-icon-outline" style="font-size: 25px;"></i>-->
-                        <!--<i class="flaticon-power117 energized menu-icon-filled" style="font-size: 25px;"></i>-->
-                    <!--</div>-->
-                    <!--<div class="col col-80">-->
-                        <!--Log out-->
-                    <!--</div>-->
-                <!--</li>-->
+                <li nav-clear menu-close ui-sref="mainMenu.about" ui-sref-active="menu-active" class="item-menu row row-center menu-list">
+                <div class="col col-20">
+                    <i class="ion-ios-information-outline menu-icon-outline" style="font-size: 32px;"></i>
+                    <i class="ion-ios-information energized menu-icon-filled" style="font-size: 32px;"></i>
+                </div>
+                <div class="col col-80">
+                    About
+                </div>
+            </li>
             </ul>
         </ion-content>
 
