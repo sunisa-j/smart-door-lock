@@ -1,0 +1,22 @@
+<ion-view view-title="Change PIN">
+    <ion-content>
+
+        <div class="list">
+            <label class="item item-input">
+                <span style="text-align: right; padding-right: 10px; width: 50%">New Passcode</span>
+                <input type="number" ng-model="myPin" style="width: 50%">
+            </label>
+        </div>
+
+        <!--Cancel & Done Button-->
+        <div class="button-bar">
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="myPin=pin">Cancel</button>
+            </div>
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline" ng-click="confirmChangePin(myPin)">Done</button>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
