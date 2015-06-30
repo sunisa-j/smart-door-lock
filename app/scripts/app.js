@@ -85,47 +85,56 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 }
             },
             {
-                name: 'settings',
-                url: '/settings',
+                name: 'about',
+                url: '/about',
                 views: {
                     menuContent: {
-                        controller: 'SettingsController',
-                        templateUrl: 'templates/settings.html'
+                        templateUrl: 'templates/about.html'
                     }
-                },
-                children: [
-                    {
-                        name: 'changePasscode',
-                        url: '/change-passcode',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'SettingsController',
-                                templateUrl: 'templates/change-passcode.html'
-                            }
-                        }
-                    },
-                    {
-                        name: 'manageCard',
-                        url: '/manage-card',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'SettingsController',
-                                templateUrl: 'templates/manage-card.html'
-                            }
-                        }
-                    },
-                    {
-                        name: 'about',
-                        url: '/about',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'SettingsController',
-                                templateUrl: 'templates/about.html'
-                            }
-                        }
-                    }
-                ]
+                }
             },
+            //{
+            //    name: 'settings',
+            //    url: '/settings',
+            //    views: {
+            //        menuContent: {
+            //            controller: 'SettingsController',
+            //            templateUrl: 'templates/settings.html'
+            //        }
+            //    },
+            //    children: [
+            //        {
+            //            name: 'changePasscode',
+            //            url: '/change-passcode',
+            //            views: {
+            //                'menuContent@mainMenu': {
+            //                    controller: 'SettingsController',
+            //                    templateUrl: 'templates/change-passcode.html'
+            //                }
+            //            }
+            //        },
+            //        {
+            //            name: 'manageCard',
+            //            url: '/manage-card',
+            //            views: {
+            //                'menuContent@mainMenu': {
+            //                    controller: 'SettingsController',
+            //                    templateUrl: 'templates/manage-card.html'
+            //                }
+            //            }
+            //        },
+            //        {
+            //            name: 'about',
+            //            url: '/about',
+            //            views: {
+            //                'menuContent@mainMenu': {
+            //                    controller: 'SettingsController',
+            //                    templateUrl: 'templates/about.html'
+            //                }
+            //            }
+            //        }
+            //    ]
+            //},
             {
                 name: 'notifications',
                 url: '/notifications',
@@ -143,6 +152,38 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                             'menuContent@mainMenu': {
                                 controller: 'NotificationsController',
                                 templateUrl: 'templates/notification.html'
+                            }
+                        }
+                    }
+                ]
+            },
+            {
+                name: 'profile',
+                url: '/profile',
+                views: {
+                    menuContent: {
+                        controller: 'ProfileController',
+                        templateUrl: '../templates/profile.html'
+                    }
+                },
+                children: [
+                    {
+                        name: 'changePin',
+                        url: '/change-pin',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'ProfileController',
+                                templateUrl: 'templates/change-pin.html'
+                            }
+                        }
+                    },
+                    {
+                        name: 'manageCard',
+                        url: '/manage-card',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'ProfileController',
+                                templateUrl: 'templates/manage-card.html'
                             }
                         }
                     }
