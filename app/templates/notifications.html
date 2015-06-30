@@ -6,7 +6,7 @@
                 <i class="ion-ios-minus assertive" ng-show="notif.action=='removed'"></i>
                 <i class="ion-ios-plus balanced" ng-show="notif.action=='added'"></i>
             </div>
-            <div class="custom-row-title medium-font-size">
+            <div class="custom-row-title medium-font-size" style="margin-top: 5px">
                 <div ng-show="notif.action=='removed'"">You have been {{notif.action}} from {{notif.door.name}} by {{notif.handler.name}}.</div>
                 <div ng-show="notif.action=='added'"">You have been {{notif.action}} as a member of {{notif.door.name}} by {{notif.handler.name}}.</div>
 
