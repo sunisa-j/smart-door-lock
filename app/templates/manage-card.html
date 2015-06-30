@@ -1,33 +1,23 @@
 <ion-view view-title="Manage Card">
     <ion-content>
 
-        <div class="custom-row">
+        <div class="custom-row" ng-repeat="card in cardInfo" ng-class="{'card-void-status-bg':card.status=='Void'}">
             <div class="custom-row-icon">
-                <i class="flaticon-debit"></i>
+                <i class="flaticon-debit" ng-class="{'stable-font-color':card.status=='Void'}"></i>
+                <i class="custom-row-status-icon-corner ion-ios-close stable" ng-show="card.status=='Void'"></i>
+
+                <i class="custom-row-status-icon-corner ion-ios-checkmark balanced" ng-show="card.status=='Enabled'"></i>
+                <i class="custom-row-status-icon-corner ion-ios-close assertive" ng-show="card.status=='Disabled'"></i>
             </div>
-            <div class="custom-row-title">
-                <div>5310120240</div>
-                <div class="custom-row-font-status balanced">
-                    <i class="custom-row-status-icon ion-ios-checkmark"></i>&nbsp;Enabled
-                </div>
+            <div class="custom-row-title" ng-class="{'stable-font-color':card.status=='Void'}">
+                <div>{{card.idCard}}</div>
+                <!--<div class="custom-row-font-status balanced">-->
+                    <!--<i class="custom-row-status-icon ion-ios-checkmark"></i>&nbsp;Enabled-->
+                <!--</div>-->
             </div>
             <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-close-outline" ng-click="confirmEnableCard()">Disable</button>
-            </div>
-        </div>
-
-        <div class="custom-row stable-bg">
-            <div class="custom-row-icon">
-                <i class="flaticon-debit"></i>
-            </div>
-            <div class="custom-row-title">
-                <div>4910110999</div>
-                <div class="custom-row-font-status dark">
-                    <i class="custom-row-status-icon ion-ios-close"></i>&nbsp;Void
-                </div>
-            </div>
-            <div class="custom-row-button" ng-hide="true">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-close-outline">Disable</button>
+                <button class="button button-outline button-small button-dark" ng-click="confirmEnableCard(card.$id,'disable')" ng-show="card.status=='Enabled'">Disable</button>
+                <button class="button button-outline button-small button-dark" ng-click="confirmEnableCard(card.$id,'enable')" ng-show="card.status=='Disabled'">Enable</button>
             </div>
         </div>
 
