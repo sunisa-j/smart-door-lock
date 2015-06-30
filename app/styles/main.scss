@@ -43,7 +43,7 @@ $custom_ion_content_bg: #F7F7F7;
 $border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
-$doors_custom_row_height: 76px;
+$doors_custom_row_height: 65px;
 $tabs_column_height: 50px;
 // Your application styles go here **********************
 
@@ -482,6 +482,11 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-basis: 30px;
   -ms-flex-basis: 30px;
 }
+.flex-grow-1 {
+   flex-grow: 1;
+   -webkit-flex-grow: 1;
+   -moz-flex-grow: 1;
+ }
 
 // Custom Row
 .door-custom-row {
@@ -495,8 +500,8 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .door-status-icon {
   position: absolute;
-  top: 12px;
-  left: 49px;
+  top: 10px;
+  left: 48px;
   width: 28px;
   height: 28px;
   border-radius: 50px;
@@ -517,7 +522,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   flex-basis: 90px;
   -webkit-flex-basis: 90px;
   -moz-flex-basis: 90px;
-  font-size: 40px;
+  font-size: 37px;
   color: $font_icon_color;
 }
 .custom-row-title {
@@ -1049,6 +1054,12 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-top: solid 1px $border_color;
 }
 // media query *****************************************
+@media (max-width: 1023px) {
+  .door-custom-row {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
 @media (max-width: 767px) {
   .main-menu-button {
     visibility: visible;
@@ -1057,5 +1068,12 @@ input::-webkit-datetime-edit, #date-time-edit {
 @media (min-width: 768px) {
   .main-menu-button {
     visibility: hidden;
+  }
+}
+@media (min-width: 1024px) {
+  .door-custom-row {
+    flex: 0 0 50%;
+    max-width: 50%;
+    border-right: solid 1px $border_color;
   }
 }
