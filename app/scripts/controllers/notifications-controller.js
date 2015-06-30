@@ -4,6 +4,64 @@ window.app.controller('NotificationsController', function ($scope, $stateParams)
 
     $scope.notifId = $stateParams.notificationId;
     $scope.dateNow = new Date();
+    $scope.notifications = [
+        {
+            $id: 1,
+            action: 'removed',
+            door : {
+                id: 100,
+                name: 'R101'
+            },
+            handler: {
+                id: 1,
+                name: 'Wimon Khamchan'
+            },
+            status: 'unread',
+            createTime: new Date('June 30, 2015 13:30:00')
+        },
+        {
+            $id: 2,
+            action: 'added',
+            door : {
+                id: 101,
+                name: 'WSN'
+            },
+            handler: {
+                id: 2,
+                name: 'Prof. Wannarat Santiamorntat'
+            },
+            status: 'unread',
+            createTime: new Date('June 29, 2015 12:00:00')
+        }
+    ];
+    $scope.notificationsObj = {
+        1: {
+            action: 'removed',
+            door: {
+                id: 100,
+                name: 'R101'
+            },
+            handler: {
+                id: 1,
+                name: 'Wimon Khamchan'
+            },
+            status: 'unread',
+            createTime: new Date('June 30, 2015 13:30:00')
+        },
+        2: {
+            action : 'added',
+            door: {
+                id: 101,
+                name: 'WSN'
+            },
+            handler: {
+                id: 2,
+                name: 'Prof. Wannarat Santiamorntat'
+            },
+            status: 'unread',
+            createTime: new Date('June 29, 2015 12:00:00')
+        }
+    };
 
     $scope.calcDate = function(timeDuration) {
         var days = (timeDuration/ (24*3600*1000)).toFixed(0);
@@ -48,34 +106,4 @@ window.app.controller('NotificationsController', function ($scope, $stateParams)
         return valueReturn;
     };
 
-    $scope.notifications = [
-        {
-            $id: 1,
-            action: 'removed',
-            door : {
-                id: 100,
-                name: 'R101'
-            },
-            handler: {
-                id: 1,
-                name: 'Wimon Khamchan'
-            },
-            status: 'unread',
-            createTime: new Date('June 30, 2015 13:30:00')
-        },
-        {
-            $id: 2,
-            action: 'added',
-            door : {
-                id: 101,
-                name: 'WSN'
-            },
-            handler: {
-                id: 2,
-                name: 'Prof. Wannarat Santiamorntat'
-            },
-            status: 'unread',
-            createTime: new Date('June 29, 2015 12:00:00')
-        }
-    ];
 });
