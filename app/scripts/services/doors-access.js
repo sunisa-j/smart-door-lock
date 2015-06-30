@@ -4,8 +4,8 @@ window.app.factory('doorsAccess', function () {
 
     var doorsAccess = {
         'group1': {
-            name: 'Robot',
-            desc: 'Computer Engineering near reservoir',
+            name: 'Classroom',
+            desc: 'Computer Engineering, PSU',
             doorsAccess: {
                 'door1': {
                     name: 'R101',
@@ -44,8 +44,8 @@ window.app.factory('doorsAccess', function () {
                     }
                 },
                 'door3': {
-                    name: 'WSN',
-                    desc: '3rd floor',
+                    name: 'R201',
+                    desc: '2nd floor',
                     status: {
                         door: 'opened',
                         lock: 'locked'
@@ -82,12 +82,12 @@ window.app.factory('doorsAccess', function () {
             }
         },
         'group2': {
-            name: 'Robot 2',
-            desc: 'Computer Engineering 2',
+            name: 'Laboratory',
+            desc: 'Computer Engineering, PSU',
             doorsAccess: {
                 'door1': {
-                    name: 'R2-101',
-                    desc: '1st floor',
+                    name: 'WSN',
+                    desc: '3rd floor',
                     status: {
                         door: 'closed',
                         lock: 'unlocked'
@@ -104,8 +104,8 @@ window.app.factory('doorsAccess', function () {
                     }
                 },
                 'door2': {
-                    name: 'R2-200',
-                    desc: '2nd floor',
+                    name: 'CNR',
+                    desc: '3rd floor',
                     status: {
                         door: 'closed',
                         lock: 'locked'
@@ -122,8 +122,8 @@ window.app.factory('doorsAccess', function () {
                     }
                 },
                 'door4': {
-                    name: 'R4-403',
-                    desc: '3rd floor',
+                    name: 'Robotic',
+                    desc: '4th floor',
                     status: {
                         door: 'opened',
                         lock: 'unlocked'
@@ -145,33 +145,33 @@ window.app.factory('doorsAccess', function () {
 
     // convert object to array
     var doorsAccessArr = [];
-    var numberOfBuildings = 0;
+    var numberOfGroups = 0;
 
     angular.forEach(doorsAccess, function(value, key){
-        var building = angular.copy(value);
-        var doorsInBuilding = building.doorsAccess;
-        building.$id = key;
+        var group = angular.copy(value);
+        var doorsInGroup = group.doorsAccess;
+        group.$id = key;
 
-        building.doorsAccess = [];
-        var doorsEachBuilding = 0;
+        group.doorsAccess = [];
+        var doorsEachGroup = 0;
 
-        angular.forEach(doorsInBuilding, function(door, key){
+        angular.forEach(doorsInGroup, function(door, key){
             var tmp = angular.copy(door);
             tmp.$id = key;
-            building.doorsAccess.push(tmp);
+            group.doorsAccess.push(tmp);
 
-            doorsEachBuilding++;
+            doorsEachGroup++;
         });
-        building.numberOfDoors = doorsEachBuilding;
-        numberOfBuildings++;
+        group.numberOfDoors = doorsEachGroup;
+        numberOfGroups++;
 
-        doorsAccessArr.push(building);
+        doorsAccessArr.push(group);
     });
-    doorsAccessArr.numberOfBuildings = numberOfBuildings;
+    doorsAccessArr.numberOfGroups = numberOfGroups;
 
     // Get number of doors
     var doorsCount = [];
-    for(var i=0; i < numberOfBuildings; i++) {
+    for(var i=0; i < numberOfGroups; i++) {
         var tmp = {
             'buildingId': doorsAccessArr[i].$id,
             'buildingName': doorsAccessArr[i].name,
