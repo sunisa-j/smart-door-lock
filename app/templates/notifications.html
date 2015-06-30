@@ -1,50 +1,20 @@
 <ion-view view-title="Notifications">
     <ion-content>
 
-        <div class="custom-row" ui-sref="mainMenu.notifications.notification">
+        <div class="custom-row" ng-repeat="notif in notifications | orderBy:createTime:reverse" ui-sref="mainMenu.notifications.notification({notificationId: notif.$id})">
             <div class="custom-row-icon">
-                <i class="ion-ios-close assertive"></i>
+                <i class="ion-ios-minus assertive" ng-show="notif.action=='removed'"></i>
+                <i class="ion-ios-plus balanced" ng-show="notif.action=='added'"></i>
             </div>
             <div class="custom-row-title medium-font-size">
-                <div>
-                    You have been denied to enter R101 on 1 May 2012 from 1.00 pm to 2.00 pm
-                </div>
-                <div class="custom-row-font-status stable-font-color">
-                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;5 minutes ago
-                </div>
-            </div>
-            <div class="custom-row-arrow">
-                <i class="ion-ios-arrow-right"></i>
-            </div>
-        </div>
+                <div ng-show="notif.action=='removed'"">You have been {{notif.action}} from {{notif.door.name}} by {{notif.handler.name}}.</div>
+                <div ng-show="notif.action=='added'"">You have been {{notif.action}} as a member of {{notif.door.name}} by {{notif.handler.name}}.</div>
 
-        <div class="custom-row">
-            <div class="custom-row-icon">
-                <i class="ion-ios-checkmark balanced"></i>
-            </div>
-            <div class="custom-row-title medium-font-size">
-                <div>
-                    You have been allowed to enter R101 on 28 Apr 2015 from 8.30 am to 12.00 am
-                </div>
                 <div class="custom-row-font-status stable-font-color">
-                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;1 day ago
-                </div>
-            </div>
-            <div class="custom-row-arrow">
-                <i class="ion-ios-arrow-right"></i>
-            </div>
-        </div>
-
-        <div class="custom-row">
-            <div class="custom-row-icon">
-                <i class="ion-ios-plus balanced"></i>
-            </div>
-            <div class="custom-row-title medium-font-size">
-                <div>
-                    You have been added as a member of WSN, Robot by Prof.Wannarat
-                </div>
-                <div class="custom-row-font-status stable-font-color">
-                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;2 days ago
+                    <div style="display: none" ng-init="timeDuration=''">
+                        {{ timeDuration = ( (dateNow.getTime() - notif.createTime.getTime()) )  }}
+                    </div>
+                    <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;{{ calcDate(timeDuration) }}
                 </div>
             </div>
             <div class="custom-row-arrow">
