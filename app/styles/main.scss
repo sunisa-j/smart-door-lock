@@ -12,7 +12,7 @@ $positive: #0382BF;   // blue
 $bar-dark-border: #525252;
 $font-family-base: THfont, Thonburi, "Browallia New", Arial;
 $font-family-light-sans-serif: THfont, Thonburi, "Browallia New", Arial;
-$font-size-base: 15px;
+$font-size-base: 16px;
 $bar-title-font-size: 20px;
 $z-index-badge: 1px;
 $button-stable-border: $stable;
@@ -32,10 +32,11 @@ $item-padding: 15px;
 // ****************** ionic *****************************
 
 // **** your variable changes can go here ***************
-$dark_font_color: #000;
+$dark_font_color: #333;
 $stable_font_color: #A7A7A7;
+$font_icon_color: #525252;
 $medium_font_size: 14px;
-$custom_row_font_size: 16px;
+$custom_row_font_size: $font-size-base;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
 $custom_ion_content_bg: #F7F7F7;
@@ -139,6 +140,9 @@ input::-webkit-datetime-edit, #date-time-edit {
   background-color: $assertive !important;
 }
 .item-bg-color-on-grey-bg { background-color: #EFEFEF; }
+.card-void-status-bg {
+  background-color: #F5F5F5;
+}
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
@@ -514,7 +518,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   -webkit-flex-basis: 90px;
   -moz-flex-basis: 90px;
   font-size: 40px;
-  color: $dark;
+  color: $font_icon_color;
 }
 .custom-row-title {
   @extend .flex-1;
@@ -530,6 +534,12 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .custom-row-status-icon {
   font-size: 16px;
+}
+.custom-row-status-icon-corner {
+  position: absolute;
+  right: 15px;
+  bottom: -11px;
+  font-size: 24px;
 }
 .custom-row-arrow {
   flex-basis: 30px;
@@ -722,6 +732,24 @@ input::-webkit-datetime-edit, #date-time-edit {
  }
 .notif-menu-active .notif-icon-filled {
   visibility: visible !important;
+}
+.profile-icon-outline {
+  display: block;
+  color: #d7d7d7;
+}
+.profile-icon-filled {
+  display: none;
+}
+.profile-div {
+  @extend .pointer, .align-items-center;
+  text-align: center;
+  height: 100%;
+}
+.profile-menu-active .profile-icon-outline {
+  display: none !important;
+}
+.profile-menu-active .profile-icon-filled {
+  display: block !important;
 }
 // Custom dashboard.html ********************************
 .dashboard-row {
