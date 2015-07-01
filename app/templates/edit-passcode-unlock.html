@@ -1,0 +1,50 @@
+<ion-view view-title="{{passcodeUnlockSelected.name}}">
+    <ion-content class="custom-ion-content-bg">
+
+        <div class="item item-divider edit-button-item-divider">
+            <div ng-class="{'fade-in':enableEditPasscode.value==false, 'opacity-0':enableEditPasscode.value==true,'fade-out':enableEditPasscode.value==true, 'opacity-1':enableEditPasscode.value==false}">
+                <button class="button button-clear button-small link-btn-color"
+                        ng-click="enableEditPasscode.value=true; passcodeReadOnly.value=false"
+                        ng-hide="enableEditPasscode.value">Edit</button>
+            </div>
+            <div ng-class="{'fade-in':enableEditPasscode.value==true, 'opacity-0':enableEditPasscode.value==false,'fade-out':enableEditPasscode.value==false, 'opacity-1':enableEditPasscode.value==true}">
+                <button class="button button-clear button-small button-stable"
+                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPasscode.value">Cancel</button>
+                <button class="button button-clear button-small button-balanced"
+                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPasscode.value">Save</button>
+            </div>
+        </div>
+
+        <div class="list">
+            <label class="item item-input">
+                <span>Passcode Name</span>
+                <input type="text" ng-model="passcodeUnlockSelected.name" ng-disabled="passcodeReadOnly.value">
+            </label>
+        </div>
+        <div class="list" style="padding-bottom: 30px">
+            <label class="item item-input">
+                <span>New Passcode</span>
+                <input type="password" ng-model="passcodeUnlockSelected.passcode" ng-disabled="passcodeReadOnly.value">
+            </label>
+        </div>
+
+        <div class="flex align-items-center custom-setting-row-with-right-button pointer">
+            <div class="custom-row-title">
+                <div>Access Time</div>
+            </div>
+            <div class="custom-setting-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="item item-desc">
+            Select calendars for new passcode group to access {{doorData.name}}.
+        </div>
+
+        <div class="button-div-padding">
+            <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="myPin=pin">Delete Passcode</button>
+        </div>
+
+    </ion-content>
+</ion-view>
