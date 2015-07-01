@@ -155,6 +155,10 @@ input[disabled] {
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
   background-color: $light;
 }
+// Modal ************************************************
+.modal .bar-header {
+  background-color: $custom_ion_content_bg;
+}
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
@@ -269,6 +273,7 @@ input[disabled] {
 .edit-button-item-divider div {
   position: absolute;
   right: 10px;
+  top: 1px;
 }
 .edit-button-item-divider button {
   font-size: $medium_font_size;
@@ -392,7 +397,7 @@ input[disabled] {
 }
 // Popup ************************************************
 .popup-head {
-  background-color: #eee;
+  background-color: $custom_ion_content_bg;
   text-align: center;
 }
 .popup-title {
