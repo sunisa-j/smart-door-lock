@@ -45,6 +45,7 @@ $border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
 $doors_custom_row_height: 65px;
+$custom_setting_row_height: 50px;
 $tabs_column_height: 50px;
 
 // Your application styles go here **********************
@@ -145,6 +146,9 @@ input::-webkit-datetime-edit, #date-time-edit {
 .card-void-status-bg {
   background-color: #F5F5F5;
 }
+[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
+  background-color: $light;
+}
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
   background-color: $custom_ion_content_bg !important;
@@ -163,6 +167,9 @@ input::-webkit-datetime-edit, #date-time-edit {
 .button-bar {
   padding: 0 5px;
 }
+.toggle {
+  @extend .pointer;
+}
 .toggle .track {
   background-color: $light_border_color;
 }
@@ -171,7 +178,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .custom-button-right-text {
   margin-right: -10px;
-  margin-top: 3px;
+  margin-top: 0px;
   white-space: normal !important;
 }
 .custom-button-right-text .text-before-arrow-right{
@@ -181,6 +188,7 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .custom-button-right-text i {
   color: $bar-dark-border;
+  font-size: $font-size-base;
 }
 .search-button-div { padding-top: 2px; }
 .custom-search-button {
@@ -195,6 +203,9 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: 22px;
 }
 // item, item-divider ***********************************
+.item {
+  color: $dark_font_color;
+}
 .item-divider {
   height: 28px;
   font-size: 15px;
@@ -215,7 +226,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: 12px;
   color: $dark;
   padding-top: 5px;
-  padding-bottom: 10px;
+  padding-bottom: 20px;
   background-color: transparent;
   border: 0;
 }
@@ -237,6 +248,9 @@ input::-webkit-datetime-edit, #date-time-edit {
 .item-checkbox input {
   height: 20px;
   width: 20px;
+}
+.item-button-right {
+  height: $custom_setting_row_height;
 }
 // Custom Manage User Content ***************************
 .manage-user-margin-left {
@@ -552,20 +566,41 @@ input::-webkit-datetime-edit, #date-time-edit {
   flex-basis: 30px;
   -webkit-flex-basis: 30px;
   -moz-flex-basis: 30px;
-  font-size: 20px;
   color: $bar-dark-border;
+  font-size: $font-size-base;
+}
+.custom-setting-row-arrow {
+  flex-basis: 6px;
+  -webkit-flex-basis: 6px;
+  -moz-flex-basis: 6px;
+  padding-right: 18px;
+  color: $bar-dark-border;
+  font-size: $font-size-base;
 }
 .custom-row-button {
   flex-basis: 85px;
   -webkit-flex-basis: 85px;
   -moz-flex-basis: 85px;
+  padding-right: 15px;
+  text-align: right;
+}
+.custom-row-spinner {
+  flex-basis: 51px;
+  -webkit-flex-basis: 51px;
+  -moz-flex-basis: 51px;
   margin-right: 15px;
+  text-align: center;
+  font-size: 28px;
 }
 .custom-row-button .button {
   padding: 0 7px;
 }
-.custom-row-button .button-small {
-  font-size: 14px;
+.custom-row-button .toggle {
+  margin-top: 0;
+}
+.custom-row-button i {
+  color: $bar-dark-border;
+  font-size: $font-size-base;
 }
 .custom-row-desc {
   font-size: 12px;
@@ -577,7 +612,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-right: 0;
   background-color: $light;
   padding: 0 0 0 10px;
-  height: 56px;
+  height: $custom_setting_row_height;
 }
 .custom-row-inset-with-button-div {
   padding: 0 15px;
@@ -588,7 +623,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   border-right: 0;
   background-color: $light;
   padding: 0px;
-  height: 56px;
+  height: $custom_setting_row_height;
   margin-top: -1px;
 }
 .custom-row-inset-with-button .custom-row-title {
@@ -596,6 +631,23 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .custom-row-inset-with-button .custom-row-button {
   margin-right: 0;
+}
+.custom-row-del-border-bottom {
+  border-bottom: 0;
+}
+.custom-row-del-border-top {
+  border-top: 0;
+  margin-top: 0;
+}
+.row-border-inset {
+  height: 1px;
+  padding: 0 15px;
+  width: 100%;
+  background: $light;
+}
+.row-border-inset-color {
+  border-top: solid 1px $border_color;
+  width: 100%;
 }
 // Card *************************************************
 .card {
@@ -922,7 +974,10 @@ input::-webkit-datetime-edit, #date-time-edit {
   -moz-flex-basis: 256px;
   -ms-flex-basis: 256px;
 }
-
+// Calendars & event list ******************************
+.calendar-list-title {
+  color: $stable_font_color;
+}
 // Log style *******************************************
 .log-container {
   padding: 15px;
