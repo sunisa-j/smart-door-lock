@@ -31,7 +31,7 @@ window.app.controller('NotificationsController', function ($scope, $stateParams)
                 name: 'Prof. Wannarat Santiamorntat'
             },
             status: 'unread',
-            createTime: new Date('June 29, 2015 12:00:00')
+            createTime: new Date('June 29, 2015 17:50:00')
         }
     ];
     $scope.notificationsObj = {
@@ -59,7 +59,7 @@ window.app.controller('NotificationsController', function ($scope, $stateParams)
                 name: 'Prof. Wannarat Santiamorntat'
             },
             status: 'unread',
-            createTime: new Date('June 29, 2015 12:00:00')
+            createTime: new Date('June 29, 2015 17:50:00')
         }
     };
 
