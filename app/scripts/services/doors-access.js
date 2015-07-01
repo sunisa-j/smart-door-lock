@@ -23,6 +23,14 @@ window.app.factory('doorsAccess', function () {
                         configuration: true,
                         manageAccess: true,
                         adminPrivillage: true
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 },
                 'door2': {
@@ -41,6 +49,14 @@ window.app.factory('doorsAccess', function () {
                         configuration: true,
                         manageAccess: true,
                         adminPrivillage: true
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 },
                 'door3': {
@@ -59,6 +75,14 @@ window.app.factory('doorsAccess', function () {
                         configuration: false,
                         manageAccess: false,
                         adminPrivillage: false
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 },
                 'door4': {
@@ -77,6 +101,14 @@ window.app.factory('doorsAccess', function () {
                         configuration: false,
                         manageAccess: false,
                         adminPrivillage: false
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 }
             }
@@ -85,7 +117,7 @@ window.app.factory('doorsAccess', function () {
             name: 'Laboratory',
             desc: 'Computer Engineering, PSU',
             doorsAccess: {
-                'door1': {
+                'door5': {
                     name: 'WSN',
                     desc: '3rd floor',
                     status: {
@@ -101,9 +133,17 @@ window.app.factory('doorsAccess', function () {
                         configuration: false,
                         manageAccess: false,
                         adminPrivillage: false
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 },
-                'door2': {
+                'door6': {
                     name: 'CNR',
                     desc: '3rd floor',
                     status: {
@@ -119,9 +159,17 @@ window.app.factory('doorsAccess', function () {
                         configuration: false,
                         manageAccess: false,
                         adminPrivillage: false
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 },
-                'door4': {
+                'door7': {
                     name: 'Robotic',
                     desc: '4th floor',
                     status: {
@@ -137,6 +185,14 @@ window.app.factory('doorsAccess', function () {
                         configuration: false,
                         manageAccess: false,
                         adminPrivillage: false
+                    },
+                    configDoor: {
+                        autoRelock: {
+                            status: false
+                        },
+                        pinRequired: {
+                            status: false
+                        }
                     }
                 }
             }
