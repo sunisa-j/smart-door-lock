@@ -42,7 +42,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 children: [
                     {
                         name: 'doorInfo',
-                        url: '/door-info/:buildingId/:doorId',
+                        url: '/door-info/:groupId/:doorId',
                         views: {
                             'menuContent@mainMenu': {
                                 controller: 'DoorInfoController',
