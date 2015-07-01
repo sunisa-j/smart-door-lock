@@ -40,7 +40,7 @@ $medium_font_size: 14px;
 $custom_row_font_size: $font-size-base;
 $menu_bg_color: #333;
 $menu_list_height: 50px;
-$custom_ion_content_bg: #F7F7F7;
+$custom_ion_content_bg: #F5F5F5;
 $border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
@@ -49,9 +49,11 @@ $custom_setting_row_height: 50px;
 $tabs_column_height: 50px;
 
 // Your application styles go here **********************
-
 .pointer {
   cursor: pointer;
+}
+.link-btn-color {
+  color: $font_icon_color !important;
 }
 a {
   @extend .pointer;
@@ -96,6 +98,7 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   -webkit-appearance: none;
 }
 select {
+  @extend .pointer;
   border-radius: 0 !important;
   border: 0;
   padding: 0 10px;
@@ -113,6 +116,9 @@ input::-webkit-datetime-edit, #date-time-edit {
   font-size: $font-size-base;
   padding: 10px 0 !important;
   background-color: $light;
+}
+input[disabled] {
+  color: $item_divider_font_color;
 }
 // Background Class *************************************
 .stable-bg {
@@ -206,6 +212,10 @@ input::-webkit-datetime-edit, #date-time-edit {
 .item {
   color: $dark_font_color;
 }
+.item-input > span {
+  width: 150px;
+  color: $item_divider_font_color;
+}
 .item-divider {
   height: 28px;
   font-size: 15px;
@@ -251,6 +261,17 @@ input::-webkit-datetime-edit, #date-time-edit {
 }
 .item-button-right {
   height: $custom_setting_row_height;
+}
+.edit-button-item-divider {
+  border: 0;
+  margin-top: 5px;
+}
+.edit-button-item-divider div {
+  position: absolute;
+  right: 10px;
+}
+.edit-button-item-divider button {
+  font-size: $medium_font_size;
 }
 // Custom Manage User Content ***************************
 .manage-user-margin-left {
@@ -325,6 +346,7 @@ input::-webkit-datetime-edit, #date-time-edit {
   height: 10px;
 }
 .footer-tab-column {
+  @extend .pointer;
   padding-top: 5px;
   color: $light;
   height: $tabs_column_height;
@@ -391,7 +413,6 @@ input::-webkit-datetime-edit, #date-time-edit {
   display: flex;
   display: -webkit-flex;
   display: -moz-flex;
-  display: -ms-flex;
 }
 .flex-wrap {
   flex-wrap: wrap;
@@ -1113,4 +1134,25 @@ input::-webkit-datetime-edit, #date-time-edit {
   .door-custom-row:nth-child(odd) {
     border-right: solid 1px $border_color;
   }
+}
+// transitions ******************************************
+.opacity-0 {
+  opacity: 0;
+}
+.opacity-1 {
+  opacity: 1;
+}
+.fade-out {
+  opacity:0;
+  transition: opacity .2s ease-out;
+  -moz-transition: opacity .2s ease-out;
+  -webkit-transition: opacity .2s ease-out;
+  -o-transition: opacity .2s ease-out;
+}
+.fade-in {
+  opacity:1;
+  transition: opacity .5s ease-in;
+  -moz-transition: opacity .5s ease-in;
+  -webkit-transition: opacity .5s ease-in;
+  -o-transition: opacity .5s ease-in;
 }
