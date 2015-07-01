@@ -51,6 +51,28 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         },
                         children: [
                             {
+                                name: 'passcodeUnlock',
+                                url: '/passcode-unlock',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'DoorInfoController',
+                                        templateUrl: 'templates/passcode-unlock.html'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'editPasscodeUnlock',
+                                        url: '/edit-passcode-unlock/:passcodeUnlockId',
+                                        views: {
+                                            'menuContent@mainMenu': {
+                                                controller: 'DoorInfoController',
+                                                templateUrl: 'templates/edit-passcode-unlock.html'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
                                 name: 'myActivityLog',
                                 url: '/my-activity-log',
                                 views: {
@@ -147,26 +169,6 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                     }
                 ]
             }
-            //{
-            //    name: 'doorsRequest',
-            //    url: '/doors-request',
-            //    views: {
-            //        menuContent: {
-            //            controller: 'DoorsRequestController',
-            //            templateUrl: 'templates/doors-request.html'
-            //        }
-            //    }
-            //},
-            //{
-            //    name: 'doorsApproval',
-            //    url: '/doors-approval',
-            //    views: {
-            //        menuContent: {
-            //            controller: 'DoorsApprovalController',
-            //            templateUrl: 'templates/doors-approval.html'
-            //        }
-            //    }
-            //}
         ]
     });
 
