@@ -21,7 +21,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: true,
                         configuration: true,
-                        manageUser: true,
+                        manageAccess: true,
                         adminPrivillage: true
                     }
                 },
@@ -39,7 +39,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: true,
                         configuration: true,
-                        manageUser: true,
+                        manageAccess: true,
                         adminPrivillage: true
                     }
                 },
@@ -57,7 +57,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: false,
                         configuration: false,
-                        manageUser: false,
+                        manageAccess: false,
                         adminPrivillage: false
                     }
                 },
@@ -75,7 +75,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: false,
                         remoteControl: false,
                         configuration: false,
-                        manageUser: false,
+                        manageAccess: false,
                         adminPrivillage: false
                     }
                 }
@@ -99,7 +99,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: false,
                         configuration: false,
-                        manageUser: false,
+                        manageAccess: false,
                         adminPrivillage: false
                     }
                 },
@@ -117,7 +117,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: false,
                         configuration: false,
-                        manageUser: false,
+                        manageAccess: false,
                         adminPrivillage: false
                     }
                 },
@@ -135,7 +135,7 @@ window.app.factory('doorsAccess', function () {
                         viewStatus: true,
                         remoteControl: false,
                         configuration: false,
-                        manageUser: false,
+                        manageAccess: false,
                         adminPrivillage: false
                     }
                 }
