@@ -1,50 +1,44 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, $timeout) {
 
-    var buildingId = $stateParams.buildingId;
+    var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
     var doorsAccessObj = doorsAccess('object');
-    $scope.buildingName = doorsAccessObj[buildingId].name;
-    $scope.doorData = doorsAccessObj[buildingId].doorsAccess[doorId];
+    $scope.groupName = doorsAccessObj[groupId].name;
+    $scope.doorData = doorsAccessObj[groupId].doorsAccess[doorId];
 
-    //$scope.permission = {
-    //    unlock: false,
-    //    viewLog: false,
-    //    viewStatus: false,
-    //    remoteControl: false,
-    //    configuration: false,
-    //    manageUser: false,
-    //    adminPrivillage: false
-    //};
-    //var checkPermission = function() {
-    //    angular.forEach($scope.doorData.permission, function(value){
-    //        if(value === 'unlock') {
-    //            $scope.permission.unlock = true;
-    //
-    //        } else if(value === 'viewLog') {
-    //            $scope.permission.viewLog = true;
-    //
-    //        } else if(value === 'viewStatus') {
-    //            $scope.permission.viewStatus = true;
-    //
-    //        } else if(value === 'remoteControl') {
-    //            $scope.permission.remoteControl = true;
-    //
-    //        } else if(value === 'configuration') {
-    //            $scope.permission.configuration = true;
-    //
-    //        } else if(value === 'manageUser') {
-    //            $scope.permission.manageUser = true;
-    //
-    //        } else if(value === 'adminPrivillage') {
-    //            $scope.permission.adminPrivillage = true;
-    //        }
-    //    });
-    //};
-    //checkPermission();
+    $scope.pinRequired = { value: false, load: false };
+    $scope.pinRequiredChecked = function(){
+        $scope.pinRequired.load = true;
+        var valueBeforeChanged = !$scope.pinRequired.value;
 
-    // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageUser')
+        // if pinRequired status changed;
+        $scope.pinRequired.value = !(valueBeforeChanged);
+
+        $timeout( function(){
+            if($scope.pinRequired.value == !(valueBeforeChanged)) {
+                $scope.pinRequired.load = false;
+            }
+        }, 1500);
+    };
+
+    $scope.autoRelock = { value: false, load: false };
+    $scope.autoRelockChecked = function(){
+        $scope.autoRelock.load = true;
+        var valueBeforeChanged = !$scope.autoRelock.value;
+
+        // if autoRelock status changed;
+        $scope.autoRelock.value = !(valueBeforeChanged);
+
+        $timeout( function(){
+            if($scope.autoRelock.value == !(valueBeforeChanged)) {
+                $scope.autoRelock.load = false;
+            }
+        }, 1500);
+    }
+
+    // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageAccess')
     $scope.doorMenu = {
         name: 'doorInfo'
     };
