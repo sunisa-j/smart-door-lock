@@ -1,0 +1,26 @@
+<ion-view title="{{doorData.name}} Passcode Unlock">
+
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="custom-row" ng-repeat="passcode in passcodeUnlockArr" ui-sref="mainMenu.doors.doorInfo.passcodeUnlock.editPasscodeUnlock({passcodeUnlockId:passcode.$id})">
+            <div class="custom-row-icon">
+                <i class="ion-ios-keypad-outline"></i>
+            </div>
+            <div class="custom-row-title">
+                {{passcode.name}}
+            </div>
+            <div class="custom-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>
