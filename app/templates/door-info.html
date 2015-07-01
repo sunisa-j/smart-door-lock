@@ -1,97 +1,59 @@
-<ion-view view-title="WSN">
-
-    <ion-nav-buttons side="right">
-        <div style="margin-top: -3px;">
-            <button class="button button-clear" ng-show="doorMenu.name=='manageUser'" ui-sref="mainMenu.doors.doorInfo.addUser">
-                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
-            </button>
-        </div>
-    </ion-nav-buttons>
+<ion-view view-title="{{doorData.name}}">
 
     <!--Door Info Content-->
     <ion-content ng-show="doorMenu.name=='doorInfo'">
-
+        <!--Door Infomation-->
         <div class="item item-divider">Door Information</div>
-        <div class="door-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
+        <div class="door-info-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false">
                 <i class="flaticon-closed42"></i>
             </div>
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true">
                 <div class="door-status-icon">
-                    <i class="ion-ios-locked balanced" ng-show="doorData.status.lock=='locked'"></i>
-                    <i class="ion-ios-unlocked assertive" ng-show="doorData.status.lock=='unlocked'"></i>
+                    <i class="ion-ios-locked assertive" ng-show="doorData.status.lock=='locked'"></i>
+                    <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lock=='unlocked'"></i>
                 </div>
                 <i class="flaticon-open203" ng-show="doorData.status.door=='opened'"></i>
                 <i class="flaticon-closed42" ng-show="doorData.status.door=='closed'"></i>
             </div>
             <div class="custom-row-title">
-                <div>{{doorData.name}}, {{buildingName}}</div>
+                <div>{{doorData.name}}</div>
                 <div class="custom-row-desc">{{doorData.desc}}</div>
-                <div class="custom-row-font-status" ng-show="doorData.permission.viewStatus==true">
-                    <span ng-show="(doorData.status.door=='opened')&&(doorData.status.lock=='locked')" class="assertive">Locked while opened !</span>
-                    <span ng-show="(doorData.status.door!='opened')&&(doorData.status.lock=='locked')" class="balanced">Locked</span>
-                    <span ng-show="doorData.status.lock=='unlocked'" class="assertive">Unlocked</span>
-                </div>
             </div>
             <div class="custom-row-button" ng-show="doorData.permission.remoteControl==true">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-unlocked-outline">Unlock</button>
+                <button class="button button-outline button-small button-dark" style="width: 72px"
+                        ng-show="doorData.status.lock=='unlocked'">Lock</button>
+                <button class="button button-outline button-small button-dark" style="width: 72px"
+                        ng-show="doorData.status.lock=='locked'">Unlock</button>
             </div>
         </div>
-        <div class="custom-row-inset-with-button-div" ng-show="doorData.permission.configuration==true">
-            <div class="flex align-items-center custom-row-inset-with-button">
-                <div class="custom-row-title">
-                    <div>Passcode Require</div>
-                </div>
-                <div class="custom-row-button">
-                    <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-checkmark-outline">Enable</button>
-                </div>
-            </div>
-        </div>
-
+        <!--My Access Time-->
         <div class="item item-divider">My Access Time</div>
         <div class="access-time-container">
-            <!--custom time-->
-            <div class="flex access-time-padding flex-wrap">
-                <div class="access-time-column">
-                    1 Apr 2015 - 30 Apr 2015
-                </div>
+            <div class="access-time-row">
+                <div class="access-date-column">Sat, 19 Jun 2015</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div class="flex-1 day-circle-height">
-                        <span class="day-circle energized-bg">M</span>
-                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
-                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
-                        <span class="day-circle thursday-circle-margin">Th</span>
-                        <span class="day-circle friday-circle-margin">F</span>
-                        <span class="day-circle saturday-circle-margin">Sa</span>
-                        <span class="day-circle sunday-circle-margin">S</span>
-                    </div>
-                    <div class="flex-1">01.30 am - 04.30 pm</div>
+                    <div>01:30 pm - 04:30 pm <span class="calendar-list-title">OOP</span></div>
+                    <div>07:00 pm - 09:00 pm <span class="calendar-list-title">Software Lab</span></div>
+                    <div>09:00 pm - 10:00 pm <span class="calendar-list-title">COE24 Meeting</span></div>
                 </div>
             </div>
-            <!--privacy time-->
-            <div class="flex access-time-padding flex-wrap">
-                <div class="access-time-column access-time-privacy-height">
-                    Term 1/2015<br>
-                    <span class="access-time-desc">1 Apr 2015 - 30 Apr 2015</span>
-                </div>
+            <div class="access-time-row">
+                <div class="access-date-column">Tue, 22 Jun 2015</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div class="flex-1 day-circle-height">
-                        <span class="day-circle energized-bg">M</span>
-                        <span class="day-circle pink-bg tuesday-circle-margin">T</span>
-                        <span class="day-circle balanced-bg wednesday-circle-margin">W</span>
-                        <span class="day-circle orange-bg thursday-circle-margin">Th</span>
-                        <span class="day-circle positive-bg friday-circle-margin">F</span>
-                        <span class="day-circle violet-bg saturday-circle-margin">Sa</span>
-                        <span class="day-circle assertive-bg sunday-circle-margin">S</span>
-                    </div>
-                    <div class="flex-1 access-time-privacy-height">
-                        Working Time<br>
-                        <span class="access-time-desc">08.30 am - 04.30 pm</span>
-                    </div>
+                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title">CPT</span></div>
                 </div>
             </div>
-        </div>
+            <div class="access-time-row">
+                <div class="access-date-column">Wen, 23 Jun 2015</div>
+                <div class="flex flex-direction-column access-time-detail-column">
+                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title">CPT</span></div>
+                </div>
+            </div>
 
+            <button class="button button-outline button-block button-dark more-button">More ...</button>
+        </div>
+        <!--My Recent Activity-->
         <div class="item item-divider">My Recent Activity</div>
         <div class="log-container">
             <div class="flex log-row-padding flex-wrap">
@@ -106,7 +68,8 @@
                 <div class="access-time-column">09 Apr 2015 08:30:00</div>
                 <div class="log-detail">Unlocked door by card</div>
             </div>
-            <button class="button button-outline button-block icon-left button-stable more-button" ui-sref="mainMenu.doors.doorInfo.myActivityLog">More Activity ...</button>
+
+            <button class="button button-outline button-block button-dark more-button" ui-sref="mainMenu.doors.doorInfo.myActivityLog">More ...</button>
         </div>
 
         <div class="footer-tabs-height"></div>
@@ -116,12 +79,33 @@
     <!--Config Door Content-->
     <ion-content ng-show="doorMenu.name=='configDoor'" class="custom-ion-content-bg">
 
-        <div class="list">
-            <div class="item">
+        <!--Auto Relock-->
+        <div class="flex align-items-center custom-setting-row-with-right-button" ng-class="{'custom-row-del-border-bottom':autoRelock.value==true}">
+            <div class="custom-row-title">
+                <div>Auto Relock</div>
+            </div>
+            <div class="custom-row-button" ng-hide="autoRelock.load">
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="autoRelock.value" ng-change="autoRelockChecked()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+            <div class="custom-row-spinner" ng-show="autoRelock.load">
+                <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
+            </div>
+        </div>
+        <div class="item item-desc" ng-hide="autoRelock.value==true">
+            Enable this menu to set time to lock door after door unlocked.
+        </div>
+        <div class="row-border-inset" ng-show="autoRelock.value==true"><div class="row-border-inset-color"></div></div>
+        <div class="list" ng-show="autoRelock.value==true">
+            <div class="item custom-row-del-border-top">
                 Auto Relock Time
                 <span class="item-note">
                     <div class="select-div">
-                        <select class="custom-row-font-size">
+                        <select class="custom-row-font-size pointer">
                             <option>5 s</option>
                             <option>10 s</option>
                             <option>15 s</option>
@@ -132,52 +116,28 @@
                 </span>
             </div>
         </div>
-        <div class="item item-desc">
-            Set time to lock the door after the door unlocked.
+        <div class="item item-desc" ng-show="autoRelock.value==true">
+            You can set time to lock door after door unlocked.
         </div>
-
+        <!--PIN Required-->
         <div class="flex align-items-center custom-setting-row-with-right-button">
             <div class="custom-row-title">
-                <div>Passcode Require</div>
+                <div>PIN Required</div>
             </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-block icon-left button-small button-balanced ion-ios-checkmark-outline">Enable</button>
+            <div class="custom-row-button" ng-hide="pinRequired.load">
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="pinRequired.value" ng-change="pinRequiredChecked()">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
             </div>
-            <div class="custom-row-button" style="text-align: center; font-size: 28px;" ng-hide="true">
+            <div class="custom-row-spinner" ng-show="pinRequired.load">
                 <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
-            <div class="custom-row-button" ng-hide="true">
-                <button class="button button-outline button-block icon-left button-small button-assertive ion-ios-close-outline">Enable</button>
-            </div>
         </div>
         <div class="item item-desc">
-            User must use card with user passcode to unlock the door.
-        </div>
-
-        <div class="list">
-            <div class="item item-button-right">
-                Passcode Unlock
-                <button class="button button-clear custom-button-right-text">
-                    <span class="text-before-arrow-right">2 passcode</span>
-                    <i class="ion-ios-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-        <div class="item item-desc">
-            Create passcode for visitor or new member. New member can use this passcode unlock the door immediately.
-        </div>
-
-        <div class="list">
-            <div class="item item-button-right">
-                Auto Release
-                <button class="button button-clear custom-button-right-text">
-                    <span class="text-before-arrow-right">2 duration</span>
-                    <i class="ion-ios-arrow-right"></i>
-                </button>
-            </div>
-        </div>
-        <div class="item item-desc">
-            Set date & time to unlock the door
+            Members must use card and PIN to unlock door.
         </div>
 
         <div class="footer-tabs-height"></div>
@@ -222,168 +182,46 @@
     </ion-content>
     <!--End Log Content-->
 
-    <!--Manage User Content-->
-    <ion-content ng-show="doorMenu.name=='manageUser'" class="custom-ion-content-bg">
-        <div class="flex justify-content-center align-items-center search-container">
-            <div class="search-icon-div">
-                <i class="ion-ios-person-outline"></i>
-            </div>
-            <div class="flex-1 search-input-div">
-                <input type="text" placeholder="User ID or Name">
-            </div>
-            <!--<div class="select-div" style="width: 100px;">-->
-                <!--<select>-->
-                    <!--<option>By User ID</option>-->
-                    <!--<option>By Name</option>-->
-                <!--</select>-->
-            <!--</div>-->
-        </div>
-        <div class="flex justify-content-center align-items-center search-container">
-            <div class="search-title-div">
-                Department
-            </div>
-            <div class="flex-1 select-div">
-                <select style="width: 100%;">
-                    <option>Computer Engineering</option>
-                </select>
-            </div>
-        </div>
-        <div class="flex justify-content-center align-items-center search-container">
-            <div class="search-title-div">
-                Faculty
-            </div>
-            <div class="flex-1 select-div">
-                <select style="width: 100%;">
-                    <option>Engineering</option>
-                </select>
-            </div>
-            <div class="search-button-div">
-                <button class="button button-stable button-small custom-search-button">
-                    <i class="ion-ios-search"></i>
+    <!--Manage Access Content-->
+    <ion-content ng-show="doorMenu.name=='manageAccess'" class="custom-ion-content-bg">
+        <div class="list pointer">
+            <div class="item item-button-right">
+                User Management
+                <button class="button button-clear custom-button-right-text">
+                    <span class="text-before-arrow-right">2 members</span>
+                    <i class="ion-ios-arrow-right"></i>
                 </button>
             </div>
         </div>
-
-        <div class="item item-divider item-bg-color-on-grey-bg" style="padding: 0">
-            <div class="flex">
-                <span class="manage-user-item-divider-icon">
-                    <span class="manage-user-edit" ng-click="showDelButton.value=true" ng-hide="showDelButton.value==true">
-                        <i class="ion-edit"></i>
-                    </span>
-                    <span class="manage-user-del" ng-hide="showDelButton.value==false">
-                        <span class="manage-user-del-button" ng-click="confirmDelBox()"><i class="ion-ios-minus-outline assertive"></i></span>
-                        <span class="manage-user-done" ng-click="showDelButton.value=false">Done</span>
-                    </span>
-                </span>
-                <span class="manage-user-item-divider-count">
-                    <span class="line-separate-column">|</span> 3 Members
-                </span>
-                <span class="select-div">
-                    <select class="manage-user-item-divider-select">
-                        <option>All Status</option>
-                        <option>Normal</option>
-                        <option>Near Expiry</option>
-                        <option>Expired</option>
-                    </select>
-                </span>
-            </div>
+        <div class="item item-desc">
+            Create, remove, update permission and manage access time to unlock door for many user.
         </div>
 
-        <div style="padding-top: 3px;" ng-class="{'manage-user-margin-left': showDelButton.value==true}">
-            <div class="row card-row-padding relative-position">
-
-                <div class="manage-user-row-checkbox">
-                    <label class="checkbox checkbox-assertive">
-                        <input type="checkbox">
-                    </label>
-                </div>
-
-                <div class="col">
-                    <div class="card card-margin card-padding relative-position">
-
-                        <div class="flex align-items-center card-expiry-date-position">
-                            <span class="card-expiry-date-icon"><i class="ion-ios-clock balanced"></i></span>
-                            <span class="card-expiry-date-text">31 Jun 2015</span>
-                        </div>
-
-                        <div class="flex">
-                            <span class="card-title">User ID</span>
-                            <span class="card-value">4910110547</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">Name</span>
-                            <span class="card-value">สุนิสา จุลรัตน์</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">E-mail</span>
-                            <span class="card-value">sunisa.j@icloud.com</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row card-row-padding relative-position">
-                <div class="col">
-
-                    <div class="manage-user-row-checkbox">
-                        <label class="checkbox checkbox-assertive">
-                            <input type="checkbox">
-                        </label>
-                    </div>
-
-                    <div class="card card-margin card-padding relative-position">
-
-                        <div class="flex align-items-center card-expiry-date-position">
-                            <span class="card-expiry-date-icon"><i class="ion-ios-clock energized"></i></span>
-                            <span class="card-expiry-date-text">7 days later</span>
-                        </div>
-
-                        <div class="flex">
-                            <span class="card-title">User ID</span>
-                            <span class="card-value">5312120554</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">Name</span>
-                            <span class="card-value">จิรศักดิ์ นพรัตน์</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">E-mail</span>
-                            <span class="card-value">jirasak.r@me.com</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row card-row-padding relative-position">
-                <div class="col">
-
-                    <div class="manage-user-row-checkbox">
-                        <label class="checkbox checkbox-assertive">
-                            <input type="checkbox">
-                        </label>
-                    </div>
-
-                    <div class="card card-margin card-padding relative-position royal-bg">
-
-                        <div class="flex align-items-center card-expiry-date-position">
-                            <span class="card-expiry-date-icon"><i class="ion-ios-clock assertive"></i></span>
-                            <span class="card-expiry-date-text">2 days ago</span>
-                        </div>
-
-                        <div class="flex">
-                            <span class="card-title">User ID</span>
-                            <span class="card-value">4910110067</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">Name</span>
-                            <span class="card-value">จิรศักดิ์ นพรัตน์</span>
-                        </div>
-                        <div class="flex">
-                            <span class="card-title">E-mail</span>
-                            <span class="card-value">jirasak@hotmail.com</span>
-                        </div>
-                    </div>
-                </div>
+        <div class="list pointer">
+            <div class="item item-button-right">
+                Passcode Unlock
+                <button class="button button-clear custom-button-right-text">
+                    <span class="text-before-arrow-right">2 passcodes</span>
+                    <i class="ion-ios-arrow-right"></i>
+                </button>
             </div>
         </div>
+        <div class="item item-desc">
+            Create passcode for visitor or new member. New member can use this passcode unlock door only.
+        </div>
+
+        <div class="flex align-items-center custom-setting-row-with-right-button pointer">
+            <div class="custom-row-title">
+                <div>Auto Release</div>
+            </div>
+            <div class="custom-setting-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="item item-desc">
+            Set date & time to auto unlock door.
+        </div>
+
     </ion-content>
     <!--End User Content-->
 
@@ -414,12 +252,12 @@
             <div class="footer-tab-title">Log</div>
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
-             ng-class="{'footer-tab-active': doorMenu.name=='manageUser'}" ng-click="doorMenu.name='manageUser'"
-             ng-show="doorData.permission.manageUser==true">
+             ng-class="{'footer-tab-active': doorMenu.name=='manageAccess'}" ng-click="doorMenu.name='manageAccess'"
+             ng-show="doorData.permission.manageAccess==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-personadd" style="font-size: 27px;"></i></div>
-            <div class="footer-tab-title">Manage User</div>
+            <div class="footer-tab-title">Manage Access</div>
         </div>
     </div>
 
