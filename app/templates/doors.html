@@ -1,15 +1,15 @@
 <ion-view view-title="Doors">
     <ion-content>
 
-        <div ng-repeat="building in doorsAccessData">
-            <div class="item item-divider">{{building.name}}</div>
+        <div ng-repeat="group in doorsAccessData">
+            <div class="item item-divider">{{group.name}}</div>
             <div class="row flex-wrap">
-                <div ng-repeat="doorData in building.doorsAccess" class="door-custom-row" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
+                <div ng-repeat="doorData in group.doorsAccess" class="door-custom-row" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
 
-                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false" ui-sref="mainMenu.doors.doorInfo({buildingId: building.$id, doorId: doorData.$id})">
+                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false" ui-sref="mainMenu.doors.doorInfo({groupId: group.$id, doorId: doorData.$id})">
                         <i class="flaticon-closed42"></i>
                     </div>
-                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true" ui-sref="mainMenu.doors.doorInfo({buildingId: building.$id, doorId: doorData.$id})">
+                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true" ui-sref="mainMenu.doors.doorInfo({groupId: group.$id, doorId: doorData.$id})">
                         <div class="door-status-icon">
                             <i class="ion-ios-locked assertive" ng-show="doorData.status.lock=='locked'"></i>
                             <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lock=='unlocked'"></i>
@@ -18,7 +18,7 @@
                         <i class="flaticon-closed42" ng-show="doorData.status.door=='closed'"></i>
                     </div>
 
-                    <div class="custom-row-title" ui-sref="mainMenu.doors.doorInfo({buildingId: building.$id, doorId: doorData.$id})">
+                    <div class="custom-row-title" ui-sref="mainMenu.doors.doorInfo({groupId: group.$id, doorId: doorData.$id})">
                         <div>{{doorData.name}}</div>
                         <div class="custom-row-desc">{{doorData.desc}}</div>
                     </div>
