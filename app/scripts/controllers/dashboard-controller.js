@@ -12,14 +12,14 @@ window.app.controller('DashboardController', function ($scope, doorsAccess) {
     $scope.groupDoorsExpireDate = function(doorsAccessData) {
         var doorsExpireData = [];
 
-        angular.forEach(doorsAccessData, function (building) {
+        angular.forEach(doorsAccessData, function (group) {
 
-            angular.forEach(building.doorsAccess, function (door) {
+            angular.forEach(group.doorsAccess, function (door) {
                 var tmp = {
                     doorId: door.$id,
                     doorName: door.name,
-                    buildingId: building.$id,
-                    buildingName: building.name,
+                    groupId: group.$id,
+                    groupName: group.name,
                     expireDate: door.expire,
                     getTimeExpireDate : (door.expire).getTime()
                 };
