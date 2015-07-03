@@ -10,11 +10,11 @@
                             <div class="dashboard-card-title">Doors</div>
                             <div class="dashboard-card-desc">I can access</div>
                             <div class="dashboard-card-icon"><i class="flaticon-opened37" style="font-size: 50px"></i></div>
-                            <div class="dashboard-card-info">In {{doorsNumber[0].buildingName}}
-                                <span class="dashboard-green-number" ng-hide="doorsNumber[0].doors==0">{{doorsNumber[0].doors}}</span>
-                                <span ng-show="doorsNumber[0].doors==0">None</span>
-                                <span ng-show="doorsNumber[0].doors==1">door</span>
-                                <span ng-show="doorsNumber[0].doors>1">doors</span>
+                            <div class="dashboard-card-info">
+                                <span class="dashboard-green-number">{{doorsNumber}}</span>
+                                <span ng-show="doorsNumber==0">None</span>
+                                <span ng-show="doorsNumber==1">door</span>
+                                <span ng-show="doorsNumber>1">doors</span>
                             </div>
                         </div>
                     </div>
@@ -66,9 +66,9 @@
                         <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expiry date</div>
 
                         <div class="dashboard-card-row-content flex pointer" ng-repeat="data in doorsExpireData | orderBy:'expireDate'"
-                             ui-sref="mainMenu.doors.doorInfo({buildingId: data.buildingId, doorId: data.doorId})">
+                             ui-sref="mainMenu.doors.doorInfo({groupId: data.groupId, doorId: data.doorId})">
 
-                            <span class="dashboard-expire-row1">{{data.doorName}}, {{data.buildingName}}</span>
+                            <span class="dashboard-expire-row1">{{data.doorName}}</span>
                             <span class="dashboard-expire-row2">
                                 <i class="ion-ios-clock-outline"></i>
                                 {{data.expireDate.getDate()}} {{month[data.expireDate.getMonth()]}} {{data.expireDate.getFullYear()}}
@@ -105,7 +105,7 @@
 
                         <div class="dashboard-card-row-content flex" ng-repeat="data in doorsNumber">
                             <span class="dashboard-access-doors-row">
-                                {{data.buildingName}}
+                                {{data.groupName}}
                             </span>
                             <span class="dashboard-access-doors-count">
                                 <span class="dashboard-access-doors-number">{{data.doors}}</span>
