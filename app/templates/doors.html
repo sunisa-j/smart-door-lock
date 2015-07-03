@@ -1,16 +1,17 @@
 <ion-view view-title="Doors">
     <ion-content>
 
-        <div ng-repeat="group in doorsAccessData">
+        <div ng-repeat="(groupKey, group) in doorsAccessData">
             <div class="item item-divider">{{group.name}}</div>
             <div class="row flex-wrap">
-                <div ng-repeat="doorData in group.doorsAccess" class="door-custom-row" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
+                <div ng-repeat="(doorKey, doorData) in group.doorsAccess" class="door-custom-row" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}"
+                     ui-sref="mainMenu.doors.doorInfo({groupId: groupKey, doorId: doorKey})" ng-init="load[doorKey]=false">
 
-                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false" ui-sref="mainMenu.doors.doorInfo({groupId: group.$id, doorId: doorData.$id})">
+                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false">
                         <i class="flaticon-closed42"></i>
                     </div>
-                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true" ui-sref="mainMenu.doors.doorInfo({groupId: group.$id, doorId: doorData.$id})">
-                        <div class="door-status-icon">
+                    <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true">
+                        <div class="door-status-icon" ng-hide="load[doorKey]==true">
                             <i class="ion-ios-locked assertive" ng-show="doorData.status.lock=='locked'"></i>
                             <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lock=='unlocked'"></i>
                         </div>
@@ -23,11 +24,14 @@
                         <div class="custom-row-desc">{{doorData.desc}}</div>
                     </div>
 
-                    <div class="custom-row-button" ng-show="doorData.permission.remoteControl==true">
-                        <button class="button button-outline button-small button-dark" style="width: 72px"
-                                ng-show="doorData.status.lock=='unlocked'">Lock</button>
-                        <button class="button button-outline button-small button-dark" style="width: 72px"
-                                ng-show="doorData.status.lock=='locked'">Unlock</button>
+                    <div class="custom-row-button" ng-show="(doorData.permission.remoteControl==true)&&(load[doorKey]==false)">
+                        <button class="button button-outline button-small button-dark" ng-click="changeLockStatus($event, groupKey, doorKey, doorData.status.lock)">
+                            <span ng-show="doorData.status.lock=='unlocked'">Lock</span>
+                            <span ng-show="doorData.status.lock=='locked'">Unlock</span>
+                        </button>
+                    </div>
+                    <div class="custom-row-spinner" ng-show="load[doorKey]==true">
+                        <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
                     </div>
 
                 </div>
