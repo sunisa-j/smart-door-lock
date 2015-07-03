@@ -9,7 +9,7 @@
                 <i class="flaticon-closed42"></i>
             </div>
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true">
-                <div class="door-status-icon">
+                <div class="door-status-icon" ng-hide="statusLoad.value==true">
                     <i class="ion-ios-locked assertive" ng-show="doorData.status.lock=='locked'"></i>
                     <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lock=='unlocked'"></i>
                 </div>
@@ -20,11 +20,14 @@
                 <div>{{doorData.name}}</div>
                 <div class="custom-row-desc">{{doorData.desc}}</div>
             </div>
-            <div class="custom-row-button" ng-show="doorData.permission.remoteControl==true">
-                <button class="button button-outline button-small button-dark" style="width: 72px"
-                        ng-show="doorData.status.lock=='unlocked'">Lock</button>
-                <button class="button button-outline button-small button-dark" style="width: 72px"
-                        ng-show="doorData.status.lock=='locked'">Unlock</button>
+            <div class="custom-row-button" ng-show="(doorData.permission.remoteControl==true)&&(statusLoad.value==false)">
+                <button class="button button-outline button-small button-dark" ng-click="changeLockStatus(doorData.status.lock)">
+                    <span ng-show="doorData.status.lock=='unlocked'">Lock</span>
+                    <span ng-show="doorData.status.lock=='locked'">Unlock</span>
+                </button>
+            </div>
+            <div class="custom-row-spinner" ng-show="statusLoad.value==true">
+                <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
         </div>
         <!--My Access Time-->
@@ -33,21 +36,21 @@
             <div class="access-time-row">
                 <div class="access-date-column">Sat, 19 Jun 2015</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div>01:30 pm - 04:30 pm <span class="calendar-list-title">OOP</span></div>
-                    <div>07:00 pm - 09:00 pm <span class="calendar-list-title">Software Lab</span></div>
-                    <div>09:00 pm - 10:00 pm <span class="calendar-list-title">COE24 Meeting</span></div>
+                    <div>01:30 pm - 04:30 pm <span class="calendar-list-title"> OOP</span></div>
+                    <div>07:00 pm - 09:00 pm <span class="calendar-list-title"> Software Lab</span></div>
+                    <div>09:00 pm - 10:00 pm <span class="calendar-list-title"> COE24 Meeting</span></div>
                 </div>
             </div>
             <div class="access-time-row">
                 <div class="access-date-column">Tue, 22 Jun 2015</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title">CPT</span></div>
+                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title"> CPT</span></div>
                 </div>
             </div>
             <div class="access-time-row">
                 <div class="access-date-column">Wen, 23 Jun 2015</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title">CPT</span></div>
+                    <div>08:30 pm - 10:30 pm <span class="calendar-list-title"> CPT</span></div>
                 </div>
             </div>
 
@@ -80,7 +83,7 @@
     <ion-content ng-show="doorMenu.name=='configDoor'" class="custom-ion-content-bg">
 
         <!--Auto Relock-->
-        <div class="flex align-items-center custom-setting-row-with-right-button" ng-class="{'custom-row-del-border-bottom':doorData.configDoor.autoRelock.status==true}">
+        <div class="flex align-items-center custom-setting-row-with-right-button" ng-class="{'custom-row-del-border-bottom':doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)}">
             <div class="custom-row-title">
                 <div>Auto Relock</div>
             </div>
@@ -96,11 +99,11 @@
                 <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
         </div>
-        <div class="item item-desc" ng-hide="doorData.configDoor.autoRelock.status==true">
+        <div class="item item-desc" ng-hide="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
             Enable this menu to set time to lock door after door unlocked.
         </div>
-        <div class="row-border-inset" ng-show="doorData.configDoor.autoRelock.status==true"><div class="row-border-inset-color"></div></div>
-        <div class="list" ng-show="doorData.configDoor.autoRelock.status==true">
+        <div class="row-border-inset" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)"><div class="row-border-inset-color"></div></div>
+        <div class="list" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
             <div class="item custom-row-del-border-top">
                 Auto Relock Time
                 <span class="item-note">
@@ -116,7 +119,7 @@
                 </span>
             </div>
         </div>
-        <div class="item item-desc" ng-show="doorData.configDoor.autoRelock.status==true">
+        <div class="item item-desc" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
             You can set time to lock door after door unlocked.
         </div>
         <!--PIN Required-->
