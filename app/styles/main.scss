@@ -155,9 +155,12 @@ input[disabled] {
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
   background-color: $light;
 }
-// Modal ************************************************
+// Modal Popup ActionSheet ******************************
 .modal .bar-header {
   background-color: $custom_ion_content_bg;
+}
+.action-sheet-title {
+  font-size: 15px;
 }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
@@ -275,7 +278,15 @@ input[disabled] {
   right: 10px;
   top: 1px;
 }
+.edit-on-white-bg-item-divider div {
+   position: absolute;
+   right: 10px;
+   top: 1px;
+ }
 .edit-button-item-divider button {
+  font-size: $medium_font_size;
+}
+.edit-on-white-bg-item-divider button {
   font-size: $medium_font_size;
 }
 // Custom Manage User Content ***************************
@@ -578,11 +589,18 @@ input[disabled] {
 }
 .custom-row-font-status {
   font-size: 12px;
+  padding-top: 2px;
 }
 .custom-row-status-icon {
-  font-size: 16px;
+  font-size: 13px;
 }
 .custom-row-status-icon-corner {
+  position: absolute;
+  right: 15px;
+  bottom: -5px;
+  font-size: 24px;
+}
+.custom-row-status-icon-corner2 {
   position: absolute;
   right: 15px;
   bottom: -11px;
@@ -607,19 +625,20 @@ input[disabled] {
   flex-basis: 85px;
   -webkit-flex-basis: 85px;
   -moz-flex-basis: 85px;
-  padding-right: 15px;
+  padding-right: 18px;
   text-align: right;
 }
 .custom-row-spinner {
-  flex-basis: 51px;
-  -webkit-flex-basis: 51px;
-  -moz-flex-basis: 51px;
-  margin-right: 15px;
+  flex-basis: 60px;
+  -webkit-flex-basis: 60px;
+  -moz-flex-basis: 60px;
+  margin-right: 18px;
   text-align: center;
   font-size: 28px;
 }
 .custom-row-button .button {
   padding: 0 7px;
+  width: 60px;
 }
 .custom-row-button .toggle {
   margin-top: 0;
@@ -630,6 +649,7 @@ input[disabled] {
 }
 .custom-row-desc {
   font-size: 12px;
+  padding-top: 2px;
   color: $stable_font_color;
 }
 .custom-setting-row-with-right-button {
@@ -674,6 +694,10 @@ input[disabled] {
 .row-border-inset-color {
   border-top: solid 1px $border_color;
   width: 100%;
+}
+.delete-row-btn {
+  font-size: 28px !important;
+  margin-right: -10px;
 }
 // Card *************************************************
 .card {
@@ -885,7 +909,7 @@ input[disabled] {
 .dashboard-card-row-content {
   @extend .dashboard-card-desc;
   border-bottom: dashed 1px $light_border_color;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 .dashboard-card-desc i {
   font-size: 14px;
@@ -995,14 +1019,15 @@ input[disabled] {
   @extend .flex-grow-1;
   border-left: solid 1px $light_border_color;
   padding-left: 10px;
-  flex-basis: 256px;
-  -webkit-flex-basis: 256px;
-  -moz-flex-basis: 256px;
-  -ms-flex-basis: 256px;
+  flex-basis: 265px;
+  -webkit-flex-basis: 265px;
+  -moz-flex-basis: 265px;
+  -ms-flex-basis: 265px;
+  color: $item_divider_font_color;
 }
 // Calendars & event list ******************************
 .calendar-list-title {
-  color: $stable_font_color;
+  color: $stable;
 }
 // Log style *******************************************
 .log-container {
@@ -1013,7 +1038,7 @@ input[disabled] {
   padding: 5px 0;
 }
 .log-detail {
-  color: #666;
+  color: $item_divider_font_color;
 }
 // Custom Input ****************************************
 .input-height-and-border {
