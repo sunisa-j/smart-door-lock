@@ -202,6 +202,7 @@ window.app.factory('doorsAccess', function () {
     // convert object to array
     var doorsAccessArr = [];
     var numberOfGroups = 0;
+    var numberOfDoors = 0;
 
     angular.forEach(doorsAccess, function(value, key){
         var group = angular.copy(value);
@@ -221,20 +222,11 @@ window.app.factory('doorsAccess', function () {
         group.numberOfDoors = doorsEachGroup;
         numberOfGroups++;
 
+        numberOfDoors = numberOfDoors + doorsEachGroup;
+
         doorsAccessArr.push(group);
     });
     doorsAccessArr.numberOfGroups = numberOfGroups;
-
-    // Get number of doors
-    var doorsCount = [];
-    for(var i=0; i < numberOfGroups; i++) {
-        var tmp = {
-            'buildingId': doorsAccessArr[i].$id,
-            'buildingName': doorsAccessArr[i].name,
-            'doors': doorsAccessArr[i].numberOfDoors
-        };
-        doorsCount[i] = tmp;
-    }
 
     return function(data){
         if(data === 'object'){
@@ -242,7 +234,7 @@ window.app.factory('doorsAccess', function () {
         }else if (data === 'array') {
             return doorsAccessArr;
         }else if (data === 'count') {
-            return doorsCount;
+            return numberOfDoors;
         }
     };
 });
