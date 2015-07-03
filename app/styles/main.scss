@@ -26,6 +26,7 @@ $tabs-height: 49px;
 $tabs-icon-size: 28px;
 $input-height-base: 42px;
 $item-padding: 15px;
+$sheet-options-text-color: #333;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -161,6 +162,13 @@ input[disabled] {
 }
 .action-sheet-title {
   font-size: 15px;
+  background-color: #FAFAFA;
+}
+.action-sheet .button {
+  background-color: #FAFAFA;
+}
+.action-sheet-cancel .button {
+  background-color: #FAFAFA;
 }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
@@ -697,7 +705,7 @@ input[disabled] {
 }
 .delete-row-btn {
   font-size: 28px !important;
-  margin-right: -10px;
+  margin-right: -15px;
 }
 // Card *************************************************
 .card {
