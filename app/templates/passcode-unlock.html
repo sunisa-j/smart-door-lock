@@ -10,17 +10,30 @@
 
     <ion-content>
 
-        <div class="custom-row" ng-repeat="passcode in passcodeUnlockArr" ui-sref="mainMenu.doors.doorInfo.passcodeUnlock.editPasscodeUnlock({passcodeUnlockId:passcode.$id})">
+        <div class="custom-row" ng-repeat="(key, passcode) in passcodeUnlockObj" ng-init="passcode.load=false" ui-sref="mainMenu.doors.doorInfo.passcodeUnlock.editPasscodeUnlock({passcodeUnlockId:key})">
             <div class="custom-row-icon">
                 <i class="ion-ios-keypad-outline"></i>
+
+                <span ng-hide="passcode.load==true">
+                    <i class="custom-row-status-icon-corner ion-ios-checkmark balanced" ng-show="passcode.status=='Enabled'"></i>
+                    <i class="custom-row-status-icon-corner ion-ios-close assertive" ng-show="passcode.status=='Disabled'"></i>
+                </span>
             </div>
             <div class="custom-row-title">
                 {{passcode.name}}
             </div>
-            <div class="custom-row-arrow">
-                <i class="ion-ios-arrow-right"></i>
+            <div class="custom-row-button" ng-show="passcode.load==false">
+                <button class="button button-outline button-small button-dark" ng-click="$event.stopPropagation();changeStatusPasscode(key, passcode.status)">
+                    <span ng-show="passcode.status=='Enabled'">Disable</span>
+                    <span ng-show="passcode.status=='Disabled'">Enable</span>
+                </button>
+            </div>
+            <div class="custom-row-spinner" ng-show="passcode.load==true">
+                <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
         </div>
+
+
 
     </ion-content>
 </ion-view>
