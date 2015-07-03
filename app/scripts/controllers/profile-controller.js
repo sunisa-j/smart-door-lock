@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('ProfileController', function ($scope, $ionicPopup) {
+window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeout) {
 
     // Change PIN
 
@@ -62,27 +62,15 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup) {
             status: 'Enabled'
         },
         'card2': {
-            idCard: 4710110123,
+            idCard: 4910110547,
             status: 'Void'
         }
     };
-    $scope.cardInfo = [
-        {
-            $id: 'card1',
-            idCard: 4910110547,
-            status: 'Enabled'
-        },
-        {
-            $id: 'card2',
-            idCard: 4710110123,
-            status: 'Void'
-        }
-    ];
-    $scope.confirmEnableCard = function(idCard, reqStatus) {
+    $scope.confirmEnableCard = function(idCard, latestStatus) {
 
         var myPopup = $ionicPopup.confirm({
             title: 'Confirm',
-            template: 'Are you sure to ' + reqStatus + ' this card ?',
+            template: 'Are you sure to ' + latestStatus + ' this card ?',
             buttons: [
                 {
                     text: '<div class="flex align-items-center">' +
@@ -114,11 +102,26 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup) {
         myPopup.then(function(res) {
             //console.log($scope.cardInfoObj[idCard].status);
             if(res) {
-                if(reqStatus == 'disable') {
+                $scope.cardInfoObj[idCard].load = true;
+
+                if(latestStatus == 'Enabled') {
+
                     $scope.cardInfoObj[idCard].status = 'Disabled';
+
+                    $timeout( function (){
+                        if($scope.cardInfoObj[idCard].status == 'Disabled') {
+                            $scope.cardInfoObj[idCard].load = false;
+                        }
+                    }, 1500);
                 }
-                if(reqStatus == 'enable') {
+                else if(latestStatus == 'Disabled') {
                     $scope.cardInfoObj[idCard].status = 'Enabled';
+
+                    $timeout( function (){
+                        if($scope.cardInfoObj[idCard].status == 'Enabled') {
+                            $scope.cardInfoObj[idCard].load = false;
+                        }
+                    }, 1500);
                 }
             } else {
                 console.log('Changing status cancled');
