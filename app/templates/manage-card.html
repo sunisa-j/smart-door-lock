@@ -1,13 +1,15 @@
 <ion-view view-title="Manage Card">
     <ion-content>
 
-        <div class="custom-row" ng-repeat="card in cardInfo" ng-class="{'card-void-status-bg':card.status=='Void'}">
+        <div class="custom-row" ng-repeat="(key, card) in cardInfoObj" ng-class="{'card-void-status-bg':card.status=='Void'}" ng-init="card.load=false">
             <div class="custom-row-icon">
                 <i class="flaticon-debit" ng-class="{'stable-font-color':card.status=='Void'}"></i>
-                <i class="custom-row-status-icon-corner ion-ios-close stable" ng-show="card.status=='Void'"></i>
+                <i class="custom-row-status-icon-corner2 ion-ios-close stable" ng-show="card.status=='Void'"></i>
 
-                <i class="custom-row-status-icon-corner ion-ios-checkmark balanced" ng-show="card.status=='Enabled'"></i>
-                <i class="custom-row-status-icon-corner ion-ios-close assertive" ng-show="card.status=='Disabled'"></i>
+                <span ng-hide="card.load==true">
+                    <i class="custom-row-status-icon-corner2 ion-ios-checkmark balanced" ng-show="card.status=='Enabled'"></i>
+                    <i class="custom-row-status-icon-corner2 ion-ios-close assertive" ng-show="card.status=='Disabled'" ></i>
+                </span>
             </div>
             <div class="custom-row-title" ng-class="{'stable-font-color':card.status=='Void'}">
                 <div>{{card.idCard}}</div>
@@ -15,9 +17,14 @@
                     <!--<i class="custom-row-status-icon ion-ios-checkmark"></i>&nbsp;Enabled-->
                 <!--</div>-->
             </div>
-            <div class="custom-row-button">
-                <button class="button button-outline button-small button-dark" ng-click="confirmEnableCard(card.$id,'disable')" ng-show="card.status=='Enabled'">Disable</button>
-                <button class="button button-outline button-small button-dark" ng-click="confirmEnableCard(card.$id,'enable')" ng-show="card.status=='Disabled'">Enable</button>
+            <div class="custom-row-button" ng-show="card.load==false">
+                <button class="button button-outline button-small button-dark" ng-click="confirmEnableCard(key,card.status)" ng-hide="card.status=='Void'">
+                    <span ng-show="card.status=='Enabled'">Disable</span>
+                    <span ng-show="card.status=='Disabled'">Enable</span>
+                </button>
+            </div>
+            <div class="custom-row-spinner" ng-show="card.load==true">
+                <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
         </div>
 
