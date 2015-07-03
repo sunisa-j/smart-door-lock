@@ -4,8 +4,11 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
+    $scope.doorId = doorId;
+
     var doorsAccessObj = doorsAccess('object');
     $scope.groupName = doorsAccessObj[groupId].name;
+
     $scope.doorData = doorsAccessObj[groupId].doorsAccess[doorId];
 
     // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageAccess')
@@ -13,14 +16,44 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         name: 'doorInfo'
     };
 
+    // -------------------------------------------------------------------------
+    // About Door Info -------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    $scope.statusLoad = { value: false };
+
+    $scope.changeLockStatus = function (latestLockStatus) {
+
+        $scope.statusLoad.value = true;
+
+        if(latestLockStatus == 'locked') {
+            $scope.doorData.status.lock = 'unlocked';
+            $timeout(function () {
+                if ($scope.doorData.status.lock == 'unlocked') {
+                    $scope.statusLoad.value = false;
+                }
+            }, 1500);
+        }
+        else if(latestLockStatus == 'unlocked') {
+            $scope.doorData.status.lock = 'locked';
+            $timeout(function () {
+                if ($scope.doorData.status.lock == 'locked') {
+                    $scope.statusLoad.value = false;
+                }
+            }, 1500);
+        }
+    };
+
+    // -------------------------------------------------------------------------
     // About Config Door -------------------------------------------------------
+    // -------------------------------------------------------------------------
+
     $scope.pinRequired = { load: false };
     $scope.autoRelock = { load: false };
 
     $scope.pinRequiredChecked = function(){
         $scope.pinRequired.load = true;
         var valueBeforeChanged = !$scope.doorData.configDoor.pinRequired.status;
-
         // if pinRequired status changed;
         $scope.doorData.configDoor.pinRequired.status = !(valueBeforeChanged);
 
@@ -33,7 +66,6 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.autoRelockChecked = function(){
         $scope.autoRelock.load = true;
         var valueBeforeChanged = !$scope.doorData.configDoor.autoRelock.status;
-
         // if autoRelock status changed;
         $scope.doorData.configDoor.autoRelock.status = !(valueBeforeChanged);
 
@@ -44,14 +76,15 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         }, 1500);
     };
 
-    // About Manage Access ----------------------------------------------------
+    // -------------------------------------------------------------------------
+    // About Manage Access -----------------------------------------------------
+    // -------------------------------------------------------------------------
 
-    // About Passcode Unlock --------------------------------------------------
-    $scope.passcodeUnlockArr = passcodeUnlock(doorId, '', 'array');
-
+    // About Passcode Unlock ---------------------------------------------------
+    $scope.passcodeUnlockObj = passcodeUnlock(doorId, '', 'object');
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
-    $scope.passcodeUnlockSelected = passcodeUnlock('', passcodeUnlockId, 'object');
-
+    $scope.passcodeUnlockId = passcodeUnlockId;
+    $scope.passcodeUnlockSelected = passcodeUnlock('', passcodeUnlockId, 'selected');
     $scope.enableEditPasscode = { value: false };
     $scope.passcodeReadOnly = { value: true };
 
@@ -64,6 +97,27 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
     $scope.createPasscodeUnlock = function () {
         console.log('create passcode');
+    };
+
+    $scope.changeStatusPasscode = function(passcodeId, latestStatus){
+        $scope.passcodeUnlockObj[passcodeId].load = true;
+
+        if(latestStatus == 'Enabled') {
+            $scope.passcodeUnlockObj[passcodeId].status = 'Disabled';
+            $timeout(function () {
+                if ($scope.passcodeUnlockObj[passcodeId].status == 'Disabled') {
+                    $scope.passcodeUnlockObj[passcodeId].load = false;
+                }
+            }, 1500);
+        }
+        else if(latestStatus == 'Disabled') {
+            $scope.passcodeUnlockObj[passcodeId].status = 'Enabled';
+            $timeout(function () {
+                if ($scope.passcodeUnlockObj[passcodeId].status == 'Enabled') {
+                    $scope.passcodeUnlockObj[passcodeId].load = false;
+                }
+            }, 1500);
+        }
     };
 
     $scope.confirmDeletePasscode = function() {
