@@ -168,6 +168,28 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         }
                     }
                 ]
+            },
+            {
+                name: 'accessTime',
+                url: '/accessTime/:doorId/:passcodeUnlockId',
+                views: {
+                    menuContent: {
+                        controller: 'AccessTimeController',
+                        templateUrl: '../templates/access-time.html'
+                    }
+                },
+                children: [
+                    {
+                        name: 'addAccessTimeCalendar',
+                        url: '/add-access-time-calendar',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'AccessTimeController',
+                                templateUrl: 'templates/add-access-time-calendar.html'
+                            }
+                        }
+                    }
+                ]
             }
         ]
     });
