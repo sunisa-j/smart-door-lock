@@ -6,9 +6,9 @@ window.app.controller('MainMenuController', function ($scope) {
     $scope.loginName = 'สุนิสา จุลรัตน์';
 
     // get count of unread message (notification)
-    $scope.unreadMsg = 20;
+    $scope.unreadMsg = 2;
 
     // if this user is approver. get count of approve msg number
-    $scope.approveMsg = 32;
+    //$scope.approveMsg = 32;
 
 });
