@@ -18,8 +18,8 @@ window.app.controller('AccessTimeController', function ($scope, $stateParams, $t
 
         var hideSheet = $ionicActionSheet.show({
             buttons: [
-                { text: 'Normal' },
-                { text: 'Holiday' }
+                { text: '<i class="ion-ios-calendar-outline balanced"></i>Normal' },
+                { text: '<i class="ion-ios-calendar-outline energized"></i>Holiday' }
             ],
             //destructiveText: 'Delete',
             titleText: 'Select Access Policy',
