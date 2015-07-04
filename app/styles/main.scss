@@ -61,6 +61,12 @@ a {
   text-decoration: none;
   color: inherit !important;
 }
+.about-content-padding {
+  padding: 15px;
+}
+.about-content-padding a {
+  color: $balanced !important;
+}
 .overflow-hidden-text {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -167,8 +173,13 @@ input[disabled] {
 .action-sheet .button {
   background-color: #FAFAFA;
 }
+.action-sheet .button > i {
+  font-size: 28px;
+  padding-right: 15px;
+}
 .action-sheet-cancel .button {
   background-color: #FAFAFA;
+  color: $stable_font_color;
 }
 // Custom ion-content bg ********************************
 .custom-ion-content-bg {
@@ -407,9 +418,9 @@ input[disabled] {
   width: 40px;
 }
 // Badge ************************************************
-.badge {
-  padding: 2px 4px;
-}
+//.badge {
+//  padding: 2px 4px;
+//}
 // Position *********************************************
 .relative-position {
   position: relative;
