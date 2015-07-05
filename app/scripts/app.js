@@ -174,8 +174,8 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 url: '/accessTime/:doorId/:passcodeUnlockId',
                 views: {
                     menuContent: {
-                        controller: 'AccessTimeController',
-                        templateUrl: '../templates/access-time.html'
+                        controller: 'PasscodeAccessTimeController',
+                        templateUrl: '../templates/passcode-access-time.html'
                     }
                 },
                 children: [
@@ -184,7 +184,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         url: '/add-access-time-calendar',
                         views: {
                             'menuContent@mainMenu': {
-                                controller: 'AccessTimeController',
+                                controller: 'PasscodeAccessTimeController',
                                 templateUrl: 'templates/add-access-time-calendar.html'
                             }
                         }
