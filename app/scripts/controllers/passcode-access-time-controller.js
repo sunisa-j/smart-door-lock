@@ -1,9 +1,12 @@
 'use strict';
 
-window.app.controller('AccessTimeController', function ($scope, $stateParams, $timeout, $ionicActionSheet, passcodePolicies) {
+window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $timeout, $ionicActionSheet, $ionicModal, passcodePolicies, usersCalendars) {
 
     var doorId = $stateParams.doorId;
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
+    $scope.acccessPolicyType = { value:''};
+    var userId = 1;
+    $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId);
 
     //Get access time of title informaiton
     $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array');
@@ -12,6 +15,14 @@ window.app.controller('AccessTimeController', function ($scope, $stateParams, $t
     $scope.deleteCalendar = function (id) {
         console.log('delete ' + id);
     };
+
+    // add calendars modal
+    $ionicModal.fromTemplateUrl('templates/add-access-time-calendar.html' , {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.addCalendarsModal = modal;
+    });
 
     // action sheet for select calendar type
     $scope.selectCalendarType = function() {
@@ -29,12 +40,13 @@ window.app.controller('AccessTimeController', function ($scope, $stateParams, $t
             },
             buttonClicked: function(index) {
                 if(index === 0) {
-                    $scope.gotoAddCalendars('normal');
-
+                    $scope.acccessPolicyType.value = 'Normal';
                 }
                 else if(index === 1) {
-                    $scope.gotoAddCalendars('holiday');
+                    $scope.acccessPolicyType.value = 'Holiday';
                 }
+                $scope.addCalendarsModal.show();
+
                 return true;
             }
         });
@@ -43,13 +55,8 @@ window.app.controller('AccessTimeController', function ($scope, $stateParams, $t
         //}, 4000);
     };
 
-    $scope.gotoAddCalendars = function (type) {
-        if(type == 'normal') {
-            console.log('select normal access time');
-        }
-        else if(type == 'holiday') {
-            console.log('select holiday access time');
-        }
+    $scope.addCalendarsSelected = function () {
+        console.log("add calendar");
     };
 
 
