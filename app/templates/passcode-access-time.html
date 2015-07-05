@@ -1,4 +1,4 @@
-<ion-view title="Access Time">
+<ion-view title="Passcode Access Time">
 
     <ion-nav-buttons side="right">
         <div style="margin-top: -3px;">
@@ -30,7 +30,7 @@
                     <i class="ion-ios-calendar-outline" ng-class="{'balanced':passcodePolicy.type=='normal', 'energized':passcodePolicy.type=='holiday'}"></i>
                 </div>
                 <div class="custom-row-title">
-                    <div>{{passcodePolicy.calendar}}</div>
+                    <div>{{passcodePolicy.calendar.name}}</div>
                     <!--<div class="custom-row-desc">{{passcodePolicy.calendar.owner}}</div>-->
                 </div>
                 <div class="custom-row-button pointer" ng-show="group.showDel==true" ng-click="deleteCalendar(passcodePolicy.$id)"
@@ -41,7 +41,7 @@
 
         </div>
 
-        <button class="button button-outline button-block button-dark more-button" style="margin-top: 30px">Preview</button>
+        <button class="button button-outline button-block button-dark more-button" style="margin-top: 30px" ng-hide="passcodePoliciesData[0].length==0&&passcodePoliciesData[1].length==0">Preview</button>
 
     </ion-content>
 </ion-view>
