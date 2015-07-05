@@ -1,24 +1,26 @@
 'use strict';
 
-window.app.factory('passcodePolicies', function () {
+window.app.factory('passcodePolicies', function (calendars) {
 
     var passcodePolicies = {
-        1: {
+        'passcodePolicy1': {
             type: 'normal',
             passcode: 'passcode1',
             calendar: 'calendar1'
         },
-        2: {
+        'passcodePolicy2': {
             type: 'holiday',
             passcode: 'passcode1',
             calendar: 'calendar2'
         },
-        3: {
+        'passcodePolicy3': {
             type: 'normal',
             passcode: 'passcode2',
             calendar: 'calendar1'
         }
     };
+
+    var calendarsData = calendars;
 
     return function(passcodeUnlockId, data){
 
@@ -28,21 +30,33 @@ window.app.factory('passcodePolicies', function () {
         passcodePoliciesArr[1] = [];
 
         angular.forEach(passcodePolicies, function(passcodePolicy, key){
-            var tmp = angular.copy(passcodePolicy);
 
-            if(tmp.type == 'normal' && tmp.passcode == passcodeUnlockId) {
+            var passcodePolicyTmp = angular.copy(passcodePolicy);
+            var calendarsTmp = angular.copy(calendarsData);
+
+            if(passcodePolicyTmp.type == 'normal' && passcodePolicyTmp.passcode == passcodeUnlockId) {
                 var normalObj = {};
                 normalObj.$id = key;
                 normalObj.type = 'normal',
-                normalObj.calendar = tmp.calendar
+                normalObj.calendar = {
+                    $id: passcodePolicy.calendar,
+                    public: calendarsTmp[passcodePolicyTmp.calendar].public,
+                    name: calendarsTmp[passcodePolicyTmp.calendar].name,
+                    description: calendarsTmp[passcodePolicyTmp.calendar].description
+                };
 
                 passcodePoliciesArr[0].push(normalObj);
             }
-            else if(tmp.type == 'holiday' && tmp.passcode == passcodeUnlockId) {
+            else if(passcodePolicyTmp.type == 'holiday' && passcodePolicyTmp.passcode == passcodeUnlockId) {
                 var holidayObj = {};
                 holidayObj.$id = key;
                 holidayObj.type = 'holiday',
-                holidayObj.calendar = tmp.calendar
+                holidayObj.calendar = {
+                    $id: passcodePolicy.calendar,
+                    public: calendarsTmp[passcodePolicyTmp.calendar].public,
+                    name: calendarsTmp[passcodePolicyTmp.calendar].name,
+                    description: calendarsTmp[passcodePolicyTmp.calendar].description
+                };
 
                 passcodePoliciesArr[1].push(holidayObj);
             }
@@ -51,11 +65,20 @@ window.app.factory('passcodePolicies', function () {
         // select objects (passcode: passcodeUnlockId)
         var passcodePoliciesObj = {};
         angular.forEach(passcodePolicies, function(passcodePolicy, key){
-            var tmp = angular.copy(passcodePolicy);
-            if(tmp.passcode == passcodeUnlockId) {
+
+            var passcodePolicyTmp = angular.copy(passcodePolicy);
+            var calendarsTmp = angular.copy(calendarsData);
+
+            if(passcodePolicyTmp.passcode == passcodeUnlockId) {
                 passcodePoliciesObj[key] = {};
-                passcodePoliciesObj[key].type = tmp.type;
-                passcodePoliciesObj[key].calendar = tmp.calendar;
+                passcodePoliciesObj[key].passcode = passcodeUnlockId;
+                passcodePoliciesObj[key].type = passcodePolicyTmp.type;
+                passcodePoliciesObj[key].calendar = {
+                    $id: passcodePolicy.calendar,
+                    public: calendarsTmp[passcodePolicyTmp.calendar].public,
+                    name: calendarsTmp[passcodePolicyTmp.calendar].name,
+                    description: calendarsTmp[passcodePolicyTmp.calendar].description
+                };
             }
         });
 
