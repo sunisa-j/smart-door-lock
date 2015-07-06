@@ -52,7 +52,7 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies) {
         if(policiesType == 'passcodePolicies') {
 
             var userCalendarsNotSelected = angular.copy(usersCalendars);
-            var passcodePoliciesData = angular.copy(passcodePolicies(passcodeId, 'object'));
+            var passcodePoliciesData = angular.copy(passcodePolicies(passcodeId, 'object', ''));
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
 
@@ -60,13 +60,13 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies) {
                     angular.forEach(passcodePoliciesData, function (passcodePolicy) {
 
                         if ((passcodePolicy.passcode == passcodeId) && (passcodePolicy.calendar.$id == userCalendar.calendar)) {
-                            console.log(userCalendar);
+                            //console.log(userCalendar);
                             delete userCalendarsNotSelected[userCalendarId];
                         }
                     });
                 }
             });
-            console.log(userCalendarsNotSelected);
+            //console.log(userCalendarsNotSelected);
 
             angular.forEach(userCalendarsNotSelected, function(value, key){
                 var userCalendarTmp = angular.copy(value);
