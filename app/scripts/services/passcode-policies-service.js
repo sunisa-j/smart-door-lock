@@ -22,7 +22,7 @@ window.app.factory('passcodePolicies', function (calendars) {
 
     var calendarsData = calendars;
 
-    return function(passcodeUnlockId, data){
+    return function(passcodeUnlockId, data, addObj){
 
         // group follow passcode policy type
         var passcodePoliciesArr = [];
@@ -87,6 +87,11 @@ window.app.factory('passcodePolicies', function (calendars) {
         }
         else if(data == 'array') {
             return passcodePoliciesArr;
+        }
+        else if(data == 'add') {
+            passcodePolicies[passcodePolicy.length + 2].type = addObj.type;
+            passcodePolicies[passcodePolicy.length + 2].passcode = addObj.passcode;
+            passcodePolicies[passcodePolicy.length + 2].calendar = addObj.calendar;
         }
     };
 });
