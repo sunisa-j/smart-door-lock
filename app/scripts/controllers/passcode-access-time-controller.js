@@ -1,15 +1,15 @@
 'use strict';
 
-window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $timeout, $ionicActionSheet, $ionicModal, passcodePolicies, usersCalendars) {
+window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, passcodePolicies, usersCalendars) {
 
     var doorId = $stateParams.doorId;
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
     $scope.acccessPolicyType = { value:''};
-    var userId = 1;
-    $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId);
+    var userId = 1; // Login User Id
+    $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId); // Selected calendars this user can access
 
     //Get access time of title informaiton
-    $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array');
+    $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array', '');
 
     // when click delete calendar
     $scope.deleteCalendar = function (id) {
@@ -50,13 +50,36 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
                 return true;
             }
         });
-        //$timeout(function() {
-        //    hideSheet();
-        //}, 4000);
     };
 
+    // Store Checkbox Input Value
+    $scope.calendarCheckbox = {};
+
     $scope.addCalendarsSelected = function () {
-        console.log("add calendar");
+        var type = ($scope.acccessPolicyType.value).toLowerCase();
+        var passcode = passcodeUnlockId;
+
+        angular.forEach($scope.userCalendars, function(group){
+            angular.forEach(group, function(value){
+
+                if($scope.calendarCheckbox[value.calendar.$id] == true) {
+                    var calendarId = value.calendar.$id;
+                    //console.log("Selected: " + $scope.calendarCheckbox[calendarId]);
+                    var dataAddtoPasscodePolicies = {
+                        type: type,
+                        passcode: passcode,
+                        calendar: calendarId
+                    };
+                    console.log('Call function add: ' + dataAddtoPasscodePolicies.calendar);
+                }
+            });
+        });
+        $scope.addCalendarsModal.hide();
+    };
+
+    $scope.cancelAddCalendars = function () {
+        $scope.calendarCheckbox = {};
+        $scope.addCalendarsModal.hide();
     };
 
 
