@@ -162,6 +162,9 @@ input[disabled] {
 [nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
   background-color: $light;
 }
+.checkbox-row-bg {
+  background-color: #FDFDFD;
+}
 // Modal Popup ActionSheet ******************************
 .modal .bar-header {
   background-color: $custom_ion_content_bg;
@@ -237,6 +240,10 @@ input[disabled] {
 // item, item-divider ***********************************
 .item {
   color: $dark_font_color;
+  margin-top: -1px;
+  margin-bottom: 0;
+  margin-left: 0;
+  margin-right: 0;
 }
 .item-input > span {
   width: 150px;
