@@ -24,7 +24,7 @@
                 {{userRes.firstName}} {{userRes.lastName}}
             </div>
             <div class="custom-row-button">
-                <button class="button button-clear button-icon ion-ios-plus-outline button-balanced button-icon-right" ng-show="userRes.addedStatus==false"></button>
+                <button class="button button-clear button-icon ion-ios-plus-outline button-balanced button-icon-right" ng-show="userRes.addedStatus==false" ng-click="confirmAddUser(userRes.id, userRes.employeeNumber)"></button>
                 <span ng-show="userRes.addedStatus==true" class="assertive">Added</span>
             </div>
         </div>
