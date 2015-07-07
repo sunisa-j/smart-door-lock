@@ -187,7 +187,7 @@
 
     <!--Manage Access Content-->
     <ion-content ng-show="doorMenu.name=='manageAccess'" class="custom-ion-content-bg">
-        <div class="list pointer">
+        <div class="list pointer" ui-sref="mainMenu.doors.doorInfo.userManagement({doorId: doorId})">
             <div class="item item-button-right">
                 User Management
                 <button class="button button-clear custom-button-right-text">
@@ -213,7 +213,7 @@
             Create passcode for visitor or new member. New member can use this passcode unlock door only.
         </div>
 
-        <div class="flex align-items-center custom-setting-row-with-right-button pointer" ui-sref="mainMenu.autoReleaseAccessTime({doorId: doorId})">
+        <div class="flex align-items-center custom-setting-row-with-right-button pointer" ui-sref="mainMenu.doors.doorInfo.autoReleaseAccessTime({doorId: doorId})">
             <div class="custom-row-title">
                 <div>Auto Release</div>
             </div>
