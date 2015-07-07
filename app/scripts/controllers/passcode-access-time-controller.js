@@ -19,7 +19,8 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
     // add calendars modal
     $ionicModal.fromTemplateUrl('templates/add-access-time-calendar.html' , {
         scope: $scope,
-        animation: 'slide-in-up'
+        animation: 'slide-in-up',
+        backdropClickToClose: false
     }).then(function(modal) {
         $scope.addCalendarsModal = modal;
     });
@@ -74,6 +75,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
                 }
             });
         });
+        $scope.calendarCheckbox = {};
         $scope.addCalendarsModal.hide();
     };
 
