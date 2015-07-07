@@ -14,18 +14,18 @@
         <!--Permission-->
         <div class="item item-divider edit-button-item-divider" style="margin-top: 15px">
             Permission
-            <div ng-class="{'fade-in':enableEditPasscode.value==false, 'opacity-0':enableEditPasscode.value==true,'fade-out':enableEditPasscode.value==true, 'opacity-1':enableEditPasscode.value==false}">
+            <div ng-class="{'fade-in':enableEditPermission.value==false, 'opacity-0':enableEditPermission.value==true,'fade-out':enableEditPermission.value==true, 'opacity-1':enableEditPermission.value==false}">
                 <button class="button button-clear button-small link-btn-color"
-                        ng-click="enableEditPasscode.value=true; passcodeReadOnly.value=false"
-                        ng-hide="enableEditPasscode.value">Edit</button>
+                        ng-click="enableEditPermission.value=true; passcodeReadOnly.value=false"
+                        ng-hide="enableEditPermission.value">Edit</button>
             </div>
-            <div ng-class="{'fade-in':enableEditPasscode.value==true, 'opacity-0':enableEditPasscode.value==false,'fade-out':enableEditPasscode.value==false, 'opacity-1':enableEditPasscode.value==true}">
+            <div ng-class="{'fade-in':enableEditPermission.value==true, 'opacity-0':enableEditPermission.value==false,'fade-out':enableEditPermission.value==false, 'opacity-1':enableEditPermission.value==true}">
                 <button class="button button-clear button-small button-stable"
-                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
-                        ng-show="enableEditPasscode.value">Cancel</button>
+                        ng-click="enableEditPermission.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPermission.value">Cancel</button>
                 <button class="button button-clear button-small button-balanced"
-                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
-                        ng-show="enableEditPasscode.value">Save</button>
+                        ng-click="enableEditPermission.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPermission.value">Save</button>
             </div>
         </div>
         <div class="item custom-row-del-border-bottom">
