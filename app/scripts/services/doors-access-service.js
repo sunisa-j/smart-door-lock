@@ -14,7 +14,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'unlocked'
                     },
-                    expire: new Date('30 Jun 2015'),
+                    expire: new Date('30 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: true,
@@ -40,7 +40,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'locked'
                     },
-                    expire: new Date('19 Jun 2015'),
+                    expire: new Date('19 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: true,
@@ -66,7 +66,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'locked'
                     },
-                    expire: new Date('12 Jun 2015'),
+                    expire: new Date('12 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: false,
@@ -92,7 +92,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'unlocked'
                     },
-                    expire: new Date('10 Jun 2015'),
+                    expire: new Date('10 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: false,
@@ -124,7 +124,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'unlocked'
                     },
-                    expire: new Date('22 Jun 2015'),
+                    expire: new Date('22 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: false,
@@ -150,7 +150,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'closed',
                         lock: 'locked'
                     },
-                    expire: new Date('27 Jun 2015'),
+                    expire: new Date('27 Dec 2015'),
                     permission: {
                         unlock: true,
                         viewLog: false,
@@ -176,7 +176,7 @@ window.app.factory('doorsAccess', function () {
                         door: 'opened',
                         lock: 'unlocked'
                     },
-                    expire: new Date('20 Jun 2014'),
+                    expire: new Date('20 Dec 2014'),
                     permission: {
                         unlock: true,
                         viewLog: false,
