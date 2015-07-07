@@ -17,12 +17,10 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
         $scope.load = true;
 
         if(req != '') {
-
             // finding req user
             angular.forEach(usersData, function(user){
                 var employeeNumber = user.employeeNumber;
                 var name = (user.name);
-
                 var res = employeeNumber.match(req);
                 var res2 = name.match(req);
 
@@ -50,9 +48,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     });
                     index++;
                 });
-                console.log($scope.usersRes);
             }
-
             $scope.load = false;
 
         }else{
