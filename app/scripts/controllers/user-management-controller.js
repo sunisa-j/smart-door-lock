@@ -1,22 +1,25 @@
 'use strict';
 
-window.app.controller('UserManagementController', function ($scope, $stateParams, doorsAccess, doorsUsers, users) {
+window.app.controller('UserManagementController', function ($scope, $stateParams, doorsAccess, doorsUsers, users, $state, $ionicPopup) {
 
     var doorId = $stateParams.doorId;
     $scope.doorName = (doorsAccess('doors'))[doorId].name;
 
     $scope.doorUsers = doorsUsers(doorId, 'array');
-    var users = users('array');
+    var usersData = users('array');
 
+    var editUserId = $stateParams.userId;
+    $scope.editUser = users('object')[editUserId];
+
+    // Search user ready to add
     $scope.searchUserForAdd = function(req) {
         $scope.usersRes = [];
-        $scope.usersResNotAdded = [];
         $scope.load = true;
 
         if(req != '') {
 
             // finding req user
-            angular.forEach(users, function(user){
+            angular.forEach(usersData, function(user){
                 var employeeNumber = user.employeeNumber;
                 var name = (user.name);
 
@@ -55,7 +58,56 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
         }else{
             $scope.load = false;
             $scope.usersRes = [];
-            $scope.usersResNotAdded = [];
         }
     };
+
+    // Confirm to add selected user
+    $scope.confirmAddUser = function(userId, employeeNumber) {
+
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure to add <span class="balanced">' + employeeNumber + '</span> to new member in ' + $scope.doorName + '?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-checkmark-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Confirm</span>' +
+                    '</div>',
+                    type: 'button-outline button-balanced',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                addNewUser(userId);
+            } else {
+                console.log('Canceled');
+            }
+        });
+    };
+
+    // Add User
+    var addNewUser = function(userId) {
+        $state.go('mainMenu.doors.doorInfo.userManagement.editUser', {userId: userId});
+    };
+
+
 });
