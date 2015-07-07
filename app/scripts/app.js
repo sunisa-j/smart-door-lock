@@ -170,26 +170,24 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 ]
             },
             {
-                name: 'accessTime',
-                url: '/accessTime/:doorId/:passcodeUnlockId',
+                name: 'passcodeAccessTime',
+                url: '/passcode-access-time/:doorId/:passcodeUnlockId',
                 views: {
                     menuContent: {
                         controller: 'PasscodeAccessTimeController',
                         templateUrl: '../templates/passcode-access-time.html'
                     }
-                },
-                children: [
-                    {
-                        name: 'addAccessTimeCalendar',
-                        url: '/add-access-time-calendar',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'PasscodeAccessTimeController',
-                                templateUrl: 'templates/add-access-time-calendar.html'
-                            }
-                        }
+                }
+            },
+            {
+                name: 'autoReleaseAccessTime',
+                url: '/auto-release-access-time/:doorId',
+                views: {
+                    menuContent: {
+                        controller: 'AutoReleaseAccessTimeController',
+                        templateUrl: '../templates/auto-release-access-time.html'
                     }
-                ]
+                }
             }
         ]
     });
