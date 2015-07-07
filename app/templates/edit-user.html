@@ -29,11 +29,73 @@
             </div>
         </div>
         <div class="item custom-row-del-border-bottom">
-            General
+
+            <div class="flex permission-flex-container">
+                <div class="permission-title">General</div>
+
+                <div class="flex flex-wrap" style="flex-basis: 400px; flex-grow: 1; -webkit-flex-grow: 1;">
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            View Status
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            View Log
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            Remote Access
+                        </li>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="row-border-inset"><div class="row-border-inset-color"></div></div>
         <div class="item custom-row-del-border-top">
-            Administration
+
+            <div class="flex permission-flex-container">
+                <div class="permission-title">Administration</div>
+
+                <div class="flex flex-wrap" style="flex-basis: 400px; flex-grow: 1; -webkit-flex-grow: 1;">
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            Manage Access
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            Admin Privilege
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox">
+                            </label>
+                            Config Door
+                        </li>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div class="item item-desc">
             Setting permission for this user to access {{doorName}} do you want.
@@ -53,7 +115,7 @@
         </div>
 
         <div class="button-div-padding">
-            <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeletePasscode()">Delete Passcode</button>
+            <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeletePasscode()">Delete User</button>
         </div>
 
     </ion-content>
