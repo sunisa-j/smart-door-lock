@@ -186,6 +186,16 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                                 templateUrl: '../templates/add-user.html'
                                             }
                                         }
+                                    },
+                                    {
+                                        name: 'editUser',
+                                        url: '/edit-user',
+                                        views: {
+                                            'menuContent@mainMenu': {
+                                                controller: 'UserManagementController',
+                                                templateUrl: '../templates/edit-user.html'
+                                            }
+                                        }
                                     }
                                 ]
                             },
