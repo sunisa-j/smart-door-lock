@@ -45,6 +45,7 @@ $custom_ion_content_bg: #F5F5F5;
 $border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
+$custom_row_small_height: 48px;
 $doors_custom_row_height: 65px;
 $custom_setting_row_height: 50px;
 $tabs_column_height: 50px;
@@ -201,6 +202,14 @@ input[disabled] {
 }
 .button-bar {
   padding: 0 5px;
+}
+.button-icon-right {
+  font-size: 38px;
+  padding: 3px 0px !important;
+  margin-right: -15px;
+}
+.search-button-icon {
+  padding: 3px 0px !important;
 }
 .toggle {
   @extend .pointer;
@@ -570,13 +579,17 @@ input[disabled] {
 
 // Custom Row
 .custom-row {
-@extend .flex, .justify-content-center, .align-items-center, .pointer;
+  @extend .flex, .justify-content-center, .align-items-center, .pointer;
   border: solid 1px $border_color;
   height: $custom_row_base_height;
   margin-top: -1px;
   border-left: 0;
   border-right: 0;
   line-height: 17px;
+}
+.custom-user-row {
+  @extend .custom-row;
+  height: $custom_row_small_height;
 }
 .door-custom-row {
   @extend .custom-row;
@@ -595,7 +608,13 @@ input[disabled] {
   background-color: $light;
   font-size: 25px;
 }
-
+.custom-row-user-id {
+  flex-basis: 120px;
+  -webkit-flex-basis: 120px;
+  -moz-flex-basis: 120px;
+  font-size: $custom_row_font_size;
+  color: $font_icon_color;
+}
 .custom-row-icon {
   @extend .relative-position;
   flex-basis: 90px;
@@ -1095,6 +1114,11 @@ input[disabled] {
   font-size: 24px;
   color: $stable_font_color;
   height: $input-height-base;
+}
+.search-person-icon {
+  font-size: 31px !important;
+  position: absolute;
+  top: 5px;
 }
 .search-input-div {
   @extend .input-height-and-border;
