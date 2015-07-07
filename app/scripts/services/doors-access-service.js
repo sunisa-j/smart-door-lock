@@ -2,6 +2,195 @@
 
 window.app.factory('doorsAccess', function () {
 
+    var doors = [
+        {
+            id: 'door1',
+            group: 'group1',
+            name: 'R101',
+            description: '1st floor',
+            hardwareId: 'OA:28:66:C4:73:8D-1',
+            status: {
+                lockState: 'unlocked',
+                doorState: 'closed'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door2',
+            group: 'group1',
+            name: 'R200',
+            description: '2nd floor',
+            hardwareId: 'OA:28:66:C4:73:8D-2',
+            status: {
+                lockState: 'locked',
+                doorState: 'closed'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door3',
+            group: 'group1',
+            name: 'R201',
+            description: '2nd floor',
+            hardwareId: 'OA:28:66:C4:73:8D-3',
+            status: {
+                lockState: 'locked',
+                doorState: 'opened'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door4',
+            group: 'group1',
+            name: 'R300',
+            description: '3rd floor',
+            hardwareId: 'OA:28:66:C4:73:8D-4',
+            status: {
+                lockState: 'unlocked',
+                doorState: 'opened'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door5',
+            group: 'group2',
+            name: 'WSN',
+            description: '3rd floor',
+            hardwareId: 'OA:28:66:C4:73:8D-5',
+            status: {
+                lockState: 'unlocked',
+                doorState: 'closed'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door6',
+            group: 'group2',
+            name: 'CNR',
+            description: '3rd floor',
+            hardwareId: 'OA:28:66:C4:73:8D-6',
+            status: {
+                lockState: 'locked',
+                doorState: 'closed'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        },
+        {
+            id: 'door7',
+            group: 'group2',
+            name: 'Robotic',
+            description: '4th floor',
+            hardwareId: 'OA:28:66:C4:73:8D-7',
+            status: {
+                lockState: 'unlocked',
+                doorState: 'opened'
+            },
+            setting: {
+                lockType: 'magnetic',
+                pinRequired: false,
+                autoRelock: false,
+                autoRelockTime: 10,
+                operatingMode: 'normal',
+                wrongCodeEntryLimit: 5,
+                userCodeTemporaryDisableTime: 180
+            },
+            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
+            createdAt: "2015-02-27T12:31:45.000Z",
+            updatedAt: "2015-02-27T12:31:45.000Z"
+        }
+    ];
+
+    var doorsObj = {};
+    angular.forEach(doors, function(value){
+        doorsObj[value.id] = {};
+        doorsObj[value.id].group = value.group;
+        doorsObj[value.id].name = value.name;
+        doorsObj[value.id].description = value.description;
+        doorsObj[value.id].hardwareId = value.hardwareId;
+        doorsObj[value.id].status = {
+            lockState: value.lockState,
+            doorState: value.doorState
+        };
+        doorsObj[value.id].setting = {
+            lockType: value.lockType,
+            pinRequired: value.pinRequired,
+            autoRelock: value.autoRelock,
+            autoRelockTime: value.autoRelockTime,
+            operatingMode: value.operatingMode,
+            wrongCodeEntryLimit: value.wrongCodeEntryLimit,
+            userCodeTemporaryDisableTime: value.userCodeTemporaryDisableTime
+        };
+        doorsObj[value.id].deviceUpdatedAt = value.deviceUpdatedAt;
+        doorsObj[value.id].createdAt = value.createdAt;
+        doorsObj[value.id].updatedAt = value.updatedAt;
+    });
+
     var doorsAccess = {
         'group1': {
             name: 'Classroom',
@@ -235,6 +424,8 @@ window.app.factory('doorsAccess', function () {
             return doorsAccessArr;
         }else if (data === 'count') {
             return numberOfDoors;
+        }else if (data === 'doors') {
+            return doorsObj;
         }
     };
 });
