@@ -26,8 +26,8 @@ window.app.factory('passcodePolicies', function (calendars) {
 
         // group follow passcode policy type
         var passcodePoliciesArr = [];
-        passcodePoliciesArr[0] = [];
-        passcodePoliciesArr[1] = [];
+        passcodePoliciesArr[0] = []; // Store Normal Access Time
+        passcodePoliciesArr[1] = []; // Store Holiday Access Time
 
         angular.forEach(passcodePolicies, function(passcodePolicy, key){
 
