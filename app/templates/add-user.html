@@ -16,14 +16,14 @@
             </div>
         </div>
 
-        <div class="custom-user-row" ng-hide="load" ng-repeat="userRes in usersRes">
+        <div class="custom-user-row pointer-default" ng-hide="load" ng-repeat="userRes in usersRes">
             <div class="custom-row-user-id">
                 {{userRes.employeeNumber}}
             </div>
             <div class="custom-row-title">
                 {{userRes.firstName}} {{userRes.lastName}}
             </div>
-            <div class="custom-row-button">
+            <div class="custom-row-button" ng-class="{'pointer': userRes.addedStatus==false}">
                 <button class="button button-clear button-icon ion-ios-plus-outline button-balanced button-icon-right" ng-show="userRes.addedStatus==false" ng-click="confirmAddUser(userRes.id, userRes.employeeNumber)"></button>
                 <span ng-show="userRes.addedStatus==true" class="assertive">Added</span>
             </div>
