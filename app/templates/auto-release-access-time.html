@@ -1,0 +1,47 @@
+<ion-view title="Auto Release Time">
+
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear" ng-click="selectCalendarType()">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div ng-repeat="group in autoReleasePoliciesData" ng-init="group.showDel=false" ng-hide="group.length==0">
+
+            <div class="item item-divider edit-on-white-bg-item-divider">
+                {{($index==0)? 'Normal Access Time':'Holiday Access Time'}}
+
+                <div ng-class="{'fade-in':group.showDel==false, 'opacity-0':group.showDel==true,'fade-out':group.showDel==true, 'opacity-1':group.showDel==false}">
+                    <button class="button button-clear button-small link-btn-color"
+                            ng-click="group.showDel=true" ng-hide="group.showDel">Edit</button>
+                </div>
+                <div ng-class="{'fade-in':group.showDel==true, 'opacity-0':group.showDel==false,'fade-out':group.showDel==false, 'opacity-1':group.showDel==true}">
+                    <button class="button button-clear button-small button-balanced"
+                            ng-click="group.showDel=false" ng-show="group.showDel">Done</button>
+                </div>
+            </div>
+
+            <div class="custom-row" ng-repeat="autoReleasePolicy in group" style="cursor: default">
+                <div class="custom-row-icon">
+                    <i class="ion-ios-calendar-outline" ng-class="{'balanced':autoReleasePolicy.type=='normal', 'energized':autoReleasePolicy.type=='holiday'}"></i>
+                </div>
+                <div class="custom-row-title">
+                    <div>{{autoReleasePolicy.calendar.name}}</div>
+                </div>
+                <div class="custom-row-button pointer" ng-show="group.showDel==true" ng-click="deleteCalendar(autoReleasePolicy.$id)"
+                     ng-class="{'fade-in':group.showDel==true, 'opacity-0':group.showDel==false,'fade-out':group.showDel==false, 'opacity-1':group.showDel==true}">
+                    <button class="button icon button-clear button-assertive ion-ios-minus-outline delete-row-btn"></button>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="button button-outline button-block button-dark more-button" style="margin-top: 30px" ng-hide="autoReleasePoliciesData[0].length==0&&autoReleasePoliciesData[1].length==0">Preview</button>
+
+
+    </ion-content>
+</ion-view>
