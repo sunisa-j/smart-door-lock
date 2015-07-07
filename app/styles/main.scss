@@ -54,6 +54,9 @@ $tabs_column_height: 50px;
 .pointer {
   cursor: pointer;
 }
+.pointer-default {
+  cursor: default !important;
+}
 .link-btn-color {
   color: $font_icon_color !important;
 }
@@ -276,7 +279,7 @@ input[disabled] {
 .item-desc {
   @extend .normal-white-space;
   font-size: 12px;
-  color: $dark;
+  color: $item_divider_font_color;
   padding-top: 5px;
   padding-bottom: 20px;
   background-color: transparent;
@@ -1192,6 +1195,16 @@ input[disabled] {
 }
 .permission-flex-border-top {
   border-top: solid 1px $border_color;
+}
+// profile image ***************************************
+.profile-background-image {
+  width: 50px;
+  height: 50px;
+  background-size: 50px 50px !important;
+  border-radius: 50%;
+  border-width: 1px;
+  border-color: $light_border_color;
+  border-style: solid;
 }
 // media query *****************************************
 @media (max-width: 1023px) {
