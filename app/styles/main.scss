@@ -250,12 +250,16 @@ input[disabled] {
   font-size: 22px;
 }
 // item, item-divider ***********************************
-.item {
+ion-modal-view .item {
   color: $dark_font_color;
   margin-top: -1px;
   margin-bottom: 0;
   margin-left: 0;
   margin-right: 0;
+}
+.item {
+  color: $dark_font_color;
+  margin-bottom: 0;
 }
 .item-input > span {
   width: 150px;
@@ -326,6 +330,14 @@ input[disabled] {
 }
 .edit-on-white-bg-item-divider button {
   font-size: $medium_font_size;
+}
+.item-checkbox input {
+  height: 24px;
+  width: 24px;
+}
+.item-checkbox .checkbox {
+  left: 2.5px;
+  margin-top: -23px;
 }
 // Custom Manage User Content ***************************
 .manage-user-margin-left {
@@ -1168,25 +1180,24 @@ input[disabled] {
 // Permission Menu *************************************
 .permission-flex-container {
   line-height: 16px;
-  padding: 15px 0 5px 0;
+  padding: 5px 0 0px 0;
+  margin-bottom: -15px;
 }
 .permission-column-width {
   flex-basis: 142px;
   -webkit-flex-basis: 142px;
   -moz-flex-basis: 142px;
   -ms-flex-basis: 142px;
-  min-width: 142px;
-  flex-grow: 1;
 }
 .permission-column-height {
-  height: 30px;
+  height: 38px;
 }
 .permission-title {
   @extend .permission-column-width;
-  padding: 0 5px 0 15px;
+  padding: 0 5px 0 0;
   font-size: $font-size-base;
   text-align: left;
-  border-bottom: solid 1px $energized;
+  min-width: 120px;
   height: 19px;
 }
 .permission-item-checkbox {
