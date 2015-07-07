@@ -31,72 +31,6 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
         controller: 'MainMenuController',
         children: [
             {
-                name: 'doors',
-                url: '/doors',
-                views: {
-                    menuContent: {
-                        controller: 'DoorsController',
-                        templateUrl: 'templates/doors.html'
-                    }
-                },
-                children: [
-                    {
-                        name: 'doorInfo',
-                        url: '/door-info/:groupId/:doorId',
-                        views: {
-                            'menuContent@mainMenu': {
-                                controller: 'DoorInfoController',
-                                templateUrl: 'templates/door-info.html'
-                            }
-                        },
-                        children: [
-                            {
-                                name: 'passcodeUnlock',
-                                url: '/passcode-unlock',
-                                views: {
-                                    'menuContent@mainMenu': {
-                                        controller: 'DoorInfoController',
-                                        templateUrl: 'templates/passcode-unlock.html'
-                                    }
-                                },
-                                children: [
-                                    {
-                                        name: 'editPasscodeUnlock',
-                                        url: '/edit-passcode-unlock/:passcodeUnlockId',
-                                        views: {
-                                            'menuContent@mainMenu': {
-                                                controller: 'DoorInfoController',
-                                                templateUrl: 'templates/edit-passcode-unlock.html'
-                                            }
-                                        }
-                                    }
-                                ]
-                            },
-                            {
-                                name: 'myActivityLog',
-                                url: '/my-activity-log',
-                                views: {
-                                    'menuContent@mainMenu': {
-                                        controller: 'DoorInfoController',
-                                        templateUrl: 'templates/my-activity-log.html'
-                                    }
-                                }
-                            },
-                            {
-                                name: 'addUser',
-                                url: '/add-user',
-                                views: {
-                                    'menuContent@mainMenu': {
-                                        controller: 'DoorInfoController',
-                                        templateUrl: 'templates/add-user.html'
-                                    }
-                                }
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 name: 'dashboard',
                 url: '/dashboard',
                 views: {
@@ -170,24 +104,104 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 ]
             },
             {
-                name: 'passcodeAccessTime',
-                url: '/passcode-access-time/:doorId/:passcodeUnlockId',
+                name: 'doors',
+                url: '/doors',
                 views: {
                     menuContent: {
-                        controller: 'PasscodeAccessTimeController',
-                        templateUrl: '../templates/passcode-access-time.html'
+                        controller: 'DoorsController',
+                        templateUrl: 'templates/doors.html'
                     }
-                }
-            },
-            {
-                name: 'autoReleaseAccessTime',
-                url: '/auto-release-access-time/:doorId',
-                views: {
-                    menuContent: {
-                        controller: 'AutoReleaseAccessTimeController',
-                        templateUrl: '../templates/auto-release-access-time.html'
+                },
+                children: [
+                    {
+                        name: 'doorInfo',
+                        url: '/door-info/:groupId/:doorId',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'DoorInfoController',
+                                templateUrl: 'templates/door-info.html'
+                            }
+                        },
+                        children: [
+                            {
+                                name: 'passcodeUnlock',
+                                url: '/passcode-unlock',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'DoorInfoController',
+                                        templateUrl: 'templates/passcode-unlock.html'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'editPasscodeUnlock',
+                                        url: '/edit-passcode-unlock/:passcodeUnlockId',
+                                        views: {
+                                            'menuContent@mainMenu': {
+                                                controller: 'DoorInfoController',
+                                                templateUrl: 'templates/edit-passcode-unlock.html'
+                                            }
+                                        },
+                                        children: [
+                                            {
+                                                name: 'passcodeAccessTime',
+                                                url: '/passcode-access-time/:doorId/:passcodeUnlockId',
+                                                views: {
+                                                    'menuContent@mainMenu': {
+                                                        controller: 'PasscodeAccessTimeController',
+                                                        templateUrl: '../templates/passcode-access-time.html'
+                                                    }
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'autoReleaseAccessTime',
+                                url: '/auto-release-access-time/:doorId',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'AutoReleaseAccessTimeController',
+                                        templateUrl: '../templates/auto-release-access-time.html'
+                                    }
+                                }
+                            },
+                            {
+                                name: 'userManagement',
+                                url: '/user-management/:doorId',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'UserManagementController',
+                                        templateUrl: '../templates/user-management.html'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'addUser',
+                                        url: '/add-user',
+                                        views: {
+                                            'menuContent@mainMenu': {
+                                                controller: 'UserManagementController',
+                                                templateUrl: '../templates/add-user.html'
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                name: 'myActivityLog',
+                                url: '/my-activity-log',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'DoorInfoController',
+                                        templateUrl: 'templates/my-activity-log.html'
+                                    }
+                                }
+                            }
+                        ]
                     }
-                }
+                ]
             }
         ]
     });
