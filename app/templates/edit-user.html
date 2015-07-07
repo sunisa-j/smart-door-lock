@@ -1,8 +1,60 @@
 <ion-view title="{{editUser.employeeNumber}}'s Info">
 
-    <ion-content>
+    <ion-content class="custom-ion-content-bg">
+        <!--User Info-->
+        <div style="padding: 10px 28px; line-height: 28px; background: #fff; border-bottom: solid 1px #ddd">
+            <div class="flex align-items-center" style="height: 50px">
+                <span class="card-title">
+                    <div class="profile-background-image" style="background: url(images/profile.png) no-repeat"></div>
+                </span>
+                <span class="card-value" style="font-size: 16px">{{editUser.firstName}} {{editUser.lastName}}</span>
+            </div>
+        </div>
 
+        <!--Permission-->
+        <div class="item item-divider edit-button-item-divider" style="margin-top: 15px">
+            Permission
+            <div ng-class="{'fade-in':enableEditPasscode.value==false, 'opacity-0':enableEditPasscode.value==true,'fade-out':enableEditPasscode.value==true, 'opacity-1':enableEditPasscode.value==false}">
+                <button class="button button-clear button-small link-btn-color"
+                        ng-click="enableEditPasscode.value=true; passcodeReadOnly.value=false"
+                        ng-hide="enableEditPasscode.value">Edit</button>
+            </div>
+            <div ng-class="{'fade-in':enableEditPasscode.value==true, 'opacity-0':enableEditPasscode.value==false,'fade-out':enableEditPasscode.value==false, 'opacity-1':enableEditPasscode.value==true}">
+                <button class="button button-clear button-small button-stable"
+                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPasscode.value">Cancel</button>
+                <button class="button button-clear button-small button-balanced"
+                        ng-click="enableEditPasscode.value=false; passcodeReadOnly.value=true"
+                        ng-show="enableEditPasscode.value">Save</button>
+            </div>
+        </div>
+        <div class="item custom-row-del-border-bottom">
+            General
+        </div>
+        <div class="row-border-inset"><div class="row-border-inset-color"></div></div>
+        <div class="item custom-row-del-border-top">
+            Administration
+        </div>
+        <div class="item item-desc">
+            Setting permission for this user to access {{doorName}} do you want.
+        </div>
 
+        <!--Access Time-->
+        <div class="flex align-items-center custom-setting-row-with-right-button pointer" ui-sref="mainMenu.doors.doorInfo.passcodeUnlock.editPasscodeUnlock.passcodeAccessTime({doorId: doorId, passcodeUnlockId: passcodeUnlockId})">
+            <div class="custom-row-title">
+                <div>Access Time</div>
+            </div>
+            <div class="custom-setting-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="item item-desc">
+            Select access time policies for this user to access {{doorName}}.
+        </div>
+
+        <div class="button-div-padding">
+            <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeletePasscode()">Delete Passcode</button>
+        </div>
 
     </ion-content>
 
