@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.factory('usersCalendars', function (calendars, passcodePolicies) {
+window.app.factory('usersCalendars', function (calendars, passcodePolicies, autoReleasePolicies) {
 
     var usersCalendars = {
         'userCalendar1': {
@@ -49,6 +49,7 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies) {
         accessRoleArr[0] = []; // Store My Calendars
         accessRoleArr[1] = []; // Store Other Calendars
 
+        // Passcode Policies -------------------------------------------------------------------------------------------
         if(policiesType == 'passcodePolicies') {
 
             var userCalendarsNotSelected = angular.copy(usersCalendars);
@@ -68,37 +69,61 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies) {
             });
             //console.log(userCalendarsNotSelected);
 
-            angular.forEach(userCalendarsNotSelected, function(value, key){
-                var userCalendarTmp = angular.copy(value);
+        }
 
-                if (userCalendarTmp.user == userId && userCalendarTmp.accessRole == 'owner') {
-                    var userCalendars = {};
-                    userCalendars.$id = key;
-                    userCalendars.accessRole = userCalendarTmp.accessRole;
-                    userCalendars.calendar = {
-                        $id: userCalendarTmp.calendar,
-                        public: calendarsTmp[userCalendarTmp.calendar].public,
-                        name: calendarsTmp[userCalendarTmp.calendar].name,
-                        description: calendarsTmp[userCalendarTmp.calendar].description
-                    };
-                    accessRoleArr[0].push(userCalendars) ;
-                }
-                else if (userCalendarTmp.user == userId && userCalendarTmp.accessRole != 'owner') {
-                    var userCalendars = {};
-                    userCalendars.$id = key;
-                    userCalendars.accessRole = userCalendarTmp.accessRole;
-                    userCalendars.calendar = {
-                        $id: userCalendarTmp.calendar,
-                        public: calendarsTmp[userCalendarTmp.calendar].public,
-                        name: calendarsTmp[userCalendarTmp.calendar].name,
-                        description: calendarsTmp[userCalendarTmp.calendar].description
-                    };
-                    accessRoleArr[1].push(userCalendars) ;
+        // Auto Release Policies ---------------------------------------------------------------------------------------
+        if(policiesType == 'autoReleasePolicies') {
+
+            var userCalendarsNotSelected = angular.copy(usersCalendars);
+            var autoReleasePoliciesData = autoReleasePolicies(doorId, 'object')
+
+            angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
+
+                if(userCalendar.user == userId) {
+                    angular.forEach(autoReleasePoliciesData, function (autoReleasePolicy) {
+
+                        if ((autoReleasePolicy.door == doorId) && (autoReleasePolicy.calendar.$id == userCalendar.calendar)) {
+                            //console.log(userCalendar);
+                            delete userCalendarsNotSelected[userCalendarId];
+                        }
+                    });
                 }
             });
-
-            return accessRoleArr;
+            //console.log(userCalendarsNotSelected);
         }
+
+        // Group userCalendars data by accessRole ('owner' & 'not owner') ----------------------------------------------
+        angular.forEach(userCalendarsNotSelected, function(value, key){
+            var userCalendarTmp = angular.copy(value);
+
+            if (userCalendarTmp.user == userId && userCalendarTmp.accessRole == 'owner') {
+                var userCalendars = {};
+                userCalendars.$id = key;
+                userCalendars.accessRole = userCalendarTmp.accessRole;
+                userCalendars.calendar = {
+                    $id: userCalendarTmp.calendar,
+                    public: calendarsTmp[userCalendarTmp.calendar].public,
+                    name: calendarsTmp[userCalendarTmp.calendar].name,
+                    description: calendarsTmp[userCalendarTmp.calendar].description
+                };
+                accessRoleArr[0].push(userCalendars) ;
+            }
+            else if (userCalendarTmp.user == userId && userCalendarTmp.accessRole != 'owner') {
+                var userCalendars = {};
+                userCalendars.$id = key;
+                userCalendars.accessRole = userCalendarTmp.accessRole;
+                userCalendars.calendar = {
+                    $id: userCalendarTmp.calendar,
+                    public: calendarsTmp[userCalendarTmp.calendar].public,
+                    name: calendarsTmp[userCalendarTmp.calendar].name,
+                    description: calendarsTmp[userCalendarTmp.calendar].description
+                };
+                accessRoleArr[1].push(userCalendars) ;
+            }
+        });
+
+        return accessRoleArr;
+
 
     };
 });
