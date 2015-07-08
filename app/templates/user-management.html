@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="custom-user-row" ng-repeat="doorUser in doorUsers | filter:search" ui-sref="mainMenu.doors.doorInfo.userManagement.editUser({userId: doorUser.user.id})">
+        <div class="custom-user-row" ng-repeat="doorUser in doorUsers | filter:search" ui-sref="mainMenu.doors.doorInfo.userManagement.editUser({doorUserId: doorUser.id})">
             <div class="custom-row-user-id">
                 {{doorUser.user.employeeNumber}}
             </div>
