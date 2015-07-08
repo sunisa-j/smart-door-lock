@@ -224,6 +224,28 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                         ]
                     }
                 ]
+            },
+            {
+                name: 'calendars',
+                url: '/calendars',
+                views: {
+                    menuContent: {
+                        controller: 'CalendarsController',
+                        templateUrl: 'templates/calendars.html'
+                    }
+                },
+                children: [
+                    {
+                        name: 'calendar',
+                        url: '/calendar/:calendarId',
+                        views: {
+                            'menuContent@mainMenu': {
+                                controller: 'CalendarController',
+                                templateUrl: 'templates/calendar.html'
+                            }
+                        }
+                    }
+                ]
             }
         ]
     });
