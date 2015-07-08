@@ -5,7 +5,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
     var doorId = $stateParams.doorId;
     $scope.acccessPolicyType = { value:''};
     var userId = 1; // Login User Id
-    $scope.userCalendars = usersCalendars(userId, doorId,'autoReleasePolicies', ''); // Selected calendars this user can access
+    $scope.userCalendars = usersCalendars(userId, doorId,'autoReleasePolicies', '', ''); // Selected calendars this user can access
 
     //Get access time of title informaiton
     $scope.autoReleasePoliciesData = autoReleasePolicies(doorId, 'array');
