@@ -6,7 +6,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
     $scope.acccessPolicyType = { value:''};
     var userId = 1; // Login User Id
-    $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId); // Selected calendars this user can access
+    $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId, ''); // Selected calendars this user can access
 
     //Get access time of title informaiton
     $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array', '');
