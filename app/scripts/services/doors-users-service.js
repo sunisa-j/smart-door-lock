@@ -66,6 +66,7 @@ window.app.factory('doorsUsers', function (users) {
         angular.forEach(doorsUsers, function(value){
             if(value.door == doorId) {
                 doorUsersObj[value.id] = {};
+                doorUsersObj[value.id].id = value.id;
                 doorUsersObj[value.id].door = value.door;
                 doorUsersObj[value.id].user = {
                     id: value.user,
@@ -74,12 +75,12 @@ window.app.factory('doorsUsers', function (users) {
                     lastName: usersData[value.user].lastName
                 };
                 doorUsersObj[value.id].permission = {
-                    viewLog: value.viewLog,
-                    viewStatus: value.viewStatus,
-                    remoteAccess: value.remoteAccess,
-                    configuration: value.configuration,
-                    policies: value.policies,
-                    grant: value.grant
+                    viewLog: value.permission.viewLog,
+                    viewStatus: value.permission.viewStatus,
+                    remoteAccess: value.permission.remoteAccess,
+                    configuration: value.permission.configuration,
+                    policies: value.permission.policies,
+                    grant: value.permission.grant
                 };
                 doorUsersObj[value.id].createdBy = value.createdBy;
                 doorUsersObj[value.id].createdAt = value.createdAt;
