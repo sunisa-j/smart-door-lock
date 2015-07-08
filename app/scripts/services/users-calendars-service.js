@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.factory('usersCalendars', function (calendars, passcodePolicies, autoReleasePolicies) {
+window.app.factory('usersCalendars', function (calendars, passcodePolicies, autoReleasePolicies, userAccessPolicies) {
 
     var usersCalendars = {
         'userCalendar1': {
@@ -42,7 +42,7 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
 
     var calendarsTmp = angular.copy(calendars);
 
-    return function(userId, doorId, policiesType, passcodeId){
+    return function(userId, doorId, policiesType, passcodeId, doorUserId){
 
         // group by 'My Calendars' (accessRole: owner) and 'Other Calendars' (accessRole: reader or writer)
         var accessRoleArr = [];
@@ -83,6 +83,27 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
                     angular.forEach(autoReleasePoliciesData, function (autoReleasePolicy) {
 
                         if ((autoReleasePolicy.door == doorId) && (autoReleasePolicy.calendar.$id == userCalendar.calendar)) {
+                            //console.log(userCalendar);
+                            delete userCalendarsNotSelected[userCalendarId];
+                        }
+                    });
+                }
+            });
+            //console.log(userCalendarsNotSelected);
+        }
+
+        // User Access Policies ----------------------------------------------------------------------------------------
+        if(policiesType == 'userAccessPolicies') {
+
+            var userCalendarsNotSelected = angular.copy(usersCalendars);
+            var userAccessPoliciesData = userAccessPolicies(doorUserId, 'object')
+
+            angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
+
+                if(userCalendar.user == userId) {
+                    angular.forEach(userAccessPoliciesData, function (userAccessPolicy) {
+
+                        if ((userAccessPolicy.doorUser == doorUserId) && (userAccessPolicy.calendar.$id == userCalendar.calendar)) {
                             //console.log(userCalendar);
                             delete userCalendarsNotSelected[userCalendarId];
                         }
