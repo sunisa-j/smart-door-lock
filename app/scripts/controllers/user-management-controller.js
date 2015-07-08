@@ -10,8 +10,6 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
 
     var editDoorUserId = $stateParams.doorUserId;
     $scope.editUser = doorsUsers(doorId, 'object')[editDoorUserId];
-    console.log($scope.editUser);
-
 
     // Search user ready to add
     $scope.searchUserForAdd = function(req) {
