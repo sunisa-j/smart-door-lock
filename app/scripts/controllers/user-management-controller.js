@@ -8,8 +8,10 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
     $scope.doorUsers = doorsUsers(doorId, 'array');
     var usersData = users('array');
 
-    var editUserId = $stateParams.userId;
-    $scope.editUser = users('object')[editUserId];
+    var editDoorUserId = $stateParams.doorUserId;
+    $scope.editUser = doorsUsers(doorId, 'object')[editDoorUserId];
+    console.log($scope.editUser);
+
 
     // Search user ready to add
     $scope.searchUserForAdd = function(req) {
@@ -103,6 +105,49 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
     // Add User
     var addNewUser = function(userId) {
         $state.go('mainMenu.doors.doorInfo.userManagement.editUser', {userId: userId});
+    };
+
+    // Delete User (remove out of doorsUsers)
+    $scope.confirmDeleteUser = function(doorUserId) {
+
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure to delete "' + $scope.editUser.user.employeeNumber + '" out of '+ $scope.doorName +' ?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Delete</span>' +
+                    '</div>',
+                    type: 'button-outline button-assertive',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                console.log('delete: ', doorUserId);
+            } else {
+                console.log('cancel');
+            }
+        });
     };
 
 
