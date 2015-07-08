@@ -189,7 +189,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                     },
                                     {
                                         name: 'editUser',
-                                        url: '/edit-user/:userId',
+                                        url: '/edit-user/:doorUserId',
                                         views: {
                                             'menuContent@mainMenu': {
                                                 controller: 'UserManagementController',
