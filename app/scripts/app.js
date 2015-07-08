@@ -195,7 +195,19 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                                 controller: 'UserManagementController',
                                                 templateUrl: '../templates/edit-user.html'
                                             }
-                                        }
+                                        },
+                                        children: [
+                                            {
+                                                name: 'userAccessTime',
+                                                url: '/user-access-time/:doorUserId',
+                                                views: {
+                                                    'menuContent@mainMenu': {
+                                                        controller: 'UserAccessTimeController',
+                                                        templateUrl: '../templates/user-access-time.html'
+                                                    }
+                                                }
+                                            }
+                                        ]
                                     }
                                 ]
                             },
