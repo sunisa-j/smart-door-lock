@@ -49,10 +49,11 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
         accessRoleArr[0] = []; // Store My Calendars
         accessRoleArr[1] = []; // Store Other Calendars
 
+        var userCalendarsNotSelected = angular.copy(usersCalendars);
+
         // Passcode Policies -------------------------------------------------------------------------------------------
         if(policiesType == 'passcodePolicies') {
 
-            var userCalendarsNotSelected = angular.copy(usersCalendars);
             var passcodePoliciesData = angular.copy(passcodePolicies(passcodeId, 'object', ''));
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
@@ -74,7 +75,6 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
         // Auto Release Policies ---------------------------------------------------------------------------------------
         if(policiesType == 'autoReleasePolicies') {
 
-            var userCalendarsNotSelected = angular.copy(usersCalendars);
             var autoReleasePoliciesData = autoReleasePolicies(doorId, 'object')
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
@@ -95,7 +95,6 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
         // User Access Policies ----------------------------------------------------------------------------------------
         if(policiesType == 'userAccessPolicies') {
 
-            var userCalendarsNotSelected = angular.copy(usersCalendars);
             var userAccessPoliciesData = userAccessPolicies(doorUserId, 'object')
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
