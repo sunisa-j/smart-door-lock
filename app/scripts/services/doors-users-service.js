@@ -63,8 +63,9 @@ window.app.factory('doorsUsers', function (users) {
         var doorUsersObj = {};
         var doorUsersArr = [];
 
-        angular.forEach(doorsUsers, function(value){
-            if(value.door == doorId) {
+        if(doorId == '') {
+            angular.forEach(doorsUsers, function(value){
+
                 doorUsersObj[value.id] = {};
                 doorUsersObj[value.id].id = value.id;
                 doorUsersObj[value.id].door = value.door;
@@ -96,8 +97,45 @@ window.app.factory('doorsUsers', function (users) {
                     lastName: usersData[value.user].lastName
                 };
                 doorUsersArr.push(objTemp);
-            }
-        });
+
+            });
+        }else {
+            angular.forEach(doorsUsers, function (value) {
+                if (value.door == doorId) {
+                    doorUsersObj[value.id] = {};
+                    doorUsersObj[value.id].id = value.id;
+                    doorUsersObj[value.id].door = value.door;
+                    doorUsersObj[value.id].user = {
+                        id: value.user,
+                        employeeNumber: usersData[value.user].employeeNumber,
+                        firstName: usersData[value.user].firstName,
+                        lastName: usersData[value.user].lastName
+                    };
+                    doorUsersObj[value.id].permission = {
+                        viewLog: value.permission.viewLog,
+                        viewStatus: value.permission.viewStatus,
+                        remoteAccess: value.permission.remoteAccess,
+                        configuration: value.permission.configuration,
+                        policies: value.permission.policies,
+                        grant: value.permission.grant
+                    };
+                    doorUsersObj[value.id].createdBy = value.createdBy;
+                    doorUsersObj[value.id].createdAt = value.createdAt;
+                    doorUsersObj[value.id].updatedBy = value.updatedBy;
+                    doorUsersObj[value.id].updatedAt = value.updatedAt;
+
+                    // push in doorsUserArr
+                    var objTemp = angular.copy(value);
+                    objTemp.user = {
+                        id: value.user,
+                        employeeNumber: usersData[value.user].employeeNumber,
+                        firstName: usersData[value.user].firstName,
+                        lastName: usersData[value.user].lastName
+                    };
+                    doorUsersArr.push(objTemp);
+                }
+            });
+        }
 
         if(data == 'object') {
             return doorUsersObj;
