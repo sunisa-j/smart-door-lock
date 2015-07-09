@@ -1,0 +1,182 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-dark dark-bg"><h1 class="title">Create Event</h1></ion-header-bar>
+
+    <ion-content class="custom-ion-content-bg">
+
+        <!--Title-->
+        <div class="list">
+            <label class="item item-input small-item-input">
+                <span>Title</span>
+                <input type="text" ng-model="createEventData.name">
+            </label>
+        </div>
+        <!--Description-->
+        <div class="list" style="padding-bottom: 15px">
+            <label class="item item-input small-item-input">
+                <span>Description</span>
+                <input type="text" ng-model="createEventData.description">
+            </label>
+        </div>
+
+
+        <div class="item item-divider edit-button-item-divider">Date & Time</div>
+        <!--Start Date-->
+        <div class="list">
+            <label class="item item-input small-item-input">
+                <span>Start Date</span>
+                <input type="date" ng-model="createEventData.startDate">
+            </label>
+        </div>
+        <!--Start Time-->
+        <div class="list flex">
+            <label class="item item-input small-item-input flex-1">
+                <span>Start Time</span>
+                <input type="time" ng-model="createEventData.startTime">
+            </label>
+            <label class="item item-input small-item-input flex-1">
+                <span>Start Time</span>
+                <input type="time" ng-model="createEventData.endTime">
+            </label>
+        </div>
+        <!--End Time-->
+        <div class="list">
+            <label class="item item-toggle small-item-toggle">
+                Repeat
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="createEventData.repeat.status">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </label>
+        </div>
+        <!--Repeat-->
+        <div class="list" ng-show="createEventData.repeat.status">
+            <label class="item item-input small-item-input sub-item-input">
+                <span>Repeat</span>
+                <span class="event-select-padding">
+                    <select class="custom-row-font-size" ng-model="createEventData.repeat.recurring">
+                        <option value="daily" ng-selected="createEventData.repeat.recurring=='daily'">Daily</option>
+                        <option value="weekly" ng-selected="createEventData.repeat.recurring=='weekly'">Weekly</option>
+                        <option value="monthly" ng-selected="createEventData.repeat.recurring=='monthly'">Monthly</option>
+                        <option value="yearly" ng-selected="createEventData.repeat.recurring=='yearly'">Yearly</option>
+                    </select>
+                </span>
+            </label>
+        </div>
+
+        <!--Daily-->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='daily')">
+            <div class="list">
+                <label class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.daily.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.daily.every==1)? 'day':'days'}}</div>
+                    </span>
+                </label>
+            </div>
+            <!--Never-->
+            <div class="list">
+                <label class="item item-input small-item-input sub-item-input">
+                    <span>End Repeat</span>
+
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="never" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='never'"
+                                    ng-click="notSelectNever.value=true"
+                                    ng-class="{'fade-in':notSelectNever.value==false, 'opacity-0':notSelectNever.value==true,'fade-out':notSelectNever.value==true, 'opacity-1':notSelectNever.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='never'"
+                                    ng-click="createEventData.repeat.endRepeat.value='never';notSelectNever.value=false"
+                                    ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1">Never</div>
+                    </span>
+
+                </label>
+            </div>
+            <!--After-->
+            <div class="list">
+                <label class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span>
+
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="after" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='after'"
+                                    ng-click="notSelectAfter.value=true"
+                                    ng-class="{'fade-in':notSelectAfter.value==false, 'opacity-0':notSelectAfter.value==true,'fade-out':notSelectAfter.value==true, 'opacity-1':notSelectAfter.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='after'"
+                                    ng-click="createEventData.repeat.endRepeat.value='after';notSelectAfter.value=false"
+                                    ng-class="{'fade-in':notSelectAfter.value==true, 'opacity-0':notSelectAfter.value==false,'fade-out':notSelectAfter.value==false, 'opacity-1':notSelectAfter.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1 flex align-items-center">
+                            <div style="padding-right: 56px;">After</div>
+                            <div>
+                                <input type="number" ng-model="createEventData.repeat.endRepeat.after" class="sub-item-text-input">
+                            </div>
+                            <div class="sub-item-unit">{{(createEventData.repeat.endRepeat.after<=1)? 'time':'times'}}</div>
+                        </div>
+                    </span>
+
+                </label>
+            </div>
+            <!--On Date-->
+            <div class="list">
+                <label class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span>
+
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="date" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='date'"
+                                    ng-click="notSelectOnDate.value=true"
+                                    ng-class="{'fade-in':notSelectOnDate.value==false, 'opacity-0':notSelectOnDate.value==true,'fade-out':notSelectOnDate.value==true, 'opacity-1':notSelectOnDate.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='date'"
+                                    ng-click="createEventData.repeat.endRepeat.value='date';notSelectOnDate.value=false"
+                                    ng-class="{'fade-in':notSelectOnDate.value==true, 'opacity-0':notSelectOnDate.value==false,'fade-out':notSelectOnDate.value==false, 'opacity-1':notSelectOnDate.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1 flex align-items-center">
+                            <div style="padding-right: 80px;">On Date</div>
+                            <div>
+                                <label><input type="date" ng-model="createEventData.repeat.endRepeat.onDate" style="width: 120px; height: 30px; border: solid 1px #e5e5e5; text-align: right"></label>
+                            </div>
+                        </div>
+                    </span>
+
+                </label>
+            </div>
+            <div class="list">
+                <label class="item item-input small-item-input sub-item-input sub-input-summary" style="border: 0; background: transparent">
+                    <span>Summary</span>
+                    <span style="padding-left: 20px">Every 1 Day</span>
+                </label>
+            </div>
+        </div>
+
+        <!--Cancel & Done Button-->
+        <div class="button-bar" style="margin-top: 15px">
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="createEventModal.hide()">Cancel</button>
+            </div>
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline">Done</button>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
