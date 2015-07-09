@@ -169,6 +169,15 @@ input[disabled] {
 .checkbox-row-bg {
   background-color: #FDFDFD;
 }
+.custom-bar-footer {
+  @extend .align-items-center;
+  height: 30px;
+  background-color: $custom_ion_content_bg;
+  color: $font_icon_color;
+  border-top: solid 1px $border_color;
+  font-size: 15px;
+  padding-right: 15px;
+}
 // Modal Popup ActionSheet ******************************
 .modal .bar-header {
   background-color: $custom_ion_content_bg;
@@ -1092,6 +1101,36 @@ ion-modal-view .item {
 // Calendars & event list ******************************
 .calendar-list-title {
   color: $stable;
+}
+.calendar-item-divider-col {
+  @extend .flex, .align-items-center;
+  flex-basis: 140px;
+  -webkit-flex-basis: 140px;
+  -moz-flex-basis: 140px;
+  height: 30px;
+  margin-right: -1px;
+}
+.calendar-icon-col {
+  flex-basis: 40px;
+  -webkit-flex-basis: 40px;
+  -moz-flex-basis: 40px;
+  text-align: center;
+}
+.calendar-icon-col .button {
+  font-size: 35px;
+  height: 100%;
+  padding: 14px 14px 10px 14px;
+}
+.calendar-month-col {
+  flex-basis: 100px;
+  -webkit-flex-basis: 100px;
+  -moz-flex-basis: 100px;
+}
+.calendar-today-col {
+  flex-basis: 60px;
+  -webkit-flex-basis: 60px;
+  -moz-flex-basis: 60px;
+  text-align: center;
 }
 // Log style *******************************************
 .log-container {
