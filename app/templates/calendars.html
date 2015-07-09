@@ -1,0 +1,35 @@
+<ion-view title="Calendars">
+
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div ng-repeat="group in calendarsData" ng-hide="group.length==0">
+
+            <div class="item item-divider">
+                <span ng-show="$index==0"><span ng-show="group[0].length==1">My Calendar</span>My Calendars</span>
+                <span ng-show="$index==1"><span ng-show="group[1].length==1">Other Calendar</span>Other Calendars</span>
+            </div>
+
+            <div class="custom-row" ng-repeat="calendarData in group" ui-sref="mainMenu.calendars.calendar({calendarId: calendarData.calendar.$id})">
+                <div class="custom-row-icon">
+                    <i class="ion-ios-calendar-outline"></i>
+                </div>
+                <div class="custom-row-title">
+                    <div>{{calendarData.calendar.name}}</div>
+                </div>
+                <div class="custom-row-arrow">
+                    <i class="ion-ios-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+
+    </ion-content>
+</ion-view>
