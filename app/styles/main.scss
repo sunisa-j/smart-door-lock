@@ -159,6 +159,9 @@ input[disabled] {
 .assertive-bg {
   background-color: $assertive !important;
 }
+.dark-bg {
+  background: $dark !important;
+}
 .item-bg-color-on-grey-bg { background-color: #EFEFEF; }
 .card-void-status-bg {
   background-color: #F5F5F5;
@@ -261,10 +264,15 @@ input[disabled] {
 // item, item-divider ***********************************
 ion-modal-view .item {
   color: $dark_font_color;
-  margin-top: -1px;
-  margin-bottom: 0;
-  margin-left: 0;
-  margin-right: 0;
+  margin: -1px;
+//  margin-top: -1px;
+//  margin-bottom: 0;
+//  margin-left: 0;
+//  margin-right: 0;
+}
+ion-modal-view .item-input {
+  color: $dark_font_color;
+  margin: -1px;
 }
 .item {
   color: $dark_font_color;
@@ -272,6 +280,13 @@ ion-modal-view .item {
 }
 .item-input > span {
   width: 150px;
+  color: $item_divider_font_color;
+}
+.small-item-input {
+  height: 48px;
+}
+.small-item-input > span {
+  width: 84px;
   color: $item_divider_font_color;
 }
 .item-divider {
