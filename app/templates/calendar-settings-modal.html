@@ -1,0 +1,47 @@
+<ion-modal-view>
+    <ion-header-bar class="bar bar-dark dark-bg"><h1 class="title">Calendar Settings</h1></ion-header-bar>
+
+    <ion-content class="custom-ion-content-bg">
+
+        <div class="item item-divider edit-button-item-divider" style="margin-top: 5px">
+            <div ng-class="{'fade-in':enableEditCalendar.value==false, 'opacity-0':enableEditCalendar.value==true,'fade-out':enableEditCalendar.value==true, 'opacity-1':enableEditCalendar.value==false}">
+                <button class="button button-clear button-small link-btn-color"
+                        ng-click="enableEditCalendar.value=true; calendarReadOnly.value=false"
+                        ng-hide="enableEditCalendar.value">Edit</button>
+            </div>
+            <div ng-class="{'fade-in':enableEditCalendar.value==true, 'opacity-0':enableEditCalendar.value==false,'fade-out':enableEditCalendar.value==false, 'opacity-1':enableEditCalendar.value==true}">
+                <button class="button button-clear button-small button-stable"
+                        ng-click="enableEditCalendar.value=false; calendarReadOnly.value=true"
+                        ng-show="enableEditCalendar.value">Cancel</button>
+                <button class="button button-clear button-small button-balanced"
+                        ng-click="enableEditCalendar.value=false; calendarReadOnly.value=true"
+                        ng-show="enableEditCalendar.value">Save</button>
+            </div>
+        </div>
+
+        <div class="list">
+            <label class="item item-input">
+                <span>Name</span>
+                <input type="text" ng-model="calendarData.name" ng-disabled="calendarReadOnly.value">
+            </label>
+        </div>
+        <div class="list" style="padding-bottom: 30px">
+            <label class="item item-input">
+                <span>Description</span>
+                <input type="text" ng-model="calendarData.description" ng-disabled="calendarReadOnly.value">
+            </label>
+        </div>
+
+        <!--Close & Delete Button-->
+        <div class="button-bar" style="margin-top: -10px">
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="calendarSettingsModal.hide()">Close</button>
+            </div>
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline" ng-click="deleteCalendar()">Delete Calendar</button>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
