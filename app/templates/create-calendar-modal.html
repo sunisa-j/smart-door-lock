@@ -1,0 +1,31 @@
+<ion-modal-view>
+    <ion-header-bar><h1 class="title">Create Calendar</h1></ion-header-bar>
+
+    <ion-content>
+
+        <div class="list">
+            <label class="item item-input">
+                <span>Name</span>
+                <input type="text" ng-model="createData.name">
+            </label>
+        </div>
+        <div class="list" style="padding-bottom: 5px">
+            <label class="item item-input">
+                <span>Description</span>
+                <input type="text" ng-model="createData.description">
+            </label>
+        </div>
+
+        <!--Cancel & Create Button-->
+        <div class="button-bar">
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="cancelCreateCalendar()">Cancel</button>
+            </div>
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-plus-outline" ng-click="createCalendar()">Create</button>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
