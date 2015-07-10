@@ -13,12 +13,21 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         endTime: new Date(),
         repeat: {
             status: false,
-            recurring: 'daily',
+            recurring: 'weekly',
             daily: {
                 every: 1
             },
             weekly: {
-                every: 1
+                every: 1,
+                days: {
+                    monday: false,
+                    tuesday: false,
+                    wednesday: false,
+                    thursday: true,
+                    friday: true,
+                    saturday: false,
+                    sunday: false
+                }
             },
             monthly: {
                 every: 1
@@ -32,6 +41,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 onDate: null
             }
         }
+    };
+
+    $scope.toggleDaySelect = function (day){
+        $scope.createEventData.repeat.weekly.days[day] = !$scope.createEventData.repeat.weekly.days[day];
     };
 
     // Calenar Settings
