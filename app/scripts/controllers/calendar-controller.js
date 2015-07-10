@@ -37,8 +37,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             },
             endRepeat: {
                 value: 'never',
-                after: null,
-                onDate: null
+                after: 1,
+                onDate: new Date()
             }
         }
     };
