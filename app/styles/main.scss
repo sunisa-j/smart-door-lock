@@ -132,6 +132,9 @@ input[disabled] {
   color: $item_divider_font_color;
 }
 // Background Class *************************************
+.light-stable-bg {
+  background-color: $custom_ion_content_bg !important;
+}
 .dark-font-color {
   color: $dark_font_color;
 }
@@ -285,7 +288,7 @@ ion-modal-view .item-input {
   height: 50px;
 }
 .item-input > span {
-  width: 150px;
+  width: 124px;
   color: $item_divider_font_color;
 }
 .small-item-input {
@@ -1175,8 +1178,14 @@ ion-modal-view .item-input {
   border: solid 1px $light_border_color !important;
   text-align: right !important;
 }
+.sub-item-date-input {
+  width: 120px !important;
+  height: 30px !important;
+  border: solid 1px $light_border_color !important;
+  text-align: right !important;
+}
 .sub-item-unit {
-  padding-left: 90px;
+  margin-left: 90px;
   color: $dark_font_color;
 }
 .del-border-sub-item {
@@ -1209,6 +1218,16 @@ ion-modal-view .item-input {
   position: absolute;
   top: -23px;
   left: 0;
+}
+.custom-event-button-bar {
+  height: 30px;
+}
+.custom-event-button-bar .button {
+  background: #F5F5F5;
+  padding: 0;
+  min-height: 30px;
+  min-width: 34px;
+  line-height: 30px;
 }
 // Log style *******************************************
 .log-container {
