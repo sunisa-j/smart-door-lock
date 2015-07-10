@@ -1228,6 +1228,17 @@ ion-modal-view .item-input {
   width: 40px;
   position: relative
 }
+.custom-circle-radio-first-col {
+  margin-left: -8px;
+  flex-basis: 30px;
+  -webkit-flex-basis: 30px;
+  -moz-flex-basis: 30px;
+  width: 30px;
+  position: relative
+}
+.custom-circle-text-first-col {
+  margin-left: 12px;
+}
 .custom-circle-radio-button {
   font-size: 32px;
   position: absolute;
