@@ -84,7 +84,9 @@ a {
 }
 select.custom-row-font-size {
   font-size: $custom_row_font_size !important;
-  padding-right: 0;
+  border: solid 1px $border_color;
+  height: 30px;
+  width: 80px;
 }
 .medium-font-size {
   font-size: $medium_font_size !important;
@@ -295,6 +297,16 @@ ion-modal-view .item-input {
   height: 44px !important;
 }
 .small-item-input > span {
+  width: 82px;
+  min-width: 82px;
+  color: $item_divider_font_color;
+  line-height: 15px;
+}
+.month-item-input {
+  @extend .align-items-flex-start;
+  height: 168px !important;
+}
+.month-item-input > span {
   width: 82px;
   min-width: 82px;
   color: $item_divider_font_color;
@@ -1202,6 +1214,9 @@ ion-modal-view .item-input {
 }
 .sub-input-padding {
   padding-left: 17px !important;
+}
+.sub-input-padding .button-bar .button {
+  border-radius: 0 !important;
 }
 .sub-input-summary {
   margin-bottom: -15px !important;
