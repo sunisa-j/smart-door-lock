@@ -53,13 +53,15 @@
         <div class="list" ng-show="createEventData.repeat.status">
             <div class="item item-input small-item-input sub-item-input">
                 <span>Repeat</span>
-                <span class="event-select-padding">
-                    <select class="custom-row-font-size" ng-model="createEventData.repeat.recurring">
-                        <option value="daily" ng-selected="createEventData.repeat.recurring=='daily'">Daily</option>
-                        <option value="weekly" ng-selected="createEventData.repeat.recurring=='weekly'">Weekly</option>
-                        <option value="monthly" ng-selected="createEventData.repeat.recurring=='monthly'">Monthly</option>
-                        <option value="yearly" ng-selected="createEventData.repeat.recurring=='yearly'">Yearly</option>
-                    </select>
+                <span class="flex align-items-center sub-input-padding">
+                    <div>
+                        <select class="custom-row-font-size" ng-model="createEventData.repeat.recurring" style="width: 150px">
+                            <option value="daily" ng-selected="createEventData.repeat.recurring=='daily'">Daily</option>
+                            <option value="weekly" ng-selected="createEventData.repeat.recurring=='weekly'">Weekly</option>
+                            <option value="monthly" ng-selected="createEventData.repeat.recurring=='monthly'">Monthly</option>
+                            <option value="yearly" ng-selected="createEventData.repeat.recurring=='yearly'">Yearly</option>
+                        </select>
+                    </div>
                 </span>
             </div>
         </div>
@@ -81,14 +83,14 @@
         <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='weekly')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>Every {{createEventData.repeat.weekly.every}}</span>
+                    <span>Every</span>
                     <span class="flex align-items-center sub-input-padding">
                         <div><input type="number" ng-model="createEventData.repeat.weekly.every" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(createEventData.repeat.weekly.every==1)? 'week':'weeks'}} on:</div>
                     </span>
                 </div>
             </div>
-            <div class="list">
+            <div class="list" style="margin-top: -4px">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>&nbsp;</span>
                     <span class="sub-input-padding" style="margin-left: -5px">
@@ -101,6 +103,99 @@
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.saturday}" ng-click="toggleDaySelect('saturday')">Sa</button>
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.sunday}" ng-click="toggleDaySelect('sunday')">S</button>
                         </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Monthly---------------------------------->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='monthly')">
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.monthly.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.monthly.every==1)? 'month':'months'}}</div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input month-item-input sub-item-input del-border-sub-item">
+                    <span>Each</span>
+                    <span class="sub-input-padding" style="margin-left: -5px; margin-top: -8px">
+                        <div class="button-bar custom-event-button-bar">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[0]}" ng-click="toggleMonthSelect(0)">1</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[1]}" ng-click="toggleMonthSelect(1)">2</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[2]}" ng-click="toggleMonthSelect(2)">3</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[3]}" ng-click="toggleMonthSelect(3)">4</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[4]}" ng-click="toggleMonthSelect(4)">5</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[5]}" ng-click="toggleMonthSelect(5)">6</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[6]}" ng-click="toggleMonthSelect(6)">7</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[7]}" ng-click="toggleMonthSelect(7)">8</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[8]}" ng-click="toggleMonthSelect(8)">9</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[9]}" ng-click="toggleMonthSelect(9)">10</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[10]}" ng-click="toggleMonthSelect(10)">11</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[11]}" ng-click="toggleMonthSelect(11)">12</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[12]}" ng-click="toggleMonthSelect(12)">13</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[13]}" ng-click="toggleMonthSelect(13)">14</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[14]}" ng-click="toggleMonthSelect(14)">15</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[15]}" ng-click="toggleMonthSelect(15)">16</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[16]}" ng-click="toggleMonthSelect(16)">17</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[17]}" ng-click="toggleMonthSelect(17)">18</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[18]}" ng-click="toggleMonthSelect(18)">19</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[19]}" ng-click="toggleMonthSelect(19)">20</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[20]}" ng-click="toggleMonthSelect(20)">21</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[21]}" ng-click="toggleMonthSelect(21)">22</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[22]}" ng-click="toggleMonthSelect(22)">23</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[23]}" ng-click="toggleMonthSelect(23)">24</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[24]}" ng-click="toggleMonthSelect(24)">25</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[25]}" ng-click="toggleMonthSelect(25)">26</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[26]}" ng-click="toggleMonthSelect(26)">27</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[27]}" ng-click="toggleMonthSelect(27)">28</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[28]}" ng-click="toggleMonthSelect(28)">29</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[29]}" ng-click="toggleMonthSelect(29)">30</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[30]}" ng-click="toggleMonthSelect(30)">31</button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>On the</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div>
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.sequent">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='first'">first</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='second'">second</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='third'">third</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fouth'">fouth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fifth'">fifth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='last'">last</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 94px">
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" style="width: 110px">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='day'">day</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekday'">weekday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekend'">weekend</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='monday'">Monday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='tuesday'">Tuesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='wednesday'">Wednesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='thursday'">Thursday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='friday'">Friday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='saturday'">Saturday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='sunday'">Sunday</option>
+                            </select>
+                        </div>
+                        <!--<div class="sub-item-unit">{{(createEventData.repeat.monthly.every==1)? 'month':'months'}} on:</div>-->
                     </span>
                 </div>
             </div>
