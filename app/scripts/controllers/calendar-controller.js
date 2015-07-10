@@ -13,7 +13,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         endTime: new Date(),
         repeat: {
             status: false,
-            recurring: 'weekly',
+            recurring: 'monthly',
             daily: {
                 every: 1
             },
@@ -30,21 +30,36 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             },
             monthly: {
-                every: 1
+                every: 1,
+                months: [
+                    false,false,false,false,false,false,false,
+                    false,false,true,false,false,false,false,
+                    false,false,false,false,false,true,false,
+                    false,false,false,false,false,false,false,
+                    false,false,false
+                ]
             },
             yearly: {
-                every: 1
+                every: 1,
+                years: [false,false,false,false,false,false,true,false,false,false,false,false]
             },
             endRepeat: {
                 value: 'never',
                 after: 1,
                 onDate: new Date()
+            },
+            onThe : {
+                sequent: 'first',
+                day: 'day'
             }
         }
     };
 
     $scope.toggleDaySelect = function (day){
         $scope.createEventData.repeat.weekly.days[day] = !$scope.createEventData.repeat.weekly.days[day];
+    };
+    $scope.toggleMonthSelect = function (month){
+        $scope.createEventData.repeat.monthly.months[month] = !$scope.createEventData.repeat.monthly.months[month];
     };
 
     // Calenar Settings
