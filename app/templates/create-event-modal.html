@@ -81,9 +81,9 @@
         <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='weekly')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>Every</span>
+                    <span>Every {{createEventData.repeat.weekly.every}}</span>
                     <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="createEventData.repeat.daily.every" class="sub-item-text-input"></div>
+                        <div><input type="number" ng-model="createEventData.repeat.weekly.every" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(createEventData.repeat.weekly.every==1)? 'week':'weeks'}} on:</div>
                     </span>
                 </div>
