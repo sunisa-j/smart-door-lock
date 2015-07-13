@@ -1,7 +1,14 @@
 'use strict';
 
-window.app.factory('doorsAccess', function () {
+window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
 
+    // Get doorGroups
+    var doorGroupsData = doorGroups;
+
+    // Get doorsUsers
+    //var doorsUsersData = doorsUsers('','array');
+
+    // Get doors ----------------------------------------------------
     var doors = [
         {
             id: 'door1',
@@ -166,6 +173,7 @@ window.app.factory('doorsAccess', function () {
         }
     ];
 
+    // transform doors array to object
     var doorsObj = {};
     angular.forEach(doors, function(value){
         doorsObj[value.id] = {};
@@ -191,238 +199,97 @@ window.app.factory('doorsAccess', function () {
         doorsObj[value.id].updatedAt = value.updatedAt;
     });
 
-    var doorsAccess = {
-        'group1': {
-            name: 'Classroom',
-            desc: 'Computer Engineering, PSU',
-            doorsAccess: {
-                'door1': {
-                    name: 'R101',
-                    desc: '1st floor',
-                    status: {
-                        door: 'closed',
-                        lock: 'unlocked'
-                    },
-                    expire: new Date('30 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: true,
-                        viewStatus: true,
-                        remoteControl: true,
-                        configuration: true,
-                        manageAccess: true,
-                        adminPrivillage: true
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                },
-                'door2': {
-                    name: 'R200',
-                    desc: '2nd floor',
-                    status: {
-                        door: 'closed',
-                        lock: 'locked'
-                    },
-                    expire: new Date('19 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: true,
-                        viewStatus: true,
-                        remoteControl: true,
-                        configuration: true,
-                        manageAccess: true,
-                        adminPrivillage: true
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                },
-                'door3': {
-                    name: 'R201',
-                    desc: '2nd floor',
-                    status: {
-                        door: 'opened',
-                        lock: 'locked'
-                    },
-                    expire: new Date('12 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: false,
-                        viewStatus: true,
-                        remoteControl: false,
-                        configuration: false,
-                        manageAccess: false,
-                        adminPrivillage: false
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                },
-                'door4': {
-                    name: 'R300',
-                    desc: '3rd floor',
-                    status: {
-                        door: 'opened',
-                        lock: 'unlocked'
-                    },
-                    expire: new Date('10 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: false,
-                        viewStatus: false,
-                        remoteControl: false,
-                        configuration: false,
-                        manageAccess: false,
-                        adminPrivillage: false
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                }
-            }
-        },
-        'group2': {
-            name: 'Laboratory',
-            desc: 'Computer Engineering, PSU',
-            doorsAccess: {
-                'door5': {
-                    name: 'WSN',
-                    desc: '3rd floor',
-                    status: {
-                        door: 'closed',
-                        lock: 'unlocked'
-                    },
-                    expire: new Date('22 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: false,
-                        viewStatus: true,
-                        remoteControl: false,
-                        configuration: false,
-                        manageAccess: false,
-                        adminPrivillage: false
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                },
-                'door6': {
-                    name: 'CNR',
-                    desc: '3rd floor',
-                    status: {
-                        door: 'closed',
-                        lock: 'locked'
-                    },
-                    expire: new Date('27 Dec 2015'),
-                    permission: {
-                        unlock: true,
-                        viewLog: false,
-                        viewStatus: true,
-                        remoteControl: false,
-                        configuration: false,
-                        manageAccess: false,
-                        adminPrivillage: false
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                },
-                'door7': {
-                    name: 'Robotic',
-                    desc: '4th floor',
-                    status: {
-                        door: 'opened',
-                        lock: 'unlocked'
-                    },
-                    expire: new Date('20 Dec 2014'),
-                    permission: {
-                        unlock: true,
-                        viewLog: false,
-                        viewStatus: true,
-                        remoteControl: false,
-                        configuration: false,
-                        manageAccess: false,
-                        adminPrivillage: false
-                    },
-                    configDoor: {
-                        autoRelock: {
-                            status: false
-                        },
-                        pinRequired: {
-                            status: false
-                        }
-                    }
-                }
-            }
-        }
-    };
+    return function(userId, data){
 
-    // convert object to array
-    var doorsAccessArr = [];
-    var numberOfGroups = 0;
-    var numberOfDoors = 0;
+        // doors object (group by doorGroups) ---------------------------
+        var doorsAccess2 = {};
 
-    angular.forEach(doorsAccess, function(value, key){
-        var group = angular.copy(value);
-        var doorsInGroup = group.doorsAccess;
-        group.$id = key;
+        angular.forEach(doorGroupsData, function(group){
+            doorsAccess2[group.id] = {};
+            doorsAccess2[group.id].name = group.name;
+            doorsAccess2[group.id].description = group.description;
+            doorsAccess2[group.id].doorsAccess = {};
 
-        group.doorsAccess = [];
-        var doorsEachGroup = 0;
+            angular.forEach(doors, function(door){
+                var doorsUsersData = doorsUsers(door.id, 'object');
 
-        angular.forEach(doorsInGroup, function(door, key){
-            var tmp = angular.copy(door);
-            tmp.$id = key;
-            group.doorsAccess.push(tmp);
+                angular.forEach(doorsUsersData, function (doorUser, doorUserKey){
 
-            doorsEachGroup++;
+                    if((group.id == door.group) && (doorUser.user.id == userId)){
+
+                        doorsAccess2[group.id].doorsAccess[door.id] = {};
+                        doorsAccess2[group.id].doorsAccess[door.id].name = door.name;
+                        doorsAccess2[group.id].doorsAccess[door.id].description = door.description;
+                        doorsAccess2[group.id].doorsAccess[door.id].status = {
+                            lockState: door.status.lockState,
+                            doorState: door.status.doorState
+                        };
+                        doorsAccess2[group.id].doorsAccess[door.id].setting = {
+                            lockType: door.setting.lockType,
+                            pinRequired: door.setting.pinRequired,
+                            autoRelock: door.setting.autoRelock,
+                            autoRelockTime: door.setting.autoRelockTime,
+                            operatingMode: door.setting.operatingMode,
+                            wrongCodeEntryLimit: door.setting.wrongCodeEntryLimit,
+                            userCodeTemporaryDisableTime: door.setting.userCodeTemporaryDisableTime
+                        };
+                        doorsAccess2[group.id].doorsAccess[door.id].permission = {
+                            doorUserId: doorUserKey,
+                            user: doorUser.user.id,
+                            viewLog: doorUser.permission.viewLog,
+                            viewStatus: doorUser.permission.viewStatus,
+                            remoteAccess: doorUser.permission.remoteAccess,
+                            configuration: doorUser.permission.configuration,
+                            policies: doorUser.permission.policies,
+                            grant: doorUser.permission.grant
+                        };
+                        doorsAccess2[group.id].doorsAccess[door.id].deviceUpdatedAt = door.deviceUpdatedAt;
+                        doorsAccess2[group.id].doorsAccess[door.id].createdAt = door.createdAt;
+                        doorsAccess2[group.id].doorsAccess[door.id].updatedAt = door.updatedAt;
+                    }
+                });
+            });
         });
-        group.numberOfDoors = doorsEachGroup;
-        numberOfGroups++;
 
-        numberOfDoors = numberOfDoors + doorsEachGroup;
+        // convert doorsAccess2 to array
+        var doorsAccess2Arr = [];
+        var numberOfGroups = 0;
+        var numberOfDoors = 0;
 
-        doorsAccessArr.push(group);
-    });
-    doorsAccessArr.numberOfGroups = numberOfGroups;
+        angular.forEach(doorsAccess2, function(value, key){
+            var group = angular.copy(value);
+            var doorsInGroup = group.doorsAccess;
+            group.id = key;
 
-    return function(data){
+            group.doorsAccess = [];
+            var doorsEachGroup = 0;
+
+            angular.forEach(doorsInGroup, function(door, key){
+                var tmp = angular.copy(door);
+                tmp.id = key;
+                group.doorsAccess.push(tmp);
+
+                doorsEachGroup++;
+            });
+            group.numberOfDoors = doorsEachGroup;
+            numberOfGroups++;
+
+            group.doorsEachGroup = doorsEachGroup;
+            numberOfDoors = numberOfDoors + doorsEachGroup;
+
+            doorsAccess2Arr.push(group);
+        });
+        doorsAccess2Arr.numberOfGroups = numberOfGroups;
+        doorsAccess2Arr.numberOfDoors = numberOfDoors;
+
+
         if(data === 'object'){
-            return doorsAccess;
-        }else if (data === 'array') {
-            return doorsAccessArr;
-        }else if (data === 'count') {
+            return doorsAccess2;
+        }
+        else if (data === 'array') {
+            return doorsAccess2Arr;
+        }
+        else if (data === 'count') {
             return numberOfDoors;
         }else if (data === 'doors') {
             return doorsObj;
