@@ -59,68 +59,68 @@
             <!--</div>-->
         </div>
 
-        <div class="flex dashboard-row">
-            <div class="dashboard-col-padding">
-                <div class="card dashboard-card">
-                    <div class="item card-item-overflow">
-                        <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expiry date</div>
+        <!--<div class="flex dashboard-row">-->
+            <!--<div class="dashboard-col-padding">-->
+                <!--<div class="card dashboard-card">-->
+                    <!--<div class="item card-item-overflow">-->
+                        <!--<div class="dashboard-card-title" style="padding-bottom: 10px;">Doors expiry date</div>-->
 
-                        <div class="dashboard-card-row-content flex pointer" ng-repeat="data in doorsExpireData | orderBy:'expireDate'"
-                             ui-sref="mainMenu.doors.doorInfo({groupId: data.groupId, doorId: data.doorId})">
+                        <!--<div class="dashboard-card-row-content flex pointer" ng-repeat="data in doorsExpireData | orderBy:'expireDate'"-->
+                             <!--ui-sref="mainMenu.doors.doorInfo({groupId: data.groupId, doorId: data.doorId})">-->
 
-                            <span class="dashboard-expire-row1">{{data.doorName}}</span>
-                            <span class="dashboard-expire-row2">
-                                <i class="ion-ios-clock-outline"></i>
-                                {{data.expireDate.getDate()}} {{month[data.expireDate.getMonth()]}} {{data.expireDate.getFullYear()}}
-                            </span>
-                            <span class="dashboard-expire-row3">
-                                <span class="dashboard-expire-number"
-                                      ng-class="{'assertive':(data.getTimeExpireDate<=getTimeDateNow),'balanced':(data.getTimeExpireDate>getTimeDateNow)}">
+                            <!--<span class="dashboard-expire-row1">{{data.doorName}}</span>-->
+                            <!--<span class="dashboard-expire-row2">-->
+                                <!--<i class="ion-ios-clock-outline"></i>-->
+                                <!--{{data.expireDate.getDate()}} {{month[data.expireDate.getMonth()]}} {{data.expireDate.getFullYear()}}-->
+                            <!--</span>-->
+                            <!--<span class="dashboard-expire-row3">-->
+                                <!--<span class="dashboard-expire-number"-->
+                                      <!--ng-class="{'assertive':(data.getTimeExpireDate<=getTimeDateNow),'balanced':(data.getTimeExpireDate>getTimeDateNow)}">-->
 
-                                    <span ng-show="diffValue==0"><i class="ion-ios-clock-outline assertive" style="font-size: 14px"></i></span>
-                                    <span ng-hide="diffValue==0">{{ diffValue = ((data.getTimeExpireDate-getTimeDateNow)/(24*3600*1000) + 1 ).toFixed(0)}}</span>
-                                </span>
-                            </span>
-                            <span class="dashboard-expire-row4">
-                                <span ng-show="diffValue==0" class="assertive">Today</span>
-                                <span ng-show="data.getTimeExpireDate<getTimeDateNow && diffValue!=0">days ago</span>
-                                <span ng-show="data.getTimeExpireDate>getTimeDateNow && diffValue!=0">days later</span>
-                            </span>
+                                    <!--<span ng-show="diffValue==0"><i class="ion-ios-clock-outline assertive" style="font-size: 14px"></i></span>-->
+                                    <!--<span ng-hide="diffValue==0">{{ diffValue = ((data.getTimeExpireDate-getTimeDateNow)/(24*3600*1000) + 1 ).toFixed(0)}}</span>-->
+                                <!--</span>-->
+                            <!--</span>-->
+                            <!--<span class="dashboard-expire-row4">-->
+                                <!--<span ng-show="diffValue==0" class="assertive">Today</span>-->
+                                <!--<span ng-show="data.getTimeExpireDate<getTimeDateNow && diffValue!=0">days ago</span>-->
+                                <!--<span ng-show="data.getTimeExpireDate>getTimeDateNow && diffValue!=0">days later</span>-->
+                            <!--</span>-->
 
-                        </div>
+                        <!--</div>-->
 
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!--If User can access doors in each building, show information all here-->
-        <div class="flex dashboard-row" ng-show="doorsNumber.numberOfBuildings>1">
-            <div class="dashboard-col-padding">
-                <div class="card dashboard-card">
-                    <div class="item card-item-overflow">
-                        <div class="dashboard-card-title" style="padding-bottom: 10px;">Doors
-                            <div class="dashboard-card-desc">I can access in each building</div>
-                        </div>
+        <!--<div class="flex dashboard-row" ng-show="doorsNumber.numberOfBuildings>1">-->
+            <!--<div class="dashboard-col-padding">-->
+                <!--<div class="card dashboard-card">-->
+                    <!--<div class="item card-item-overflow">-->
+                        <!--<div class="dashboard-card-title" style="padding-bottom: 10px;">Doors-->
+                            <!--<div class="dashboard-card-desc">I can access in each building</div>-->
+                        <!--</div>-->
 
-                        <div class="dashboard-card-row-content flex" ng-repeat="data in doorsNumber">
-                            <span class="dashboard-access-doors-row">
-                                {{data.groupName}}
-                            </span>
-                            <span class="dashboard-access-doors-count">
-                                <span class="dashboard-access-doors-number">{{data.doors}}</span>
-                            </span>
-                            <span class="dashboard-access-doors-unit">
-                                <span ng-show="data.doors<=1">door</span>
-                                <span ng-show="data.doors>1">doors</span>
-                            </span>
-                        </div>
+                        <!--<div class="dashboard-card-row-content flex" ng-repeat="data in doorsNumber">-->
+                            <!--<span class="dashboard-access-doors-row">-->
+                                <!--{{data.groupName}}-->
+                            <!--</span>-->
+                            <!--<span class="dashboard-access-doors-count">-->
+                                <!--<span class="dashboard-access-doors-number">{{data.doors}}</span>-->
+                            <!--</span>-->
+                            <!--<span class="dashboard-access-doors-unit">-->
+                                <!--<span ng-show="data.doors<=1">door</span>-->
+                                <!--<span ng-show="data.doors>1">doors</span>-->
+                            <!--</span>-->
+                        <!--</div>-->
 
 
-                    </div>
-                </div>
-            </div>
-        </div>
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
     </ion-content>
 </ion-view>
