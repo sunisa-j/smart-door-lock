@@ -46,7 +46,7 @@ $border_color: #ddd;
 $light_border_color: #E5E5E5;
 $custom_row_base_height: 65px;
 $custom_row_small_height: 48px;
-$doors_custom_row_height: 65px;
+$doors_custom_row_height: $custom_row_base_height;
 $custom_setting_row_height: 50px;
 $tabs_column_height: 50px;
 
@@ -84,7 +84,7 @@ a {
 }
 select.custom-row-font-size {
   font-size: $custom_row_font_size !important;
-  border: solid 1px $border_color;
+  border: solid 0px $border_color;
   height: 30px;
   width: 80px;
 }
@@ -805,9 +805,10 @@ ion-modal-view .item-input {
 .custom-row-del-border-bottom {
   border-bottom: 0;
 }
-.custom-row-del-border-top {
+.custom-setting-row-del-border-top {
   border-top: 0;
   margin-top: 0;
+  height: $custom_setting_row_height;
 }
 .row-border-inset {
   height: 1px;
@@ -1224,6 +1225,9 @@ ion-modal-view .item-input {
 }
 .sub-input-padding {
   padding-left: 17px !important;
+}
+.sub-input-padding select.custom-row-font-size {
+  border: solid 1px $border_color;
 }
 .sub-input-padding .button-bar .button {
   border-radius: 0 !important;
