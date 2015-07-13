@@ -4,8 +4,110 @@ window.app.factory('doorsUsers', function (users) {
 
     var doorsUsers = [
         {
-            id: 'doorUser1',
+            id: 'doorUser11',
             door: 'door1',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser12',
+            door: 'door2',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser13',
+            door: 'door3',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser14',
+            door: 'door4',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser15',
+            door: 'door5',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser16',
+            door: 'door6',
+            user: 1,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 1,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 1,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
+            id: 'doorUser17',
+            door: 'door7',
             user: 1,
             permission: {
                 viewLog: true,
