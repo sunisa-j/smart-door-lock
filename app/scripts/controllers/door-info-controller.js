@@ -6,7 +6,9 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     var doorId = $stateParams.doorId;
     $scope.doorId = doorId;
 
-    var doorsAccessObj = doorsAccess('object');
+    var userId = 1; // Login user id
+
+    var doorsAccessObj = doorsAccess(userId, 'object');
     $scope.groupName = doorsAccessObj[groupId].name;
 
     $scope.doorData = doorsAccessObj[groupId].doorsAccess[doorId];
@@ -27,17 +29,17 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         $scope.statusLoad.value = true;
 
         if(latestLockStatus == 'locked') {
-            $scope.doorData.status.lock = 'unlocked';
+            $scope.doorData.status.lockState = 'unlocked';
             $timeout(function () {
-                if ($scope.doorData.status.lock == 'unlocked') {
+                if ($scope.doorData.status.lockState == 'unlocked') {
                     $scope.statusLoad.value = false;
                 }
             }, 1500);
         }
         else if(latestLockStatus == 'unlocked') {
-            $scope.doorData.status.lock = 'locked';
+            $scope.doorData.status.lockState = 'locked';
             $timeout(function () {
-                if ($scope.doorData.status.lock == 'locked') {
+                if ($scope.doorData.status.lockState == 'locked') {
                     $scope.statusLoad.value = false;
                 }
             }, 1500);
@@ -53,24 +55,24 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
     $scope.pinRequiredChecked = function(){
         $scope.pinRequired.load = true;
-        var valueBeforeChanged = !$scope.doorData.configDoor.pinRequired.status;
+        var valueBeforeChanged = !$scope.doorData.setting.pinRequired;
         // if pinRequired status changed;
-        $scope.doorData.configDoor.pinRequired.status = !(valueBeforeChanged);
+        $scope.doorData.setting.pinRequired = !(valueBeforeChanged);
 
         $timeout( function(){
-            if($scope.doorData.configDoor.pinRequired.status == !(valueBeforeChanged)) {
+            if($scope.doorData.setting.pinRequired == !(valueBeforeChanged)) {
                 $scope.pinRequired.load = false;
             }
         }, 1500);
     };
     $scope.autoRelockChecked = function(){
         $scope.autoRelock.load = true;
-        var valueBeforeChanged = !$scope.doorData.configDoor.autoRelock.status;
+        var valueBeforeChanged = !$scope.doorData.setting.autoRelock;
         // if autoRelock status changed;
-        $scope.doorData.configDoor.autoRelock.status = !(valueBeforeChanged);
+        $scope.doorData.setting.autoRelock = !(valueBeforeChanged);
 
         $timeout( function(){
-            if($scope.doorData.configDoor.autoRelock.status == !(valueBeforeChanged)) {
+            if($scope.doorData.setting.autoRelock == !(valueBeforeChanged)) {
                 $scope.autoRelock.load = false;
             }
         }, 1500);
