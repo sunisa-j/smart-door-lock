@@ -2,28 +2,28 @@
 
     <!--Door Info Content-->
     <ion-content ng-show="doorMenu.name=='doorInfo'">
-        <!--Door Infomation-->
+        <!--Door Information-->
         <div class="item item-divider">Door Information</div>
-        <div class="door-info-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.door=='opened')&&(doorData.status.lock=='locked')}">
+        <div class="door-info-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.doorState=='opened')&&(doorData.status.lockState=='locked')}">
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false">
                 <i class="flaticon-closed42"></i>
             </div>
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==true">
                 <div class="door-status-icon" ng-hide="statusLoad.value==true">
-                    <i class="ion-ios-locked assertive" ng-show="doorData.status.lock=='locked'"></i>
-                    <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lock=='unlocked'"></i>
+                    <i class="ion-ios-locked assertive" ng-show="doorData.status.lockState=='locked'"></i>
+                    <i class="ion-ios-unlocked balanced" ng-show="doorData.status.lockState=='unlocked'"></i>
                 </div>
-                <i class="flaticon-open203" ng-show="doorData.status.door=='opened'"></i>
-                <i class="flaticon-closed42" ng-show="doorData.status.door=='closed'"></i>
+                <i class="flaticon-open203" ng-show="doorData.status.doorState=='opened'"></i>
+                <i class="flaticon-closed42" ng-show="doorData.status.doorState=='closed'"></i>
             </div>
             <div class="custom-row-title">
                 <div>{{doorData.name}}</div>
-                <div class="custom-row-desc">{{doorData.desc}}</div>
+                <div class="custom-row-desc">{{doorData.description}}</div>
             </div>
-            <div class="custom-row-button" ng-show="(doorData.permission.remoteControl==true)&&(statusLoad.value==false)">
-                <button class="button button-outline button-small button-dark" ng-click="changeLockStatus(doorData.status.lock)">
-                    <span ng-show="doorData.status.lock=='unlocked'">Lock</span>
-                    <span ng-show="doorData.status.lock=='locked'">Unlock</span>
+            <div class="custom-row-button" ng-show="(doorData.permission.remoteAccess==true)&&(statusLoad.value==false)">
+                <button class="button button-outline button-small button-dark" ng-click="changeLockStatus(doorData.status.lockState)">
+                    <span ng-show="doorData.status.lockState=='unlocked'">Lock</span>
+                    <span ng-show="doorData.status.lockState=='locked'">Unlock</span>
                 </button>
             </div>
             <div class="custom-row-spinner" ng-show="statusLoad.value==true">
@@ -83,13 +83,13 @@
     <ion-content ng-show="doorMenu.name=='configDoor'" class="custom-ion-content-bg">
 
         <!--Auto Relock-->
-        <div class="flex align-items-center custom-setting-row-with-right-button" ng-class="{'custom-row-del-border-bottom':doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)}">
+        <div class="flex align-items-center custom-setting-row-with-right-button" ng-class="{'custom-row-del-border-bottom':doorData.setting.autoRelock==true&&(autoRelock.load==false)}">
             <div class="custom-row-title">
                 <div>Auto Relock</div>
             </div>
             <div class="custom-row-button" ng-hide="autoRelock.load">
                 <label class="toggle toggle-energized">
-                    <input type="checkbox" ng-model="doorData.configDoor.autoRelock.status" ng-change="autoRelockChecked()">
+                    <input type="checkbox" ng-model="doorData.setting.autoRelock" ng-change="autoRelockChecked()">
                     <div class="track">
                         <div class="handle"></div>
                     </div>
@@ -99,16 +99,16 @@
                 <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
             </div>
         </div>
-        <div class="item item-desc" ng-hide="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
+        <div class="item item-desc" ng-hide="doorData.setting.autoRelock==true&&(autoRelock.load==false)">
             Enable this menu to set time to lock door after door unlocked.
         </div>
-        <div class="row-border-inset" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)"><div class="row-border-inset-color"></div></div>
-        <div class="list" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
-            <div class="item custom-row-del-border-top">
+        <div class="row-border-inset" ng-show="doorData.setting.autoRelock==true&&(autoRelock.load==false)"><div class="row-border-inset-color"></div></div>
+        <div class="list" ng-show="doorData.setting.autoRelock==true&&(autoRelock.load==false)">
+            <div class="item custom-setting-row-del-border-top">
                 Auto Relock Time
                 <span class="item-note">
                     <div class="select-div">
-                        <select class="custom-row-font-size">
+                        <select class="custom-row-font-size" style="height: 22px">
                             <option>5 s</option>
                             <option>10 s</option>
                             <option>15 s</option>
@@ -119,7 +119,7 @@
                 </span>
             </div>
         </div>
-        <div class="item item-desc" ng-show="doorData.configDoor.autoRelock.status==true&&(autoRelock.load==false)">
+        <div class="item item-desc" ng-show="doorData.setting.autoRelock==true&&(autoRelock.load==false)">
             You can set time to lock door after door unlocked.
         </div>
         <!--PIN Required-->
@@ -129,7 +129,7 @@
             </div>
             <div class="custom-row-button" ng-hide="pinRequired.load">
                 <label class="toggle toggle-energized">
-                    <input type="checkbox" ng-model="doorData.configDoor.pinRequired.status" ng-change="pinRequiredChecked()">
+                    <input type="checkbox" ng-model="doorData.setting.pinRequired" ng-change="pinRequiredChecked()">
                     <div class="track">
                         <div class="handle"></div>
                     </div>
@@ -229,7 +229,7 @@
     <!--End User Content-->
 
     <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center"
-         ng-hide="(doorData.permission.configuration==false)&&(doorData.permission.viewLog==false)&&(doorData.permission.manageUser==false)">
+         ng-hide="(doorData.permission.configuration==false)&&(doorData.permission.viewLog==false)&&(doorData.permission.policies==false)">
 
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='doorInfo'}" ng-click="doorMenu.name='doorInfo'">
@@ -256,7 +256,7 @@
         </div>
         <div class="flex-1 flex flex-direction-column align-items-center footer-tab-column"
              ng-class="{'footer-tab-active': doorMenu.name=='manageAccess'}" ng-click="doorMenu.name='manageAccess'"
-             ng-show="doorData.permission.manageAccess==true">
+             ng-show="doorData.permission.policies==true">
 
             <div class="footer-tab-icon tab-outline"><i class="ion-ios-personadd-outline" style="font-size: 27px;"></i></div>
             <div class="footer-tab-icon tab-filled"><i class="ion-ios-personadd" style="font-size: 27px;"></i></div>
