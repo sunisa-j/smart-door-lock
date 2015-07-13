@@ -307,6 +307,16 @@ ion-modal-view .item-input {
   height: 168px !important;
 }
 .month-item-input > span {
+   width: 82px;
+   min-width: 82px;
+   color: $item_divider_font_color;
+   line-height: 15px;
+ }
+.year-item-input {
+  @extend .align-items-flex-start;
+  height: 110px !important;
+}
+.year-item-input > span {
   width: 82px;
   min-width: 82px;
   color: $item_divider_font_color;
@@ -1249,11 +1259,35 @@ ion-modal-view .item-input {
   height: 30px;
 }
 .custom-event-button-bar .button {
-  background: #F5F5F5;
+  background: $custom_ion_content_bg;
   padding: 0;
   min-height: 30px;
-  min-width: 34px;
+  min-width: 30px;
   line-height: 30px;
+  font-size: 14px;
+}
+.custom-year-button-bar {
+  @extend .custom-event-button-bar;
+}
+.custom-year-button-bar .button {
+  background: $custom_ion_content_bg;
+  padding: 0;
+  min-height: 30px;
+  min-width: 45px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.custom-event-checkbox {
+  padding: 0 !important;
+}
+.custom-event-checkbox input {
+  padding: 5px !important;
+  width: 35px !important;
+  height: 35px !important;
+}
+.custom-event-checkbox.checkbox input:after, .checkbox-icon:after {
+  top: 37% !important;
+  left: 29% !important;
 }
 // Log style *******************************************
 .log-container {
@@ -1414,10 +1448,10 @@ ion-modal-view .item-input {
 }
 .fade-out {
   opacity:0;
-  transition: opacity .2s ease-out;
-  -moz-transition: opacity .2s ease-out;
-  -webkit-transition: opacity .2s ease-out;
-  -o-transition: opacity .2s ease-out;
+  transition: opacity .05s ease-out;
+  -moz-transition: opacity .05s ease-out;
+  -webkit-transition: opacity .05s ease-out;
+  -o-transition: opacity .05s ease-out;
 }
 .fade-in {
   opacity:1;
