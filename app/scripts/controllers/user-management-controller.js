@@ -3,7 +3,9 @@
 window.app.controller('UserManagementController', function ($scope, $stateParams, doorsAccess, doorsUsers, users, $state, $ionicPopup) {
 
     var doorId = $stateParams.doorId;
-    $scope.doorName = (doorsAccess('doors'))[doorId].name;
+    // Login user id
+    var userId = 1;
+    $scope.doorName = (doorsAccess(userId,'doors'))[doorId].name;
 
     $scope.doorUsers = doorsUsers(doorId, 'array');
     var usersData = users('array');
