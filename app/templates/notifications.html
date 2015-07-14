@@ -1,7 +1,7 @@
 <ion-view view-title="Notifications">
     <ion-content>
 
-        <div class="custom-row" ng-repeat="notif in notifications | orderBy:createTime:reverse" ui-sref="mainMenu.notifications.notification({notificationId: notif.$id})">
+        <div class="custom-row" ng-repeat="notif in notifications | orderBy:createdAt:reverse" ui-sref="mainMenu.notifications.notification({notificationId: notif.id})">
             <div class="custom-row-icon">
                 <i class="ion-ios-minus assertive" ng-show="notif.action=='removed'"></i>
                 <i class="ion-ios-plus balanced" ng-show="notif.action=='added'"></i>
@@ -12,7 +12,7 @@
 
                 <div class="custom-row-font-status stable-font-color">
                     <div style="display: none" ng-init="timeDuration=''">
-                        {{ timeDuration = ( (dateNow.getTime() - notif.createTime.getTime()) )  }}
+                        {{ timeDuration = ( dateNow.getTime() - getTimeCreated(notif.createdAt) ) }}
                     </div>
                     <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;{{ calcDate(timeDuration) }}
                 </div>
