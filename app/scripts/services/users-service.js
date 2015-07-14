@@ -38,8 +38,8 @@ window.app.factory('users', function () {
         }
     ];
 
+    // transform usersArr to obj
     var usersObj = {};
-
     angular.forEach(usersArr, function(value){
         usersObj[value.id] = {};
         usersObj[value.id].employeeNumber = value.employeeNumber;
@@ -53,10 +53,10 @@ window.app.factory('users', function () {
     });
 
     return function(data){
-        if(data == 'object'){
+        if(data === 'object'){
             return usersObj;
         }
-        else if (data == 'array'){
+        else if (data === 'array'){
             return usersArr;
         }
     };
