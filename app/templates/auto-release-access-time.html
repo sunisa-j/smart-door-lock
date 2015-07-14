@@ -32,7 +32,7 @@
                 <div class="custom-row-title">
                     <div>{{autoReleasePolicy.calendar.name}}</div>
                 </div>
-                <div class="custom-row-button pointer" ng-show="group.showDel==true" ng-click="deleteCalendar(autoReleasePolicy.$id)"
+                <div class="custom-row-button pointer" ng-show="group.showDel==true" ng-click="deleteCalendar(autoReleasePolicy.id)"
                      ng-class="{'fade-in':group.showDel==true, 'opacity-0':group.showDel==false,'fade-out':group.showDel==false, 'opacity-1':group.showDel==true}">
                     <button class="button icon button-clear button-assertive ion-ios-minus-outline delete-row-btn"></button>
                 </div>
