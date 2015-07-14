@@ -61,8 +61,8 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         angular.forEach($scope.userCalendars, function(group){
             angular.forEach(group, function(value){
 
-                if($scope.calendarCheckbox[value.calendar.$id] == true) {
-                    var calendarId = value.calendar.$id;
+                if($scope.calendarCheckbox[value.calendar.id] == true) {
+                    var calendarId = value.calendar.id;
                     //console.log("Selected: " + $scope.calendarCheckbox[calendarId]);
                     var dataAddtoPasscodePolicies = {
                         type: type,
