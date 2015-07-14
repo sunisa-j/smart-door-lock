@@ -23,9 +23,9 @@
                 {{($index==0)? 'My Calendars':'Other Calendars'}}
             </div>
 
-            <div class="custom-row" ng-repeat="calendarData in group | filter: searchCalendar" ng-init="calendarCheckbox[calendarData.calendar.$id]=false" ng-click="calendarCheckbox[calendarData.calendar.$id]=!(calendarCheckbox[calendarData.calendar.$id])" ng-class="{'checkbox-row-bg':calendarCheckbox[calendarData.calendar.$id]==true}">
+            <div class="custom-row" ng-repeat="calendarData in group | filter: searchCalendar" ng-init="calendarCheckbox[calendarData.calendar.id]=false" ng-click="calendarCheckbox[calendarData.calendar.id]=!(calendarCheckbox[calendarData.calendar.id])" ng-class="{'checkbox-row-bg':calendarCheckbox[calendarData.calendar.id]==true}">
                 <div style="display: none">
-                    <input type="checkbox" ng-model="calendarCheckbox[calendarData.calendar.$id]" name="calendarData.calendar.$id">
+                    <input type="checkbox" ng-model="calendarCheckbox[calendarData.calendar.id]" name="calendarData.calendar.id">
                 </div>
 
                 <div class="custom-row-icon">
@@ -34,7 +34,7 @@
                 <div class="custom-row-title">
                     <div>{{calendarData.calendar.name}}</div>
                 </div>
-                <div class="custom-row-button" ng-show="calendarCheckbox[calendarData.calendar.$id]==true">
+                <div class="custom-row-button" ng-show="calendarCheckbox[calendarData.calendar.id]==true">
                     <i class="radio-icon ion-checkmark" style="font-size: 28px"></i>
                 </div>
             </div>
