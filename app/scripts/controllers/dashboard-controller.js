@@ -20,9 +20,9 @@ window.app.controller('DashboardController', function ($scope, doorsAccess) {
     //
     //        angular.forEach(group.doorsAccess, function (door) {
     //            var tmp = {
-    //                doorId: door.$id,
+    //                doorId: door.id,
     //                doorName: door.name,
-    //                groupId: group.$id,
+    //                groupId: group.id,
     //                groupName: group.name,
     //                expireDate: door.expire,
     //                getTimeExpireDate : (door.expire).getTime()
