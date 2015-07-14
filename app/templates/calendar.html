@@ -1,8 +1,15 @@
 <ion-view title="{{calendarData.name}}">
 
+    <ion-nav-buttons side="right">
+        <div style="margin-top: -3px;">
+            <button class="button button-clear" ng-click="createEventModal.show()">
+                <i class="ion-ios-plus-empty" style="font-size: 38px; color: #222"></i>
+            </button>
+        </div>
+    </ion-nav-buttons>
+
     <ion-content>
         <div class="item item-divider flex">
-
             <div class="calendar-item-divider-col">
                 <div class="calendar-icon-col" style="height: 27px;">
                     <i class="ion-ios-calendar-outline" style="font-size: 24px"></i>
@@ -21,14 +28,12 @@
                     <button class="button button-outline button-icon ion-android-arrow-dropright"></button>
                 </div>
             </div>
-
         </div>
-
 
     </ion-content>
 
     <div class="bar bar-footer custom-bar-footer justify-content-flex-end">
-        <span>Calendar Settings</span>
+        <span class="pointer" ng-click="calendarSettingsModal.show()">Calendar Settings</span>
     </div>
 
 </ion-view>
