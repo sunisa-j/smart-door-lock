@@ -239,10 +239,10 @@ window.app.factory('doorsUsers', function (users) {
             });
         }
 
-        if(data == 'object') {
+        if(data === 'object') {
             return doorUsersObj;
         }
-        else if(data == 'array') {
+        else if(data === 'array') {
             return doorUsersArr;
         }
     };
