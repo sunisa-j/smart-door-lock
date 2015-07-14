@@ -2,33 +2,57 @@
 
 window.app.factory('calendars', function () {
 
-    var calendars = {
-        'calendar1': {
+    var calendars = [
+        {
+            id: 'calendar1',
             public: false,
             name: 'Working Time',
-            description: 'My Working Access Time'
+            description: 'My Working Access Time',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
-        'calendar2': {
+        {
+            id: 'calendar2',
             public: true,
             name: 'Holiday Time',
-            description: 'COE Holiday Time'
+            description: 'COE Holiday Time',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
-        'calendar3': {
+        {
+            id: 'calendar3',
             public: true,
             name: 'Meeting Time',
-            description: 'My Working Access Time'
+            description: 'My Working Access Time',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
-        'calendar4': {
+        {
+            id: 'calendar4',
             public: false,
             name: 'My Holiday Time',
-            description: 'Private Holiday Time'
+            description: 'Private Holiday Time',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
-        'calendar5': {
+        {
+            id: 'calendar5',
             public: false,
             name: 'My Meeting Time',
-            description: 'Private Meeting Time'
+            description: 'Private Meeting Time',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         }
-    };
+    ];
 
-    return calendars;
+    // transform calendars to obj
+    var calendarsObj = {};
+    angular.forEach(calendars, function(calendar){
+        calendarsObj[calendar.id] = {};
+        calendarsObj[calendar.id].public = calendar.public;
+        calendarsObj[calendar.id].name = calendar.name;
+        calendarsObj[calendar.id].description = calendar.description;
+    });
+
+    return calendarsObj;
 });
