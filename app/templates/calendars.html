@@ -17,7 +17,7 @@
                 <span ng-show="$index==1"><span ng-show="group[1].length==1">Other Calendar</span>Other Calendars</span>
             </div>
 
-            <div class="custom-row" ng-repeat="calendarData in group" ui-sref="mainMenu.calendars.calendar({calendarId: calendarData.calendar.$id})">
+            <div class="custom-row" ng-repeat="calendarData in group" ui-sref="mainMenu.calendars.calendar({calendarId: calendarData.calendar.id})">
                 <div class="custom-row-icon">
                     <i class="ion-ios-calendar-outline"></i>
                 </div>
