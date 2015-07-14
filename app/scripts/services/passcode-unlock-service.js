@@ -2,60 +2,75 @@
 
 window.app.factory('passcodeUnlock', function () {
 
-    var passcodeUnlock = {
-        'passcode1': {
+    var passcodeUnlock = [
+        {
+            id: 'passcode1',
             name: 'Chinese Student',
             passcode: '123456',
             door: 'door1',
-            status: 'Enabled'
+            status: 'Enabled',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
-        'passcode2': {
+        {
+            id: 'passcode2',
             name: 'Trainee',
             passcode: '555555',
             door: 'door1',
-            status: 'Enabled'
+            status: 'Enabled',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
-        'passcode3': {
+        {
+            id: 'passcode3',
             name: 'Trainee',
             passcode: '767676',
             door: 'door2',
-            status: 'Enabled'
+            status: 'Enabled',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
         }
-    };
+    ];
+
+    // transform calendars to obj
+    var passcodeUnlockObj = {};
+    angular.forEach(passcodeUnlock, function(passcode){
+        passcodeUnlockObj[passcode.id] = {};
+        passcodeUnlockObj[passcode.id].name = passcode.name;
+        passcodeUnlockObj[passcode.id].passcode = passcode.passcode;
+        passcodeUnlockObj[passcode.id].door = passcode.door;
+        passcodeUnlockObj[passcode.id].status = passcode.status;
+    });
 
     return function(doorId, passcodeUnlockId, data){
 
-        // convert object to array
-        var passcodeUnlockArr = [];
-        angular.forEach(passcodeUnlock, function(passcode, key){
-            var tmp = angular.copy(passcode);
-            if(tmp.door == doorId) {
-                tmp.$id = key;
-                passcodeUnlockArr.push(tmp);
-            }
-        });
-
         // select objects (door: doorId)
-        var passcodeUnlockObj = {};
-        angular.forEach(passcodeUnlock, function(passcode, key){
+        var passcodeUnlockDoorSelectedObj = {};
+        angular.forEach(passcodeUnlockObj, function(passcode, key){
             var tmp = angular.copy(passcode);
             if(tmp.door == doorId) {
-                passcodeUnlockObj[key] = {};
-                passcodeUnlockObj[key].name = tmp.name;
-                passcodeUnlockObj[key].passcode = tmp.passcode;
-                passcodeUnlockObj[key].door = tmp.door;
-                passcodeUnlockObj[key].status = tmp.status;
+                passcodeUnlockDoorSelectedObj[key] = {};
+                passcodeUnlockDoorSelectedObj[key].name = tmp.name;
+                passcodeUnlockDoorSelectedObj[key].passcode = tmp.passcode;
+                passcodeUnlockDoorSelectedObj[key].door = tmp.door;
+                passcodeUnlockDoorSelectedObj[key].status = tmp.status;
             }
         });
 
         // get passcode unlock
-        var passcodeUnlockSelected = passcodeUnlock[passcodeUnlockId];
+        var passcodeUnlockSelected = passcodeUnlockObj[passcodeUnlockId];
 
         if(data === 'object'){
-            return passcodeUnlockObj;
+            return passcodeUnlockDoorSelectedObj;
         }
         else if (data === 'array') {
-            return passcodeUnlockArr;
+            return passcodeUnlock;
         }
         else if (data === 'selected') {
             return passcodeUnlockSelected;
