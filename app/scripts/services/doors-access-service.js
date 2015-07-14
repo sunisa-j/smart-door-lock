@@ -291,6 +291,7 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
         }
         else if (data === 'count') {
             return numberOfDoors;
+
         }else if (data === 'doors') {
             return doorsObj;
         }
