@@ -3,18 +3,18 @@
 
         <div class="flex justify-content-flex-end custom-row-font-status stable-font-color" style="padding: 10px">
             <div style="display: none" ng-init="timeDuration=''">
-                {{ timeDuration = ( (dateNow.getTime() - notificationsObj[notifId].createTime.getTime()) )  }}
+                {{ timeDuration = ( dateNow.getTime() - getTimeCreated(notificationSelected.createdAt) ) }}
             </div>
             <i class="custom-row-status-icon ion-ios-clock-outline"></i>&nbsp;{{ calcDate(timeDuration) }}
         </div>
 
         <div style="padding: 0 10px 10px 10px">
             <div style="float: left; font-size: 45px; padding: 0px 20px 0px 15px; margin-top: -2px; border-right: solid 1px #efefef; margin-right: 10px">
-                <i class="ion-ios-minus assertive" ng-show="notificationsObj[notifId].action=='removed'"></i>
-                <i class="ion-ios-plus balanced" ng-show="notificationsObj[notifId].action=='added'"></i>
+                <i class="ion-ios-minus assertive" ng-show="notificationSelected.action=='removed'"></i>
+                <i class="ion-ios-plus balanced" ng-show="notificationSelected.action=='added'"></i>
             </div>
-            <div ng-show="notificationsObj[notifId].action=='removed'"">You have been {{notificationsObj[notifId].action}} from {{notificationsObj[notifId].door.name}} by {{notificationsObj[notifId].handler.name}}.</div>
-            <div ng-show="notificationsObj[notifId].action=='added'"">You have been {{notificationsObj[notifId].action}} as a member of {{notificationsObj[notifId].door.name}} by {{notificationsObj[notifId].handler.name}}.</div>
+            <div ng-show="notificationSelected.action=='removed'">You have been {{notificationSelected.action}} from {{notificationSelected.door.name}} by {{notificationSelected.handler.name}}.</div>
+            <div ng-show="notificationSelected.action=='added'">You have been {{notificationSelected.action}} as a member of {{notificationSelected.door.name}} by {{notificationSelected.handler.name}}.</div>
         </div>
 
     </ion-content>
