@@ -4,7 +4,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
-    $scope.calendarEvents = calendarEvents(calendarId,'calendarEvents');
+    $scope.calendarEventsData = calendarEvents(calendarId,'calendarEvents');
     $scope.dateSelected = new Date();
 
     $scope.transformDate = function(date){
@@ -24,7 +24,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
 
         var calendarEventsDateSelected = [];
-        var events = angular.copy($scope.calendarEvents);
+        var events = angular.copy($scope.calendarEventsData);
 
         angular.forEach(events, function(value){
             var startDate = $scope.transformDate(value.startDate);
@@ -106,7 +106,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.createEventData.repeat.yearly.years[year] = !$scope.createEventData.repeat.yearly.years[year];
     };
 
-    // Calenar Settings
+    // Calendar Settings
     $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
