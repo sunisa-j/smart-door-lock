@@ -8,7 +8,7 @@ window.app.controller('NotificationsController', function ($scope, $stateParams,
     $scope.notificationSelected = notifications('object')[$scope.notifId];
 
     $scope.getTimeCreated = function(createdAt){
-        return (new Date(createdAt)).getTime()
+        return (new Date(createdAt)).getTime();
     };
 
     $scope.calcDate = function(timeDuration) {
