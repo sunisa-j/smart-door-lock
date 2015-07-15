@@ -26,13 +26,68 @@ window.app.factory('calendarEvents', function () {
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
         {
+            id: 'calendarEvents7',
+            calendar: 'calendar1',
+            status: 'confirmed',
+            name: 'Cleaning',
+            description: 'Cleaning room',
+            startDate: '2015-07-14T10:30:00Z',
+            endDate: '2015-07-14T12:30:00',
+            createdAt: '2015-03-14T12:31:45.000Z',
+            updatedAt: '2015-03-14T12:31:45.000Z'
+        },
+        {
             id: 'calendarEvents2',
             calendar: 'calendar1',
             status: 'confirmed',
             name: 'Maintenance',
-            description: '',
-            startDate: '2015-07-01T13:30:00Z',
-            endDate: '2015-07-01T16:30:00',
+            description: 'Electric Maintenance',
+            startDate: '2015-07-14T13:30:00Z',
+            endDate: '2015-07-14T16:30:00',
+            createdAt: '2015-03-14T12:31:45.000Z',
+            updatedAt: '2015-03-14T12:31:45.000Z'
+        },
+        {
+            id: 'calendarEvents3',
+            calendar: 'calendar2',
+            status: 'confirmed',
+            name: 'Maintenance',
+            description: 'Electric Maintenance',
+            startDate: '2015-08-01T13:30:00Z',
+            endDate: '2015-08-01T16:30:00',
+            createdAt: '2015-03-14T12:31:45.000Z',
+            updatedAt: '2015-03-14T12:31:45.000Z'
+        },
+        {
+            id: 'calendarEvents4',
+            calendar: 'calendar3',
+            status: 'confirmed',
+            name: 'Maintenance',
+            description: 'Electric Maintenance',
+            startDate: '2015-08-01T13:30:00Z',
+            endDate: '2015-08-01T16:30:00',
+            createdAt: '2015-03-14T12:31:45.000Z',
+            updatedAt: '2015-03-14T12:31:45.000Z'
+        },
+        {
+            id: 'calendarEvents5',
+            calendar: 'calendar4',
+            status: 'confirmed',
+            name: 'Maintenance',
+            description: 'Electric Maintenance',
+            startDate: '2015-08-01T13:30:00Z',
+            endDate: '2015-08-01T16:30:00',
+            createdAt: '2015-03-14T12:31:45.000Z',
+            updatedAt: '2015-03-14T12:31:45.000Z'
+        },
+        {
+            id: 'calendarEvents6',
+            calendar: 'calendar5',
+            status: 'confirmed',
+            name: 'Maintenance',
+            description: 'Electric Maintenance',
+            startDate: '2015-08-01T13:30:00Z',
+            endDate: '2015-08-01T16:30:00',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         }
@@ -48,7 +103,7 @@ window.app.factory('calendarEvents', function () {
         calendarEventsObj[event.id].description = event.description;
         calendarEventsObj[event.id].startDate = event.startDate;
         calendarEventsObj[event.id].endDate = event.endDate;
-        if(!event.rRule){
+        if(event.rRule){
             calendarEventsObj[event.id].rRule = {
                 frequency: event.rRule.frequency,
                 dateStart: event.rRule.dateStart,
@@ -59,13 +114,26 @@ window.app.factory('calendarEvents', function () {
         }
     });
 
-    return function(data){
+    return function(calendarId, data){
+
+        if(calendarId != '') {
+            var calendarSelectedEvents = [];
+            angular.forEach(calendarEvents, function(value){
+                if(value.calendar == calendarId){
+                    var tmp = angular.copy(value);
+                    calendarSelectedEvents.push(tmp);
+                }
+            });
+        }
 
         if(data === 'object'){
             return calendarEventsObj;
         }
         else if (data === 'array') {
             return calendarEvents;
+        }
+        else if (data === 'calendarEvents') {
+            return calendarSelectedEvents;
         }
     };
 });
