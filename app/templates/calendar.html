@@ -32,32 +32,36 @@
     <ion-content style="margin-top: 43px">
 
         <!--then include calendar module to show events data-->
-        <div style="padding-left: 15px">Calendar Id: {{calendarEvents[0].calendar}}</div><br>
+        <div style="padding-left: 15px">Calendar Id: {{calendarEventsData[0].calendar}}</div><br>
 
-        <div ng-repeat="event in calendarEvents" ng-init="startDate=transformDate(event.startDate);endDate=transformDate(event.endDate)">
-
-            <div style="padding-left: 30px" class="balanced pointer" ng-click="getEventsDateSelected(startDate)">
+        <div ng-repeat="event in calendarEventsData">
+            <div style="padding-left: 15px" class="balanced pointer" ng-click="getEventsDateSelected(transformDate(event.startDate))">
+                <div style="display:none">{{startDate=transformDate(event.startDate)}} {{endDate=transformDate(event.endDate)}}</div>
                 {{startDate.getDate()}} {{ month[startDate.getMonth()] }} {{startDate.getFullYear()}}
-                ({{startDate.getHours()}}:{{(startDate.getMinutes()==0)? '00':startDate.getMinutes()}} - {{endDate.getHours()}}:{{(endDate.getMinutes()==0)? '00':endDate.getMinutes()}})
+                ({{startDate.getHours()}}:{{(startDate.getMinutes()==0)? '00':startDate.getMinutes()}} -
+                {{endDate.getHours()}}:{{(endDate.getMinutes()==0)? '00':endDate.getMinutes()}})
             </div>
 
-            <div style="padding-left: 30px">{{event.name}}</div>
-            <div style="padding-left: 30px; font-size: 12px" class="dark">{{event.description}}</div>
-            <div style="padding-left: 30px; font-size: 12px" ng-if="event.rRule">   {{event.rRule}}</div>
+            <div style="padding-left: 15px">{{event.name}}</div>
+            <div style="padding-left: 15px; font-size: 12px" class="dark">{{event.description}}</div>
+            <div style="padding-left: 15px; font-size: 12px" ng-if="event.rRule">{{event.rRule}}</div>
             <br>
         </div>
 
         <!--show events on date selected-->
         <div class="item item-divider">
             {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
-        </div><br>
-        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center" class="stable">No event</div>
-        <div ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)">
-            <div style="padding-left: 30px" class="balanced">
+        </div>
+        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No event</div>
+
+        <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)">
+            <div class="custom-time-row-first-col">
                 {{startDate2.getHours()}}:{{(startDate2.getMinutes()==0)? '00':startDate2.getMinutes()}} - {{endDate2.getHours()}}:{{(endDate2.getMinutes()==0)? '00':endDate2.getMinutes()}}
             </div>
-            <div style="padding-left: 30px">{{event.name}}</div>
-            <br>
+            <div class="custom-time-row-title">
+                <div>{{event.name}}</div>
+                <div class="custom-row-desc">{{event.description}}</div>
+            </div>
         </div>
 
     </ion-content>
