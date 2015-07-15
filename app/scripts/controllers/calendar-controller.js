@@ -1,9 +1,48 @@
 'use strict';
 
-window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup) {
+window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents) {
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
+    $scope.calendarEvents = calendarEvents(calendarId,'calendarEvents');
+    $scope.dateSelected = new Date();
+
+    $scope.transformDate = function(date){
+        var dateNew;
+
+        if(date == ''){
+            dateNew = new Date();
+        } else {
+            dateNew = new Date(date);
+        }
+
+        return dateNew;
+    };
+
+    $scope.getEventsDateSelected = function (dateUserSelected) {
+
+        $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
+
+        var calendarEventsDateSelected = [];
+        var events = angular.copy($scope.calendarEvents);
+
+        angular.forEach(events, function(value){
+            var startDate = $scope.transformDate(value.startDate);
+            var startDate2 = new Date(startDate.setHours(0, 0, 0, 0));
+
+            if(($scope.dateSelected).getTime() === startDate2.getTime()){
+                calendarEventsDateSelected.push(value);
+            }
+        });
+        $scope.calendarEventsDateSelected2 = calendarEventsDateSelected;
+    };
+    $scope.getEventsDateSelected($scope.dateSelected);
+
+    // month
+    $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+    // week days
+    $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
 
     $scope.createEventData = {
         name: 'Event Name',
