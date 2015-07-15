@@ -642,6 +642,12 @@ ion-modal-view .item-input {
   -moz-align-self: flex-end;
   -ms-align-self: flex-end;
 }
+.align-content-flex-start {
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  -moz-align-content: flex-start;
+  -ms-align-content: flex-start;
+}
 .flex-1 {
   flex: 1; -webkit-flex: 1; -moz-flex: 1; -ms-flex: 1;
 }
@@ -676,6 +682,10 @@ ion-modal-view .item-input {
 .door-info-custom-row {
   @extend .custom-row;
 }
+.custom-time-row {
+  @extend .custom-row;
+  padding: 5px 0;
+}
 .door-status-icon {
   position: absolute;
   top: 9px;
@@ -683,7 +693,7 @@ ion-modal-view .item-input {
   width: 29px;
   height: 29px;
   border-radius: 50px;
-  border: solid 1px $light_border_color;
+  border: solid 1px #F2F2F2;
   background-color: $light;
   font-size: 25px;
 }
@@ -702,11 +712,29 @@ ion-modal-view .item-input {
   font-size: 37px;
   color: $font_icon_color;
 }
+.custom-time-row-first-col {
+  @extend .relative-position, .align-content-flex-start;
+  flex-basis: 120px;
+  -webkit-flex-basis: 120px;
+  -moz-flex-basis: 120px;
+  font-size: $font-size-base;
+  color: $balanced;
+  padding-top: 10px;
+  height: 100%;
+}
 .custom-row-title {
   @extend .flex-1;
   text-align: left;
   padding: 0 5px;
   font-size: $custom_row_font_size;
+}
+.custom-time-row-title {
+  @extend .flex-1, .align-content-flex-start;
+  text-align: left;
+  padding: 10px;
+  font-size: $custom_row_font_size;
+  height: 100%;
+  border-left: solid 1px $light_border_color;
 }
 .custom-row-title div {
   @extend .overflow-hidden-text;
