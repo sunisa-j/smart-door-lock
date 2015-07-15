@@ -8,26 +8,56 @@
         </div>
     </ion-nav-buttons>
 
-    <ion-content>
-        <div class="item item-divider flex">
-            <div class="calendar-item-divider-col">
-                <div class="calendar-icon-col" style="height: 27px;">
-                    <i class="ion-ios-calendar-outline" style="font-size: 24px"></i>
-                </div>
-                <div class="calendar-month-col">June 2015</div>
+    <div class="bar bar-header item item-divider flex" style="margin-top: 43px">
+        <div class="calendar-item-divider-col">
+            <div class="calendar-icon-col" style="height: 27px;">
+                <i class="ion-ios-calendar-outline" style="font-size: 24px"></i>
+            </div>
+            <div class="calendar-month-col">June 2015</div>
+        </div>
+
+        <div class="flex-1"></div>
+
+        <div class="calendar-item-divider-col">
+            <div class="calendar-icon-col">
+                <button class="button button-outline button-icon ion-android-arrow-dropleft"></button>
+            </div>
+            <div class="calendar-today-col assertive pointer" ng-click="getEventsDateSelected(transformDate(''))">Today</div>
+            <div class="calendar-icon-col">
+                <button class="button button-outline button-icon ion-android-arrow-dropright"></button>
+            </div>
+        </div>
+    </div>
+
+    <ion-content style="margin-top: 43px">
+
+        <!--then include calendar module to show events data-->
+        <div style="padding-left: 15px">Calendar Id: {{calendarEvents[0].calendar}}</div><br>
+
+        <div ng-repeat="event in calendarEvents" ng-init="startDate=transformDate(event.startDate);endDate=transformDate(event.endDate)">
+
+            <div style="padding-left: 30px" class="balanced pointer" ng-click="getEventsDateSelected(startDate)">
+                {{startDate.getDate()}} {{ month[startDate.getMonth()] }} {{startDate.getFullYear()}}
+                ({{startDate.getHours()}}:{{(startDate.getMinutes()==0)? '00':startDate.getMinutes()}} - {{endDate.getHours()}}:{{(endDate.getMinutes()==0)? '00':endDate.getMinutes()}})
             </div>
 
-            <div class="flex-1"></div>
+            <div style="padding-left: 30px">{{event.name}}</div>
+            <div style="padding-left: 30px; font-size: 12px" class="dark">{{event.description}}</div>
+            <div style="padding-left: 30px; font-size: 12px" ng-if="event.rRule">   {{event.rRule}}</div>
+            <br>
+        </div>
 
-            <div class="calendar-item-divider-col">
-                <div class="calendar-icon-col">
-                    <button class="button button-outline button-icon ion-android-arrow-dropleft"></button>
-                </div>
-                <div class="calendar-today-col assertive">Today</div>
-                <div class="calendar-icon-col">
-                    <button class="button button-outline button-icon ion-android-arrow-dropright"></button>
-                </div>
+        <!--show events on date selected-->
+        <div class="item item-divider">
+            {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
+        </div><br>
+        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center" class="stable">No event</div>
+        <div ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)">
+            <div style="padding-left: 30px" class="balanced">
+                {{startDate2.getHours()}}:{{(startDate2.getMinutes()==0)? '00':startDate2.getMinutes()}} - {{endDate2.getHours()}}:{{(endDate2.getMinutes()==0)? '00':endDate2.getMinutes()}}
             </div>
+            <div style="padding-left: 30px">{{event.name}}</div>
+            <br>
         </div>
 
     </ion-content>
