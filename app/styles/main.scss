@@ -193,6 +193,14 @@ input[disabled] {
 .modal .bar-header {
   background-color: $custom_ion_content_bg;
 }
+.modal-close-icon {
+  cursor: pointer;
+  color: $dark;
+  font-size: 36px;
+  float: right;
+  padding: 0px 10px;
+  margin-top: -1px;
+}
 .action-sheet-title {
   font-size: 15px;
   background-color: #FAFAFA;
