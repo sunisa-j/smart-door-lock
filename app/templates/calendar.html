@@ -32,7 +32,7 @@
     <ion-content style="margin-top: 43px">
 
         <!--then include calendar module to show events data-->
-        <div style="padding-left: 15px">Calendar Id: {{calendarEventsData[0].calendar}}</div><br>
+        <!--<div style="padding-left: 15px">Calendar Id: {{calendarEventsData[0].calendar}}</div><br>-->
 
         <div ng-repeat="event in calendarEventsData">
             <div style="padding-left: 15px" class="balanced pointer" ng-click="getEventsDateSelected(transformDate(event.startDate))">
