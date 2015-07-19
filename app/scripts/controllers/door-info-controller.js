@@ -79,7 +79,25 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.uiConfig = {
         calendar:{
             height: 480,
-            editable: false
+            dayClick: function(date, jsEvent, view) {
+
+                var dateSelected = new Date(date._d);
+                $scope.getEventsDateSelected(dateSelected);
+
+                var dataMonth = dateSelected.getMonth()+1;
+                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? '0'+dataMonth:dataMonth) + '-' + dateSelected.getDate();
+
+                // change the day's background color just for fun
+                var dateNow = new Date();
+                if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+                }else {
+                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                }
+            }
         }
     };
 
@@ -124,26 +142,25 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             $scope.calcMyAccessTime[startDate] = [];
         }
     });
-
     angular.forEach($scope.doorUserEvents, function(event){
-        //if(runForEach) {
-            var newStartDate = new Date(event.startDate);
-            var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
+        var newStartDate = new Date(event.startDate);
+        var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
 
-            if(startDate >= dateNow) {
-                var tmp = angular.copy(event);
-                $scope.calcMyAccessTime[startDate].push(tmp);
-            }
-            //if($scope.myAccessTime.length == 3){
-            //    runForEach = false;
-            //}
-        //}
+        if(startDate >= dateNow) {
+            var tmp = angular.copy(event);
+            $scope.calcMyAccessTime[startDate].push(tmp);
+        }
     });
-
     angular.forEach($scope.calcMyAccessTime, function(value, key){
-        var tmp = angular.copy(value);
-        tmp.startDate = key;
-        $scope.myAccessTime.push(tmp);
+        if(runForEach) {
+            var tmp = angular.copy(value);
+            tmp.startDate = key;
+            $scope.myAccessTime.push(tmp);
+
+            if($scope.myAccessTime.length == 3){
+                runForEach = false;
+            }
+        }
     });
     //console.log($scope.myAccessTime);
 
