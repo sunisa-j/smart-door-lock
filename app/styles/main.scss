@@ -1438,6 +1438,9 @@ ion-modal-view .item-input {
 .fc-today-button {
   color: $assertive;
 }
+.fc-ltr .fc-basic-view .fc-day-number {
+  @extend .pointer;
+}
 ::-webkit-scrollbar {
   width: 7px;
 }
