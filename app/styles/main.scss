@@ -1455,7 +1455,20 @@ ion-modal-view .item-input {
   border-radius: 50px;
   -moz-border-radius: 50px;
   -webkit-border-radius: 50px;
-
+}
+.today-number-circle-bg {
+  position: absolute;
+  right: 1px;
+  padding-top: 3px;
+  padding-right: 4px;
+  color: $light;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  background-color: $assertive;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
 }
 ::-webkit-scrollbar {
   width: 7px;
