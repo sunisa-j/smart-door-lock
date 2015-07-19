@@ -8,7 +8,7 @@ window.app.controller('DoorsController', function ($scope, doorsAccess, $timeout
     //Get doors user can access informaiton
     $scope.doorsAccessData = doorsAccess(userId, 'object');
     $scope.doorsAccessArr = doorsAccess(userId, 'array');
-    //console.log($scope.doorsAccessData);
+    //console.log($scope.doorsAccessArr);
 
     $scope.load = {};
 
