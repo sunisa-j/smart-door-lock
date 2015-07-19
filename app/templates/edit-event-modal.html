@@ -1,0 +1,418 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <i class="ion-ios-close-empty modal-close-icon" ng-click="editEventModal.hide()"></i>
+        <h1 class="title">Edit Event {{editEventData.id}}</h1>
+    </ion-header-bar>
+
+    <ion-content class="custom-ion-content-bg">
+
+        <!--Title---------------------------------->
+        <div class="list">
+            <div class="item item-input small-item-input">
+                <span>Title</span>
+                <input type="text" ng-model="createEventData.name">
+            </div>
+        </div>
+        <!--Description-->
+        <div class="list" style="padding-bottom: 15px">
+            <div class="item item-input small-item-input">
+                <span>Description</span>
+                <input type="text" ng-model="createEventData.description">
+            </div>
+        </div>
+
+        <div class="item item-divider edit-button-item-divider">Date & Time</div>
+        <!--Start Date-->
+        <div class="list">
+            <div class="item item-input small-item-input">
+                <span>Start Date</span>
+                <input type="date" ng-model="createEventData.startDate">
+            </div>
+        </div>
+        <!--Start Time-->
+        <div class="list flex">
+            <div class="item item-input small-item-input flex-1">
+                <span>Start Time</span>
+                <input type="time" ng-model="createEventData.startTime">
+            </div>
+            <div class="item item-input small-item-input flex-1">
+                <span>End Time</span>
+                <input type="time" ng-model="createEventData.endTime">
+            </div>
+        </div>
+        <!--End Time-->
+        <div class="list">
+            <div class="item item-toggle small-item-toggle">
+                Repeat
+                <label class="toggle toggle-energized">
+                    <input type="checkbox" ng-model="createEventData.repeat.status">
+                    <div class="track">
+                        <div class="handle"></div>
+                    </div>
+                </label>
+            </div>
+        </div>
+        <!--Repeat-->
+        <div class="list" ng-show="createEventData.repeat.status">
+            <div class="item item-input small-item-input sub-item-input">
+                <span>Repeat</span>
+                <span class="flex align-items-center sub-input-padding">
+                    <div>
+                        <select class="custom-row-font-size" ng-model="createEventData.repeat.recurring" style="width: 150px">
+                            <option value="daily" ng-selected="createEventData.repeat.recurring=='daily'">Daily</option>
+                            <option value="weekly" ng-selected="createEventData.repeat.recurring=='weekly'">Weekly</option>
+                            <option value="monthly" ng-selected="createEventData.repeat.recurring=='monthly'">Monthly</option>
+                            <option value="yearly" ng-selected="createEventData.repeat.recurring=='yearly'">Yearly</option>
+                        </select>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <!--Daily----------------------------------->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='daily')">
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.daily.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.daily.every==1)? 'day':'days'}}</div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Weekly---------------------------------->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='weekly')">
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.weekly.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.weekly.every==1)? 'week':'weeks'}} on:</div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -4px">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span>
+                    <span class="sub-input-padding" style="margin-left: -5px">
+                        <div class="button-bar custom-event-button-bar">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.monday}" ng-click="toggleDaySelect('monday')">M</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.tuesday}" ng-click="toggleDaySelect('tuesday')">T</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.wednesday}" ng-click="toggleDaySelect('wednesday')">W</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.thursday}" ng-click="toggleDaySelect('thursday')">Th</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.friday}" ng-click="toggleDaySelect('friday')">F</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.saturday}" ng-click="toggleDaySelect('saturday')">Sa</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.sunday}" ng-click="toggleDaySelect('sunday')">S</button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Monthly---------------------------------->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='monthly')">
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.monthly.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.monthly.every==1)? 'month':'months'}}</div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input month-item-input sub-item-input del-border-sub-item">
+                    <span class="flex align-items-center"><div style="display: none">{{(createEventData.repeat.monthly.select=='each')? eachDisabled=false:eachDisabled=true}}</div>
+                        <div class="custom-circle-radio-first-col">
+                            <input type="radio" ng-model="createEventData.repeat.monthly.select" value="each" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.monthly.select=='each'"
+                                    ng-class="{'fade-in':notSelectEach.value==false, 'opacity-0':notSelectEach.value==true,'fade-out':notSelectEach.value==true, 'opacity-1':notSelectEach.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.monthly.select=='each'"
+                                    ng-click="createEventData.repeat.monthly.select='each';notSelectEach.value=false;eachDisabled=false;notSelectOnThe.value=true;"
+                                    ng-class="{'fade-in':notSelectEach.value==true, 'opacity-0':notSelectEach.value==false,'fade-out':notSelectEach.value==false, 'opacity-1':notSelectEach.value==true}">
+                            </button>
+                        </div>
+                        <div class="custom-circle-text-first-col">Each</div>
+                    </span>
+                    <span class="sub-input-padding" style="margin-left: -5px; margin-top: -8px">
+                        <div class="button-bar custom-event-button-bar">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[0]}" ng-click="toggleMonthSelect(0)" ng-disabled="eachDisabled">1</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[1]}" ng-click="toggleMonthSelect(1)" ng-disabled="eachDisabled">2</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[2]}" ng-click="toggleMonthSelect(2)" ng-disabled="eachDisabled">3</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[3]}" ng-click="toggleMonthSelect(3)" ng-disabled="eachDisabled">4</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[4]}" ng-click="toggleMonthSelect(4)" ng-disabled="eachDisabled">5</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[5]}" ng-click="toggleMonthSelect(5)" ng-disabled="eachDisabled">6</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[6]}" ng-click="toggleMonthSelect(6)" ng-disabled="eachDisabled">7</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[7]}" ng-click="toggleMonthSelect(7)" ng-disabled="eachDisabled">8</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[8]}" ng-click="toggleMonthSelect(8)" ng-disabled="eachDisabled">9</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[9]}" ng-click="toggleMonthSelect(9)" ng-disabled="eachDisabled">10</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[10]}" ng-click="toggleMonthSelect(10)" ng-disabled="eachDisabled">11</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[11]}" ng-click="toggleMonthSelect(11)" ng-disabled="eachDisabled">12</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[12]}" ng-click="toggleMonthSelect(12)" ng-disabled="eachDisabled">13</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[13]}" ng-click="toggleMonthSelect(13)" ng-disabled="eachDisabled">14</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[14]}" ng-click="toggleMonthSelect(14)" ng-disabled="eachDisabled">15</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[15]}" ng-click="toggleMonthSelect(15)" ng-disabled="eachDisabled">16</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[16]}" ng-click="toggleMonthSelect(16)" ng-disabled="eachDisabled">17</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[17]}" ng-click="toggleMonthSelect(17)" ng-disabled="eachDisabled">18</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[18]}" ng-click="toggleMonthSelect(18)" ng-disabled="eachDisabled">19</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[19]}" ng-click="toggleMonthSelect(19)" ng-disabled="eachDisabled">20</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[20]}" ng-click="toggleMonthSelect(20)" ng-disabled="eachDisabled">21</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[21]}" ng-click="toggleMonthSelect(21)" ng-disabled="eachDisabled">22</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[22]}" ng-click="toggleMonthSelect(22)" ng-disabled="eachDisabled">23</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[23]}" ng-click="toggleMonthSelect(23)" ng-disabled="eachDisabled">24</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[24]}" ng-click="toggleMonthSelect(24)" ng-disabled="eachDisabled">25</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[25]}" ng-click="toggleMonthSelect(25)" ng-disabled="eachDisabled">26</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[26]}" ng-click="toggleMonthSelect(26)" ng-disabled="eachDisabled">27</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[27]}" ng-click="toggleMonthSelect(27)" ng-disabled="eachDisabled">28</button>
+                        </div>
+                        <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[28]}" ng-click="toggleMonthSelect(28)" ng-disabled="eachDisabled">29</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[29]}" ng-click="toggleMonthSelect(29)" ng-disabled="eachDisabled">30</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[30]}" ng-click="toggleMonthSelect(30)" ng-disabled="eachDisabled" style="min-width: 31px">31</button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+
+                    <span class="flex align-items-center"><div style="display: none">{{(createEventData.repeat.monthly.select=='onThe')? onTheDisabled=false:onTheDisabled=true}}</div>
+                        <div class="custom-circle-radio-first-col">
+                            <input type="radio" ng-model="createEventData.repeat.monthly.select" value="onThe" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.monthly.select=='onThe'"
+                                    ng-class="{'fade-in':notSelectOnThe.value==false, 'opacity-0':notSelectOnThe.value==true,'fade-out':notSelectOnThe.value==true, 'opacity-1':notSelectOnThe.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.monthly.select=='onThe'"
+                                    ng-click="createEventData.repeat.monthly.select='onThe';notSelectOnThe.value=false;onTheDisabled=false;notSelectEach.value=true;"
+                                    ng-class="{'fade-in':notSelectOnThe.value==true, 'opacity-0':notSelectOnThe.value==false,'fade-out':notSelectOnThe.value==false, 'opacity-1':notSelectOnThe.value==true}">
+                            </button>
+                        </div>
+                        <div class="custom-circle-text-first-col">On the</div>
+                    </span>
+
+                    <span class="flex align-items-center sub-input-padding">
+                        <div>
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.sequent" ng-disabled="onTheDisabled">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='first'">first</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='second'">second</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='third'">third</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fourth'">fourth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fifth'">fifth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='last'">last</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 94px">
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" style="width: 110px" ng-disabled="onTheDisabled">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='day'">day</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekday'">weekday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekend'">weekend</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='monday'">Monday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='tuesday'">Tuesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='wednesday'">Wednesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='thursday'">Thursday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='friday'">Friday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='saturday'">Saturday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='sunday'">Sunday</option>
+                            </select>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!--Yearly---------------------------------->
+        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='yearly')">
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>Every</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div><input type="number" ng-model="createEventData.repeat.yearly.every" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(createEventData.repeat.yearly.every==1)? 'year':'years'}} in:</div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input year-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span>
+                    <span class="sub-input-padding" style="margin-left: -5px; margin-top: -8px">
+                        <div class="button-bar custom-year-button-bar">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[0]}" ng-click="toggleYearSelect(0)">Jan</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[1]}" ng-click="toggleYearSelect(1)">Feb</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[2]}" ng-click="toggleYearSelect(2)">Mar</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[3]}" ng-click="toggleYearSelect(3)">Apr</button>
+                        </div>
+                        <div class="button-bar custom-year-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[4]}" ng-click="toggleYearSelect(4)">May</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[5]}" ng-click="toggleYearSelect(5)">Jun</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[6]}" ng-click="toggleYearSelect(6)">Jul</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[7]}" ng-click="toggleYearSelect(7)">Aug</button>
+                        </div>
+                        <div class="button-bar custom-year-button-bar" style="margin-top: -1px">
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[8]}" ng-click="toggleYearSelect(8)">Sep</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[9]}" ng-click="toggleYearSelect(9)">Oct</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[10]}" ng-click="toggleYearSelect(10)">Nov</button>
+                            <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[11]}" ng-click="toggleYearSelect(11)">Dec</button>
+                        </div>
+                    </span>
+                </div>
+            </div>
+            <div class="list" style="margin-top: -7px">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+
+                    <span class="flex align-items-center">
+                        <div class="custom-circle-radio-first-col">
+                            <label class="checkbox checkbox-energized custom-event-checkbox">
+                                <input type="checkbox" ng-model="createEventData.repeat.yearly.onThe">
+                            </label>
+                        </div>
+                        <div class="custom-circle-text-first-col">On the</div>
+                    </span>
+
+                    <span class="flex align-items-center sub-input-padding">
+                        <div>
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.sequent" ng-disabled="!(createEventData.repeat.yearly.onThe)">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='first'">first</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='second'">second</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='third'">third</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fourth'">fourth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='fifth'">fifth</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='last'">last</option>
+                            </select>
+                        </div>
+                        <div style="margin-left: 94px">
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" style="width: 110px" ng-disabled="!(createEventData.repeat.yearly.onThe)">
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='day'">day</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekday'">weekday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekend'">weekend</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='monday'">Monday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='tuesday'">Tuesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='wednesday'">Wednesday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='thursday'">Thursday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='friday'">Friday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='saturday'">Saturday</option>
+                                <option value="daily" ng-selected="createEventData.repeat.onThe.day=='sunday'">Sunday</option>
+                            </select>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!--End Repeat------------------------------>
+        <div ng-show="createEventData.repeat.status">
+            <!--Never-->
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input">
+                    <span>End Repeat</span>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="never" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='never'"
+                                    ng-class="{'fade-in':notSelectNever.value==false, 'opacity-0':notSelectNever.value==true,'fade-out':notSelectNever.value==true, 'opacity-1':notSelectNever.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='never'"
+                                    ng-click="createEventData.repeat.endRepeat.value='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;"
+                                    ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1">Never</div>
+                    </span>
+
+                </div>
+            </div>
+            <!--After-->
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span><div style="display: none">{{(createEventData.repeat.endRepeat.value=='after')? afterDisabled=false:afterDisabled=true}}</div>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="after" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='after'"
+                                    ng-class="{'fade-in':notSelectAfter.value==false, 'opacity-0':notSelectAfter.value==true,'fade-out':notSelectAfter.value==true, 'opacity-1':notSelectAfter.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='after'"
+                                    ng-click="createEventData.repeat.endRepeat.value='after';notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;"
+                                    ng-class="{'fade-in':notSelectAfter.value==true, 'opacity-0':notSelectAfter.value==false,'fade-out':notSelectAfter.value==false, 'opacity-1':notSelectAfter.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1 flex align-items-center">
+                            <div style="padding-right: 56px;">After</div>
+                            <div>
+                                <input type="number" ng-model="createEventData.repeat.endRepeat.after" class="sub-item-text-input" ng-disabled="afterDisabled">
+                            </div>
+                            <div class="sub-item-unit">{{(createEventData.repeat.endRepeat.after<=1)? 'time':'times'}}</div>
+                        </div>
+                    </span>
+
+                </div>
+            </div>
+            <!--On Date-->
+            <div class="list">
+                <div class="item item-input small-item-input sub-item-input del-border-sub-item">
+                    <span>&nbsp;</span><div style="display: none">{{(createEventData.repeat.endRepeat.value=='date')? onDateDisabled=false:onDateDisabled=true}}</div>
+                    <span class="flex align-items-center sub-input-padding">
+                        <div class="custom-circle-radio-row">
+                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="date" style="display: none">
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
+                                    ng-show="createEventData.repeat.endRepeat.value=='date'"
+                                    ng-class="{'fade-in':notSelectOnDate.value==false, 'opacity-0':notSelectOnDate.value==true,'fade-out':notSelectOnDate.value==true, 'opacity-1':notSelectOnDate.value==false}">
+                            </button>
+                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
+                                    ng-hide="createEventData.repeat.endRepeat.value=='date'"
+                                    ng-click="createEventData.repeat.endRepeat.value='date';notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;"
+                                    ng-class="{'fade-in':notSelectOnDate.value==true, 'opacity-0':notSelectOnDate.value==false,'fade-out':notSelectOnDate.value==false, 'opacity-1':notSelectOnDate.value==true}">
+                            </button>
+                        </div>
+                        <div class="dark-font-color flex-1 flex align-items-center">
+                            <div style="padding-right: 80px;">On Date</div>
+                            <div>
+                                <label><input type="date" ng-model="createEventData.repeat.endRepeat.onDate" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
+                            </div>
+                        </div>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+
+        <!--Summary--------------------------------->
+        <div class="list" ng-show="createEventData.repeat.status">
+            <div class="item item-input small-item-input sub-item-input sub-input-summary" style="border: 0; background: transparent">
+                <span>Summary</span>
+                <span style="padding-left: 20px; color: #333">Every 1 Day</span>
+            </div>
+        </div>
+
+        <!--Cancel & Done Button-->
+        <div class="button-bar" style="margin-top: 15px">
+            <!--<div class="button-div-padding">-->
+            <!--<button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="editEventModal.hide()">Cancel</button>-->
+            <!--</div>-->
+            <div class="button-div-padding">
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline more-button">Done</button>
+            </div>
+            <!--<div class="button-div-padding">-->
+            <!--<button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline">Delete</button>-->
+            <!--</div>-->
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
