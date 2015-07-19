@@ -7,11 +7,11 @@ window.app.factory('notifications', function () {
             id: 1,
             action: 'removed',
             door : {
-                id: 100,
+                id: 'door1',
                 name: 'R101'
             },
             handler: {
-                id: 1,
+                id: 12,
                 name: 'Wimon Khamchan'
             },
             status: 'unread',
@@ -22,11 +22,11 @@ window.app.factory('notifications', function () {
             id: 2,
             action: 'added',
             door : {
-                id: 101,
+                id: 'door5',
                 name: 'WSN'
             },
             handler: {
-                id: 2,
+                id: 11,
                 name: 'Prof. Wannarat Santiamorntat'
             },
             status: 'unread',
