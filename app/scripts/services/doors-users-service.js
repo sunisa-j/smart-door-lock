@@ -140,6 +140,23 @@ window.app.factory('doorsUsers', function (users) {
             updatedAt: "2015-06-18T08:47:09.000Z"
         },
         {
+            id: 'doorUser22',
+            door: 'door2',
+            user: 2,
+            permission: {
+                viewLog: true,
+                viewStatus: true,
+                remoteAccess: true,
+                configuration: true,
+                policies: true,
+                grant: true
+            },
+            createdBy: 2,
+            createdAt: "2015-06-18T08:47:09.000Z",
+            updatedBy: 2,
+            updatedAt: "2015-06-18T08:47:09.000Z"
+        },
+        {
             id: 'doorUser3',
             door: 'door2',
             user: 3,
