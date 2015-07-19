@@ -1,0 +1,29 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <i class="ion-ios-close-empty modal-close-icon" ng-click="calendarEventsModal.hide()"></i>
+        <h1 class="title">Events</h1>
+    </ion-header-bar>
+
+    <ion-content style="margin-top: -1px">
+
+        <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
+
+        <!--show events on date selected-->
+        <div class="item item-divider">
+            {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
+        </div>
+        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No event</div>
+
+        <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)">
+            <div class="custom-time-row-first-col">
+                {{startDate2.getUTCHours()}}:{{(startDate2.getUTCMinutes()==0)? '00':startDate2.getUTCMinutes()}} - {{endDate2.getUTCHours()}}:{{(endDate2.getUTCMinutes()==0)? '00':endDate2.getUTCMinutes()}}
+            </div>
+            <div class="custom-time-row-title">
+                <div class="overflow-hidden-text">{{event.name}}</div>
+                <div class="custom-row-desc overflow-hidden-text">{{event.description}}</div>
+            </div>
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
