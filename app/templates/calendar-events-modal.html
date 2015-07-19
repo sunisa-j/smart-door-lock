@@ -9,7 +9,7 @@
         <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
 
         <!--show events on date selected-->
-        <div class="item item-divider">
+        <div class="item item-divider date-selected-item-divider">
             {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
         </div>
         <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No event</div>
