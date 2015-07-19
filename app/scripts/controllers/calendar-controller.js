@@ -76,7 +76,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     angular.element("td.fc-day-number div").removeClass('number-circle-bg');
                     angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
                 }
-
+            },
+            eventClick: function(event, element) {
+                console.log('event: ', event);
+                $scope.editEventData = event;
+                $scope.editEventModal.show();
             }
         }
     };
@@ -162,7 +166,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.createEventData.repeat.yearly.years[year] = !$scope.createEventData.repeat.yearly.years[year];
     };
 
-    // Calendar Settings
+    // Calendar Settings ---------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -212,7 +216,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         });
     };
 
-    // Create Event
+    // Create Event ---------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/create-event-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -222,6 +226,19 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     });
     $scope.openCreateEvent = function(){
         $scope.createEventModal.show();
+    };
+
+    // Edit Event -----------------------------------------------------
+    $ionicModal.fromTemplateUrl('templates/edit-event-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false
+    }).then(function(modal) {
+        $scope.editEventModal = modal;
+    });
+    $scope.openEditEvent = function(event){
+        $scope.editEventData = event;
+        $scope.editEventModal.show();
     };
 
 });
