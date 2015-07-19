@@ -1434,12 +1434,28 @@ ion-modal-view .item-input {
 }
 .fc-ltr .fc-basic-view .fc-day-number {
   padding-right: 5px;
+  position: relative;
 }
 .fc-today-button {
   color: $assertive;
 }
 .fc-ltr .fc-basic-view .fc-day-number {
   @extend .pointer;
+}
+.number-circle-bg {
+  position: absolute;
+  right: 1px;
+  padding-top: 3px;
+  padding-right: 4px;
+  color: $light;
+  font-weight: bold;
+  width: 22px;
+  height: 22px;
+  background-color: #222;
+  border-radius: 50px;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+
 }
 ::-webkit-scrollbar {
   width: 7px;
