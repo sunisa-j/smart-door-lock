@@ -52,6 +52,26 @@ window.app.factory('userAccessPolicies', function (calendars) {
             createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
             updatedAt: '2015-06-18T08:47:09.000Z'
+        },
+        {
+            id: 'userPolicy6',
+            type: 'normal',
+            doorUser: 'doorUser11',
+            calendar: 'calendar1',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
+        },
+        {
+            id: 'userPolicy7',
+            type: 'normal',
+            doorUser: 'doorUser22',
+            calendar: 'calendar1',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
         }
     ];
 
