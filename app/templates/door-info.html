@@ -4,7 +4,7 @@
     <ion-content ng-show="doorMenu.name=='doorInfo'">
         <!--Door Information-->
         <div class="item item-divider">Door Information</div>
-        <div class="door-info-custom-row" style="border: 0" ng-class="{'royal-bg': (doorData.status.doorState=='opened')&&(doorData.status.lockState=='locked')}">
+        <div class="door-info-custom-row" style="border: 0; cursor: default" ng-class="{'royal-bg': (doorData.status.doorState=='opened')&&(doorData.status.lockState=='locked')}">
             <div class="custom-row-icon" ng-show="doorData.permission.viewStatus==false">
                 <i class="flaticon-closed42"></i>
             </div>
@@ -33,28 +33,19 @@
         <!--My Access Time-->
         <div class="item item-divider">My Access Time</div>
         <div class="access-time-container">
-            <div class="access-time-row">
-                <div class="access-date-column">Sat, 19 Jun 2015</div>
+            <div class="access-time-row" ng-repeat="event in myAccessTime">
+                <div style="display: none">{{ myStartDate = transformDate(event.startDate) }}</div>
+                <div class="access-date-column">{{weekDay[myStartDate.getDay()]}}, {{myStartDate.getDate()}} {{ month[myStartDate.getMonth(myStartDate)] }} {{myStartDate.getFullYear()}}</div>
                 <div class="flex flex-direction-column access-time-detail-column">
-                    <div>01:30 pm - 04:30 pm <span class="calendar-list-title"> OOP</span></div>
-                    <div>07:00 pm - 09:00 pm <span class="calendar-list-title"> Software Lab</span></div>
-                    <div style="padding-bottom: 0">09:00 pm - 10:00 pm <span class="calendar-list-title"> COE24 Meeting</span></div>
-                </div>
-            </div>
-            <div class="access-time-row">
-                <div class="access-date-column">Tue, 22 Jun 2015</div>
-                <div class="flex flex-direction-column access-time-detail-column">
-                    <div style="padding-bottom: 0">08:30 pm - 10:30 pm <span class="calendar-list-title"> CPT</span></div>
-                </div>
-            </div>
-            <div class="access-time-row">
-                <div class="access-date-column">Wen, 23 Jun 2015</div>
-                <div class="flex flex-direction-column access-time-detail-column">
-                    <div style="padding-bottom: 0">08:30 pm - 10:30 pm <span class="calendar-list-title"> CPT</span></div>
+                    <div ng-repeat="accessTime in event" ng-init="myStartDate2=transformDate(accessTime.startDate);myEndDate2=transformDate(accessTime.endDate)">
+                        {{myStartDate2.getUTCHours()}}:{{(myStartDate2.getUTCMinutes()==0)? '00':myStartDate2.getUTCMinutes()}} - {{myEndDate2.getUTCHours()}}:{{(myEndDate2.getUTCMinutes()==0)? '00':myEndDate2.getUTCMinutes()}}
+                        <span class="calendar-list-title"> {{accessTime.name}} {{accessTime.calendar}}</span>
+                    </div>
                 </div>
             </div>
 
-            <button class="button button-outline button-block button-dark more-button">More ...</button>
+            <button class="button button-outline button-block button-dark more-button" ng-click="calendarEventsModal.show();calendarTodayActive()" ng-hide="myAccessTime.length==0">More ...</button>
+            <div style="text-align: center; padding: 15px 0" class="stable" ng-show="myAccessTime.length==0">No event</div>
         </div>
         <!--My Recent Activity-->
         <div class="item item-divider">My Recent Activity</div>
