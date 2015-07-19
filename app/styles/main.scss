@@ -191,7 +191,7 @@ input[disabled] {
 }
 // Modal Popup ActionSheet ******************************
 .modal .bar-header {
-  background-color: $custom_ion_content_bg;
+  background-color: $light;
 }
 .modal-close-icon {
   cursor: pointer;
@@ -655,6 +655,12 @@ ion-modal-view .item-input {
   -webkit-align-content: flex-start;
   -moz-align-content: flex-start;
   -ms-align-content: flex-start;
+}
+.align-content-flex-end {
+  align-content: flex-end;
+  -webkit-align-content: flex-end;
+  -moz-align-content: flex-end;
+  -ms-align-content: flex-end;
 }
 .flex-1 {
   flex: 1; -webkit-flex: 1; -moz-flex: 1; -ms-flex: 1;
@@ -1328,6 +1334,114 @@ ion-modal-view .item-input {
 .custom-event-checkbox.checkbox input:after, .checkbox-icon:after {
   top: 37% !important;
   left: 29% !important;
+}
+.fc-toolbar {
+  @extend .flex, .align-items-center;
+  padding: 0 0 0 10px;
+  height: 30px;
+  margin-right: -2px;
+  background-color: $custom_ion_content_bg;
+  border-top: solid 1px $border_color;
+}
+.fc-toolbar .fc-left {
+  @extend .flex-1;
+}
+.fc-toolbar .fc-left * {
+  font-size: $font-size-base !important;
+}
+.fc-toolbar .fc-right {
+  flex-basis: 150px;
+  -webkit-flex-basis: 150px;
+  -moz-flex-basis: 150px;
+}
+.fc .button {
+  border-radius: 0;
+  font-size: $font-size-base !important;
+  padding-top: 1px;
+}
+.fc .fc-button-group > * {
+  width: 44px;
+}
+.fc-button {
+  height: 31px !important;
+}
+.fc-state-default.fc-corner-left {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.fc-state-default.fc-corner-right {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.fc-state-default {
+  color: #333;
+  background-color: $custom_ion_content_bg;
+  background-image: none;
+  box-shadow: none;
+  text-shadow: none;
+  border-color: $border_color;
+}
+.fc-today {
+  background-color: transparent !important;
+  color: $assertive;
+}
+.fc th {
+  text-align: center;
+  border-left: solid 0px #fff;
+  border-right: solid 0px #fff;
+  padding: 4px !important;
+  color: $item_divider_font_color;
+}
+.fc td {
+  border-right: 0px;
+}
+.fc-view-container {
+  margin-top: -16px;
+  margin-left: -1px;
+}
+.fc .fc-toolbar > * > * {
+  margin-left: -1px;
+}
+.fc-day-grid-event .fc-time {
+  font-weight: normal !important;
+  color: #000;
+}
+.fc-title {
+  color: $dark;
+}
+.fc-scroller {
+  overflow-y: auto;
+}
+.fc-row fc-widget-header {
+  border-right-width: 0px;
+}
+.fc-icon-left-single-arrow{
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-right: 10px solid $stable_font_color;
+}
+.fc-icon-right-single-arrow {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 10px solid $stable_font_color;
+}
+.fc-ltr .fc-basic-view .fc-day-number {
+  padding-right: 5px;
+}
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: $light_border_color;
 }
 // Log style *******************************************
 .log-container {
