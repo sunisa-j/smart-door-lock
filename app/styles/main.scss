@@ -294,6 +294,9 @@ ion-modal-view .item-input {
   color: $dark_font_color;
   margin-bottom: 0;
 }
+.item-divider.date-selected-item-divider{
+  color: #333 !important;
+}
 .item-input {
   height: 50px;
 }
@@ -1407,7 +1410,7 @@ ion-modal-view .item-input {
   color: #000;
 }
 .fc-title {
-  color: $dark;
+  color: #333;
 }
 .fc-scroller {
   overflow-y: auto;
@@ -1431,6 +1434,9 @@ ion-modal-view .item-input {
 }
 .fc-ltr .fc-basic-view .fc-day-number {
   padding-right: 5px;
+}
+.fc-today-button {
+  color: $assertive;
 }
 ::-webkit-scrollbar {
   width: 7px;
