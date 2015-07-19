@@ -55,13 +55,29 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.uiConfig = {
         calendar:{
             height: 480,
-            editable: true,
+            dayClick: function(date, jsEvent, view) {
+
+                var dateSelected = new Date(date._d);
+                //console.log(new Date(dateSelected.setHours(0,0,0,0)));
+                $scope.getEventsDateSelected(dateSelected);
+
+                //alert('Clicked on: ' + date.format());
+                //
+                //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                //
+                //alert('Current view: ' + view.name);
+
+                // change the day's background color just for fun
+                angular.element('.fc td').css('background-color', 'transparent');
+                angular.element(this).css('background-color', '#F5F5F5');
+
+
+            }
             //header:{
             //    left: 'month basicWeek basicDay agendaWeek agendaDay',
             //    center: 'title',
             //    right: 'today prev,next'
             //},
-            dayClick: $scope.openCreateEvent
             //eventDrop: $scope.alertOnDrop,
             //eventResize: $scope.alertOnResize
         }
