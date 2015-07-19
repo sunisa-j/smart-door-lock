@@ -22,8 +22,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     };
 
     $scope.getEventsDateSelected = function (dateUserSelected) {
-
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
+        console.log($scope.dateSelected );
 
         var calendarEventsDateSelected = [];
         var events = angular.copy($scope.calendarEventsData);
@@ -57,31 +57,37 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             height: 480,
             dayClick: function(date, jsEvent, view) {
 
-                var dateSelected = new Date(date._d);
-                //console.log(new Date(dateSelected.setHours(0,0,0,0)));
-                $scope.getEventsDateSelected(dateSelected);
-
                 //alert('Clicked on: ' + date.format());
-                //
                 //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                //
                 //alert('Current view: ' + view.name);
 
+                var dateSelected = new Date(date._d);
+                $scope.getEventsDateSelected(dateSelected);
+
+                var dataMonth = dateSelected.getMonth()+1;
+                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? '0'+dataMonth:dataMonth) + '-' + dateSelected.getDate();
+
                 // change the day's background color just for fun
-                angular.element('.fc td').css('background-color', 'transparent');
-                angular.element(this).css('background-color', '#F5F5F5');
-
-
+                angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+                angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
             }
-            //header:{
-            //    left: 'month basicWeek basicDay agendaWeek agendaDay',
-            //    center: 'title',
-            //    right: 'today prev,next'
-            //},
-            //eventDrop: $scope.alertOnDrop,
-            //eventResize: $scope.alertOnResize
         }
     };
+    angular.element('.fc-today-button').on('click', function() {
+        var dateNow = new Date();
+        var dateNow2 = new Date(dateNow.setHours(0,0,0,0));
+        //console.log(dateNow2);
+        $scope.getEventsDateSelected(dateNow);
+
+        var dataMonth = dateNow2.getMonth()+1;
+        var dataDate = dateNow2.getFullYear() + '-' + ((dataMonth < 10)? '0'+dataMonth:dataMonth) + '-' + dateNow2.getDate();
+
+        angular.element("td.fc-day-number[data-date=" + dataDate + "]").click();
+
+        // change the day's background color just for fun
+        //angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+        //angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+    });
 
     $scope.createEventData = {
         name: 'Event Name',
