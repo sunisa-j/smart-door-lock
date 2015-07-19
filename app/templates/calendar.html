@@ -33,8 +33,6 @@
 
         <!--then include calendar module to show events data-->
         <!--<div style="padding-left: 15px">Calendar Id: {{calendarEventsData[0].calendar}}</div><br>-->
-
-        <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
         <!--<div ng-repeat="event in calendarEventsData">-->
             <!--<div style="padding-left: 15px" class="balanced pointer" ng-click="getEventsDateSelected(transformDate(event.startDate))">-->
                 <!--<div style="display:none">{{startDate=transformDate(event.startDate)}} {{endDate=transformDate(event.endDate)}}</div>-->
@@ -48,6 +46,8 @@
             <!--<div style="padding-left: 15px; font-size: 12px" ng-if="event.rRule">{{event.rRule}}</div>-->
             <!--<br>-->
         <!--</div>-->
+
+        <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
 
         <!--show events on date selected-->
         <div class="item item-divider date-selected-item-divider">
