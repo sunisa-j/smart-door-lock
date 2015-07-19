@@ -4,7 +4,9 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
-    $scope.calendarEventsData = calendarEvents(calendarId,'calendarEvents');
+
+    // About calendar management -------------------------------------------
+    $scope.calendarEventsData = calendarEvents('', '', calendarId,'calendarEvents');
     $scope.dateSelected = new Date();
 
     $scope.transformDate = function(date){
@@ -44,6 +46,27 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // week days
     $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
 
+    // Calendar UI
+    $scope.uiCalendarEvents = {
+        events: $scope.calendarEventsData,
+        color: 'rgba(0, 201, 13, 0.2)',
+        textColor: '#333333'
+    };
+    $scope.uiConfig = {
+        calendar:{
+            height: 480,
+            editable: true,
+            //header:{
+            //    left: 'month basicWeek basicDay agendaWeek agendaDay',
+            //    center: 'title',
+            //    right: 'today prev,next'
+            //},
+            dayClick: $scope.openCreateEvent
+            //eventDrop: $scope.alertOnDrop,
+            //eventResize: $scope.alertOnResize
+        }
+    };
+
     $scope.createEventData = {
         name: 'Event Name',
         description: '',
@@ -52,7 +75,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         endTime: new Date(),
         repeat: {
             status: false,
-            recurring: 'yearly',
+            recurring: 'monthly',
             daily: {
                 every: 1
             },
@@ -164,5 +187,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     }).then(function(modal) {
         $scope.createEventModal = modal;
     });
+    $scope.openCreateEvent = function(){
+        $scope.createEventModal.show();
+    };
 
 });
