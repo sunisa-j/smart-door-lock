@@ -14,7 +14,8 @@
         </div>
         <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No event</div>
 
-        <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)">
+        <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)"
+             ng-click="openEditEvent(event)">
             <div class="custom-time-row-first-col">
                 {{startDate2.getUTCHours()}}:{{(startDate2.getUTCMinutes()==0)? '00':startDate2.getUTCMinutes()}} - {{endDate2.getUTCHours()}}:{{(endDate2.getUTCMinutes()==0)? '00':endDate2.getUTCMinutes()}}
             </div>
