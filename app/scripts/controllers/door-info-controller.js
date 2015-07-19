@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents) {
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
@@ -16,6 +16,71 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     // Set Default Menu (Menu contains are 'doorInfo', 'configDoor', 'log' and 'manageAccess')
     $scope.doorMenu = {
         name: 'doorInfo'
+    };
+
+    // Calendar UI --------------------------------------------------------
+    $ionicModal.fromTemplateUrl('templates/calendar-events-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up'
+    }).then(function(modal) {
+        $scope.calendarEventsModal = modal;
+    });
+
+    $scope.doorUserEvents = calendarEvents(userId, doorId, '','doorUserEvents');
+    //console.log($scope.doorUserEvents);
+
+    $scope.dateSelected = new Date();
+
+    $scope.transformDate = function(date){
+        var dateNew;
+
+        if(date == ''){
+            dateNew = new Date();
+        } else {
+            dateNew = new Date(date);
+        }
+
+        return dateNew;
+    };
+    $scope.calendarTodayActive = function() {
+        angular.element('.fc-today-button').click();
+    };
+
+    $scope.getEventsDateSelected = function (dateUserSelected) {
+
+        $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
+
+        var calendarEventsDateSelected = [];
+        var events = angular.copy($scope.doorUserEvents);
+
+        angular.forEach(events, function(value){
+            var startDate = $scope.transformDate(value.startDate);
+            var startDate2 = new Date(startDate.setHours(0, 0, 0, 0));
+
+            if(($scope.dateSelected).getTime() === startDate2.getTime()){
+                calendarEventsDateSelected.push(value);
+            }
+        });
+        $scope.calendarEventsDateSelected2 = calendarEventsDateSelected;
+    };
+    $scope.getEventsDateSelected($scope.dateSelected);
+
+    // month
+    $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    // week days
+    $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
+
+    // Calendar UI
+    $scope.uiCalendarEvents = {
+        events: $scope.doorUserEvents,
+        color: 'rgba(0, 201, 13, 0.2)',
+        textColor: '#333333'
+    };
+    $scope.uiConfig = {
+        calendar:{
+            height: 480,
+            editable: false
+        }
     };
 
     // -------------------------------------------------------------------------
@@ -45,6 +110,43 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             }, 1500);
         }
     };
+
+    // My Access Time
+    $scope.calcMyAccessTime = {};
+    $scope.myAccessTime = [];
+    var dateNow = new Date();
+    var runForEach = true;
+
+    angular.forEach($scope.doorUserEvents, function(event){
+        var newStartDate = new Date(event.startDate);
+        var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
+        if(startDate >= dateNow) {
+            $scope.calcMyAccessTime[startDate] = [];
+        }
+    });
+
+    angular.forEach($scope.doorUserEvents, function(event){
+        //if(runForEach) {
+            var newStartDate = new Date(event.startDate);
+            var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
+
+            if(startDate >= dateNow) {
+                var tmp = angular.copy(event);
+                $scope.calcMyAccessTime[startDate].push(tmp);
+            }
+            //if($scope.myAccessTime.length == 3){
+            //    runForEach = false;
+            //}
+        //}
+    });
+
+    angular.forEach($scope.calcMyAccessTime, function(value, key){
+        var tmp = angular.copy(value);
+        tmp.startDate = key;
+        $scope.myAccessTime.push(tmp);
+    });
+    //console.log($scope.myAccessTime);
+
 
     // -------------------------------------------------------------------------
     // About Config Door -------------------------------------------------------
