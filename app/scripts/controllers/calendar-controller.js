@@ -60,11 +60,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                 //alert('Current view: ' + view.name);
 
+                console.log(date);
+                //console.log(jsEvent);
+                //console.log(view);
+
                 var dateSelected = new Date(date._d);
                 $scope.getEventsDateSelected(dateSelected);
 
                 var dataMonth = dateSelected.getMonth()+1;
-                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? '0'+dataMonth:dataMonth) + '-' + dateSelected.getDate();
+                var dataDay = dateSelected.getDate();
+                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+                console.log(dataDate);
 
                 // change the day's background color just for fun
                 var dateNow = new Date();
