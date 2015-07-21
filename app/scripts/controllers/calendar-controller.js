@@ -60,10 +60,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
                 //alert('Current view: ' + view.name);
 
-                console.log(date);
-                //console.log(jsEvent);
-                //console.log(view);
-
                 var dateSelected = new Date(date._d);
                 $scope.getEventsDateSelected(dateSelected);
 
