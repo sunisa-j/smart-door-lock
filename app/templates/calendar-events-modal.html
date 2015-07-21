@@ -12,7 +12,7 @@
         <div class="item item-divider date-selected-item-divider">
             {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
         </div>
-        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No event</div>
+        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No Events</div>
 
         <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)"
              ng-click="openEditEvent(event)">
