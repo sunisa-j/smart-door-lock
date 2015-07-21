@@ -39,7 +39,7 @@
                 <div class="flex flex-direction-column access-time-detail-column">
                     <div ng-repeat="accessTime in event" ng-init="myStartDate2=transformDate(accessTime.startDate);myEndDate2=transformDate(accessTime.endDate)">
                         {{myStartDate2.getUTCHours()}}:{{(myStartDate2.getUTCMinutes()==0)? '00':myStartDate2.getUTCMinutes()}} - {{myEndDate2.getUTCHours()}}:{{(myEndDate2.getUTCMinutes()==0)? '00':myEndDate2.getUTCMinutes()}}
-                        <span class="calendar-list-title"> {{accessTime.name}} {{accessTime.calendar}}</span>
+                        <span class="calendar-list-title"> {{accessTime.name}}</span>
                     </div>
                 </div>
             </div>
