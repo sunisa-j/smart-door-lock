@@ -1,7 +1,7 @@
 <ion-modal-view>
     <ion-header-bar>
         <i class="ion-ios-close-empty modal-close-icon" ng-click="calendarEventsModal.hide()"></i>
-        <h1 class="title">Events</h1>
+        <h1 class="title">My Access Time in {{doorData.name}}</h1>
     </ion-header-bar>
 
     <ion-content style="margin-top: -2px">
@@ -26,5 +26,15 @@
         </div>
 
     </ion-content>
+
+    <div class="bar bar-footer bar-light custom-bar-footer flex">
+        <!--Calendar Today Button-->
+        <div class="flex-1">
+            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px" id="today-button" ng-click="todayActive()">
+                Today
+            </button>
+        </div>
+    </div>
+
 
 </ion-modal-view>
