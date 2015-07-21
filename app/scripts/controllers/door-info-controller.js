@@ -18,7 +18,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         name: 'doorInfo'
     };
 
-    // Calendar UI --------------------------------------------------------
+    // About calendar management -------------------------------------------
     $ionicModal.fromTemplateUrl('templates/calendar-events-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -27,10 +27,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     });
 
     $scope.doorUserEvents = calendarEvents(userId, doorId, '','doorUserEvents');
-    //console.log($scope.doorUserEvents);
-
     $scope.dateSelected = new Date();
-
     $scope.transformDate = function(date){
         var dateNew;
 
@@ -42,12 +39,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
         return dateNew;
     };
-    $scope.calendarTodayActive = function() {
-        angular.element('.fc-today-button').click();
-    };
-
     $scope.getEventsDateSelected = function (dateUserSelected) {
-
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
 
         var calendarEventsDateSelected = [];
@@ -69,7 +61,6 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
     // week days
     $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
-
     // Calendar UI
     $scope.uiCalendarEvents = {
         events: $scope.doorUserEvents,
@@ -78,6 +69,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     };
     $scope.uiConfig = {
         calendar:{
+            header:{
+                right: 'today prev,next'
+            },
+            editable: false,
             height: 480,
             dayClick: function(date, jsEvent, view) {
 
@@ -111,8 +106,36 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     }
                     angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
                 }
+            },
+            eventClick: function(event, element) {
+                //console.log('event: ', event);
+                $scope.editEventData = event;
+                $scope.editEventModal.show();
             }
         }
+    };
+    // bind my button with full calendar
+    $scope.todayActive = function() {
+        angular.element('.fc-today-button').click();
+        angular.element('#calendar').fullCalendar('today');
+
+        var dateNow = new Date();
+        var dateNow2 = new Date(dateNow.setHours(0,0,0,0));
+
+        $scope.getEventsDateSelected(dateNow);
+
+        var dataMonth = dateNow2.getMonth()+1;
+        var dataDay = dateNow2.getDate();
+        var dataDate = dateNow2.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+
+        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+        if(isOtherMonth) {
+            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+        }
+        angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
     };
 
     // -------------------------------------------------------------------------
