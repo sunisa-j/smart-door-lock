@@ -1,5 +1,7 @@
 <ion-view title="{{calendarData.name}}">
 
+    <div style="display: none">{{todayActive()}}</div>
+
     <ion-nav-buttons side="right">
         <div style="margin-top: -3px;">
             <button class="button button-clear" ng-click="createEventModal.show()">
@@ -7,6 +9,12 @@
             </button>
         </div>
     </ion-nav-buttons>
+
+    <!--Calendar Today Button-->
+    <!--<button class="button button-clear button-assertive" id="today-button"-->
+            <!--style="position: absolute; top: 36px; left: 3px; z-index: 1; font-size: 16px">-->
+        <!--Today-->
+    <!--</button>-->
 
     <!--<div class="bar bar-header item item-divider flex" style="margin-top: 43px">-->
         <!--<div class="calendar-item-divider-col">-->
@@ -20,32 +28,16 @@
 
         <!--<div class="calendar-item-divider-col">-->
             <!--<div class="calendar-icon-col">-->
-                <!--<button class="button button-outline button-icon ion-android-arrow-dropleft"></button>-->
+                <!--<button class="button button-outline button-icon ion-android-arrow-dropleft" id="prev-month"></button>-->
             <!--</div>-->
-            <!--<div class="calendar-today-col assertive pointer" ng-click="getEventsDateSelected(transformDate(''))">Today</div>-->
+            <!--<div class="calendar-today-col assertive pointer" ng-click="getEventsDateSelected(transformDate(''))" id="today-button">Today</div>-->
             <!--<div class="calendar-icon-col">-->
-                <!--<button class="button button-outline button-icon ion-android-arrow-dropright"></button>-->
+                <!--<button class="button button-outline button-icon ion-android-arrow-dropright" id="next-month"></button>-->
             <!--</div>-->
         <!--</div>-->
     <!--</div>-->
 
     <ion-content style="margin-top: -1px">
-
-        <!--then include calendar module to show events data-->
-        <!--<div style="padding-left: 15px">Calendar Id: {{calendarEventsData[0].calendar}}</div><br>-->
-        <!--<div ng-repeat="event in calendarEventsData">-->
-            <!--<div style="padding-left: 15px" class="balanced pointer" ng-click="getEventsDateSelected(transformDate(event.startDate))">-->
-                <!--<div style="display:none">{{startDate=transformDate(event.startDate)}} {{endDate=transformDate(event.endDate)}}</div>-->
-                <!--{{startDate.getDate()}} {{ month[startDate.getMonth()] }} {{startDate.getFullYear()}}-->
-                <!--({{startDate.getHours()}}:{{(startDate.getMinutes()==0)? '00':startDate.getMinutes()}} --->
-                <!--{{endDate.getHours()}}:{{(endDate.getMinutes()==0)? '00':endDate.getMinutes()}})-->
-            <!--</div>-->
-
-            <!--<div style="padding-left: 15px">{{event.name}}</div>-->
-            <!--<div style="padding-left: 15px; font-size: 12px" class="dark">{{event.description}}</div>-->
-            <!--<div style="padding-left: 15px; font-size: 12px" ng-if="event.rRule">{{event.rRule}}</div>-->
-            <!--<br>-->
-        <!--</div>-->
 
         <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
 
@@ -69,11 +61,19 @@
         <div style="padding-top: 60px"></div>
     </ion-content>
 
-    <div class="bar bar-footer custom-bar-footer justify-content-flex-end">
-        <button class="button button-clear button-light" style="font-size: 14px; height: 100%" ng-click="calendarSettingsModal.show()">
-            <i class="ion-ios-gear-outline" style="font-size: 20px"></i>&nbsp;
-            Calendar Settings
-        </button>
+    <div class="bar bar-footer bar-light custom-bar-footer flex">
+        <!--Calendar Today Button-->
+        <div class="flex-1">
+            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px" id="today-button" ng-click="todayActive()">
+                Today
+            </button>
+        </div>
+        <div style="flex-basis: 148px; height: 100%">
+            <button class="button button-clear button-dark" style="font-size: 14px; height: 100%; width: 148px; text-align: left" ng-click="calendarSettingsModal.show()">
+                <i class="ion-ios-gear-outline" style="font-size: 20px"></i>&nbsp;
+                <span style="position: absolute; top: -1px; right: 0; width: 120px">Calendar Settings</span>
+            </button>
+        </div>
     </div>
 
 </ion-view>
