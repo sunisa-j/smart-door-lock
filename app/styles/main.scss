@@ -184,11 +184,6 @@ input[disabled] {
 .custom-bar-footer {
   @extend .align-items-center;
   height: 30px;
-  background-color: $dark;
-  color: $light;
-  border-top: solid 1px $border_color;
-  font-size: 15px;
-  padding-right: 15px;
 }
 // Modal Popup ActionSheet ******************************
 .modal .bar-header {
@@ -1353,11 +1348,17 @@ ion-modal-view .item-input {
 }
 .fc-toolbar .fc-left * {
   font-size: $font-size-base !important;
+  padding-left: 5px;
+//  float: right;
+//  padding-right: 10px;
 }
 .fc-toolbar .fc-right {
-  flex-basis: 150px;
-  -webkit-flex-basis: 150px;
-  -moz-flex-basis: 150px;
+  flex-basis: 88px;
+  -webkit-flex-basis: 88px;
+  -moz-flex-basis: 88px;
+}
+.fc-right button.fc-today-button {
+  display: none;
 }
 .fc .button {
   border-radius: 0;
@@ -1415,7 +1416,7 @@ ion-modal-view .item-input {
   color: #000;
 }
 .fc-title {
-  color: #333;
+  color: $item_divider_font_color;
 }
 .fc-event .fc-content {
   font-size: 12px;
