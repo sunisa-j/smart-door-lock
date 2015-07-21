@@ -49,6 +49,7 @@ $custom_row_small_height: 48px;
 $doors_custom_row_height: $custom_row_base_height;
 $custom_setting_row_height: 50px;
 $tabs_column_height: 50px;
+$calendar_item_border: #ECECEC;
 
 // Your application styles go here **********************
 .pointer {
@@ -183,8 +184,8 @@ input[disabled] {
 .custom-bar-footer {
   @extend .align-items-center;
   height: 30px;
-  background-color: $custom_ion_content_bg;
-  color: $font_icon_color;
+  background-color: $dark;
+  color: $light;
   border-top: solid 1px $border_color;
   font-size: 15px;
   padding-right: 15px;
@@ -296,6 +297,7 @@ ion-modal-view .item-input {
 }
 .item-divider.date-selected-item-divider{
   color: #333 !important;
+  border-color: $calendar_item_border;
 }
 .item-input {
   height: 50px;
@@ -1344,7 +1346,7 @@ ion-modal-view .item-input {
   height: 30px;
   margin-right: -2px;
   background-color: $custom_ion_content_bg;
-  border-top: solid 1px $border_color;
+  border-top: solid 1px $calendar_item_border;
 }
 .fc-toolbar .fc-left {
   @extend .flex-1;
@@ -1382,7 +1384,8 @@ ion-modal-view .item-input {
   background-image: none;
   box-shadow: none;
   text-shadow: none;
-  border-color: $border_color;
+  border-top-color: $calendar_item_border !important;
+  border-color: #E4E4E4;
 }
 .fc-today {
   background-color: transparent !important;
@@ -1394,9 +1397,11 @@ ion-modal-view .item-input {
   border-right: solid 0px #fff;
   padding: 4px !important;
   color: $item_divider_font_color;
+  font-size: 14px;
 }
 .fc td {
   border-right: 0px;
+  border-color: $calendar_item_border;
 }
 .fc-view-container {
   margin-top: -16px;
@@ -1411,6 +1416,9 @@ ion-modal-view .item-input {
 }
 .fc-title {
   color: #333;
+}
+.fc-event .fc-content {
+  font-size: 12px;
 }
 .fc-scroller {
   overflow-y: auto;
