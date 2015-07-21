@@ -85,7 +85,9 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 $scope.getEventsDateSelected(dateSelected);
 
                 var dataMonth = dateSelected.getMonth()+1;
-                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? '0'+dataMonth:dataMonth) + '-' + dateSelected.getDate();
+                var dataDay = dateSelected.getDate();
+                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+                console.log(dataDate);
 
                 // change the day's background color just for fun
                 var dateNow = new Date();
