@@ -9,10 +9,11 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Technician Meeting',
             description: 'Every month on 2nd Monday until December 31, 2016',
-            startDate: '2015-07-17T09:00:00Z',
-            endDate: '2015-07-17T11:00:00Z',
+            startDate: '2015-07-17T09:00:00.000Z',
+            endDate: '2015-07-17T11:00:00.000Z',
             rRule: {
                 frequency: 'MONTHLY',
+                interval: 1,
                 dateStart: '2015-01-01',
                 until: '2016-12-31',
                 byWeekDay: [
@@ -31,8 +32,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Electrical Maintenance',
             description: 'Electric Maintenance',
-            startDate: '2015-07-30T13:30:00Z',
-            endDate: '2015-07-30T16:30:00',
+            startDate: '2015-07-30T13:30:00.000Z',
+            endDate: '2015-07-30T16:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -42,8 +43,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Meeting',
             description: 'Electric Maintenance',
-            startDate: '2015-08-01T09:00:00Z',
-            endDate: '2015-08-01T16:30:00',
+            startDate: '2015-08-01T09:00:00.000Z',
+            endDate: '2015-08-01T16:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -53,8 +54,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Teaching',
             description: 'Electric Maintenance',
-            startDate: '2015-08-01T10:00:00Z',
-            endDate: '2015-08-01T16:30:00',
+            startDate: '2015-08-01T10:00:00.000Z',
+            endDate: '2015-08-01T16:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -64,8 +65,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Cleaning',
             description: 'Electric Maintenance',
-            startDate: '2015-08-01T13:30:00Z',
-            endDate: '2015-08-01T16:30:00',
+            startDate: '2015-08-01T13:30:00.000Z',
+            endDate: '2015-08-01T16:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -75,8 +76,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Maintenance',
             description: 'Electric Maintenance',
-            startDate: '2015-07-30T13:00:00Z',
-            endDate: '2015-07-30T16:00:00',
+            startDate: '2015-07-30T13:00:00.000Z',
+            endDate: '2015-07-30T16:00:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -86,8 +87,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Cleaning',
             description: 'Cleaning room',
-            startDate: '2015-08-10T10:30:00Z',
-            endDate: '2015-08-10T12:30:00',
+            startDate: '2015-08-10T10:30:00.000Z',
+            endDate: '2015-08-10T12:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -97,8 +98,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Big Cleaning',
             description: 'COE Big Cleaning',
-            startDate: '2015-08-20T08:30:00Z',
-            endDate: '2015-08-20T16:30:00',
+            startDate: '2015-08-20T08:30:00.000Z',
+            endDate: '2015-08-20T16:30:00.000Z',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         }
