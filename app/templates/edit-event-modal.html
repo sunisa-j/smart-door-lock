@@ -1,7 +1,7 @@
 <ion-modal-view>
     <ion-header-bar>
         <i class="ion-ios-close-empty modal-close-icon" ng-click="editEventModal.hide()"></i>
-        <h1 class="title">Edit Event {{editEventData.id}}</h1>
+        <h1 class="title">Edit Event ({{editEventData.id}})</h1>
     </ion-header-bar>
 
     <ion-content class="custom-ion-content-bg">
@@ -10,42 +10,42 @@
         <div class="list">
             <div class="item item-input small-item-input">
                 <span>Title</span>
-                <input type="text" ng-model="createEventData.name">
+                <input type="text" ng-model="editEventData.name">
             </div>
         </div>
         <!--Description-->
         <div class="list" style="padding-bottom: 15px">
             <div class="item item-input small-item-input">
                 <span>Description</span>
-                <input type="text" ng-model="createEventData.description">
+                <input type="text" ng-model="editEventData.description">
             </div>
         </div>
 
         <div class="item item-divider edit-button-item-divider">Date & Time</div>
         <!--Start Date-->
         <div class="list">
-            <div class="item item-input small-item-input">
+            <label class="item item-input small-item-input">
                 <span>Start Date</span>
-                <input type="date" ng-model="createEventData.startDate">
-            </div>
+                <input type="date" ng-model="editEventData.startDate">
+            </label>
         </div>
         <!--Start Time-->
         <div class="list flex">
-            <div class="item item-input small-item-input flex-1">
+            <label class="item item-input small-item-input flex-1">
                 <span>Start Time</span>
-                <input type="time" ng-model="createEventData.startTime">
-            </div>
-            <div class="item item-input small-item-input flex-1">
+                <input type="time" ng-model="editEventData.startDate">
+            </label>
+            <label class="item item-input small-item-input flex-1">
                 <span>End Time</span>
-                <input type="time" ng-model="createEventData.endTime">
-            </div>
+                <input type="time" ng-model="editEventData.endDate">
+            </label>
         </div>
         <!--End Time-->
         <div class="list">
             <div class="item item-toggle small-item-toggle">
                 Repeat
                 <label class="toggle toggle-energized">
-                    <input type="checkbox" ng-model="createEventData.repeat.status">
+                    <input type="checkbox" ng-model="repeat.status">
                     <div class="track">
                         <div class="handle"></div>
                     </div>
@@ -53,16 +53,16 @@
             </div>
         </div>
         <!--Repeat-->
-        <div class="list" ng-show="createEventData.repeat.status">
+        <div class="list" ng-show="repeat.status">
             <div class="item item-input small-item-input sub-item-input">
                 <span>Frequency</span>
                 <span class="flex align-items-center sub-input-padding">
                     <div>
-                        <select class="custom-row-font-size" ng-model="createEventData.repeat.recurring" style="width: 150px">
-                            <option value="daily" ng-selected="createEventData.repeat.recurring=='daily'">Daily</option>
-                            <option value="weekly" ng-selected="createEventData.repeat.recurring=='weekly'">Weekly</option>
-                            <option value="monthly" ng-selected="createEventData.repeat.recurring=='monthly'">Monthly</option>
-                            <option value="yearly" ng-selected="createEventData.repeat.recurring=='yearly'">Yearly</option>
+                        <select class="custom-row-font-size" ng-model="editEventData.rRule.frequency" style="width: 150px">
+                            <option value="DAILY" ng-selected="editEventData.rRule.frequency=='DAILY'">Daily</option>
+                            <option value="WEEKLY" ng-selected="editEventData.rRule.frequency=='WEEKLY'">Weekly</option>
+                            <option value="MONTHLY" ng-selected="editEventData.rRule.frequency=='MONTHLY'">Monthly</option>
+                            <option value="YEARLY" ng-selected="editEventData.rRule.frequency=='YEARLY'">Yearly</option>
                         </select>
                     </div>
                 </span>
@@ -70,26 +70,26 @@
         </div>
 
         <!--Daily----------------------------------->
-        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='daily')">
+        <div ng-show="(repeat.status)&&(editEventData.rRule.frequency=='DAILY')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
                     <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="createEventData.repeat.daily.every" class="sub-item-text-input"></div>
-                        <div class="sub-item-unit">{{(createEventData.repeat.daily.every==1)? 'day':'days'}}</div>
+                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'day':'days'}}</div>
                     </span>
                 </div>
             </div>
         </div>
 
         <!--Weekly---------------------------------->
-        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='weekly')">
+        <div ng-show="(repeat.status)&&(editEventData.rRule.frequency=='WEEKLY')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
                     <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="createEventData.repeat.weekly.every" class="sub-item-text-input"></div>
-                        <div class="sub-item-unit">{{(createEventData.repeat.weekly.every==1)? 'week':'weeks'}} on:</div>
+                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'week':'weeks'}} on:</div>
                     </span>
                 </div>
             </div>
@@ -112,13 +112,13 @@
         </div>
 
         <!--Monthly---------------------------------->
-        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='monthly')">
+        <div ng-show="(repeat.status)&&(editEventData.rRule.frequency=='MONTHLY')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
                     <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="createEventData.repeat.monthly.every" class="sub-item-text-input"></div>
-                        <div class="sub-item-unit">{{(createEventData.repeat.monthly.every==1)? 'month':'months'}}</div>
+                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'month':'months'}}</div>
                     </span>
                 </div>
             </div>
@@ -234,13 +234,13 @@
         </div>
 
         <!--Yearly---------------------------------->
-        <div ng-show="(createEventData.repeat.status)&&(createEventData.repeat.recurring=='yearly')">
+        <div ng-show="(repeat.status)&&(editEventData.rRule.frequency=='YEARLY')">
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
                     <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="createEventData.repeat.yearly.every" class="sub-item-text-input"></div>
-                        <div class="sub-item-unit">{{(createEventData.repeat.yearly.every==1)? 'year':'years'}} in:</div>
+                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                        <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'year':'years'}} in:</div>
                     </span>
                 </div>
             </div>
@@ -312,21 +312,21 @@
         </div>
 
         <!--End Repeat------------------------------>
-        <div ng-show="createEventData.repeat.status">
+        <div ng-show="repeat.status">
             <!--Never-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input">
                     <span>End Repeat</span>
                     <span class="flex align-items-center sub-input-padding">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="never" style="display: none">
+                            <input type="radio" ng-model="repeat.endRepeat" value="never" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="createEventData.repeat.endRepeat.value=='never'"
+                                    ng-show="repeat.endRepeat=='never'"
                                     ng-class="{'fade-in':notSelectNever.value==false, 'opacity-0':notSelectNever.value==true,'fade-out':notSelectNever.value==true, 'opacity-1':notSelectNever.value==false}">
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="createEventData.repeat.endRepeat.value=='never'"
-                                    ng-click="createEventData.repeat.endRepeat.value='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;"
+                                    ng-hide="repeat.endRepeat=='never'"
+                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;"
                                     ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
                             </button>
                         </div>
@@ -338,26 +338,26 @@
             <!--After-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>&nbsp;</span><div style="display: none">{{(createEventData.repeat.endRepeat.value=='after')? afterDisabled=false:afterDisabled=true}}</div>
+                    <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='after')? afterDisabled=false:afterDisabled=true}}</div>
                     <span class="flex align-items-center sub-input-padding">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="after" style="display: none">
+                            <input type="radio" ng-model="repeat.endRepeat" value="after" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="createEventData.repeat.endRepeat.value=='after'"
+                                    ng-show="repeat.endRepeat=='after'"
                                     ng-class="{'fade-in':notSelectAfter.value==false, 'opacity-0':notSelectAfter.value==true,'fade-out':notSelectAfter.value==true, 'opacity-1':notSelectAfter.value==false}">
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="createEventData.repeat.endRepeat.value=='after'"
-                                    ng-click="createEventData.repeat.endRepeat.value='after';notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;"
+                                    ng-hide="repeat.endRepeat=='after'"
+                                    ng-click="repeat.endRepeat='after';notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;"
                                     ng-class="{'fade-in':notSelectAfter.value==true, 'opacity-0':notSelectAfter.value==false,'fade-out':notSelectAfter.value==false, 'opacity-1':notSelectAfter.value==true}">
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="padding-right: 56px;">After</div>
                             <div>
-                                <input type="number" ng-model="createEventData.repeat.endRepeat.after" class="sub-item-text-input" ng-disabled="afterDisabled">
+                                <input type="number" ng-model="editEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled">
                             </div>
-                            <div class="sub-item-unit">{{(createEventData.repeat.endRepeat.after<=1)? 'time':'times'}}</div>
+                            <div class="sub-item-unit">{{(editEventData.rRule.count<=1)? 'time':'times'}}</div>
                         </div>
                     </span>
 
@@ -366,24 +366,24 @@
             <!--On Date-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>&nbsp;</span><div style="display: none">{{(createEventData.repeat.endRepeat.value=='date')? onDateDisabled=false:onDateDisabled=true}}</div>
+                    <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='date')? onDateDisabled=false:onDateDisabled=true}}</div>
                     <span class="flex align-items-center sub-input-padding">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="createEventData.repeat.endRepeat.value" value="date" style="display: none">
+                            <input type="radio" ng-model="repeat.endRepeat" value="date" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="createEventData.repeat.endRepeat.value=='date'"
+                                    ng-show="repeat.endRepeat=='date'"
                                     ng-class="{'fade-in':notSelectOnDate.value==false, 'opacity-0':notSelectOnDate.value==true,'fade-out':notSelectOnDate.value==true, 'opacity-1':notSelectOnDate.value==false}">
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="createEventData.repeat.endRepeat.value=='date'"
-                                    ng-click="createEventData.repeat.endRepeat.value='date';notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;"
+                                    ng-hide="repeat.endRepeat=='date'"
+                                    ng-click="repeat.endRepeat='date';notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;"
                                     ng-class="{'fade-in':notSelectOnDate.value==true, 'opacity-0':notSelectOnDate.value==false,'fade-out':notSelectOnDate.value==false, 'opacity-1':notSelectOnDate.value==true}">
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="padding-right: 80px;">On Date</div>
                             <div>
-                                <label><input type="date" ng-model="createEventData.repeat.endRepeat.onDate" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
+                                <label><input type="date" ng-model="editEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
                             </div>
                         </div>
                     </span>
@@ -393,7 +393,7 @@
         </div>
 
         <!--Summary--------------------------------->
-        <div class="list" ng-show="createEventData.repeat.status">
+        <div class="list" ng-show="repeat.status">
             <div class="item item-input small-item-input sub-item-input sub-input-summary" style="border: 0; background: transparent">
                 <span>Summary</span>
                 <span style="padding-left: 20px; color: #333">Every 1 Day</span>
