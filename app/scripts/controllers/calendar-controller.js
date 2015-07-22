@@ -5,7 +5,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
 
-    // About calendar management -------------------------------------------
+    // -------------------------------------------------------------------------
+    // About calendar management -----------------------------------------------
+    // -------------------------------------------------------------------------
+
+    // Get all events to show in ui-calendar -----------------------------------
     $scope.calendarEventsData = calendarEvents('', '', calendarId,'calendarEvents');
     $scope.dateSelected = new Date();
     $scope.transformDate = function(date){
@@ -19,6 +23,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         return dateNew;
     };
+
+    // Get events from date selected -------------------------------------------
     $scope.getEventsDateSelected = function (dateUserSelected) {
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
 
@@ -37,11 +43,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     };
     $scope.getEventsDateSelected($scope.dateSelected);
 
-    // month
+    // Reference month & weekday -----------------------------------------------
     $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    // week days
     $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
-    // Calendar UI
+
+    // Calendar UI Configuration -----------------------------------------------
     $scope.uiCalendarEvents = {
         events: $scope.calendarEventsData,
         color: 'rgba(0, 201, 13, 0.2)',
@@ -53,9 +59,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 right: 'today prev,next'
             },
             height: 480,
-            dayClick: function(date, jsEvent, view) {
+            dayClick: function(date, jsEvent, view) { // When select day
 
                 var dateSelected = new Date(date._d);
+                $scope.dateSelected = dateSelected;
                 $scope.getEventsDateSelected(dateSelected);
 
                 var dataMonth = dateSelected.getMonth()+1;
@@ -86,21 +93,59 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
                 }
             },
-            eventClick: function(event, element) {
+            eventClick: function(event, element) { // When select event
                 //console.log('event: ', event);
                 $scope.editEventData = event;
                 $scope.editEventModal.show();
+            },
+            viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
+                $scope.getEventsDateSelected($scope.dateSelected);
+
+                var dataMonth = $scope.dateSelected.getMonth()+1;
+                var dataDay = $scope.dateSelected.getDate();
+                var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+
+                // change the day's background color just for fun
+                var dateNow = new Date();
+                if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
+                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+                    if(isOtherMonth) {
+                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+                    }
+                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+
+                }else {
+                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+                    if(isOtherMonth) {
+                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+                    }
+                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                }
+                //console.log("View Changed: ", view.visStart, view.visEnd, view.start, view.end);
             }
         }
     };
-    // bind my button with full calendar
+
+    // bind my today button with ui-calendar -----------------------------------
+    $scope.runTodayActiveFirst = { value: true};
     $scope.todayActive = function() {
+
+        $scope.runTodayActiveFirst.value = false;
+
         angular.element('.fc-today-button').click();
         angular.element('#calendar').fullCalendar('today');
 
         var dateNow = new Date();
         var dateNow2 = new Date(dateNow.setHours(0,0,0,0));
 
+        $scope.dateSelected = dateNow;
         $scope.getEventsDateSelected(dateNow);
 
         var dataMonth = dateNow2.getMonth()+1;
@@ -117,9 +162,74 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
     };
 
+    // -------------------------------------------------------------------------
+    // Calendar Settings -------------------------------------------------------
+    // -------------------------------------------------------------------------
+    $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false
+    }).then(function(modal) {
+        $scope.calendarSettingsModal = modal;
+    });
+    $scope.deleteCalendar = function() {
 
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure to delete "' + $scope.calendarData.name + '" ?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Delete</span>' +
+                    '</div>',
+                    type: 'button-outline button-assertive',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                console.log('delete: ', calendarId);
+            } else {
+                console.log('cancel');
+            }
+        });
+    };
 
+    // -------------------------------------------------------------------------
+    // Toggle when select day month or year Input on create & edit modal -------
+    // -------------------------------------------------------------------------
+    $scope.toggleDaySelect = function (day){
+        $scope.createEventData.repeat.weekly.days[day] = !$scope.createEventData.repeat.weekly.days[day];
+    };
+    $scope.toggleMonthSelect = function (month){
+        $scope.createEventData.repeat.monthly.months[month] = !$scope.createEventData.repeat.monthly.months[month];
+    };
+    $scope.toggleYearSelect = function (year){
+        $scope.createEventData.repeat.yearly.years[year] = !$scope.createEventData.repeat.yearly.years[year];
+    };
 
+    // -------------------------------------------------------------------------
+    // Create Event ------------------------------------------------------------
+    // -------------------------------------------------------------------------
     $scope.createEventData = {
         name: 'Event Name',
         description: '',
@@ -171,68 +281,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         }
     };
-
-    $scope.toggleDaySelect = function (day){
-        $scope.createEventData.repeat.weekly.days[day] = !$scope.createEventData.repeat.weekly.days[day];
-    };
-    $scope.toggleMonthSelect = function (month){
-        $scope.createEventData.repeat.monthly.months[month] = !$scope.createEventData.repeat.monthly.months[month];
-    };
-    $scope.toggleYearSelect = function (year){
-        $scope.createEventData.repeat.yearly.years[year] = !$scope.createEventData.repeat.yearly.years[year];
-    };
-
-    // Calendar Settings ---------------------------------------------------
-    $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up',
-        backdropClickToClose: false
-    }).then(function(modal) {
-        $scope.calendarSettingsModal = modal;
-    });
-    $scope.deleteCalendar = function() {
-
-        var myPopup = $ionicPopup.confirm({
-            title: 'Confirm',
-            template: 'Are you sure to delete "' + $scope.calendarData.name + '" ?',
-            buttons: [
-                {
-                    text: '<div class="flex align-items-center">' +
-                    '<span class="flex-basis-30">' +
-                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
-                    '</span>' +
-                    '<span class="flex-1">Cancel</span>' +
-                    '</div>',
-                    type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
-                        return false;
-                    }
-                },{
-                    text: '<div class="flex align-items-center">' +
-                    '<span class="flex-basis-30">' +
-                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
-                    '</span>' +
-                    '<span class="flex-1">Delete</span>' +
-                    '</div>',
-                    type: 'button-outline button-assertive',
-                    onTap: function(e) {
-                        //e.preventDefault();
-                        return true;
-                    }
-                }
-            ]
-        });
-        myPopup.then(function(res) {
-            if(res) {
-                console.log('delete: ', calendarId);
-            } else {
-                console.log('cancel');
-            }
-        });
-    };
-
-    // Create Event ---------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/create-event-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -244,7 +292,9 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.createEventModal.show();
     };
 
-    // Edit Event -----------------------------------------------------
+    // -------------------------------------------------------------------------
+    // Edit Event --------------------------------------------------------------
+    // -------------------------------------------------------------------------
     $ionicModal.fromTemplateUrl('templates/edit-event-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
