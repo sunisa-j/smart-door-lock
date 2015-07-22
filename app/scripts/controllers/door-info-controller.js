@@ -18,7 +18,11 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         name: 'doorInfo'
     };
 
-    // About calendar management -------------------------------------------
+    // -------------------------------------------------------------------------
+    // About calendar management -----------------------------------------------
+    // -------------------------------------------------------------------------
+
+    // Calendar modal for show all events --------------------------------------
     $ionicModal.fromTemplateUrl('templates/calendar-events-modal.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -26,19 +30,20 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         $scope.calendarEventsModal = modal;
     });
 
+    // Get all events to show in ui-calendar -----------------------------------
     $scope.doorUserEvents = calendarEvents(userId, doorId, '','doorUserEvents');
     $scope.dateSelected = new Date();
     $scope.transformDate = function(date){
         var dateNew;
-
         if(date == ''){
             dateNew = new Date();
         } else {
             dateNew = new Date(date);
         }
-
         return dateNew;
     };
+
+    // Get events from date selected -------------------------------------------
     $scope.getEventsDateSelected = function (dateUserSelected) {
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
 
@@ -57,11 +62,11 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     };
     $scope.getEventsDateSelected($scope.dateSelected);
 
-    // month
+    // Reference month & weekday -----------------------------------------------
     $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    // week days
     $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
-    // Calendar UI
+
+    // Calendar UI Configuration -----------------------------------------------
     $scope.uiCalendarEvents = {
         events: $scope.doorUserEvents,
         color: 'rgba(0, 201, 13, 0.2)',
@@ -74,9 +79,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             },
             editable: false,
             height: 480,
-            dayClick: function(date, jsEvent, view) {
+            dayClick: function(date, jsEvent, view) { // When select day
 
                 var dateSelected = new Date(date._d);
+                $scope.dateSelected = dateSelected;
                 $scope.getEventsDateSelected(dateSelected);
 
                 var dataMonth = dateSelected.getMonth()+1;
@@ -107,14 +113,47 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
                 }
             },
-            eventClick: function(event, element) {
+            eventClick: function(event, element) { // When select event
                 //console.log('event: ', event);
                 $scope.editEventData = event;
                 $scope.editEventModal.show();
+            },
+            viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
+                $scope.getEventsDateSelected($scope.dateSelected);
+
+                var dataMonth = $scope.dateSelected.getMonth()+1;
+                var dataDay = $scope.dateSelected.getDate();
+                var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+
+                // change the day's background color just for fun
+                var dateNow = new Date();
+                if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
+                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+                    if(isOtherMonth) {
+                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+                    }
+                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+
+                }else {
+                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
+                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+                    if(isOtherMonth) {
+                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+                    }
+                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                }
+                //console.log("View Changed: ", view.visStart, view.visEnd, view.start, view.end);
             }
         }
     };
-    // bind my button with full calendar
+
+    // bind my today button with ui-calendar ----------------------------------
     $scope.todayActive = function() {
         angular.element('.fc-today-button').click();
         angular.element('#calendar').fullCalendar('today');
@@ -122,6 +161,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         var dateNow = new Date();
         var dateNow2 = new Date(dateNow.setHours(0,0,0,0));
 
+        $scope.dateSelected = dateNow;
         $scope.getEventsDateSelected(dateNow);
 
         var dataMonth = dateNow2.getMonth()+1;
@@ -139,7 +179,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     };
 
     // -------------------------------------------------------------------------
-    // About Door Info -------------------------------------------------------
+    // About Door Info ---------------------------------------------------------
     // -------------------------------------------------------------------------
 
     $scope.statusLoad = { value: false };
@@ -166,7 +206,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         }
     };
 
-    // My Access Time
+    // My Access Time ----------------------------------------------------------
     $scope.calcMyAccessTime = {};
     $scope.myAccessTime = [];
     var dateNow = new Date();
