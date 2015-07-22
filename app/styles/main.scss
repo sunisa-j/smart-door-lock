@@ -698,6 +698,7 @@ ion-modal-view .item-input {
 }
 .custom-time-row {
   @extend .custom-row;
+  border-color: $calendar_item_border;
   padding: 5px 0;
 }
 .door-status-icon {
@@ -748,7 +749,7 @@ ion-modal-view .item-input {
   padding: 10px;
   font-size: $custom_row_font_size;
   height: 100%;
-  border-left: solid 1px $light_border_color;
+  border-left: solid 1px $calendar_item_border;
 }
 .custom-row-title div {
   @extend .overflow-hidden-text;
