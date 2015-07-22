@@ -95,8 +95,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             },
             eventClick: function(event, element) { // When select event
                 //console.log('event: ', event);
-                $scope.editEventData = event;
-                $scope.editEventModal.show();
+                $scope.openEditEvent(event);
             },
             viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
                 $scope.getEventsDateSelected($scope.dateSelected);
@@ -304,6 +303,31 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     });
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
+
+        $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
+        $scope.editEventData.endDate = new Date($scope.editEventData.endDate);
+
+        $scope.repeat = {
+            status: false,
+            endRepeat: 'never'
+        };
+
+        if($scope.editEventData.rRule) {
+            $scope.repeat.status = true;
+        }
+
+        if($scope.editEventData.rRule && !$scope.editEventData.rRule.until) {
+            $scope.repeat.endRepeat = 'never';
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.until && !$scope.editEventData.rRule.count) {
+            $scope.repeat.endRepeat = 'date';
+            $scope.editEventData.rRule.until = new Date($scope.editEventData.rRule.until);
+        }
+        else if ($scope.editEventData.rRule && $scope.editEventData.rRule.until && $scope.editEventData.rRule.count){
+            $scope.repeat.endRepeat = 'after';
+        }
+
+        console.log($scope.editEventData);
         $scope.editEventModal.show();
     };
 
