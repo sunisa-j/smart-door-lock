@@ -56,15 +56,13 @@
         <div class="list" ng-show="repeat.status">
             <div class="item item-input small-item-input sub-item-input">
                 <span>Frequency</span>
-                <span class="flex align-items-center sub-input-padding">
-                    <div>
-                        <select class="custom-row-font-size" ng-model="editEventData.rRule.frequency" style="width: 150px">
-                            <option value="DAILY" ng-selected="editEventData.rRule.frequency=='DAILY'">Daily</option>
-                            <option value="WEEKLY" ng-selected="editEventData.rRule.frequency=='WEEKLY'">Weekly</option>
-                            <option value="MONTHLY" ng-selected="editEventData.rRule.frequency=='MONTHLY'">Monthly</option>
-                            <option value="YEARLY" ng-selected="editEventData.rRule.frequency=='YEARLY'">Yearly</option>
-                        </select>
-                    </div>
+                <span class="flex align-items-center sub-input-padding" style="width: 180px">
+                    <select class="custom-row-font-size" ng-model="editEventData.rRule.frequency">
+                        <option value="DAILY" ng-selected="editEventData.rRule.frequency=='DAILY'">Daily</option>
+                        <option value="WEEKLY" ng-selected="editEventData.rRule.frequency=='WEEKLY'">Weekly</option>
+                        <option value="MONTHLY" ng-selected="editEventData.rRule.frequency=='MONTHLY'">Monthly</option>
+                        <option value="YEARLY" ng-selected="editEventData.rRule.frequency=='YEARLY'">Yearly</option>
+                    </select>
                 </span>
             </div>
         </div>
@@ -74,8 +72,8 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
-                    <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                    <span class="flex align-items-center">
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'day':'days'}}</div>
                     </span>
                 </div>
@@ -87,8 +85,8 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
-                    <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                    <span class="flex align-items-center">
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'week':'weeks'}} on:</div>
                     </span>
                 </div>
@@ -116,8 +114,8 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
-                    <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                    <span class="flex align-items-center">
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'month':'months'}}</div>
                     </span>
                 </div>
@@ -187,7 +185,9 @@
             <div class="list" style="margin-top: -7px">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
 
-                    <span class="flex align-items-center"><div style="display: none">{{(createEventData.repeat.monthly.select=='onThe')? onTheDisabled=false:onTheDisabled=true}}</div>
+                    <div style="display: none">{{(createEventData.repeat.monthly.select=='onThe')? onTheDisabled=false:onTheDisabled=true}}</div>
+
+                    <span class="flex align-items-center">
                         <div class="custom-circle-radio-first-col">
                             <input type="radio" ng-model="createEventData.repeat.monthly.select" value="onThe" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
@@ -200,11 +200,11 @@
                                     ng-class="{'fade-in':notSelectOnThe.value==true, 'opacity-0':notSelectOnThe.value==false,'fade-out':notSelectOnThe.value==false, 'opacity-1':notSelectOnThe.value==true}">
                             </button>
                         </div>
-                        <div class="custom-circle-text-first-col" style="padding-left: 5px">On the</div>
+                        <div class="custom-circle-text-first-col">On the</div>
                     </span>
 
-                    <span class="flex align-items-center sub-input-padding">
-                        <div>
+                    <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
+                            <div style="width: 150px; padding-right: 10px">
                             <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.sequent" ng-disabled="onTheDisabled">
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='first'">first</option>
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='second'">second</option>
@@ -214,8 +214,8 @@
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='last'">last</option>
                             </select>
                         </div>
-                        <div style="margin-left: 94px">
-                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" style="width: 110px" ng-disabled="onTheDisabled">
+                        <div style="width: 180px">
+                            <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" ng-disabled="onTheDisabled">
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.day=='day'">day</option>
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekday'">weekday</option>
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekend'">weekend</option>
@@ -238,8 +238,8 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
-                    <span class="flex align-items-center sub-input-padding">
-                        <div><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
+                    <span class="flex align-items-center">
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="editEventData.rRule.interval" class="sub-item-text-input"></div>
                         <div class="sub-item-unit">{{(editEventData.rRule.interval==1)? 'year':'years'}} in:</div>
                     </span>
                 </div>
@@ -281,8 +281,8 @@
                         <div class="custom-circle-text-first-col">On the</div>
                     </span>
 
-                    <span class="flex align-items-center sub-input-padding">
-                        <div>
+                    <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
+                        <div style="width: 150px; padding-right: 10px">
                             <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.sequent" ng-disabled="!(createEventData.repeat.yearly.onThe)">
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='first'">first</option>
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='second'">second</option>
@@ -292,7 +292,7 @@
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.sequent=='last'">last</option>
                             </select>
                         </div>
-                        <div style="margin-left: 94px">
+                        <div style="width: 180px">
                             <select class="custom-row-font-size" ng-model="createEventData.repeat.onThe.day" style="width: 110px" ng-disabled="!(createEventData.repeat.yearly.onThe)">
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.day=='day'">day</option>
                                 <option value="daily" ng-selected="createEventData.repeat.onThe.day=='weekday'">weekday</option>
@@ -353,7 +353,7 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div style="padding-right: 28px;">After</div>
+                            <div>After</div>
                             <div>
                                 <input type="number" ng-model="editEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled">
                             </div>
@@ -381,7 +381,7 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div style="padding-right: 70px;">On Date</div>
+                            <div>On Date</div>
                             <div>
                                 <label><input type="date" ng-model="editEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
                             </div>
