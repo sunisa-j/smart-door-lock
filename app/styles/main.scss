@@ -312,6 +312,12 @@ ion-modal-view .item-input {
   color: $dark_font_color;
   margin-bottom: 0;
 }
+.item-input input {
+  padding-right: 0;
+}
+.item-input input[type=text] {
+  padding-right: 5px;
+}
 .item-divider.date-selected-item-divider{
   color: #333 !important;
   border-color: $calendar_item_border;
@@ -366,7 +372,7 @@ ion-modal-view .item-input {
   margin-top: -8px;
 }
 .end-repeat-second-col {
-  margin-left: 15px;
+  margin-left: 8px;
 }
 .item-toggle.small-item-toggle {
   height: 44px;
@@ -1268,9 +1274,6 @@ ion-modal-view .item-input {
 .sub-item-input {
   padding-top: 25px;
   padding-bottom: 25px
-}
-.sub-item-input > span {
-  padding-left: 10px;
 }
 .sub-item-text-input {
   width: 80px !important;
