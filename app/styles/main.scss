@@ -100,8 +100,8 @@ select.custom-row-font-size {
   left: 40px !important;
   right: 40px !important;
 }
-textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-  padding: 12px 5px 10px 15px !important;
+textarea, input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+//  padding: 12px 5px 10px 15px;
   color: $base-color;
   background-color: $light;
   border: 0;
@@ -110,6 +110,27 @@ textarea, input[type="text"], input[type="password"], input[type="datetime"], in
   font-size: $font-size-base;
   border-radius: 0;
   -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-left: 15px;
+}
+input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"] {
+  color: $base-color;
+  background-color: $light;
+  border: 0;
+  height: 100%;
+  width: 100%;
+  font-size: $font-size-base;
+  border-radius: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+.small-item-input textarea, input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.small-item-input textarea, input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"] {
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
 }
 select {
   @extend .pointer;
@@ -120,6 +141,7 @@ select {
   height: 100%;
   font-size: $font-size-base;
   -webkit-appearance: none;
+  -moz-appearance: none;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   padding: 6px 0px;
@@ -303,6 +325,7 @@ ion-modal-view .item-input {
 }
 .small-item-input {
   height: 44px !important;
+  margin-left: -1px !important;
 }
 .small-item-input > span {
   width: 82px;
@@ -310,16 +333,24 @@ ion-modal-view .item-input {
   color: $item_divider_font_color;
   line-height: 15px;
 }
+.small-item-input-datetime {
+  margin-left: 15px !important;
+}
 .month-item-input {
   @extend .align-items-flex-start;
   height: 168px !important;
 }
 .month-item-input > span {
-   width: 82px;
-   min-width: 82px;
-   color: $item_divider_font_color;
-   line-height: 15px;
- }
+  margin-left: 0px;
+  width: 82px;
+  min-width: 82px;
+  color: $item_divider_font_color;
+  line-height: 15px;
+}
+.month-item-input .sub-input-padding {
+  margin-left: 10px;
+  margin-top: -8px;
+}
 .year-item-input {
   @extend .align-items-flex-start;
   height: 110px !important;
@@ -330,6 +361,13 @@ ion-modal-view .item-input {
   color: $item_divider_font_color;
   line-height: 15px;
 }
+.year-item-input .sub-input-padding {
+  margin-left: 10px;
+  margin-top: -8px;
+}
+.end-repeat-second-col {
+  margin-left: 15px;
+}
 .item-toggle.small-item-toggle {
   height: 44px;
   color: $item_divider_font_color;
@@ -337,10 +375,6 @@ ion-modal-view .item-input {
 }
 .item-toggle.small-item-toggle .toggle {
   top: 5.5px;
-}
-.small-item-input textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
 .item-divider {
   height: 28px;
@@ -1245,13 +1279,15 @@ ion-modal-view .item-input {
   text-align: right !important;
 }
 .sub-item-date-input {
-  width: 120px !important;
+  margin-left: -7px;
+  width: 128px !important;
   height: 30px !important;
+  padding-left: 5px !important;
   border: solid 1px $light_border_color !important;
   text-align: right !important;
 }
 .sub-item-unit {
-  margin-left: 90px;
+  margin-left: 100px;
   color: $dark_font_color;
 }
 .del-border-sub-item {
@@ -1267,10 +1303,11 @@ ion-modal-view .item-input {
   padding-left: 6px;
 }
 .sub-input-padding {
-  padding-left: 17px !important;
+  padding-left: 0px !important;
 }
 .sub-input-padding select.custom-row-font-size {
   border: solid 1px $border_color;
+  margin-left: 15px;
 }
 .sub-input-padding .button-bar .button {
   border-radius: 0 !important;
@@ -1286,7 +1323,6 @@ ion-modal-view .item-input {
   position: relative
 }
 .custom-circle-radio-first-col {
-  margin-left: -8px;
   flex-basis: 30px;
   -webkit-flex-basis: 30px;
   -moz-flex-basis: 30px;
@@ -1295,6 +1331,7 @@ ion-modal-view .item-input {
 }
 .custom-circle-text-first-col {
   margin-left: 12px;
+  font-size: 15px;
 }
 .custom-circle-radio-button {
   font-size: 32px;
@@ -1512,6 +1549,11 @@ ion-modal-view .item-input {
   border-left: 0;
   border-right: 0;
   margin-top: -1px;
+}
+.search-container-input {
+  padding: 0px 5px 0px 15px !important;
+  height: 100% !important;
+  line-height: 28px !important;
 }
 .search-icon-div {
   flex-basis: 33px;
