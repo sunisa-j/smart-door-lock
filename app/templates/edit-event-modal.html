@@ -26,18 +26,18 @@
         <div class="list">
             <label class="item item-input small-item-input">
                 <span>Start Date</span>
-                <input type="date" ng-model="editEventData.startDate">
+                <input type="date" ng-model="editEventData.startDate" class="small-item-input-datetime">
             </label>
         </div>
         <!--Start Time-->
         <div class="list flex">
             <label class="item item-input small-item-input flex-1">
                 <span>Start Time</span>
-                <input type="time" ng-model="editEventData.startDate">
+                <input type="time" ng-model="editEventData.startDate" class="small-item-input-datetime">
             </label>
             <label class="item item-input small-item-input flex-1">
                 <span>End Time</span>
-                <input type="time" ng-model="editEventData.endDate">
+                <input type="time" ng-model="editEventData.endDate" class="small-item-input-datetime">
             </label>
         </div>
         <!--End Time-->
@@ -96,7 +96,7 @@
             <div class="list" style="margin-top: -4px">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>&nbsp;</span>
-                    <span class="sub-input-padding" style="margin-left: -5px">
+                    <span class="sub-input-padding" style="margin-left: 10px">
                         <div class="button-bar custom-event-button-bar">
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.monday}" ng-click="toggleDaySelect('monday')">M</button>
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.weekly.days.tuesday}" ng-click="toggleDaySelect('tuesday')">T</button>
@@ -139,7 +139,7 @@
                         </div>
                         <div class="custom-circle-text-first-col">Each</div>
                     </span>
-                    <span class="sub-input-padding" style="margin-left: -5px; margin-top: -8px">
+                    <span class="sub-input-padding">
                         <div class="button-bar custom-event-button-bar">
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[0]}" ng-click="toggleMonthSelect(0)" ng-disabled="eachDisabled">1</button>
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.monthly.months[1]}" ng-click="toggleMonthSelect(1)" ng-disabled="eachDisabled">2</button>
@@ -247,7 +247,7 @@
             <div class="list" style="margin-top: -7px">
                 <div class="item item-input year-item-input sub-item-input del-border-sub-item">
                     <span>&nbsp;</span>
-                    <span class="sub-input-padding" style="margin-left: -5px; margin-top: -8px">
+                    <span class="sub-input-padding">
                         <div class="button-bar custom-year-button-bar">
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[0]}" ng-click="toggleYearSelect(0)">Jan</button>
                             <button class="button" ng-class="{'energized-bg': createEventData.repeat.yearly.years[1]}" ng-click="toggleYearSelect(1)">Feb</button>
@@ -317,7 +317,7 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input">
                     <span>End Repeat</span>
-                    <span class="flex align-items-center sub-input-padding">
+                    <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <input type="radio" ng-model="repeat.endRepeat" value="never" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
@@ -339,7 +339,7 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='after')? afterDisabled=false:afterDisabled=true}}</div>
-                    <span class="flex align-items-center sub-input-padding">
+                    <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <input type="radio" ng-model="repeat.endRepeat" value="after" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
@@ -353,7 +353,7 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div style="padding-right: 56px;">After</div>
+                            <div style="padding-right: 28px;">After</div>
                             <div>
                                 <input type="number" ng-model="editEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled">
                             </div>
@@ -367,7 +367,7 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='date')? onDateDisabled=false:onDateDisabled=true}}</div>
-                    <span class="flex align-items-center sub-input-padding">
+                    <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <input type="radio" ng-model="repeat.endRepeat" value="date" style="display: none">
                             <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
@@ -381,7 +381,7 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div style="padding-right: 80px;">On Date</div>
+                            <div style="padding-right: 70px;">On Date</div>
                             <div>
                                 <label><input type="date" ng-model="editEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
                             </div>
@@ -396,7 +396,7 @@
         <div class="list" ng-show="repeat.status">
             <div class="item item-input small-item-input sub-item-input sub-input-summary" style="border: 0; background: transparent">
                 <span>Summary</span>
-                <span style="padding-left: 20px; color: #333">Every 1 Day</span>
+                <span style="padding-left: 15px; color: #333">Every 1 Day</span>
             </div>
         </div>
 
