@@ -1272,11 +1272,20 @@ ion-modal-view .item-input {
   padding-top: 25px;
   padding-bottom: 25px
 }
+.sub-item-input-second-col {
+  flex-basis: 150px;
+  -webkit-flex-basis: 150px;
+  -moz-flex-basis: 150px;
+  padding-right: 20px;
+}
 .sub-item-text-input {
-  width: 80px !important;
+  width: 100% !important;
   height: 30px !important;
   border: solid 1px $light_border_color !important;
   text-align: right !important;
+}
+.sub-input-text-with-unit {
+  width: 210px !important;
 }
 .sub-item-date-input {
   margin-left: -7px;
@@ -1287,7 +1296,8 @@ ion-modal-view .item-input {
   text-align: right !important;
 }
 .sub-item-unit {
-  margin-left: 100px;
+  @extend .flex-1;
+  margin-left: 10px;
   color: $dark_font_color;
 }
 .del-border-sub-item {
@@ -1302,11 +1312,9 @@ ion-modal-view .item-input {
 .event-select-padding select {
   padding-left: 6px;
 }
-.sub-input-padding {
-  padding-left: 0px !important;
-}
 .sub-input-padding select.custom-row-font-size {
   border: solid 1px $border_color;
+  width: 100% !important;
   margin-left: 15px;
 }
 .sub-input-padding .button-bar .button {
@@ -1330,6 +1338,7 @@ ion-modal-view .item-input {
   position: relative
 }
 .custom-circle-text-first-col {
+  @extend .flex-1;
   margin-left: 12px;
   font-size: 15px;
 }
