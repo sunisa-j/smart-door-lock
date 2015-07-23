@@ -353,11 +353,11 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div>After</div>
-                            <div>
+                            <div style="min-width: 30px">After</div>
+                            <div style="min-width: 60px; padding-right: 20px">
                                 <input type="number" ng-model="editEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled">
                             </div>
-                            <div class="sub-item-unit">{{(editEventData.rRule.count<=1)? 'time':'times'}}</div>
+                            <div style="min-width: 50px" class="sub-item-unit">{{(editEventData.rRule.count<=1)? 'time':'times'}}</div>
                         </div>
                     </span>
 
@@ -381,8 +381,8 @@
                             </button>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
-                            <div>On Date</div>
-                            <div>
+                            <div style="min-width: 70px">On Date</div>
+                            <div style="min-width: 128px">
                                 <label><input type="date" ng-model="editEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
                             </div>
                         </div>
