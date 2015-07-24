@@ -52,7 +52,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         color: 'rgba(0, 201, 13, 0.2)',
         textColor: '#333333'
     };
-    $scope.setDayRedBg = function(dataDate) {
+    var setDayRedBg = function(dataDate) {
         angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
         angular.element("td.fc-day-number div").removeClass('number-circle-bg');
 
@@ -62,7 +62,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
         angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
     };
-    $scope.setDayBlackBg = function(dataDate) {
+    var setDayBlackBg = function(dataDate) {
         angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
         angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
         angular.element("td.fc-day-number div").removeClass('number-circle-bg');
@@ -93,9 +93,9 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
                 // change the day's background
                 if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    $scope.setDayRedBg(dataDate);
+                    setDayRedBg(dataDate);
                 }else {
-                    $scope.setDayBlackBg(dataDate);
+                    setDayBlackBg(dataDate);
                 }
             },
             eventClick: function(event, element) {
@@ -115,16 +115,16 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
                 // change the day's background
                 if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    $scope.setDayRedBg(dataDate);
+                    setDayRedBg(dataDate);
                 }else {
-                    $scope.setDayBlackBg(dataDate);
+                    setDayBlackBg(dataDate);
                 }
             }
         }
     };
 
     // bind my today button with ui-calendar -----------------------------------
-    $scope.runTodayActiveFirst = { value: true};
+    $scope.runTodayActiveFirst = { value: true };
     $scope.todayActive = function() {
 
         $scope.runTodayActiveFirst.value = false;
@@ -224,7 +224,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Week Month Year & about Repeat value Default ----------------------------
     // -------------------------------------------------------------------------
 
-    $scope.setEventDataDefault = function () {
+    var setEventDataDefault = function () {
         $scope.eventWeekDay = {
             'MO': false,
             'TU': false,
@@ -333,8 +333,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.editEventModal = modal;
     });
 
-    // Calculate value in 'On the' ---------------------------------------------
-    $scope.setOnSequent = function() {
+    // Calculate value in 'On the' --------------------------------------
+    var setOnSequent = function() {
         if($scope.editEventData.rRule.bySetPos == 1) {
             $scope.repeat.onThe.sequent = 'first';
         }
@@ -354,7 +354,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             $scope.repeat.onThe.sequent = 'last';
         }
     };
-    $scope.setOnDay = function(){
+    var setOnDay = function(){
         if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'MO') {
             $scope.repeat.onThe.day = 'monday';
         }
@@ -417,7 +417,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
-        $scope.setEventDataDefault();
+        setEventDataDefault();
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
@@ -445,14 +445,14 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
-                $scope.setOnSequent();
+                setOnSequent();
 
                 // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
                 if($scope.editEventData.rRule.byMonthDay){
                     $scope.repeat.onThe.day = 'day';
                 }
                 else if($scope.editEventData.rRule.byWeekDay){
-                    $scope.setOnDay();
+                    setOnDay();
                 }
             } else {
                 $scope.repeat.repeatBy = 'each';
@@ -478,7 +478,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
-                $scope.setOnSequent();
+                setOnSequent();
 
                 // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
                 if($scope.editEventData.rRule.byMonthDay){
@@ -487,7 +487,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
                 else if($scope.editEventData.rRule.byWeekDay){
                     $scope.repeat.checked = true;
-                    $scope.setOnDay();
+                    setOnDay();
                 }
             }
         }
