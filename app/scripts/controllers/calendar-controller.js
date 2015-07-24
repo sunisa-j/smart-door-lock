@@ -155,6 +155,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
     // Calendar Settings -------------------------------------------------------
     // -------------------------------------------------------------------------
+
     $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -162,6 +163,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     }).then(function(modal) {
         $scope.calendarSettingsModal = modal;
     });
+
     $scope.deleteCalendar = function() {
 
         var myPopup = $ionicPopup.confirm({
@@ -207,6 +209,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
     // Toggle when select day month or year Input on create & edit modal -------
     // -------------------------------------------------------------------------
+
     $scope.toggleWeekDaySelect = function (weekDay){
         $scope.eventWeekDay[weekDay] = !$scope.eventWeekDay[weekDay];
     };
@@ -220,37 +223,41 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
     // Week Month Year & about Repeat value Default ----------------------------
     // -------------------------------------------------------------------------
-    $scope.eventWeekDay = {
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false
-    };
-    $scope.eventMonthDay = [
-        false,false,false,false,false,false,false,
-        false,false,false,false,false,false,false,
-        false,false,false,false,false,false,false,
-        false,false,false,false,false,false,false,
-        false,false,false
-    ];
-    $scope.eventMonth = [false,false,false,false,false,false,false,false,false,false,false,false];
-    $scope.repeat = {
-        status: false,
-        endRepeat: 'never', // 'never', 'after', 'date' (on date)
-        repeatBy: '', // 'each', 'on' (on the)
-        onThe : {
-            checked: false,
-            sequent: 'first',
-            day: 'day'
-        }
+
+    $scope.setEventDataDefault = function () {
+        $scope.eventWeekDay = {
+            monday: false,
+            tuesday: false,
+            wednesday: false,
+            thursday: false,
+            friday: false,
+            saturday: false,
+            sunday: false
+        };
+        $scope.eventMonthDay = [
+            false,false,false,false,false,false,false,
+            false,false,false,false,false,false,false,
+            false,false,false,false,false,false,false,
+            false,false,false,false,false,false,false,
+            false,false,false
+        ];
+        $scope.eventMonth = [false,false,false,false,false,false,false,false,false,false,false,false];
+        $scope.repeat = {
+            status: false,
+            endRepeat: 'never', // 'never', 'after', 'date' (on date)
+            repeatBy: '', // 'each', 'on' (on the)
+            onThe : {
+                checked: false,
+                sequent: 'first',
+                day: 'day'
+            }
+        };
     };
 
     // -------------------------------------------------------------------------
     // Create Event ------------------------------------------------------------
     // -------------------------------------------------------------------------
+
     $scope.createEventData = {
         name: 'Event Name',
         description: '',
@@ -317,6 +324,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
     // Edit Event --------------------------------------------------------------
     // -------------------------------------------------------------------------
+
     $ionicModal.fromTemplateUrl('templates/edit-event-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -409,6 +417,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
+        $scope.setEventDataDefault();
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
