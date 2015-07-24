@@ -12,15 +12,14 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Get all events to show in ui-calendar -----------------------------------
     $scope.calendarEventsData = calendarEvents('', '', calendarId,'calendarEvents');
     $scope.dateSelected = new Date();
+
     $scope.transformDate = function(date){
         var dateNew;
-
         if(date == ''){
             dateNew = new Date();
         } else {
             dateNew = new Date(date);
         }
-
         return dateNew;
     };
 
@@ -53,14 +52,36 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         color: 'rgba(0, 201, 13, 0.2)',
         textColor: '#333333'
     };
+    $scope.setDayRedBg = function(dataDate) {
+        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+        if(isOtherMonth) {
+            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+        }
+        angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+    };
+    $scope.setDayBlackBg = function(dataDate) {
+        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+        angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
+        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+        if(isOtherMonth) {
+            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+        }
+        angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+    };
     $scope.uiConfig = {
         calendar:{
             header:{
                 right: 'today prev,next'
             },
             height: 480,
-            dayClick: function(date, jsEvent, view) { // When select day
+            dayClick: function(date, jsEvent, view) {
 
+                // When select day ---------------------------------------------
                 var dateSelected = new Date(date._d);
                 $scope.dateSelected = dateSelected;
                 $scope.getEventsDateSelected(dateSelected);
@@ -68,65 +89,36 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 var dataMonth = dateSelected.getMonth()+1;
                 var dataDay = dateSelected.getDate();
                 var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+                var dateNow = new Date();
 
                 // change the day's background
-                var dateNow = new Date();
                 if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
-
+                    $scope.setDayRedBg(dataDate);
                 }else {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                    $scope.setDayBlackBg(dataDate);
                 }
             },
-            eventClick: function(event, element) { // When select event
+            eventClick: function(event, element) {
+
+                // When select event -------------------------------------------
                 $scope.openEditEvent(event);
             },
-            viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
+            viewRender: function(view, element) {
+
+                // When change month (click prev,next button), focus day selected
                 $scope.getEventsDateSelected($scope.dateSelected);
 
                 var dataMonth = $scope.dateSelected.getMonth()+1;
                 var dataDay = $scope.dateSelected.getDate();
                 var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+                var dateNow = new Date();
 
                 // change the day's background
-                var dateNow = new Date();
                 if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
-
+                    $scope.setDayRedBg(dataDate);
                 }else {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                    $scope.setDayBlackBg(dataDate);
                 }
-                //console.log("View Changed: ", view.visStart, view.visEnd, view.start, view.end);
             }
         }
     };
