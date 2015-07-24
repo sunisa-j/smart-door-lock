@@ -8,20 +8,15 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             calendar: 'calendar1',
             status: 'confirmed',
             name: 'Technician Meeting',
-            description: 'Every month on 2nd Monday until December 31, 2016',
+            description: 'Test Monthly',
             startDate: '2015-07-17T09:00:00.000Z',
             endDate: '2015-07-17T11:00:00.000Z',
             rRule: {
                 frequency: 'MONTHLY',
                 interval: 1,
-                dateStart: '2015-01-01',
-                until: '2016-12-31',
-                byWeekDay: [
-                    'MO'
-                ],
-                bySetPos: [
-                    2
-                ]
+                dateStart: '2015-07-17',
+                until: '2015-12-31',
+                byMonthDay: [1,31]
             },
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
@@ -34,6 +29,23 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Electric Maintenance',
             startDate: '2015-07-30T13:30:00.000Z',
             endDate: '2015-07-30T16:30:00.000Z',
+            rRule: {
+                frequency: 'YEARLY',
+                interval: 2,
+                dateStart: '2015-07-30',
+                until: '2015-12-31',
+                //count: 3,
+                byMonth: [1,4,7],
+                //byWeekDay: [
+                //    'MO','TU','WE','TH','FR'
+                //],
+                byWeekDay: [
+                    'SA','SU'
+                ],
+                bySetPos: [
+                    2
+                ]
+            },
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -45,6 +57,18 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Electric Maintenance',
             startDate: '2015-08-01T09:00:00.000Z',
             endDate: '2015-08-01T16:30:00.000Z',
+            rRule: {
+                frequency: 'MONTHLY',
+                interval: 1,
+                dateStart: '2015-01-01',
+                until: '2015-12-31',
+                byWeekDay: [
+                    'MO'
+                ],
+                bySetPos: [
+                    2
+                ]
+            },
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
