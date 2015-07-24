@@ -80,6 +80,15 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Electric Maintenance',
             startDate: '2015-08-01T10:00:00.000Z',
             endDate: '2015-08-01T16:30:00.000Z',
+            rRule: {
+                frequency: 'WEEKLY',
+                interval: 1,
+                dateStart: '2015-01-01',
+                until: '2015-12-31',
+                byWeekDay: [
+                    'TU', 'TH'
+                ]
+            },
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -91,6 +100,12 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Electric Maintenance',
             startDate: '2015-08-01T13:30:00.000Z',
             endDate: '2015-08-01T16:30:00.000Z',
+            rRule: {
+                frequency: 'DAILY',
+                interval: 2,
+                dateStart: '2015-01-01',
+                until: '2015-12-31'
+            },
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
