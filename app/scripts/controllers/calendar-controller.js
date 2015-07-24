@@ -178,8 +178,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -190,8 +189,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     '<span class="flex-1">Delete</span>' +
                     '</div>',
                     type: 'button-outline button-assertive',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
@@ -258,55 +256,26 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Create Event ------------------------------------------------------------
     // -------------------------------------------------------------------------
 
+    var createEventStartDate = new Date();
+    createEventStartDate.setMinutes(0);
+    createEventStartDate.setSeconds(0);
+    createEventStartDate.setMilliseconds(0);
+
+    var createEventEndDate = new Date();
+    createEventEndDate.setMinutes(0);
+    createEventEndDate.setSeconds(0);
+    createEventEndDate.setMilliseconds(0);
+    createEventEndDate.setHours(createEventEndDate.getHours() +1 );
+
     $scope.createEventData = {
-        name: 'Event Name',
-        description: '',
-        startDate: new Date(),
-        startTime: new Date(),
-        endTime: new Date(),
-        repeat: {
-            status: false,
-            recurring: 'monthly',
-            daily: {
-                every: 1
-            },
-            weekly: {
-                every: 1,
-                days: {
-                    monday: false,
-                    tuesday: false,
-                    wednesday: false,
-                    thursday: true,
-                    friday: true,
-                    saturday: false,
-                    sunday: false
-                }
-            },
-            monthly: {
-                every: 1,
-                select: 'each',
-                months: [
-                    false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,
-                    false,false,false,false,false,false,false,
-                    false,false,false
-                ]
-            },
-            yearly: {
-                every: 1,
-                onThe: false,
-                years: [false,false,false,false,false,false,true,false,false,false,false,false]
-            },
-            endRepeat: {
-                value: 'never',
-                after: 1,
-                onDate: new Date()
-            },
-            onThe : {
-                sequent: 'first',
-                day: 'day'
-            }
+        calendar: calendarId,
+        name: 'Event name',
+        description: 'Event description',
+        startDate: createEventStartDate,
+        endDate: createEventEndDate,
+        rRule: {
+            frequency: 'DAILY',
+            interval: 1
         }
     };
 
@@ -318,7 +287,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.createEventModal = modal;
     });
     $scope.openCreateEvent = function(){
+        setEventDataDefault();
+
+        // Set startDate & endDate to date -------------------------------------
+        $scope.createEventData.startDate = new Date($scope.createEventData.startDate);
+        $scope.createEventData.endDate = new Date($scope.createEventData.endDate);
+
         $scope.createEventModal.show();
+    };
+
+    $scope.saveEvent = function () {
+        console.log($scope.createEventData);
     };
 
     // -------------------------------------------------------------------------
@@ -415,6 +394,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
 
+    // Transform event data to show in edit event modal -----------------
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
         setEventDataDefault();
@@ -504,6 +484,52 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         $scope.editEventModal.show();
+    };
+
+    // Save Event Data Edited --------------------------------------------------
+    $scope.editEvent = function (eventId) {
+        console.log($scope.editEventData);
+    };
+
+    // Delete Event -------------------------------------------------------------
+    $scope.deleteEvent = function (eventId){
+
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure to delete this "' + $scope.editEventData.name + '" event ?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function() {
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Delete</span>' +
+                    '</div>',
+                    type: 'button-outline button-assertive',
+                    onTap: function() {
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                console.log('delete: ', eventId);
+            } else {
+                console.log('cancel');
+            }
+        });
     };
 
 });
