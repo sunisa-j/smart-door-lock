@@ -1670,7 +1670,7 @@ ion-modal-view .item-input {
 // media query *****************************************
 @media (max-width: 1023px) {
   .door-custom-row {
-    flex: 0 0 100%;
+    flex: 0 0 100% !important;
     max-width: 100% !important;
   }
 }
