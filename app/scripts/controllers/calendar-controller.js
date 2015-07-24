@@ -69,7 +69,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 var dataDay = dateSelected.getDate();
                 var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
 
-                // change the day's background color just for fun
+                // change the day's background
                 var dateNow = new Date();
                 if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
                     angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
@@ -94,7 +94,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             },
             eventClick: function(event, element) { // When select event
-                //console.log('event: ', event);
                 $scope.openEditEvent(event);
             },
             viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
@@ -104,7 +103,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 var dataDay = $scope.dateSelected.getDate();
                 var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
 
-                // change the day's background color just for fun
+                // change the day's background
                 var dateNow = new Date();
                 if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
                     angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
@@ -216,14 +215,45 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
     // Toggle when select day month or year Input on create & edit modal -------
     // -------------------------------------------------------------------------
-    $scope.toggleDaySelect = function (day){
-        $scope.createEventData.repeat.weekly.days[day] = !$scope.createEventData.repeat.weekly.days[day];
+    $scope.toggleWeekDaySelect = function (weekDay){
+        $scope.eventWeekDay[weekDay] = !$scope.eventWeekDay[weekDay];
+    };
+    $scope.toggleMonthDaySelect = function (monthDay){
+        $scope.eventMonthDay[monthDay] = !$scope.eventMonthDay[monthDay];
     };
     $scope.toggleMonthSelect = function (month){
-        $scope.createEventData.repeat.monthly.months[month] = !$scope.createEventData.repeat.monthly.months[month];
+        $scope.eventMonth[month] = !$scope.eventMonth[month];
     };
-    $scope.toggleYearSelect = function (year){
-        $scope.createEventData.repeat.yearly.years[year] = !$scope.createEventData.repeat.yearly.years[year];
+
+    // -------------------------------------------------------------------------
+    // Week Month Year & about Repeat value Default ----------------------------
+    // -------------------------------------------------------------------------
+    $scope.eventWeekDay = {
+        monday: false,
+        tuesday: false,
+        wednesday: false,
+        thursday: false,
+        friday: false,
+        saturday: false,
+        sunday: false
+    };
+    $scope.eventMonthDay = [
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false
+    ];
+    $scope.eventMonth = [false,false,false,false,false,false,false,false,false,false,false,false];
+    $scope.repeat = {
+        status: false,
+        endRepeat: 'never', // 'never', 'after', 'date' (on date)
+        repeatBy: '', // 'each', 'on' (on the)
+        onThe : {
+            checked: false,
+            sequent: 'first',
+            day: 'day'
+        }
     };
 
     // -------------------------------------------------------------------------
@@ -258,8 +288,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 select: 'each',
                 months: [
                     false,false,false,false,false,false,false,
-                    false,false,true,false,false,false,false,
-                    false,false,false,false,false,true,false,
+                    false,false,false,false,false,false,false,
+                    false,false,false,false,false,false,false,
                     false,false,false,false,false,false,false,
                     false,false,false
                 ]
@@ -280,6 +310,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         }
     };
+
     $ionicModal.fromTemplateUrl('templates/create-event-modal.html', {
         scope: $scope,
         animation: 'slide-in-up',
@@ -301,21 +332,102 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     }).then(function(modal) {
         $scope.editEventModal = modal;
     });
+
+    // Calculate value in 'On the' ---------------------------------------------
+    $scope.setOnSequent = function() {
+        if($scope.editEventData.rRule.bySetPos == 1) {
+            $scope.repeat.onThe.sequent = 'first';
+        }
+        else if($scope.editEventData.rRule.bySetPos == 2) {
+            $scope.repeat.onThe.sequent = 'second';
+        }
+        else if($scope.editEventData.rRule.bySetPos == 3) {
+            $scope.repeat.onThe.sequent = 'third';
+        }
+        else if($scope.editEventData.rRule.bySetPos == 4) {
+            $scope.repeat.onThe.sequent = 'fourth';
+        }
+        else if($scope.editEventData.rRule.bySetPos == 5) {
+            $scope.repeat.onThe.sequent = 'fifth';
+        }
+        else if($scope.editEventData.rRule.bySetPos == -1) {
+            $scope.repeat.onThe.sequent = 'last';
+        }
+    };
+    $scope.setOnDay = function(){
+        if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'MO') {
+            $scope.repeat.onThe.day = 'monday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'TU') {
+            $scope.repeat.onThe.day = 'tuesday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'WE') {
+            $scope.repeat.onThe.day = 'wednesday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'TH') {
+            $scope.repeat.onThe.day = 'thursday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'FR') {
+            $scope.repeat.onThe.day = 'friday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'SA') {
+            $scope.repeat.onThe.day = 'saturday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'SU') {
+            $scope.repeat.onThe.day = 'sunday';
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 5) {
+            var weekday = ['MO', 'TU', 'WE', 'TH', 'FR'];
+            var weekdayValue = {
+                'MO': false,
+                'TU': false,
+                'WE': false,
+                'TH': false,
+                'FR': false
+            };
+            angular.forEach(weekday, function(weekday){
+                angular.forEach($scope.editEventData.rRule.byWeekDay, function(value){
+                    if(value == weekday){
+                        weekdayValue[weekday] = true;
+                    }
+                });
+            });
+            if(weekdayValue['MO']==true && weekdayValue['TU']==true && weekdayValue['WE']==true && weekdayValue['TH']==true && weekdayValue['FR']==true){
+                $scope.repeat.onThe.day = 'weekday';
+            }
+        }
+        else if($scope.editEventData.rRule.byWeekDay.length == 2) {
+            var weekend = ['SA', 'SU'];
+            var weekendValue = {
+                'MO': false,
+                'TU': false
+            };
+            angular.forEach(weekend, function(weekend){
+                angular.forEach($scope.editEventData.rRule.byWeekDay, function(value){
+                    if(value == weekend){
+                        weekendValue[weekend] = true;
+                    }
+                });
+            });
+            if(weekendValue['SA']==true && weekendValue['SU']==true){
+                $scope.repeat.onThe.day = 'weekend';
+            }
+        }
+    };
+
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
 
+        // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
         $scope.editEventData.endDate = new Date($scope.editEventData.endDate);
 
-        $scope.repeat = {
-            status: false,
-            endRepeat: 'never'
-        };
-
+        // Set on/off repeat ---------------------------------------------------
         if($scope.editEventData.rRule) {
             $scope.repeat.status = true;
         }
 
+        // Set end repeat value (never, after, on date) ------------------------
         if($scope.editEventData.rRule && !$scope.editEventData.rRule.until) {
             $scope.repeat.endRepeat = 'never';
         }
@@ -327,7 +439,58 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             $scope.repeat.endRepeat = 'after';
         }
 
-        console.log($scope.editEventData);
+        // Set value 'each' or 'on' ---------------------------------------------
+        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){  // for monthly
+            if($scope.editEventData.rRule.bySetPos){
+                $scope.repeat.repeatBy = 'on';
+                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
+                $scope.setOnSequent();
+
+                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
+                if($scope.editEventData.rRule.byMonthDay){
+                    $scope.repeat.onThe.day = 'day';
+                }
+                else if($scope.editEventData.rRule.byWeekDay){
+                    $scope.setOnDay();
+                }
+            } else {
+                $scope.repeat.repeatBy = 'each';
+                if($scope.editEventData.rRule.byMonthDay){
+                    angular.forEach($scope.editEventData.rRule.byMonthDay, function(value){
+                        var monthDay = parseInt(value);
+                        if(monthDay > 0){
+                            $scope.eventMonthDay[monthDay-1] = true;
+                        }
+                    });
+                }
+            }
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.byMonth){ // for yearly
+            if($scope.editEventData.rRule.byMonth){
+                angular.forEach($scope.editEventData.rRule.byMonth, function(value){
+                    var month = parseInt(value);
+                    if(month > 0){
+                        $scope.eventMonth[month-1] = true;
+                    }
+                });
+            }
+            if($scope.editEventData.rRule.bySetPos){
+                $scope.repeat.repeatBy = 'on';
+                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
+                $scope.setOnSequent();
+
+                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
+                if($scope.editEventData.rRule.byMonthDay){
+                    $scope.repeat.onThe.day = 'day';
+                    $scope.repeat.checked = true;
+                }
+                else if($scope.editEventData.rRule.byWeekDay){
+                    $scope.repeat.checked = true;
+                    $scope.setOnDay();
+                }
+            }
+        }
+
         $scope.editEventModal.show();
     };
 
