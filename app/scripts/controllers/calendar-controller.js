@@ -226,13 +226,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     $scope.setEventDataDefault = function () {
         $scope.eventWeekDay = {
-            monday: false,
-            tuesday: false,
-            wednesday: false,
-            thursday: false,
-            friday: false,
-            saturday: false,
-            sunday: false
+            'MO': false,
+            'TU': false,
+            'WE': false,
+            'TH': false,
+            'FR': false,
+            'SA': false,
+            'SU': false
         };
         $scope.eventMonthDay = [
             false,false,false,false,false,false,false,
@@ -441,7 +441,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         // Set value 'each' or 'on' ---------------------------------------------
-        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){  // for monthly
+        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
@@ -466,7 +466,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             }
         }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.byMonth){ // for yearly
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY'){
             if($scope.editEventData.rRule.byMonth){
                 angular.forEach($scope.editEventData.rRule.byMonth, function(value){
                     var month = parseInt(value);
@@ -490,6 +490,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     $scope.setOnDay();
                 }
             }
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
+            angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
+                if(weekday == 'MO') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'TU') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'WE') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'TH') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'FR') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'SA') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'SU') { $scope.eventWeekDay[weekday] = true; }
+            });
         }
 
         $scope.editEventModal.show();
