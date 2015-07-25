@@ -45,7 +45,7 @@
             <div class="item item-toggle small-item-toggle">
                 Repeat
                 <label class="toggle toggle-energized">
-                    <input type="checkbox" ng-model="repeat.status">
+                    <input type="checkbox" ng-model="repeat.status" ng-change="editEventOnOffRepeat()">
                     <div class="track">
                         <div class="handle"></div>
                     </div>
@@ -406,7 +406,7 @@
                 <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline" ng-click="deleteEvent(editEventData.id)">Delete</button>
             </div>
             <div class="button-div-padding">
-                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline" ng-click="editEvent(editEventData.id)">Save</button>
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline" ng-click="saveEditEvent()">Save</button>
             </div>
 
         </div>
