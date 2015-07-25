@@ -29,7 +29,7 @@
                 <input type="date" ng-model="editEventData.startDate" class="small-item-input-datetime">
             </label>
         </div>
-        <!--Start Time-->
+        <!--End Time-->
         <div class="list flex">
             <label class="item item-input small-item-input flex-1">
                 <span>Start Time</span>
@@ -40,7 +40,7 @@
                 <input type="time" ng-model="editEventData.endDate" class="small-item-input-datetime">
             </label>
         </div>
-        <!--End Time-->
+        <!--Repeat-->
         <div class="list">
             <div class="item item-toggle small-item-toggle">
                 Repeat
@@ -52,7 +52,7 @@
                 </label>
             </div>
         </div>
-        <!--Repeat-->
+        <!--Frequency-->
         <div class="list" ng-show="repeat.status">
             <div class="item item-input small-item-input sub-item-input">
                 <span>Frequency</span>
@@ -206,26 +206,26 @@
                     <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
                             <div style="width: 150px; padding-right: 10px">
                             <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="onTheDisabled">
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='first'">first</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='second'">second</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='third'">third</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='fourth'">fourth</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='fifth'">fifth</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='last'">last</option>
+                                <option value="first" ng-selected="repeat.onThe.sequent=='first'">first</option>
+                                <option value="second" ng-selected="repeat.onThe.sequent=='second'">second</option>
+                                <option value="third" ng-selected="repeat.onThe.sequent=='third'">third</option>
+                                <option value="fourth" ng-selected="repeat.onThe.sequent=='fourth'">fourth</option>
+                                <option value="fifth" ng-selected="repeat.onThe.sequent=='fifth'">fifth</option>
+                                <option value="last" ng-selected="repeat.onThe.sequent=='last'">last</option>
                             </select>
                         </div>
                         <div style="width: 180px">
                             <select class="custom-row-font-size" ng-model="repeat.onThe.day" ng-disabled="onTheDisabled">
-                                <option value="daily" ng-selected="repeat.onThe.day=='day'">day</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='monday'">Monday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='tuesday'">Tuesday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='wednesday'">Wednesday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='thursday'">Thursday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='friday'">Friday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='saturday'">Saturday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='sunday'">Sunday</option>
+                                <option value="day" ng-selected="repeat.onThe.day=='day'">day</option>
+                                <option value="weekday" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
+                                <option value="weekend" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
+                                <option value="monday" ng-selected="repeat.onThe.day=='monday'">Monday</option>
+                                <option value="tuesday" ng-selected="repeat.onThe.day=='tuesday'">Tuesday</option>
+                                <option value="thursday" ng-selected="repeat.onThe.day=='wednesday'">Wednesday</option>
+                                <option value="thursday" ng-selected="repeat.onThe.day=='thursday'">Thursday</option>
+                                <option value="friday" ng-selected="repeat.onThe.day=='friday'">Friday</option>
+                                <option value="saturday" ng-selected="repeat.onThe.day=='saturday'">Saturday</option>
+                                <option value="sunday" ng-selected="repeat.onThe.day=='sunday'">Sunday</option>
                             </select>
                         </div>
                     </span>
@@ -275,7 +275,7 @@
                     <span class="flex align-items-center">
                         <div class="custom-circle-radio-first-col">
                             <label class="checkbox checkbox-energized custom-event-checkbox">
-                                <input type="checkbox" ng-model="repeat.checked">
+                                <input type="checkbox" ng-model="repeat.onThe.checked">
                             </label>
                         </div>
                         <div class="custom-circle-text-first-col">On the</div>
@@ -283,27 +283,27 @@
 
                     <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
                         <div style="width: 150px; padding-right: 10px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="!(repeat.checked)">
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='first'">first</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='second'">second</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='third'">third</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='fourth'">fourth</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='fifth'">fifth</option>
-                                <option value="daily" ng-selected="repeat.onThe.sequent=='last'">last</option>
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="!(repeat.onThe.checked)">
+                                <option value="first" ng-selected="repeat.onThe.sequent=='first'">first</option>
+                                <option value="second" ng-selected="repeat.onThe.sequent=='second'">second</option>
+                                <option value="third" ng-selected="repeat.onThe.sequent=='third'">third</option>
+                                <option value="fourth" ng-selected="repeat.onThe.sequent=='fourth'">fourth</option>
+                                <option value="fifth" ng-selected="repeat.onThe.sequent=='fifth'">fifth</option>
+                                <option value="last" ng-selected="repeat.onThe.sequent=='last'">last</option>
                             </select>
                         </div>
                         <div style="width: 180px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" style="width: 110px" ng-disabled="!(repeat.checked)">
-                                <option value="daily" ng-selected="repeat.onThe.day=='day'">day</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='monday'">Monday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='tuesday'">Tuesday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='wednesday'">Wednesday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='thursday'">Thursday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='friday'">Friday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='saturday'">Saturday</option>
-                                <option value="daily" ng-selected="repeat.onThe.day=='sunday'">Sunday</option>
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" style="width: 110px" ng-disabled="!(repeat.onThe.checked)">
+                                <option value="day" ng-selected="repeat.onThe.day=='day'">day</option>
+                                <option value="weekday" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
+                                <option value="weekend" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
+                                <option value="monday" ng-selected="repeat.onThe.day=='monday'">Monday</option>
+                                <option value="tuesday" ng-selected="repeat.onThe.day=='tuesday'">Tuesday</option>
+                                <option value="thursday" ng-selected="repeat.onThe.day=='wednesday'">Wednesday</option>
+                                <option value="thursday" ng-selected="repeat.onThe.day=='thursday'">Thursday</option>
+                                <option value="friday" ng-selected="repeat.onThe.day=='friday'">Friday</option>
+                                <option value="saturday" ng-selected="repeat.onThe.day=='saturday'">Saturday</option>
+                                <option value="sunday" ng-selected="repeat.onThe.day=='sunday'">Sunday</option>
                             </select>
                         </div>
                     </span>
@@ -406,7 +406,7 @@
                 <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline" ng-click="deleteEvent(editEventData.id)">Delete</button>
             </div>
             <div class="button-div-padding">
-                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline" ng-click="editEvent(editEventData.id)">Done</button>
+                <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline" ng-click="editEvent(editEventData.id)">Save</button>
             </div>
 
         </div>
