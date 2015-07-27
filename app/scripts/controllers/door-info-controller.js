@@ -18,6 +18,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         name: 'doorInfo'
     };
 
+    // -------------------------------------------------------------------------
+    // Select calendars events -------------------------------------------------
+    // -------------------------------------------------------------------------
+
     // Variable Default, Set Value for Show Event Data ('myAccessTime', 'autoRelease', 'passcodeUnlock', 'userAccess')
     $scope.showEventsDataName = { value: 'myAccessTime' };
     var eventsData = { value: [] };
