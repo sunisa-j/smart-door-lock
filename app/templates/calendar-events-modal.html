@@ -2,7 +2,8 @@
 
     <ion-header-bar>
         <i class="ion-ios-close-empty modal-close-icon" ng-click="calendarEventsModal.hide()"></i>
-        <h1 class="title">My Access Time in {{doorData.name}}</h1>
+        <h1 class="title" ng-show="showEventsDataName.value=='myAccessTime'">My Access Time in {{doorData.name}}</h1>
+        <h1 class="title" ng-show="showEventsDataName.value=='autoRelease'">Auto Release Time</h1>
     </ion-header-bar>
 
     <ion-content style="margin-top: -2px">
