@@ -97,7 +97,8 @@ window.app.factory('autoReleasePolicies', function (calendars) {
 
         if(data === 'object') {
             return autoReleasePoliciesDoorSelectedObj;
-        }else if(data === 'array') {
+        }
+        else if(data === 'array') {
             return autoReleasePoliciesArr;
         }
     };
