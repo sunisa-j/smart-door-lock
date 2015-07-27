@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, passcodePolicies, usersCalendars, calendarEvents) {
+window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, passcodePolicies, usersCalendars, calendarEvents, passcodeUnlock) {
 
     var doorId = $stateParams.doorId;
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
@@ -8,8 +8,11 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
     var userId = 1; // Login User Id
     $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId, ''); // Selected calendars this user can access
 
-    //Get access time of title informaiton
+    // Get access time of title informaition
     $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array', '');
+
+    // Get passcode unlock name
+    $scope.passcodeUnlockSelected = passcodeUnlock(doorId, passcodeUnlockId, 'selected');
 
     // when click delete calendar
     $scope.deleteCalendar = function (id) {
