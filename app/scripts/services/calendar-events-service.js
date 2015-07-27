@@ -154,14 +154,12 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
         calendarEventsObj[event.id].description = event.description;
         calendarEventsObj[event.id].startDate = event.startDate;
         calendarEventsObj[event.id].endDate = event.endDate;
+
+        calendarEventsObj[event.id].start = event.startDate;
+        calendarEventsObj[event.id].title = event.name;
+
         if(event.rRule){
-            calendarEventsObj[event.id].rRule = {
-                frequency: event.rRule.frequency,
-                dateStart: event.rRule.dateStart,
-                until: event.rRule.until,
-                byWeekDay: event.rRule.byWeekDay,
-                bySetPos: event.rRule.bySetPos
-            };
+            calendarEventsObj[event.id].rRule = event.rRule;
         }
     });
 
@@ -188,16 +186,16 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             });
         }
 
-        if(data === 'object'){
+        if(data === 'object'){ // Events in each calendar (Object format)
             return calendarEventsObj;
         }
-        else if (data === 'array') {
+        else if (data === 'array') { // Events in each calendar (Array format)
             return calendarEvents;
         }
-        else if (data === 'calendarEvents') {
+        else if (data === 'calendarEvents') { // Events in Selected Calendar
             return calendarSelectedEvents;
         }
-        else if (data === 'doorUserEvents'){
+        else if (data === 'doorUserEvents'){ // Events in any calendar association with doorId & userId
 
             if(userId != '' && doorId != '') {
                 // group events by door and user selected (in calendars this user is 'owner')
