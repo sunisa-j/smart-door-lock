@@ -72,7 +72,17 @@ window.app.factory('userAccessPolicies', function (calendars) {
             createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
             updatedAt: '2015-06-18T08:47:09.000Z'
-        }
+        },
+        {
+            id: 'userPolicy8',
+            type: 'holiday',
+            doorUser: 'doorUser11',
+            calendar: 'calendar2',
+            createdBy: 1,
+            createdAt: '2015-06-18T08:47:09.000Z',
+            updatedBy: 1,
+            updatedAt: '2015-06-18T08:47:09.000Z'
+        },
     ];
 
     // transform calendars to obj
