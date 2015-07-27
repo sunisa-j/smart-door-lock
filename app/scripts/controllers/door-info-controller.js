@@ -18,6 +18,21 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         name: 'doorInfo'
     };
 
+    // Variable Default, Set Value for Show Event Data ('myAccessTime', 'autoRelease', 'passcodeUnlock', 'userAccess')
+    $scope.showEventsDataName = { value: 'myAccessTime' };
+    var eventsData = { value: [] };
+
+    // Get all events to show in ui-calendar -----------------------------------
+    $scope.selectEventsData = function () {
+
+        eventsData.value = [];
+
+        if($scope.showEventsDataName.value == 'myAccessTime'){
+            eventsData.value = calendarEvents(userId, doorId, '','doorUserEvents');
+        }
+    };
+    $scope.selectEventsData();
+
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
     // -------------------------------------------------------------------------
@@ -29,9 +44,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     }).then(function(modal) {
         $scope.calendarEventsModal = modal;
     });
+    $scope.$on('modal.shown', function() {
+        $scope.selectEventsData();
+    });
 
-    // Get all events to show in ui-calendar -----------------------------------
-    $scope.doorUserEvents = calendarEvents(userId, doorId, '','doorUserEvents');
     $scope.dateSelected = new Date();
     $scope.transformDate = function(date){
         var dateNew;
@@ -48,7 +64,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
 
         var calendarEventsDateSelected = [];
-        var events = angular.copy($scope.doorUserEvents);
+        var events = angular.copy(eventsData.value);
 
         angular.forEach(events, function(value){
             var startDate = $scope.transformDate(value.startDate);
@@ -67,10 +83,32 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.weekDay = ['Sun', 'Mon', 'Tue', 'Wen', 'Thu', 'Fri', 'Sat'];
 
     // Calendar UI Configuration -----------------------------------------------
+
     $scope.uiCalendarEvents = {
-        events: $scope.doorUserEvents,
+        events: eventsData.value,
         color: 'rgba(0, 201, 13, 0.2)',
         textColor: '#333333'
+    };
+    var setDayRedBg = function(dataDate) {
+        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+        if(isOtherMonth) {
+            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+        }
+        angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+    };
+    var setDayBlackBg = function(dataDate) {
+        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
+        angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
+        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+
+        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
+        if(isOtherMonth) {
+            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+        }
+        angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
     };
     $scope.uiConfig = {
         calendar:{
@@ -79,8 +117,9 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             },
             editable: false,
             height: 480,
-            dayClick: function(date, jsEvent, view) { // When select day
+            dayClick: function(date, jsEvent, view) {
 
+                // When select day ---------------------------------------------
                 var dateSelected = new Date(date._d);
                 $scope.dateSelected = dateSelected;
                 $scope.getEventsDateSelected(dateSelected);
@@ -88,67 +127,31 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 var dataMonth = dateSelected.getMonth()+1;
                 var dataDay = dateSelected.getDate();
                 var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-
-                // change the day's background color just for fun
                 var dateNow = new Date();
+
+                // change the day's background
                 if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
-
+                    setDayRedBg(dataDate);
                 }else {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                    setDayBlackBg(dataDate);
                 }
             },
-            eventClick: function(event, element) { // When select event
-                //console.log('event: ', event);
-                $scope.editEventData = event;
-                $scope.editEventModal.show();
-            },
-            viewRender: function(view, element) { // When change month (click prev,next button), focus day selected
+            viewRender: function(view, element) {
+
+                // When change month (click prev,next button), focus day selected
                 $scope.getEventsDateSelected($scope.dateSelected);
 
                 var dataMonth = $scope.dateSelected.getMonth()+1;
                 var dataDay = $scope.dateSelected.getDate();
                 var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-
-                // change the day's background color just for fun
                 var dateNow = new Date();
+
+                // change the day's background
                 if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
-
+                    setDayRedBg(dataDate);
                 }else {
-                    angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-                    angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
-                    angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-                    var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-                    if(isOtherMonth) {
-                        angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-                    }
-                    angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+                    setDayBlackBg(dataDate);
                 }
-                //console.log("View Changed: ", view.visStart, view.visEnd, view.start, view.end);
             }
         }
     };
@@ -212,14 +215,14 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     var dateNow = new Date();
     var runForEach = true;
 
-    angular.forEach($scope.doorUserEvents, function(event){
+    angular.forEach(eventsData.value, function(event){
         var newStartDate = new Date(event.startDate);
         var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
         if(startDate >= dateNow) {
             $scope.calcMyAccessTime[startDate] = [];
         }
     });
-    angular.forEach($scope.doorUserEvents, function(event){
+    angular.forEach(eventsData.value, function(event){
         var newStartDate = new Date(event.startDate);
         var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
 
