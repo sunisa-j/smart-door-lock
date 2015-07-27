@@ -44,8 +44,8 @@
                 </div>
             </div>
 
-            <button class="button button-outline button-block button-dark more-button" ng-click="calendarEventsModal.show();todayActive()" ng-hide="myAccessTime.length==0">More ...</button>
-            <div style="text-align: center; padding: 15px 0" class="stable" ng-show="myAccessTime.length==0">No event</div>
+            <button class="button button-outline button-block button-dark more-button" ng-click="showEventsDataName.value='myAccessTime';calendarEventsModal.show();todayActive()" ng-hide="myAccessTime.length==0">More ...</button>
+            <div style="text-align: center; padding: 15px 0" class="stable" ng-show="myAccessTime.length==0">No Events</div>
         </div>
         <!--My Recent Activity-->
         <div class="item item-divider">My Recent Activity</div>
@@ -219,6 +219,7 @@
     </ion-content>
     <!--End User Content-->
 
+    <!--Tabs-->
     <div class="bar bar-footer bar-dark footer-tabs-height flex justify-content-center align-items-center"
          ng-hide="(doorData.permission.configuration==false)&&(doorData.permission.viewLog==false)&&(doorData.permission.policies==false)">
 
