@@ -6,18 +6,18 @@
 
     <ion-content>
 
-        <div class="flex justify-content-center align-items-center search-container">
+        <div class="flex justify-content-center align-items-center search-container" ng-show="false">
             <div class="search-icon-div">
                 <i class="ion-ios-calendar-outline"></i>
             </div>
             <div class="flex-1 search-input-div" ng-init="searchCalendar=''">
                 <input type="text" placeholder="Search Calendar Name" ng-model="searchCalendar">
             </div>
-            <!--<div class="search-button-div">-->
-                <!--<button class="button button-stable button-small custom-search-button">-->
-                    <!--<i class="ion-ios-search"></i>-->
-                <!--</button>-->
-            <!--</div>-->
+            <div class="search-button-div">
+                <button class="button button-stable button-small custom-search-button">
+                    <i class="ion-ios-search"></i>
+                </button>
+            </div>
         </div>
 
         <div ng-repeat="group in userCalendars" ng-hide="group.length==0">
@@ -26,7 +26,7 @@
                 {{($index==0)? 'My Calendars':'Other Calendars'}}
             </div>
 
-            <div class="custom-row" ng-repeat="calendarData in group | filter: searchCalendar" ng-init="calendarCheckbox[calendarData.calendar.id]=false" ng-click="calendarCheckbox[calendarData.calendar.id]=!(calendarCheckbox[calendarData.calendar.id])" ng-class="{'checkbox-row-bg':calendarCheckbox[calendarData.calendar.id]==true}">
+            <div class="custom-row" ng-repeat="calendarData in group" ng-init="calendarCheckbox[calendarData.calendar.id]=false" ng-click="calendarCheckbox[calendarData.calendar.id]=!(calendarCheckbox[calendarData.calendar.id])" ng-class="{'checkbox-row-bg':calendarCheckbox[calendarData.calendar.id]==true}">
                 <div style="display: none">
                     <input type="checkbox" ng-model="calendarCheckbox[calendarData.calendar.id]" name="calendarData.calendar.id">
                 </div>
