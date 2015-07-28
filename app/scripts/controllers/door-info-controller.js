@@ -214,39 +214,71 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     };
 
     // My Access Time ----------------------------------------------------------
-    $scope.calcMyAccessTime = {};
+    var calcMyAccessTime = {};
+    var myAccessTime3Latest = [];
     $scope.myAccessTime = [];
     var dateNow = new Date();
     var runForEach = true;
 
+    // Set variable type default is array for events (startDate >= dateNow)
     angular.forEach(eventsData.value, function(event){
         var newStartDate = new Date(event.startDate);
         var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
         if(startDate >= dateNow) {
-            $scope.calcMyAccessTime[startDate] = [];
+            calcMyAccessTime[startDate] = [];
         }
     });
+    // Push events group by startDate
     angular.forEach(eventsData.value, function(event){
         var newStartDate = new Date(event.startDate);
         var startDate = new Date(newStartDate.setHours(0, 0, 0, 0));
 
         if(startDate >= dateNow) {
             var tmp = angular.copy(event);
-            $scope.calcMyAccessTime[startDate].push(tmp);
+            calcMyAccessTime[startDate].push(tmp);
         }
     });
-    angular.forEach($scope.calcMyAccessTime, function(value, key){
+    // Get latest 3 events
+    angular.forEach(calcMyAccessTime, function(value, key){
         if(runForEach) {
             var tmp = angular.copy(value);
             tmp.startDate = key;
-            $scope.myAccessTime.push(tmp);
+            myAccessTime3Latest.push(tmp);
 
-            if($scope.myAccessTime.length == 3){
+            if(myAccessTime3Latest.length == 3){
                 runForEach = false;
             }
         }
     });
-    //console.log($scope.myAccessTime);
+    // Sort by startDate (ASC)
+    if(myAccessTime3Latest.length != 0) {
+
+        var startDateFirst = {value: myAccessTime3Latest[0]};
+        var i = 0;
+
+        angular.forEach(myAccessTime3Latest, function (value) {
+            if (value.startDate > startDateFirst.value.startDate) {
+                startDateFirst.value = value;
+            }
+            //console.log(new Date(value.startDate).getTime());
+            //console.log(new Date(startDateFirst.value.startDate).getTime() + '\n');
+        });
+        $scope.myAccessTime[0] = startDateFirst.value;
+        angular.forEach(myAccessTime3Latest, function (value) {
+            if (value.startDate == startDateFirst.value.startDate) {
+                myAccessTime3Latest.splice(i, 1);
+            }
+            i++;
+        });
+
+        if (myAccessTime3Latest[0].startDate > myAccessTime3Latest[1].startDate) {
+            $scope.myAccessTime[1] = myAccessTime3Latest[0];
+            $scope.myAccessTime[2] = myAccessTime3Latest[1];
+        } else {
+            $scope.myAccessTime[1] = myAccessTime3Latest[1];
+            $scope.myAccessTime[2] = myAccessTime3Latest[0];
+        }
+    }
 
 
     // -------------------------------------------------------------------------
