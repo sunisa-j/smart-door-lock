@@ -721,42 +721,91 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Delete Event ------------------------------------------------------------
     $scope.deleteEvent = function (eventId){
 
-        var myPopup = $ionicPopup.confirm({
-            title: 'Confirm',
-            template: 'Are you sure to delete this "' + $scope.editEventData.name + '" event ?',
-            buttons: [
-                {
-                    text: '<div class="flex align-items-center">' +
-                    '<span class="flex-basis-30">' +
-                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
-                    '</span>' +
-                    '<span class="flex-1">Cancel</span>' +
-                    '</div>',
-                    type: 'button-outline button-stable',
-                    onTap: function() {
-                        return false;
+        if($scope.editEventData.rRule) {
+            var myPopup = $ionicPopup.confirm({
+                title: 'Confirm',
+                template: 'Do you want to delete all occurrences of this event, or only the selected occurrence ?',
+                buttons: [
+                    {
+                        text: '<div class="flex align-items-center">' +
+                        '<span class="flex-1">Cancel</span>' +
+                        '</div>',
+                        type: 'button-outline button-stable button-small',
+                        onTap: function() {
+                            return false;
+                        }
+                    },
+                    {
+                        text: '<div class="flex align-items-center">' +
+                        '<span class="flex-1">Delete All</span>' +
+                        '</div>',
+                        type: 'button-outline button-assertive button-small',
+                        onTap: function() {
+                            return 'delete all';
+                        }
+                    },
+                    {
+                        text: '<div class="flex align-items-center">' +
+                        '<span class="flex-1">Delete Only This Event</span>' +
+                        '</div>',
+                        type: 'button-outline button-assertive button-small',
+                        onTap: function() {
+                            return 'delete once';
+                        }
                     }
-                },{
-                    text: '<div class="flex align-items-center">' +
-                    '<span class="flex-basis-30">' +
-                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
-                    '</span>' +
-                    '<span class="flex-1">Delete</span>' +
-                    '</div>',
-                    type: 'button-outline button-assertive',
-                    onTap: function() {
-                        return true;
-                    }
+                ]
+            });
+            myPopup.then(function(res) {
+                if(res == 'delete once') {
+                    console.log('Delete Only This Event: ', eventId);
                 }
-            ]
-        });
-        myPopup.then(function(res) {
-            if(res) {
-                console.log('delete: ', eventId);
-            } else {
-                console.log('cancel');
-            }
-        });
+                else if(res == 'delete all') {
+                    console.log('Delete All: ', $scope.editEventData.recurringEvent);
+                }
+                else {
+                    console.log('Cancel');
+                }
+            });
+        }else {
+            var myPopup = $ionicPopup.confirm({
+                title: 'Confirm',
+                template: 'Do you want to delete this event "' + $scope.editEventData.name + '" ?',
+                buttons: [
+                    {
+                        text: '<div class="flex align-items-center">' +
+                        '<span class="flex-basis-30">' +
+                        '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                        '</span>' +
+                        '<span class="flex-1">Cancel</span>' +
+                        '</div>',
+                        type: 'button-outline button-stable',
+                        onTap: function() {
+                            return false;
+                        }
+                    },
+                    {
+                        text: '<div class="flex align-items-center">' +
+                        '<span class="flex-basis-30">' +
+                        '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                        '</span>' +
+                        '<span class="flex-1">Delete</span>' +
+                        '</div>',
+                        type: 'button-outline button-assertive',
+                        onTap: function() {
+                            return true;
+                        }
+                    }
+                ]
+            });
+            myPopup.then(function(res) {
+                if(res) {
+                    console.log('Delete Event: ', eventId);
+                }
+                else {
+                    console.log('Cancel');
+                }
+            });
+        }
     };
 
     // When on/off repeat on edit event modal ----------------------------------
