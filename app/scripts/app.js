@@ -237,7 +237,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                 children: [
                     {
                         name: 'calendar',
-                        url: '/calendar/:calendarId',
+                        url: '/calendar/:calendarId/:accessRole',
                         views: {
                             'menuContent@mainMenu': {
                                 controller: 'CalendarController',
