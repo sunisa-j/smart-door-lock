@@ -4,6 +4,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
+    var calendarAccessRole = $stateParams.accessRole;
 
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
@@ -101,7 +102,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             eventClick: function(event, element) {
 
                 // When select event -------------------------------------------
-                $scope.openEditEvent(event);
+                if(calendarAccessRole != 'reader'){
+                    $scope.openEditEvent(event);
+                }else{
+                    console.log('read only');
+                }
             },
             viewRender: function(view, element) {
 
