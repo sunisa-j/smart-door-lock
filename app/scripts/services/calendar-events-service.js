@@ -15,9 +15,11 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 frequency: 'MONTHLY',
                 interval: 1,
                 dateStart: '2015-07-17',
-                until: '2015-12-31',
+                count: 2,
+                //until: '2015-12-31',
                 byMonthDay: [1,31]
             },
+            recurringEvent: 'recurringId1',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -34,7 +36,6 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 interval: 2,
                 dateStart: '2015-07-30',
                 until: '2015-12-31',
-                //count: 3,
                 byMonth: [1,4,7],
                 //byWeekDay: [
                 //    'MO','TU','WE','TH','FR'
@@ -46,6 +47,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                     2
                 ]
             },
+            recurringEvent: 'recurringId2',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -69,6 +71,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                     2
                 ]
             },
+            recurringEvent: 'recurringId3',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -89,6 +92,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                     'TU', 'TH'
                 ]
             },
+            recurringEvent: 'recurringId4',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
@@ -106,6 +110,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 dateStart: '2015-01-01',
                 until: '2015-12-31'
             },
+            recurringEvent: 'recurringId5',
             createdAt: '2015-03-14T12:31:45.000Z',
             updatedAt: '2015-03-14T12:31:45.000Z'
         },
