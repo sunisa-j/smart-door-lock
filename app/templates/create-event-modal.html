@@ -196,7 +196,7 @@
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
                                     ng-hide="repeat.repeatBy=='on'"
-                                    ng-click="repeat.repeatBy='on';notSelectOnThe.value=false;onTheDisabled=false;notSelectEach.value=true;calculateRrule()"
+                                    ng-click="repeat.repeatBy='on';repeat.onThe.sequent='first';repeat.onThe.day='day';notSelectOnThe.value=false;onTheDisabled=false;notSelectEach.value=true;calculateRrule()"
                                     ng-class="{'fade-in':notSelectOnThe.value==true, 'opacity-0':notSelectOnThe.value==false,'fade-out':notSelectOnThe.value==false, 'opacity-1':notSelectOnThe.value==true}">
                             </button>
                         </div>
@@ -238,8 +238,8 @@
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
-                    <span class="flex align-items-center">
-                        <div class="sub-item-input-second-col"><input type="number" ng-model="createEventData.rRule.interval" class="sub-item-text-input"></div>
+                    <span class="flex align-items-center" ng-init="repeat.onThe.checked=false;eventMonth[0]=true">
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="createEventData.rRule.interval" class="sub-item-text-input" min="1" ng-change="calculateRrule()"></div>
                         <div class="sub-item-unit">{{(createEventData.rRule.interval==1)? 'year':'years'}} in:</div>
                     </span>
                 </div>
@@ -249,22 +249,22 @@
                     <span>&nbsp;</span>
                     <span class="sub-input-padding">
                         <div class="button-bar custom-year-button-bar">
-                            <button class="button" ng-class="{'energized-bg': eventMonth[0]}" ng-click="toggleMonthSelect(0)">Jan</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[1]}" ng-click="toggleMonthSelect(1)">Feb</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[2]}" ng-click="toggleMonthSelect(2)">Mar</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[3]}" ng-click="toggleMonthSelect(3)">Apr</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[0]}" ng-click="toggleMonthSelect(0);calculateRrule()">Jan</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[1]}" ng-click="toggleMonthSelect(1);calculateRrule()">Feb</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[2]}" ng-click="toggleMonthSelect(2);calculateRrule()">Mar</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[3]}" ng-click="toggleMonthSelect(3);calculateRrule()">Apr</button>
                         </div>
                         <div class="button-bar custom-year-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonth[4]}" ng-click="toggleMonthSelect(4)">May</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[5]}" ng-click="toggleMonthSelect(5)">Jun</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[6]}" ng-click="toggleMonthSelect(6)">Jul</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[7]}" ng-click="toggleMonthSelect(7)">Aug</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[4]}" ng-click="toggleMonthSelect(4);calculateRrule()">May</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[5]}" ng-click="toggleMonthSelect(5);calculateRrule()">Jun</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[6]}" ng-click="toggleMonthSelect(6);calculateRrule()">Jul</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[7]}" ng-click="toggleMonthSelect(7);calculateRrule()">Aug</button>
                         </div>
                         <div class="button-bar custom-year-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonth[8]}" ng-click="toggleMonthSelect(8)">Sep</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[9]}" ng-click="toggleMonthSelect(9)">Oct</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[10]}" ng-click="toggleMonthSelect(10)">Nov</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonth[11]}" ng-click="toggleMonthSelect(11)">Dec</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[8]}" ng-click="toggleMonthSelect(8);calculateRrule()">Sep</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[9]}" ng-click="toggleMonthSelect(9);calculateRrule()">Oct</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[10]}" ng-click="toggleMonthSelect(10);calculateRrule()">Nov</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonth[11]}" ng-click="toggleMonthSelect(11);calculateRrule()">Dec</button>
                         </div>
                     </span>
                 </div>
@@ -275,7 +275,7 @@
                     <span class="flex align-items-center">
                         <div class="custom-circle-radio-first-col">
                             <label class="checkbox checkbox-energized custom-event-checkbox">
-                                <input type="checkbox" ng-model="repeat.onThe.checked">
+                                <input type="checkbox" ng-model="repeat.onThe.checked" ng-change="repeat.onThe.sequent='first';repeat.onThe.day='day';calculateRrule()">
                             </label>
                         </div>
                         <div class="custom-circle-text-first-col">On the</div>
@@ -283,7 +283,7 @@
 
                     <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
                         <div style="width: 150px; padding-right: 10px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="!(repeat.onThe.checked)">
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="!(repeat.onThe.checked)" ng-change="calculateRrule()">
                                 <option value="first" ng-selected="repeat.onThe.sequent=='first'">first</option>
                                 <option value="second" ng-selected="repeat.onThe.sequent=='second'">second</option>
                                 <option value="third" ng-selected="repeat.onThe.sequent=='third'">third</option>
@@ -293,7 +293,7 @@
                             </select>
                         </div>
                         <div style="width: 180px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" style="width: 110px" ng-disabled="!(repeat.onThe.checked)">
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" style="width: 110px" ng-disabled="!(repeat.onThe.checked)" ng-change="calculateRrule()">
                                 <option value="day" ng-selected="repeat.onThe.day=='day'">day</option>
                                 <option value="weekday" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
                                 <option value="weekend" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
@@ -326,7 +326,7 @@
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
                                     ng-hide="repeat.endRepeat=='never'"
-                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;calculateRrule();"
+                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;calculateRrule()"
                                     ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
                             </button>
                         </div>
@@ -348,7 +348,7 @@
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
                                     ng-hide="repeat.endRepeat=='after'"
-                                    ng-click="repeat.endRepeat='after';notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;"
+                                    ng-click="repeat.endRepeat='after';createEventData.rRule.count=1;notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;calculateRrule()"
                                     ng-class="{'fade-in':notSelectAfter.value==true, 'opacity-0':notSelectAfter.value==false,'fade-out':notSelectAfter.value==false, 'opacity-1':notSelectAfter.value==true}">
                             </button>
                         </div>
@@ -376,7 +376,7 @@
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
                                     ng-hide="repeat.endRepeat=='date'"
-                                    ng-click="repeat.endRepeat='date';notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;"
+                                    ng-click="repeat.endRepeat='date';createEventData.rRule.until=dateUntil;notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;calculateRrule()"
                                     ng-class="{'fade-in':notSelectOnDate.value==true, 'opacity-0':notSelectOnDate.value==false,'fade-out':notSelectOnDate.value==false, 'opacity-1':notSelectOnDate.value==true}">
                             </button>
                         </div>
