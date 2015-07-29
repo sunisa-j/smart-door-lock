@@ -35,11 +35,20 @@
             </label>
         </div>
 
+        <div class="flex align-items-center custom-setting-row-with-right-button pointer" ng-click="shareCalendarModal.show()">
+            <div class="custom-row-title">
+                <div>Share Calendar</div>
+            </div>
+            <div class="custom-setting-row-arrow">
+                <i class="ion-ios-arrow-right"></i>
+            </div>
+        </div>
+        <div class="item item-desc">
+            Share this calendar to your selected users.
+        </div>
+
         <!--Close & Delete Button-->
         <div class="button-bar" style="margin-top: -10px">
-            <!--<div class="button-div-padding">-->
-                <!--<button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="calendarSettingsModal.hide()">Close</button>-->
-            <!--</div>-->
             <div class="button-div-padding">
                 <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="deleteCalendar()">Delete Calendar</button>
             </div>
