@@ -41,8 +41,8 @@
                 Today
             </button>
         </div>
-        <div style="flex-basis: 148px; height: 100%">
-            <button class="button button-clear button-dark" style="font-size: 14px; height: 100%; width: 148px; text-align: left" ng-click="calendarSettingsModal.show()">
+        <div style="flex-basis: 148px; height: 100%" ng-show="calendarAccessRole=='owner'">
+            <button class="button button-clear button-dark" style="font-size: 14px; height: 100%; width: 148px; text-align: left" ui-sref="mainMenu.calendars.calendar.calendarSettings">
                 <i class="ion-ios-gear-outline" style="font-size: 20px"></i>&nbsp;
                 <span style="position: absolute; top: -1px; right: 0; width: 120px">Calendar Settings</span>
             </button>
