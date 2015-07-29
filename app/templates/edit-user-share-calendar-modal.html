@@ -1,5 +1,6 @@
 <ion-modal-view>
     <ion-header-bar>
+        <i class="ion-ios-close-empty modal-close-icon" ng-click="editUserModal.hide()"></i>
         <h1 class="title">Edit Access Role</h1>
     </ion-header-bar>
 
@@ -11,7 +12,6 @@
                     <div class="profile-background-image" style="background: url(images/profile50x50.jpg) no-repeat"></div>
                 </span>
                 <span class="card-value" style="font-size: 16px">
-                    <!--<div style="font-size: 14px; color: #898989; line-height: 20px">{{editUser.user.employeeNumber}}</div>-->
                     <div class="overflow-hidden-text">
                         <span style="font-size: 14px">{{editUser.user.employeeNumber}}</span>
                         <span style="padding-left: 10px">{{editUser.user.firstName}} {{editUser.user.lastName}}</span>
@@ -33,36 +33,35 @@
                         ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
                         ng-show="enableEditPermission.value">Cancel</button>
                 <button class="button button-clear button-small button-balanced"
-                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true; saveAccessRole()"
                         ng-show="enableEditPermission.value">Save</button>
             </div>
         </div>
-        <div class="item custom-row-del-border-bottom">
+        <div class="item" style="padding: 10px 15px 17px 15px">
 
             <div class="flex permission-flex-container">
-                <!--<div class="permission-title">General</div>-->
 
                 <div class="flex flex-wrap" style="flex-basis: 400px; flex-grow: 1; -webkit-flex-grow: 1;">
-                    <div class="permission-column-height permission-column-width">
+                    <div class="permission-column-height access-role-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.accessRole.owner" ng-disabled="checkboxReadOnly.value">
+                                <input type="radio" value="owner" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
                             </label>
                             Owner
                         </li>
                     </div>
-                    <div class="permission-column-height permission-column-width">
+                    <div class="permission-column-height access-role-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.accessRole.writer" ng-disabled="checkboxReadOnly.value">
+                                <input type="radio" value="writer" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
                             </label>
                             Writer
                         </li>
                     </div>
-                    <div class="permission-column-height permission-column-width">
+                    <div class="permission-column-height access-role-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.accessRole.reader" ng-disabled="checkboxReadOnly.value">
+                                <input type="radio" value="reader" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
                             </label>
                             Reader
                         </li>
