@@ -49,7 +49,7 @@
             <!--<div class="button-div-padding">-->
                 <!--<button class="button button-outline button-block icon-left button-stable ion-ios-close-outline" ng-click="cancelAddCalendars()">Cancel</button>-->
             <!--</div>-->
-            <div class="button-div-padding">
+            <div class="button-div-padding" ng-hide="userCalendars.length==0">
                 <button class="button button-outline button-block icon-left button-balanced ion-ios-plus-outline more-button" ng-click="addCalendarsSelected()">Add</button>
             </div>
         </div>
