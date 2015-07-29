@@ -163,11 +163,9 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
         });
 
         if(data === 'array'){
-            console.log(accessRoleArr);
             return accessRoleArr;
         }
         else if(data === 'object'){
-            console.log(usersCalendarsObj);
             return usersCalendarsObj;
         }
         else if(data === 'calendarUsers'){
