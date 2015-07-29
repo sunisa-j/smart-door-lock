@@ -247,6 +247,408 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
 
+    // Set byweekday RRule
+    var setByWeekDay = function(){
+        var byweekday = [];
+
+        if($scope.eventWeekDay['MO'] == true) {
+            byweekday.push(RRule.MO);
+        }
+        if($scope.eventWeekDay['TU'] == true) {
+            byweekday.push(RRule.TU);
+        }
+        if($scope.eventWeekDay['WE'] == true) {
+            byweekday.push(RRule.WE);
+        }
+        if($scope.eventWeekDay['TH'] == true) {
+            byweekday.push(RRule.TH);
+        }
+        if($scope.eventWeekDay['FR'] == true) {
+            byweekday.push(RRule.FR);
+        }
+        if($scope.eventWeekDay['SA'] == true) {
+            byweekday.push(RRule.SA);
+        }
+        if($scope.eventWeekDay['SU'] == true) {
+            byweekday.push(RRule.SU);
+        }
+
+        return byweekday;
+    };
+
+    // Set bymonn RRule
+    var setByMonthDay = function(){
+        var bymonthday = [];
+        var i = 1;
+        angular.forEach($scope.eventMonthDay, function(value){
+            if(value == true) {
+                bymonthday.push(i);
+            }
+            i++;
+        });
+
+        return bymonthday;
+    };
+
+    // Convert 'On the' sequent from sting to number for bySetPos RRule
+    var getBySetPos = function(sequent){
+        if(sequent == 'first'){
+            return [1];
+        }else if(sequent == 'second'){
+            return [2];
+        }else if(sequent == 'third'){
+            return [3];
+        }else if(sequent == 'fourth'){
+            return [4];
+        }else if(sequent == 'fifth'){
+            return [5];
+        }else if(sequent == 'last'){
+            return [-1];
+        }
+    };
+
+    // Set on the to rRule
+    var setOntheRrule = function(){
+        if($scope.repeat.onThe.day == 'day'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'weekday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'weekend'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.SA, RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SA, RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SA, RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'monday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.MO],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.MO],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.MO],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'tuesday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.TU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.TU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.TU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'wednesday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.WE],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.WE],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.WE],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'thursday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.TH],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.TH],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.TH],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'friday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.FR],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'saturday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.SA],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SA],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SA],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+        else if($scope.repeat.onThe.day == 'sunday'){
+            if ($scope.repeat.endRepeat == 'date') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    until: new Date($scope.createEventData.rRule.until),
+                    byweekday: [RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'after') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    count: $scope.createEventData.rRule.count,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+            else if ($scope.repeat.endRepeat == 'never') {
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart),
+                    byweekday: [RRule.SU],
+                    bymonthday: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                });
+            }
+        }
+    };
+
+
     // -------------------------------------------------------------------------
     // Create Event ------------------------------------------------------------
     // -------------------------------------------------------------------------
@@ -277,35 +679,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     }).then(function(modal) {
         $scope.createEventModal = modal;
     });
-
-    // Set byweekday in RRule
-    $scope.setByweekday = function(){
-        var byweekday = [];
-
-        if($scope.eventWeekDay['MO'] == true) {
-            byweekday.push(RRule.MO);
-        }
-        if($scope.eventWeekDay['TU'] == true) {
-            byweekday.push(RRule.TU);
-        }
-        if($scope.eventWeekDay['WE'] == true) {
-            byweekday.push(RRule.WE);
-        }
-        if($scope.eventWeekDay['TH'] == true) {
-            byweekday.push(RRule.TH);
-        }
-        if($scope.eventWeekDay['FR'] == true) {
-            byweekday.push(RRule.FR);
-        }
-        if($scope.eventWeekDay['SA'] == true) {
-            byweekday.push(RRule.SA);
-        }
-        if($scope.eventWeekDay['SU'] == true) {
-            byweekday.push(RRule.SU);
-        }
-
-        return byweekday;
-    };
 
     // Calculate Repeat Summary (by RRule Module) for Create Event Modal
     $scope.calculateRrule = function() {
@@ -339,7 +712,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.createEventData.rRule.frequency == 'WEEKLY') {
 
-                var byweekday = $scope.setByweekday();
+                var byweekday = setByWeekDay();
 
                 if ($scope.repeat.endRepeat == 'date') {
                     $scope.createDataRule = new RRule({
@@ -366,6 +739,56 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         dtstart: new Date($scope.createEventData.rRule.dateStart),
                         byweekday: byweekday
                     });
+                }
+            }
+            else if ($scope.createEventData.rRule.frequency == 'MONTHLY') {
+                var bymonthday = [];
+                var bymonthday = setByMonthDay();
+
+                $scope.createDataRule = new RRule({
+                    freq: RRule.MONTHLY,
+                    interval: $scope.createEventData.rRule.interval,
+                    dtstart: new Date($scope.createEventData.rRule.dateStart)
+                });
+
+                if($scope.repeat.repeatBy=='each'){
+                    if(bymonthday.length > 0){
+                        if ($scope.repeat.endRepeat == 'date') {
+                            $scope.createDataRule = new RRule({
+                                freq: RRule.MONTHLY,
+                                interval: $scope.createEventData.rRule.interval,
+                                dtstart: new Date($scope.createEventData.rRule.dateStart),
+                                until: new Date($scope.createEventData.rRule.until),
+                                bymonthday: bymonthday
+                            });
+                        }
+                        else if ($scope.repeat.endRepeat == 'after') {
+                            $scope.createDataRule = new RRule({
+                                freq: RRule.MONTHLY,
+                                interval: $scope.createEventData.rRule.interval,
+                                count: $scope.createEventData.rRule.count,
+                                dtstart: new Date($scope.createEventData.rRule.dateStart),
+                                bymonthday: bymonthday
+                            });
+                        }
+                        else if ($scope.repeat.endRepeat == 'never') {
+                            $scope.createDataRule = new RRule({
+                                freq: RRule.MONTHLY,
+                                interval: $scope.createEventData.rRule.interval,
+                                dtstart: new Date($scope.createEventData.rRule.dateStart),
+                                bymonthday: bymonthday
+                            });
+                        }
+                    }else{
+                        $scope.createDataRule = new RRule({
+                            freq: RRule.MONTHLY,
+                            interval: $scope.createEventData.rRule.interval,
+                            dtstart: new Date($scope.createEventData.rRule.dateStart)
+                        });
+                    }
+                }
+                else if($scope.repeat.repeatBy=='on'){
+                    setOntheRrule();
                 }
             }
         }
@@ -403,7 +826,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // Calculate 'On the' for save to db ---------------------------------------
     var setOnSequentToSave = function() {
-        $scope.createEventData.rRule.bySetPos = [];
+        $scope.repeat.onThe.sequent = [];
 
         if($scope.repeat.onThe.sequent == 'first') {
             $scope.createEventData.rRule.bySetPos.push(1);
