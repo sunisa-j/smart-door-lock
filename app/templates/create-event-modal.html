@@ -57,7 +57,7 @@
             <div class="item item-input small-item-input sub-item-input">
                 <span>Frequency</span>
                 <span class="flex align-items-center sub-input-padding" style="width: 180px">
-                    <select class="custom-row-font-size" ng-model="createEventData.rRule.frequency">
+                    <select class="custom-row-font-size" ng-model="createEventData.rRule.frequency" ng-change="calculateRrule()">
                         <option value="DAILY" ng-selected="createEventData.rRule.frequency=='DAILY'">Daily</option>
                         <option value="WEEKLY" ng-selected="createEventData.rRule.frequency=='WEEKLY'">Weekly</option>
                         <option value="MONTHLY" ng-selected="createEventData.rRule.frequency=='MONTHLY'">Monthly</option>
@@ -73,7 +73,7 @@
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
                     <span>Every</span>
                     <span class="flex align-items-center">
-                        <div class="sub-item-input-second-col"><input type="number" ng-model="createEventData.rRule.interval" class="sub-item-text-input"></div>
+                        <div class="sub-item-input-second-col"><input type="number" ng-model="createEventData.rRule.interval" class="sub-item-text-input" min="1" ng-change="calculateRrule()"></div>
                         <div class="sub-item-unit">{{(createEventData.rRule.interval==1)? 'day':'days'}}</div>
                     </span>
                 </div>
@@ -96,13 +96,13 @@
                     <span>&nbsp;</span>
                     <span class="sub-input-padding" style="margin-left: 10px">
                         <div class="button-bar custom-event-button-bar">
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['MO']}" ng-click="toggleWeekDaySelect('MO')">M</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['TU']}" ng-click="toggleWeekDaySelect('TU')">T</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['WE']}" ng-click="toggleWeekDaySelect('WE')">W</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['TH']}" ng-click="toggleWeekDaySelect('TH')">Th</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['FR']}" ng-click="toggleWeekDaySelect('FR')">F</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['SA']}" ng-click="toggleWeekDaySelect('SA')">Sa</button>
-                            <button class="button" ng-class="{'energized-bg': eventWeekDay['SU']}" ng-click="toggleWeekDaySelect('SU')">S</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['MO']}" ng-click="toggleWeekDaySelect('MO');calculateRrule()">M</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['TU']}" ng-click="toggleWeekDaySelect('TU');calculateRrule()">T</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['WE']}" ng-click="toggleWeekDaySelect('WE');calculateRrule()">W</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['TH']}" ng-click="toggleWeekDaySelect('TH');calculateRrule()">Th</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['FR']}" ng-click="toggleWeekDaySelect('FR');calculateRrule()">F</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['SA']}" ng-click="toggleWeekDaySelect('SA');calculateRrule()">Sa</button>
+                            <button class="button" ng-class="{'energized-bg': eventWeekDay['SU']}" ng-click="toggleWeekDaySelect('SU');calculateRrule()">S</button>
                         </div>
                     </span>
                 </div>
@@ -312,7 +312,7 @@
         </div>
 
         <!--End Repeat------------------------------>
-        <div ng-show="repeat.status">
+        <div ng-show="repeat.status" ng-init="repeat.endRepeat='never'">
             <!--Never-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input">
@@ -326,7 +326,7 @@
                             </button>
                             <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
                                     ng-hide="repeat.endRepeat=='never'"
-                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;"
+                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;calculateRrule();"
                                     ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
                             </button>
                         </div>
@@ -355,7 +355,7 @@
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="min-width: 30px">After</div>
                             <div style="min-width: 80px; padding-right: 20px">
-                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled">
+                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" min="1" ng-disabled="afterDisabled" ng-change="calculateRrule()">
                             </div>
                             <div style="min-width: 50px" class="sub-item-unit">{{(createEventData.rRule.count<=1)? 'time':'times'}}</div>
                         </div>
@@ -383,7 +383,7 @@
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="min-width: 70px">On Date</div>
                             <div style="min-width: 128px">
-                                <label><input type="date" ng-model="createEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled"></label>
+                                <label><input type="date" ng-model="createEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled" ng-change="calculateRrule()"></label>
                             </div>
                         </div>
                     </span>
@@ -393,19 +393,18 @@
         </div>
 
         <!--Summary--------------------------------->
-        <!--<div class="list" ng-show="repeat.status">-->
-            <!--<div class="item item-input small-item-input sub-item-input sub-input-summary" style="border: 0; background: transparent">-->
-                <!--<span>Summary</span>-->
-                <!--<span style="padding-left: 15px; color: #333">Every 1 Day</span>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div class="list" ng-show="repeat.status">
+            <div class="flex align-items-flex-start" style="border: 0; background: transparent; padding-top: 15px">
+                <span style="padding-left: 15px; min-width: 98px">Summary</span>
+                <span style="padding-left: 15px; padding-right: 5px; color: #333; white-space: pre-line; line-height: 20px">{{ createDataRule.toText() }}</span>
+            </div>
+        </div>
 
         <!--Cancel & Done Button-->
-        <div class="button-bar" style="margin-top: 15px">
+        <div class="button-bar" style="margin-top: 10px">
             <div class="button-div-padding">
                 <button class="button button-outline button-block icon-left button-balanced ion-ios-checkmark-outline more-button" ng-click="saveEvent()">Create</button>
             </div>
-
         </div>
 
     </ion-content>
