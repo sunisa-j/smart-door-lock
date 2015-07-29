@@ -1,10 +1,10 @@
 'use strict';
 
-window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents) {
+window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents, usersCalendars, users) {
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
-    var calendarAccessRole = $stateParams.accessRole;
+    $scope.calendarAccessRole = $stateParams.accessRole;
 
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
@@ -102,7 +102,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             eventClick: function(event, element) {
 
                 // When select event -------------------------------------------
-                if(calendarAccessRole != 'reader'){
+                if($scope.calendarAccessRole != 'reader'){
                     $scope.openEditEvent(event);
                 }else{
                     console.log('read only');
@@ -161,13 +161,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calendar Settings -------------------------------------------------------
     // -------------------------------------------------------------------------
 
-    $ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
-        scope: $scope,
-        animation: 'slide-in-up',
-        backdropClickToClose: false
-    }).then(function(modal) {
-        $scope.calendarSettingsModal = modal;
-    });
+    //$ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
+    //    scope: $scope,
+    //    animation: 'slide-in-up',
+    //    backdropClickToClose: false
+    //}).then(function(modal) {
+    //    $scope.calendarSettingsModal = modal;
+    //});
 
     $scope.deleteCalendar = function() {
 
@@ -1037,4 +1037,172 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         console.log('Save Event Data: ', $scope.editEventData);
     };
 
+    // -------------------------------------------------------------------------
+    // Share Calendar ----------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    // Modal for add user to share this calendar
+    $ionicModal.fromTemplateUrl('templates/add-user-share-calendar-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false
+    }).then(function(modal) {
+        $scope.addUserModal = modal;
+    });
+
+    // Get all user who have permission to manage calendar
+    $scope.usersCalendarData = usersCalendars('','','','','', calendarId, 'calendarUsers');
+
+    // Search user ready to add
+    var usersData = users('array');
+    $scope.searchUserForAdd = function(req) {
+        $scope.usersRes = [];
+        $scope.load = true;
+
+        if(req != '') {
+            // finding req user
+            angular.forEach(usersData, function(user){
+                var employeeNumber = user.employeeNumber;
+                var name = (user.name);
+                var res = employeeNumber.match(req);
+                var res2 = name.match(req);
+
+                if(res == req){
+                    $scope.usersRes.push(user);
+                }
+                else if(res2 == req){
+                    $scope.usersRes.push(user);
+                }
+            });
+
+            if($scope.usersRes.length == 0) {
+                console.log('no user match');
+            }
+            else {
+                // found user(s) match then check not added in this door
+                var index = 0;
+                angular.forEach($scope.usersRes, function(userRes){
+                    $scope.usersRes[index].addedStatus = false;
+
+                    angular.forEach($scope.usersCalendarData, function(userCalendar){
+                        if(userCalendar.user.employeeNumber == userRes.employeeNumber) {
+                            $scope.usersRes[index].addedStatus = true;
+                        }
+                    });
+                    index++;
+                });
+            }
+            $scope.load = false;
+
+        }else{
+            $scope.load = false;
+            $scope.usersRes = [];
+        }
+    };
+
+    // Confirm to add selected user
+    $scope.confirmAddUser = function(userId, employeeNumber) {
+
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Are you sure to add <span class="balanced">' + employeeNumber + '</span> to new member in ' + $scope.doorName + '?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-checkmark-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Confirm</span>' +
+                    '</div>',
+                    type: 'button-outline button-balanced',
+                    onTap: function(e) {
+                        //e.preventDefault();
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                addNewUser(userId);
+            } else {
+                console.log('Canceled');
+            }
+        });
+    };
+
+    // Add User
+    var addNewUser = function(userId) {
+        //$state.go('mainMenu.doors.doorInfo.userManagement.editUser', {userId: userId});
+        console.log('Go to set accessRole for this user');
+    };
+
+    // Delete User (remove out of usersCalendars)
+    $scope.confirmDeleteUser = function(userCalendarId) {
+
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Do you want to delete "' + $scope.editUser.user.employeeNumber + '" out of '+ $scope.calendarData.name +' ?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function() {
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Delete</span>' +
+                    '</div>',
+                    type: 'button-outline button-assertive',
+                    onTap: function() {
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                console.log('delete: ', userCalendarId);
+            } else {
+                console.log('cancel');
+            }
+        });
+    };
+
+    // Modal for edit access role for selected user
+    $ionicModal.fromTemplateUrl('templates/edit-user-share-calendar-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false
+    }).then(function(modal) {
+        $scope.editUserModal = modal;
+    });
+
+    // Edit Access Role for Selected User
+    $scope.editAccessRole = function(userCalendarId){
+        $scope.editUser =  usersCalendars('','','','','','','object')[userCalendarId];
+        //console.log($scope.editUser);
+        $scope.editUserModal.show();
+    };
 });
