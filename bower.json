@@ -24,6 +24,12 @@
         "release/js/ionic.js",
         "release/js/ionic-angular.js"
       ]
+    },
+    "rrule": {
+      "main": [
+        "lib/rrule.js",
+        "lib/nlp.js"
+      ]
     }
   }
 }
