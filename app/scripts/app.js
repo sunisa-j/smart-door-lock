@@ -149,7 +149,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                                 views: {
                                                     'menuContent@mainMenu': {
                                                         controller: 'PasscodeAccessTimeController',
-                                                        templateUrl: '../templates/passcode-access-time.html'
+                                                        templateUrl: 'templates/passcode-access-time.html'
                                                     }
                                                 }
                                             }
@@ -163,7 +163,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 views: {
                                     'menuContent@mainMenu': {
                                         controller: 'AutoReleaseAccessTimeController',
-                                        templateUrl: '../templates/auto-release-access-time.html'
+                                        templateUrl: 'templates/auto-release-access-time.html'
                                     }
                                 }
                             },
@@ -173,7 +173,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 views: {
                                     'menuContent@mainMenu': {
                                         controller: 'UserManagementController',
-                                        templateUrl: '../templates/user-management.html'
+                                        templateUrl: 'templates/user-management.html'
                                     }
                                 },
                                 children: [
@@ -183,7 +183,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                         views: {
                                             'menuContent@mainMenu': {
                                                 controller: 'UserManagementController',
-                                                templateUrl: '../templates/add-user.html'
+                                                templateUrl: 'templates/add-user.html'
                                             }
                                         }
                                     },
@@ -193,7 +193,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                         views: {
                                             'menuContent@mainMenu': {
                                                 controller: 'UserManagementController',
-                                                templateUrl: '../templates/edit-user.html'
+                                                templateUrl: 'templates/edit-user.html'
                                             }
                                         },
                                         children: [
@@ -203,7 +203,7 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                                 views: {
                                                     'menuContent@mainMenu': {
                                                         controller: 'UserAccessTimeController',
-                                                        templateUrl: '../templates/user-access-time.html'
+                                                        templateUrl: 'templates/user-access-time.html'
                                                     }
                                                 }
                                             }
@@ -243,7 +243,31 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                 controller: 'CalendarController',
                                 templateUrl: 'templates/calendar.html'
                             }
-                        }
+                        },
+                        children: [
+                            {
+                                name: 'calendarSettings',
+                                url: '/calendar-settings',
+                                views: {
+                                    'menuContent@mainMenu': {
+                                        controller: 'CalendarController',
+                                        templateUrl: 'templates/calendar-settings.html'
+                                    }
+                                },
+                                children: [
+                                    {
+                                        name: 'shareCalendar',
+                                        url: '/share-calendar',
+                                        views: {
+                                            'menuContent@mainMenu': {
+                                                controller: 'CalendarController',
+                                                templateUrl: 'templates/share-calendar.html'
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 ]
             }
