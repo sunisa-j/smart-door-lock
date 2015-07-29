@@ -1,0 +1,84 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <h1 class="title">Edit Access Role</h1>
+    </ion-header-bar>
+
+    <ion-content class="custom-ion-content-bg">
+        <!--User Info-->
+        <div style="padding: 10px 28px; line-height: 28px; background: #fff; border-bottom: solid 1px #ddd">
+            <div class="flex align-items-center" style="height: 50px">
+                <span class="card-title">
+                    <div class="profile-background-image" style="background: url(images/profile50x50.jpg) no-repeat"></div>
+                </span>
+                <span class="card-value" style="font-size: 16px">
+                    <!--<div style="font-size: 14px; color: #898989; line-height: 20px">{{editUser.user.employeeNumber}}</div>-->
+                    <div class="overflow-hidden-text">
+                        <span style="font-size: 14px">{{editUser.user.employeeNumber}}</span>
+                        <span style="padding-left: 10px">{{editUser.user.firstName}} {{editUser.user.lastName}}</span>
+                    </div>
+                </span>
+            </div>
+        </div>
+
+        <!--Access Role-->
+        <div class="item item-divider edit-button-item-divider" style="margin-top: 15px" ng-init="checkboxReadOnly.value=true">
+            Access Role
+            <div ng-class="{'fade-in':enableEditPermission.value==false, 'opacity-0':enableEditPermission.value==true,'fade-out':enableEditPermission.value==true, 'opacity-1':enableEditPermission.value==false}">
+                <button class="button button-clear button-small link-btn-color"
+                        ng-click="enableEditPermission.value=true; checkboxReadOnly.value=false"
+                        ng-hide="enableEditPermission.value">Edit</button>
+            </div>
+            <div ng-class="{'fade-in':enableEditPermission.value==true, 'opacity-0':enableEditPermission.value==false,'fade-out':enableEditPermission.value==false, 'opacity-1':enableEditPermission.value==true}">
+                <button class="button button-clear button-small button-stable"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-show="enableEditPermission.value">Cancel</button>
+                <button class="button button-clear button-small button-balanced"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-show="enableEditPermission.value">Save</button>
+            </div>
+        </div>
+        <div class="item custom-row-del-border-bottom">
+
+            <div class="flex permission-flex-container">
+                <!--<div class="permission-title">General</div>-->
+
+                <div class="flex flex-wrap" style="flex-basis: 400px; flex-grow: 1; -webkit-flex-grow: 1;">
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox" ng-model="editUser.accessRole.owner" ng-disabled="checkboxReadOnly.value">
+                            </label>
+                            Owner
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox" ng-model="editUser.accessRole.writer" ng-disabled="checkboxReadOnly.value">
+                            </label>
+                            Writer
+                        </li>
+                    </div>
+                    <div class="permission-column-height permission-column-width">
+                        <li class="item item-checkbox permission-item-checkbox">
+                            <label class="checkbox checkbox-energized">
+                                <input type="checkbox" ng-model="editUser.accessRole.reader" ng-disabled="checkboxReadOnly.value">
+                            </label>
+                            Reader
+                        </li>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="item item-desc">
+            Set access role for this user.
+        </div>
+
+        <div class="button-div-padding">
+            <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeleteUser(editUser.id)">Delete User</button>
+        </div>
+
+    </ion-content>
+
+</ion-modal-view>
