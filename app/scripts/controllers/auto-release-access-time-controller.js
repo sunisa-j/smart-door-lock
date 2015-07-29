@@ -136,9 +136,9 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             });
 
         }
-        console.log(eventsData.value);
-        console.log(normalEvents.value);
-        console.log(holidayEvents.value);
+        //console.log(eventsData.value);
+        //console.log(normalEvents.value);
+        //console.log(holidayEvents.value);
     };
     $scope.selectEventsData();
 
