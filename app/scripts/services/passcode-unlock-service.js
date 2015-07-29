@@ -66,6 +66,7 @@ window.app.factory('passcodeUnlock', function () {
         // get passcode unlock
         var passcodeUnlockSelected = passcodeUnlockObj[passcodeUnlockId];
 
+
         if(data === 'object'){
             return passcodeUnlockDoorSelectedObj;
         }
@@ -74,6 +75,17 @@ window.app.factory('passcodeUnlock', function () {
         }
         else if (data === 'selected') {
             return passcodeUnlockSelected;
+        }
+        else if (data === 'passcodeDoorArray') {
+            var passcodeDoorArray = []
+            if(doorId != ''){
+                angular.forEach(passcodeUnlock, function(passcode){
+                    if(passcode.door == doorId){
+                        passcodeDoorArray.push(passcode);
+                    }
+                });
+            }
+            return passcodeDoorArray;
         }
     };
 });
