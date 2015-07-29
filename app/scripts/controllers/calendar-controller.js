@@ -1105,7 +1105,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         var myPopup = $ionicPopup.confirm({
             title: 'Confirm',
-            template: 'Are you sure to add <span class="balanced">' + employeeNumber + '</span> to new member in ' + $scope.doorName + '?',
+            template: 'Do you want to share "' + $scope.calendarData.name + '" with <span class="balanced">' + employeeNumber + '</span> ?',
             buttons: [
                 {
                     text: '<div class="flex align-items-center">' +
@@ -1145,8 +1145,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // Add User
     var addNewUser = function(userId) {
-        //$state.go('mainMenu.doors.doorInfo.userManagement.editUser', {userId: userId});
-        console.log('Go to set accessRole for this user');
+        console.log('Go to set accessRole for this user: ' + userId + ' to usersCalendars');
+        //$scope.editAccessRole(newUserCalendarId);
     };
 
     // Delete User (remove out of usersCalendars)
@@ -1183,7 +1183,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         });
         myPopup.then(function(res) {
             if(res) {
-                console.log('delete: ', userCalendarId);
+                console.log('Delete This User: ' + userCalendarId + ' out of usersCalendars');
             } else {
                 console.log('cancel');
             }
@@ -1199,10 +1199,29 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.editUserModal = modal;
     });
 
+    $scope.editUser = {};
+
     // Edit Access Role for Selected User
     $scope.editAccessRole = function(userCalendarId){
         $scope.editUser =  usersCalendars('','','','','','','object')[userCalendarId];
-        //console.log($scope.editUser);
+        $scope.editUser.id = userCalendarId;
+        if($scope.editUser.accessRole == 'owner') {
+            $scope.editUser.accessRole = 'owner';
+        }
+        else if($scope.editUser.accessRole == 'writer') {
+            $scope.editUser.accessRole = 'writer';
+        }
+        else if($scope.editUser.accessRole == 'reader') {
+            $scope.editUser.accessRole = 'reader';
+        } else {
+            $scope.editUser.accessRole = null;
+        }
+
         $scope.editUserModal.show();
+    };
+
+    // Save Access Role for Edit User
+    $scope.saveAccessRole = function(){
+        console.log('Edit Access Role to "' + $scope.editUser.accessRole + '" of User ID is ' + $scope.editUser.user.id);
     };
 });
