@@ -6,7 +6,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
     var doorUser = doorsUsers('', 'object')[doorUserId];
     $scope.acccessPolicyType = { value:''};
     var userId = 1; // Login User Id
-    $scope.userCalendars = usersCalendars(userId, doorUser.door, 'userAccessPolicies', '', doorUserId); // Selected calendars this user can access
+    $scope.userCalendars = usersCalendars(userId, doorUser.door, 'userAccessPolicies', '', doorUserId, '', 'array'); // Selected calendars this user can access
 
     //Get access time of title informaiton
     $scope.userPoliciesData = userAccessPolicies(doorUserId, 'array');
