@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers) {
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
@@ -17,6 +17,9 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.doorMenu = {
         name: 'doorInfo'
     };
+
+    // Get Members of This Door
+    $scope.doorUsers = doorsUsers(doorId, 'array');
 
     // -------------------------------------------------------------------------
     // Select calendars events -------------------------------------------------
@@ -320,6 +323,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     // About Passcode Unlock ---------------------------------------------------
     $scope.passcodeUnlockObj = passcodeUnlock(doorId, '', 'object');
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
+    $scope.passcodeDoorArray = passcodeUnlock(doorId, '', 'passcodeDoorArray');
     $scope.passcodeUnlockId = passcodeUnlockId;
     $scope.passcodeUnlockSelected = passcodeUnlock('', passcodeUnlockId, 'selected');
     $scope.enableEditPasscode = { value: false };
