@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents, usersCalendars, users) {
+window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents, usersCalendars, users, RRule) {
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
@@ -161,14 +161,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calendar Settings -------------------------------------------------------
     // -------------------------------------------------------------------------
 
-    //$ionicModal.fromTemplateUrl('templates/calendar-settings-modal.html', {
-    //    scope: $scope,
-    //    animation: 'slide-in-up',
-    //    backdropClickToClose: false
-    //}).then(function(modal) {
-    //    $scope.calendarSettingsModal = modal;
-    //});
-
     $scope.deleteCalendar = function() {
 
         var myPopup = $ionicPopup.confirm({
@@ -227,34 +219,32 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Week Month Year & about Repeat value Default ----------------------------
     // -------------------------------------------------------------------------
 
-    var setEventDataDefault = function () {
-        $scope.eventWeekDay = {
-            'MO': false,
-            'TU': false,
-            'WE': false,
-            'TH': false,
-            'FR': false,
-            'SA': false,
-            'SU': false
-        };
-        $scope.eventMonthDay = [
-            false,false,false,false,false,false,false,
-            false,false,false,false,false,false,false,
-            false,false,false,false,false,false,false,
-            false,false,false,false,false,false,false,
-            false,false,false
-        ];
-        $scope.eventMonth = [false,false,false,false,false,false,false,false,false,false,false,false];
-        $scope.repeat = {
-            status: false,
-            endRepeat: 'never', // 'never', 'after', 'date' (on date)
-            repeatBy: '', // 'each', 'on' (on the)
-            onThe : {
-                checked: false,
-                sequent: 'first',
-                day: 'day'
-            }
-        };
+    $scope.eventWeekDay = {
+        'MO': false,
+        'TU': false,
+        'WE': false,
+        'TH': false,
+        'FR': false,
+        'SA': false,
+        'SU': false
+    };
+    $scope.eventMonthDay = [
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,
+        false,false,false
+    ];
+    $scope.eventMonth = [false,false,false,false,false,false,false,false,false,false,false,false];
+    $scope.repeat = {
+        status: false,
+        endRepeat: 'never', // 'never', 'after', 'date' (on date)
+        repeatBy: '', // 'each', 'on' (on the)
+        onThe : {
+            checked: false,
+            sequent: 'first',
+            day: 'day'
+        }
     };
 
     // -------------------------------------------------------------------------
@@ -288,8 +278,100 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.createEventModal = modal;
     });
 
+    // Set byweekday in RRule
+    $scope.setByweekday = function(){
+        var byweekday = [];
+
+        if($scope.eventWeekDay['MO'] == true) {
+            byweekday.push(RRule.MO);
+        }
+        if($scope.eventWeekDay['TU'] == true) {
+            byweekday.push(RRule.TU);
+        }
+        if($scope.eventWeekDay['WE'] == true) {
+            byweekday.push(RRule.WE);
+        }
+        if($scope.eventWeekDay['TH'] == true) {
+            byweekday.push(RRule.TH);
+        }
+        if($scope.eventWeekDay['FR'] == true) {
+            byweekday.push(RRule.FR);
+        }
+        if($scope.eventWeekDay['SA'] == true) {
+            byweekday.push(RRule.SA);
+        }
+        if($scope.eventWeekDay['SU'] == true) {
+            byweekday.push(RRule.SU);
+        }
+
+        return byweekday;
+    };
+
+    // Calculate Repeat Summary (by RRule Module) for Create Event Modal
+    $scope.calculateRrule = function() {
+
+        if($scope.repeat.status == true) {
+            if ($scope.createEventData.rRule.frequency == 'DAILY') {
+
+                if ($scope.repeat.endRepeat == 'date') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.DAILY,
+                        interval: $scope.createEventData.rRule.interval,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart),
+                        until: new Date($scope.createEventData.rRule.until)
+                    });
+                }
+                else if ($scope.repeat.endRepeat == 'after') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.DAILY,
+                        interval: $scope.createEventData.rRule.interval,
+                        count: $scope.createEventData.rRule.count,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart)
+                    });
+                }
+                else if ($scope.repeat.endRepeat == 'never') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.DAILY,
+                        interval: $scope.createEventData.rRule.interval,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart)
+                    });
+                }
+            }
+            else if ($scope.createEventData.rRule.frequency == 'WEEKLY') {
+
+                var byweekday = $scope.setByweekday();
+
+                if ($scope.repeat.endRepeat == 'date') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.WEEKLY,
+                        interval: $scope.createEventData.rRule.interval,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart),
+                        until: new Date($scope.createEventData.rRule.until),
+                        byweekday: byweekday
+                    });
+                }
+                else if ($scope.repeat.endRepeat == 'after') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.WEEKLY,
+                        interval: $scope.createEventData.rRule.interval,
+                        count: $scope.createEventData.rRule.count,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart),
+                        byweekday: byweekday
+                    });
+                }
+                else if ($scope.repeat.endRepeat == 'never') {
+                    $scope.createDataRule = new RRule({
+                        freq: RRule.WEEKLY,
+                        interval: $scope.createEventData.rRule.interval,
+                        dtstart: new Date($scope.createEventData.rRule.dateStart),
+                        byweekday: byweekday
+                    });
+                }
+            }
+        }
+    };
+
     $scope.openCreateEvent = function(){
-        setEventDataDefault();
 
         // Set startDate & endDate to date -------------------------------------
         $scope.createEventData.startDate = new Date($scope.createEventData.startDate);
@@ -300,6 +382,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // When on/off repeat on create event modal --------------------------------
     $scope.onOffRepeat = function(){
+
         // if frequency toggle value is true
         if($scope.repeat.status == true){
             $scope.createEventData.rRule = {
@@ -314,6 +397,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 console.log($scope.createEventData.rRule);
             }
         }
+
+        $scope.calculateRrule();
     };
 
     // Calculate 'On the' for save to db ---------------------------------------
@@ -624,7 +709,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Transform event data to show in edit event modal ------------------------
     $scope.openEditEvent = function(event){
         $scope.editEventData = event;
-        setEventDataDefault();
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
@@ -1115,8 +1199,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -1127,8 +1210,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     '<span class="flex-1">Confirm</span>' +
                     '</div>',
                     type: 'button-outline button-balanced',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
@@ -1143,7 +1225,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         });
     };
 
-    // Add User
+    // Add user do you want to share this calendar
     var addNewUser = function(userId) {
         console.log('Go to set accessRole for this user: ' + userId + ' to usersCalendars');
         //$scope.editAccessRole(newUserCalendarId);
@@ -1205,6 +1287,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.editAccessRole = function(userCalendarId){
         $scope.editUser =  usersCalendars('','','','','','','object')[userCalendarId];
         $scope.editUser.id = userCalendarId;
+
         if($scope.editUser.accessRole == 'owner') {
             $scope.editUser.accessRole = 'owner';
         }
