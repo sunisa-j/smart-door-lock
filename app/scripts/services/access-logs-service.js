@@ -55,8 +55,8 @@ window.app.factory('accessLogs', function () {
             user: 1,
             userString: 'สุนิสา จุลรัตน์',
             message: 'Successfully authenticated',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-03-20T12:31:45.000Z',
+            updatedAt: '2015-03-20T12:31:45.000Z'
         },
         {
             id: 'accessLog6',
@@ -66,8 +66,8 @@ window.app.factory('accessLogs', function () {
             user: 1,
             userString: 'สุนิสา จุลรัตน์',
             message: 'Successfully authenticated',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-03-21T12:31:45.000Z',
+            updatedAt: '2015-03-21T12:31:45.000Z'
         },
         {
             id: 'accessLog7',
@@ -77,8 +77,8 @@ window.app.factory('accessLogs', function () {
             user: 1,
             userString: 'สุนิสา จุลรัตน์',
             message: 'Successfully remote access',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-03-31T12:31:45.000Z',
+            updatedAt: '2015-03-31T12:31:45.000Z'
         }
     ];
 
@@ -96,12 +96,19 @@ window.app.factory('accessLogs', function () {
         accessLogsObj[value.id].updatedAt = value.updatedAt;
     });
 
-    return function(data){
+    return function(data, msg, startDate, endDate){
 
         if(data === 'object'){
             return accessLogsObj;
         }
         else if (data === 'array') {
+            return accessLogs;
+        }
+        else if (data === 'search'){
+
+            // send msg, startDate, endDate to server
+            // if success, return data
+
             return accessLogs;
         }
     };
