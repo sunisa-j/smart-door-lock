@@ -68,12 +68,19 @@ window.app.factory('activityLogs', function () {
         activityLogsObj[value.id].updatedAt = value.updatedAt;
     });
 
-    return function(data){
+    return function(data, msg, startDate, endDate){
 
         if(data === 'object'){
             return activityLogsObj;
         }
         else if (data === 'array') {
+            return activityLogs;
+        }
+        else if (data === 'search'){
+
+            // send msg, startDate, endDate to server
+            // if success, return data
+
             return activityLogs;
         }
     };
