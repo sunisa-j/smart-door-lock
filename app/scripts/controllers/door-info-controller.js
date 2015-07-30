@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers, _) {
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
@@ -242,17 +242,20 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         }
     });
     // Get latest 3 events
-    angular.forEach(calcMyAccessTime, function(value, key){
-        if(runForEach) {
-            var tmp = angular.copy(value);
-            tmp.startDate = key;
-            myAccessTime3Latest.push(tmp);
+    if(calcMyAccessTime.length != 0){
+        angular.forEach(calcMyAccessTime, function(value, key){
+            if(runForEach) {
+                var tmp = angular.copy(value);
+                tmp.startDate = key;
+                myAccessTime3Latest.push(tmp);
 
-            if(myAccessTime3Latest.length == 3){
-                runForEach = false;
+
+                if(myAccessTime3Latest.length == 3){
+                    runForEach = false;
+                }
             }
-        }
-    });
+        });
+    }
     // Sort by startDate (ASC)
     if(myAccessTime3Latest.length != 0) {
 
@@ -274,12 +277,17 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             i++;
         });
 
-        if (myAccessTime3Latest[0].startDate > myAccessTime3Latest[1].startDate) {
+        if(myAccessTime3Latest.length == 1) {
             $scope.myAccessTime[1] = myAccessTime3Latest[0];
-            $scope.myAccessTime[2] = myAccessTime3Latest[1];
-        } else {
-            $scope.myAccessTime[1] = myAccessTime3Latest[1];
-            $scope.myAccessTime[2] = myAccessTime3Latest[0];
+        }
+        else if (myAccessTime3Latest.length == 2) {
+            if (myAccessTime3Latest[0].startDate > myAccessTime3Latest[1].startDate) {
+                $scope.myAccessTime[1] = myAccessTime3Latest[0];
+                $scope.myAccessTime[2] = myAccessTime3Latest[1];
+            } else {
+                $scope.myAccessTime[1] = myAccessTime3Latest[1];
+                $scope.myAccessTime[2] = myAccessTime3Latest[0];
+            }
         }
     }
 
