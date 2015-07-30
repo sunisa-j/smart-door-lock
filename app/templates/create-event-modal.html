@@ -355,7 +355,7 @@
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="min-width: 30px">After</div>
                             <div style="min-width: 80px; padding-right: 20px">
-                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" min="1" ng-disabled="afterDisabled" ng-change="calculateRrule()">
+                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled" min="1" ng-change="calculateRrule()">
                             </div>
                             <div style="min-width: 50px" class="sub-item-unit">{{(createEventData.rRule.count<=1)? 'time':'times'}}</div>
                         </div>
@@ -396,7 +396,7 @@
         <div class="list" ng-show="repeat.status">
             <div class="flex align-items-flex-start" style="border: 0; background: transparent; padding-top: 15px">
                 <span style="padding-left: 15px; min-width: 98px">Summary</span>
-                <span style="padding-left: 15px; padding-right: 5px; color: #333; white-space: pre-line; line-height: 24px">{{ createDataRule.toText() }}</span>
+                <span style="padding-left: 15px; padding-right: 5px; color: #333; white-space: pre-line; line-height: 24px">{{ createDataRrule.toText() }}</span>
             </div>
         </div>
 
