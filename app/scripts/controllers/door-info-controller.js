@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers, _) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers, _, accessLogs, activityLogs) {
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
@@ -21,6 +21,8 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     // Get Members of This Door
     $scope.doorUsers = doorsUsers(doorId, 'array');
 
+
+
     // -------------------------------------------------------------------------
     // Select calendars events -------------------------------------------------
     // -------------------------------------------------------------------------
@@ -39,6 +41,8 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         }
     };
     $scope.selectEventsData();
+
+
 
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
@@ -188,6 +192,8 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
     };
 
+
+
     // -------------------------------------------------------------------------
     // About Door Info ---------------------------------------------------------
     // -------------------------------------------------------------------------
@@ -301,6 +307,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     }
 
 
+
     // -------------------------------------------------------------------------
     // About Config Door -------------------------------------------------------
     // -------------------------------------------------------------------------
@@ -332,6 +339,8 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             }
         }, 1500);
     };
+
+
 
     // -------------------------------------------------------------------------
     // About Manage Access -----------------------------------------------------
@@ -418,6 +427,42 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 console.log('cancel');
             }
         });
+    };
+
+
+
+    // -------------------------------------------------------------------------
+    // About Access Logs -------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    $scope.accessLogsData = accessLogs('array', '', '', '');
+
+    $scope.searchAccessLogs = function(msg, startDate, endDate){
+        console.log('Search access logs by msg: ', msg);
+        console.log('Search access logs begin : ', startDate);
+        console.log('Search access logs end: ', endDate);
+
+        // Get logs data, set to $scope.accessLogsData
+        $scope.accessLogsData = accessLogs('search', msg, startDate, endDate);
+    };
+
+
+
+    // -------------------------------------------------------------------------
+    // About My Activity Logs --------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    $scope.myActivityLogsData = activityLogs('array', '', '', '');
+    $scope.myActivityLogs5Latest = $scope.myActivityLogsData;
+    //$scope.myActivityLogs5Latest = _.chunk($scope.myActivityLogsData, [size=1]);
+
+    $scope.searchMyActivityLogs = function(msg, startDate, endDate){
+        console.log('Search my activity logs by msg: ', msg);
+        console.log('Search my activity logs begin : ', startDate);
+        console.log('Search my activity logs end: ', endDate);
+
+        // Get logs data, set to $scope.myActivityLogsData
+        $scope.myActivityLogsData = activityLogs('search', msg, startDate, endDate);
     };
 
 });
