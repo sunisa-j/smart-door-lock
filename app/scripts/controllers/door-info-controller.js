@@ -220,7 +220,9 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     var calcMyAccessTime = {};
     var myAccessTime3Latest = [];
     $scope.myAccessTime = [];
-    var dateNow = new Date();
+
+    var dateNow1 = new Date();
+    var dateNow = dateNow1.setDate(dateNow1.getDate() - 1);
     var runForEach = true;
 
     // Set variable type default is array for events (startDate >= dateNow)
@@ -231,6 +233,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
             calcMyAccessTime[startDate] = [];
         }
     });
+    console.log(calcMyAccessTime);
     // Push events group by startDate
     angular.forEach(eventsData.value, function(event){
         var newStartDate = new Date(event.startDate);
@@ -258,6 +261,8 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     }
     // Sort by startDate (ASC)
     if(myAccessTime3Latest.length != 0) {
+
+        //$scope.myAccessTime = _.sortBy(myAccessTime3Latest, new Date(myAccessTime3Latest.startDate).getTime());
 
         var startDateFirst = {value: myAccessTime3Latest[0]};
         var i = 0;
