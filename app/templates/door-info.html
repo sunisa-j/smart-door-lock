@@ -50,20 +50,14 @@
         <!--My Recent Activity-->
         <div class="item item-divider">My Recent Activity</div>
         <div class="log-container">
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">10 Apr 2015 08:30:00</div>
-                <div class="log-detail">Unlocked door by card</div>
-            </div>
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">10 Apr 2015 00:10:44</div>
-                <div class="log-detail">Unlocked door by mobile</div>
-            </div>
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">09 Apr 2015 08:30:00</div>
-                <div class="log-detail">Unlocked door by card</div>
+            <div class="flex log-row-padding flex-wrap" ng-repeat="myActivity in myActivityLogs5Latest">
+                <div class="access-time-column" ng-init="logTime=transformDate(myActivity.createdAt)">
+                    {{logTime.getDate()}} {{ month[logTime.getMonth(logTime)] }} {{logTime.getFullYear()}} {{logTime.getHours()}}:{{(logTime.getMinutes()==0)? '00':logTime.getMinutes()}}
+                </div>
+                <div class="log-detail">{{ myActivity.message }}</div>
             </div>
 
-            <button class="button button-outline button-block button-dark more-button" ui-sref="mainMenu.doors.doorInfo.myActivityLog">More ...</button>
+            <button class="button button-outline button-block button-dark more-button" ui-sref="mainMenu.doors.doorInfo.myActivityLog" ng-hide="myActivityLogsData.length==0">More ...</button>
         </div>
 
         <div class="footer-tabs-height"></div>
@@ -141,36 +135,30 @@
     <!--Log Content-->
     <ion-content ng-show="doorMenu.name=='log'">
         <div class="flex justify-content-center align-items-center search-container">
-            <div class="flex-1 start-date-div"><label><input type="date" class="search-container-input"></label></div>
+            <div class="flex-1 start-date-div"><label><input type="date" class="search-container-input" ng-model="accessLogsStartDate"></label></div>
             <div class="to-div">to</div>
-            <div class="flex-1 end-date-div"><label><input type="date" class="search-container-input"></label></div>
+            <div class="flex-1 end-date-div"><label><input type="date" class="search-container-input" ng-model="accessLogsEndDate"></label></div>
         </div>
         <div class="flex justify-content-center align-items-center search-container">
             <div class="search-icon-div">
                 <i class="ion-ios-paper-outline"></i>
             </div>
             <div class="flex-1 search-input-div">
-                <input type="text" placeholder="Search Activity">
+                <input type="text" placeholder="Search Activity" ng-model="searchAccessLogsMsg" onkeydown="(event.keyCode == 13)? document.getElementById('searchAccessLogs').click():''">
             </div>
             <div class="search-button-div">
-                <button class="button button-stable button-small custom-search-button">
+                <button class="button button-stable button-small custom-search-button" ng-click="searchAccessLogs(searchAccessLogsMsg, accessLogsStartDate, accessLogsEndDate)" id="searchAccessLogs">
                     <i class="ion-ios-search"></i>
                 </button>
             </div>
         </div>
 
         <div class="log-container">
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">10 Apr 2015 08:30:00</div>
-                <div class="log-detail">Unlocked door by card by 4910110555</div>
-            </div>
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">10 Apr 2015 00:10:44</div>
-                <div class="log-detail">Unlocked door by mobile by 4812346228</div>
-            </div>
-            <div class="flex log-row-padding flex-wrap">
-                <div class="access-time-column">09 Apr 2015 08:30:00</div>
-                <div class="log-detail">Unlocked door by card by 5010524884</div>
+            <div class="flex log-row-padding flex-wrap" ng-repeat="accessLog in accessLogsData">
+                <div class="access-time-column" ng-init="logTime=transformDate(accessLog.createdAt)">
+                    {{logTime.getDate()}} {{ month[logTime.getMonth(logTime)] }} {{logTime.getFullYear()}} {{logTime.getHours()}}:{{(logTime.getMinutes()==0)? '00':logTime.getMinutes()}}
+                </div>
+                <div class="log-detail">{{ accessLog.message }} by {{ accessLog.userString }}</div>
             </div>
         </div>
     </ion-content>
