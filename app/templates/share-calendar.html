@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="list pointer"  ng-repeat="userCalendar in usersCalendar | filter:search" ng-click="editAccessRole(userCalendar.id)">
+        <div class="list pointer"  ng-repeat="userCalendar in usersCalendar | filter:search" ng-click="editAccessRole(userCalendar.id, userCalendar.user.id, $event)">
             <div class="item item-button-right">
                 <div class="flex">
                     <div class="custom-row-user-id">
@@ -30,7 +30,8 @@
                 </div>
                 <button class="button button-clear custom-button-right-text">
                     <span class="text-before-arrow-right-small">{{userCalendar.accessRole}}</span>
-                    <i class="ion-ios-arrow-right"></i>
+                    <span style="width: 6px" ng-show="userCalendar.user.id==userId"></span>
+                    <i class="ion-ios-arrow-right" ng-hide="userCalendar.user.id==userId"></i>
                 </button>
             </div>
         </div>
