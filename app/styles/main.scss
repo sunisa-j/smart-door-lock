@@ -1647,10 +1647,10 @@ ion-modal-view .item-input {
   -ms-flex-basis: 142px;
 }
 .access-role-column-width {
-  flex-basis: 94px;
-  -webkit-flex-basis: 94px;
-  -moz-flex-basis: 94px;
-  -ms-flex-basis: 94px;
+  flex-basis: 94px !important;
+  -webkit-flex-basis: 94px !important;
+  -moz-flex-basis: 94px !important;
+  -ms-flex-basis: 94px !important;
 }
 .permission-column-height {
   height: 38px;
