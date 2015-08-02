@@ -5,6 +5,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     var calendarId = $stateParams.calendarId;
     $scope.calendarData = calendars[calendarId];
     $scope.calendarAccessRole = $stateParams.accessRole;
+    // Login User Id
+    var userId = 1;
 
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
@@ -2865,7 +2867,21 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     });
 
     // Get all user who have permission to manage calendar
-    $scope.usersCalendarData = usersCalendars('','','','','', calendarId, 'calendarUsers');
+    $scope.getUsersCalendar = function(){
+        $scope.usersCalendar = usersCalendars('','','','','', calendarId, 'calendarUsers');
+
+        // Get Access Role of Login User
+        $scope.loginUserAccessRole = { role: '' };
+        var index = 0;
+        angular.forEach($scope.usersCalendar, function(value){
+            if(value.user.id == userId) {
+                $scope.loginUserAccessRole.role = value.accessRole;
+                $scope.usersCalendar.splice(index, 1);
+            }
+            index++;
+        });
+    };
+    $scope.getUsersCalendar();
 
     // Search user ready to add
     var usersData = users('array');
@@ -3012,11 +3028,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     });
 
     $scope.editUser = {};
+    $scope.selectedUser = { latestAccessRole: '' };
 
     // Edit Access Role for Selected User
     $scope.editAccessRole = function(userCalendarId){
         $scope.editUser =  usersCalendars('','','','','','','object')[userCalendarId];
         $scope.editUser.id = userCalendarId;
+        $scope.selectedUser.latestAccessRole = $scope.editUser.accessRole;
 
         if($scope.editUser.accessRole == 'owner') {
             $scope.editUser.accessRole = 'owner';
@@ -3036,5 +3054,18 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Save Access Role for Edit User
     $scope.saveAccessRole = function(){
         console.log('Edit Access Role to "' + $scope.editUser.accessRole + '" of User ID is ' + $scope.editUser.user.id);
+
+        // When save success then refresh data
+        $scope.selectedUser.latestAccessRole = $scope.editUser.accessRole;
+        console.log('Selected User Latest Access Role: "' + $scope.selectedUser.latestAccessRole + '" of User ID is ' + $scope.editUser.user.id);
+        $scope.getUsersCalendar();
+    };
+
+    $scope.cancelEditAccessRole = function(){
+        $scope.editUser.accessRole = $scope.selectedUser.latestAccessRole;
+        console.log('Selected User Latest Access Role: "' + $scope.editUser.accessRole + '" of User ID is ' + $scope.editUser.user.id);
+
+        // Refresh data
+        $scope.getUsersCalendar();
     };
 });
