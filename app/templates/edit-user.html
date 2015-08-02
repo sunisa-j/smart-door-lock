@@ -1,4 +1,4 @@
-<ion-view title="User Policy">
+<ion-view title="{{doorName}} User Policy">
 
     <ion-content class="custom-ion-content-bg">
         <!--User Info-->
@@ -8,9 +8,8 @@
                     <div class="profile-background-image" style="background: url(images/profile50x50.jpg) no-repeat"></div>
                 </span>
                 <span class="card-value" style="font-size: 16px">
-                    <!--<div style="font-size: 14px; color: #898989; line-height: 20px">{{editUser.user.employeeNumber}}</div>-->
                     <div class="overflow-hidden-text">
-                        <span style="font-size: 14px">{{editUser.user.employeeNumber}}</span>
+                        <span>{{editUser.user.employeeNumber}}</span>
                         <span style="padding-left: 10px">{{editUser.user.firstName}} {{editUser.user.lastName}}</span>
                     </div>
                 </span>
@@ -20,17 +19,19 @@
         <!--Permission-->
         <div class="item item-divider edit-button-item-divider" style="margin-top: 15px" ng-init="checkboxReadOnly.value=true">
             Permission
-            <div ng-class="{'fade-in':enableEditPermission.value==false, 'opacity-0':enableEditPermission.value==true,'fade-out':enableEditPermission.value==true, 'opacity-1':enableEditPermission.value==false}">
+            <div ng-class="{'fade-in':enableEditPermission.value==false, 'opacity-0':enableEditPermission.value==true,'fade-out':enableEditPermission.value==true, 'opacity-1':enableEditPermission.value==false}"
+                    ng-hide="editUser.user.id==userId">
                 <button class="button button-clear button-small link-btn-color"
                         ng-click="enableEditPermission.value=true; checkboxReadOnly.value=false"
                         ng-hide="enableEditPermission.value">Edit</button>
             </div>
-            <div ng-class="{'fade-in':enableEditPermission.value==true, 'opacity-0':enableEditPermission.value==false,'fade-out':enableEditPermission.value==false, 'opacity-1':enableEditPermission.value==true}">
+            <div ng-class="{'fade-in':enableEditPermission.value==true, 'opacity-0':enableEditPermission.value==false,'fade-out':enableEditPermission.value==false, 'opacity-1':enableEditPermission.value==true}"
+                 ng-hide="editUser.user.id==userId">
                 <button class="button button-clear button-small button-stable"
-                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true; cancelEditPermission()"
                         ng-show="enableEditPermission.value">Cancel</button>
                 <button class="button button-clear button-small button-balanced"
-                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true; savePermission()"
                         ng-show="enableEditPermission.value">Save</button>
             </div>
         </div>
@@ -43,15 +44,17 @@
                     <div class="permission-column-height permission-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.viewStatus" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.viewStatus" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.viewStatus==true">
+                                <input type="checkbox" ng-model="editUser.permission.viewStatus" disabled ng-if="loginUser.permission.viewStatus==false">
                             </label>
                             View Status
                         </li>
                     </div>
-                    <div class="permission-column-height permission-column-width">
+                    <div class="permission-column-height permission-column-width" ng-show="loginUser.permission.viewStatus==true">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.viewLog" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.viewLog" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.viewLog==true">
+                                <input type="checkbox" ng-model="editUser.permission.viewLog" disabled ng-if="loginUser.permission.viewLog==false">
                             </label>
                             View Log
                         </li>
@@ -59,7 +62,8 @@
                     <div class="permission-column-height permission-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.remoteAccess" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.remoteAccess" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.remoteAccess==true">
+                                <input type="checkbox" ng-model="editUser.permission.remoteAccess" disabled ng-if="loginUser.permission.remoteAccess==false">
                             </label>
                             Remote Access
                         </li>
@@ -78,7 +82,8 @@
                     <div class="permission-column-height permission-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.policies" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.policies" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.policies==true">
+                                <input type="checkbox" ng-model="editUser.permission.policies" disabled ng-if="loginUser.permission.policies==false">
                             </label>
                             Manage Access
                         </li>
@@ -86,7 +91,8 @@
                     <div class="permission-column-height permission-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.grant" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.grant" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.grant==true">
+                                <input type="checkbox" ng-model="editUser.permission.grant" disabled ng-if="loginUser.permission.grant==false">
                             </label>
                             Admin Privilege
                         </li>
@@ -94,7 +100,8 @@
                     <div class="permission-column-height permission-column-width">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
-                                <input type="checkbox" ng-model="editUser.permission.configuration" ng-disabled="checkboxReadOnly.value">
+                                <input type="checkbox" ng-model="editUser.permission.configuration" ng-disabled="checkboxReadOnly.value" ng-if="loginUser.permission.configuration==true">
+                                <input type="checkbox" ng-model="editUser.permission.configuration" disabled ng-if="loginUser.permission.configuration==false">
                             </label>
                             Config Door
                         </li>
@@ -120,7 +127,7 @@
             Select access time policies for this user to access {{doorName}}.
         </div>
 
-        <div class="button-div-padding">
+        <div class="button-div-padding" ng-show="loginUser.permission.policies==true" ng-hide="editUser.user.id==userId">
             <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeleteUser(editUser.id)">Delete User</button>
         </div>
 
