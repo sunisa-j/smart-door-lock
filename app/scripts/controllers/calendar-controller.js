@@ -2867,24 +2867,21 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.addUserModal = modal;
     });
 
-    // Get all user who have permission to manage calendar
+    // Get all user who have permission to manage calendar ---------------------
     $scope.getUsersCalendar = function(){
         $scope.usersCalendar = usersCalendars('','','','','', calendarId, 'calendarUsers');
 
         // Get Access Role of Login User
         $scope.loginUserAccessRole = { role: '' };
-        //var index = 0;
         angular.forEach($scope.usersCalendar, function(value){
             if(value.user.id == userId) {
                 $scope.loginUserAccessRole.role = value.accessRole;
-                //$scope.usersCalendar.splice(index, 1);
             }
-            //index++;
         });
     };
     $scope.getUsersCalendar();
 
-    // Search user ready to add
+    // Search user ready to add ------------------------------------------------
     var usersData = users('array');
     $scope.searchUserForAdd = function(req) {
         $scope.usersRes = [];
@@ -2931,7 +2928,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
 
-    // Confirm to add selected user
+    // Confirm to add selected user --------------------------------------------
     $scope.confirmAddUser = function(userId, employeeNumber) {
 
         var myPopup = $ionicPopup.confirm({
@@ -2972,13 +2969,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         });
     };
 
-    // Add user do you want to share this calendar
+    // Add user do you want to share this calendar -----------------------------
     var addNewUser = function(userId) {
         console.log('Go to set accessRole for this user: ' + userId + ' to usersCalendars');
-        //$scope.editAccessRole(newUserCalendarId);
     };
 
-    // Delete User (remove out of usersCalendars)
+    // Delete User (remove out of usersCalendars) ------------------------------
     $scope.confirmDeleteUser = function(userCalendarId) {
 
         var myPopup = $ionicPopup.confirm({
@@ -3031,7 +3027,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.editUser = {};
     $scope.selectedUser = { latestAccessRole: '' };
 
-    // Edit Access Role for Selected User
+    // Edit Access Role for Selected User --------------------------------------
     $scope.editAccessRole = function(userCalendarId, thisUserId, event){
 
         if(thisUserId == userId){
@@ -3058,7 +3054,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
 
-    // Save Access Role for Edit User
+    // Save Access Role for Edit User ------------------------------------------
     $scope.saveAccessRole = function(){
         console.log('Edit Access Role to "' + $scope.editUser.accessRole + '" of User ID is ' + $scope.editUser.user.id);
 
