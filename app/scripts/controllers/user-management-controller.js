@@ -3,17 +3,27 @@
 window.app.controller('UserManagementController', function ($scope, $stateParams, doorsAccess, doorsUsers, users, $state, $ionicPopup) {
 
     var doorId = $stateParams.doorId;
-    // Login user id
-    var userId = 1;
     $scope.doorName = (doorsAccess(userId,'doors'))[doorId].name;
-
-    $scope.doorUsers = doorsUsers(doorId, 'array');
+    //$scope.doorUsers = doorsUsers(doorId, 'array');
     var usersData = users('array');
 
-    var editDoorUserId = $stateParams.doorUserId;
-    $scope.editUser = doorsUsers(doorId, 'object')[editDoorUserId];
+    // Login user id
+    var userId = 1;
+    $scope.userId = userId;
 
-    // Search user ready to add
+    // Get Members
+    $scope.doorUsers = doorsUsers(doorId, 'array');
+
+    // Get Permission of Login User
+    $scope.loginUser = { permission: {} };
+
+    angular.forEach($scope.doorUsers, function(value){
+        if(value.user.id == userId) {
+            $scope.loginUser.permission = value.permission;
+        }
+    });
+
+    // Search user ready to add ------------------------------------------------
     $scope.searchUserForAdd = function(req) {
         $scope.usersRes = [];
         $scope.load = true;
@@ -59,7 +69,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
         }
     };
 
-    // Confirm to add selected user
+    // Confirm to add selected user --------------------------------------------
     $scope.confirmAddUser = function(userId, employeeNumber) {
 
         var myPopup = $ionicPopup.confirm({
@@ -102,12 +112,12 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
         });
     };
 
-    // Add User
+    // Add User ----------------------------------------------------------------
     var addNewUser = function(userId) {
         $state.go('mainMenu.doors.doorInfo.userManagement.editUser', {userId: userId});
     };
 
-    // Delete User (remove out of doorsUsers)
+    // Delete User (remove out of doorsUsers) ----------------------------------
     $scope.confirmDeleteUser = function(doorUserId) {
 
         var myPopup = $ionicPopup.confirm({
@@ -148,6 +158,43 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                 console.log('cancel');
             }
         });
+    };
+
+
+    // -------------------------------------------------------------------------
+    // User Policy -------------------------------------------------------------
+    // -------------------------------------------------------------------------
+    var editDoorUserId = $stateParams.doorUserId;
+
+    // Get all user who have permission to access this door ----------
+
+    $scope.getMemberSelected = function(){
+
+        if(editDoorUserId){
+            $scope.editUser = doorsUsers(doorId, 'object')[editDoorUserId];
+
+            $scope.selectedUser = { latestPermission: {} };
+            $scope.selectedUser.latestPermission = $scope.editUser.permission;
+        }
+    };
+    $scope.getMemberSelected();
+
+    // Save Permission for Edit User ----------------------------------
+    $scope.savePermission = function(){
+        console.log('Edit Permission to "' + $scope.editUser.permission + '" of User ID is ' + $scope.editUser.user.id);
+
+        // When save success then refresh data
+        $scope.selectedUser.latestPermission = $scope.editUser.permission;
+        console.log('Selected User Latest Permission: "' + $scope.selectedUser.latestPermission + '" of User ID is ' + $scope.editUser.user.id);
+        //$scope.getMemberSelected(); // Use when API Ready
+    };
+
+    $scope.cancelEditPermission = function(){
+        $scope.editUser.permission = $scope.selectedUser.latestPermission;
+        console.log('Selected User Latest Permission: "' + $scope.editUser.permission + '" of User ID is ' + $scope.editUser.user.id);
+
+        // Refresh data
+        $scope.getMemberSelected();
     };
 
 
