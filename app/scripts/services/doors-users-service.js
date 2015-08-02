@@ -8,12 +8,12 @@ window.app.factory('doorsUsers', function (users) {
             door: 'door1',
             user: 1,
             permission: {
-                viewLog: true,
+                viewLog: false,
                 viewStatus: true,
                 remoteAccess: true,
                 configuration: true,
                 policies: true,
-                grant: true
+                grant: false
             },
             createdBy: 1,
             createdAt: "2015-06-18T08:47:09.000Z",
@@ -127,7 +127,7 @@ window.app.factory('doorsUsers', function (users) {
             door: 'door1',
             user: 2,
             permission: {
-                viewLog: true,
+                viewLog: false,
                 viewStatus: true,
                 remoteAccess: true,
                 configuration: true,
