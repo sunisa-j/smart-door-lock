@@ -21,7 +21,7 @@
         </div>
 
         <!--Access Role-->
-        <div class="item item-divider edit-button-item-divider" style="margin-top: 15px" ng-init="checkboxReadOnly.value=true">
+        <div class="item item-divider edit-button-item-divider" style="margin-top: 15px" ng-init="checkboxReadOnly.value=true" ng-show="loginUserAccessRole.role!='reader'">
             Access Role
             <div ng-class="{'fade-in':enableEditPermission.value==false, 'opacity-0':enableEditPermission.value==true,'fade-out':enableEditPermission.value==true, 'opacity-1':enableEditPermission.value==false}">
                 <button class="button button-clear button-small link-btn-color"
@@ -30,19 +30,19 @@
             </div>
             <div ng-class="{'fade-in':enableEditPermission.value==true, 'opacity-0':enableEditPermission.value==false,'fade-out':enableEditPermission.value==false, 'opacity-1':enableEditPermission.value==true}">
                 <button class="button button-clear button-small button-stable"
-                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true"
+                        ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true; cancelEditAccessRole()"
                         ng-show="enableEditPermission.value">Cancel</button>
                 <button class="button button-clear button-small button-balanced"
                         ng-click="enableEditPermission.value=false; checkboxReadOnly.value=true; saveAccessRole()"
                         ng-show="enableEditPermission.value">Save</button>
             </div>
         </div>
-        <div class="item" style="padding: 10px 15px 17px 15px">
+        <div class="item" style="padding: 10px 15px 17px 15px" ng-show="loginUserAccessRole.role!='reader'">
 
             <div class="flex permission-flex-container">
 
                 <div class="flex flex-wrap" style="flex-basis: 400px; flex-grow: 1; -webkit-flex-grow: 1;">
-                    <div class="permission-column-height access-role-column-width">
+                    <div class="permission-column-height access-role-column-width" ng-hide="loginUserAccessRole.role!='owner'">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
                                 <input type="radio" value="owner" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
@@ -50,7 +50,7 @@
                             Owner
                         </li>
                     </div>
-                    <div class="permission-column-height access-role-column-width">
+                    <div class="permission-column-height access-role-column-width" ng-show="loginUserAccessRole.role!='reader'">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
                                 <input type="radio" value="writer" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
@@ -58,7 +58,7 @@
                             Writer
                         </li>
                     </div>
-                    <div class="permission-column-height access-role-column-width">
+                    <div class="permission-column-height access-role-column-width" ng-show="loginUserAccessRole.role!='reader'">
                         <li class="item item-checkbox permission-item-checkbox">
                             <label class="checkbox checkbox-energized">
                                 <input type="radio" value="reader" ng-model="editUser.accessRole" ng-disabled="checkboxReadOnly.value">
@@ -70,11 +70,11 @@
             </div>
 
         </div>
-        <div class="item item-desc">
+        <div class="item item-desc" ng-show="loginUserAccessRole.role!='reader'">
             Set access role for this user.
         </div>
 
-        <div class="button-div-padding">
+        <div class="button-div-padding" ng-show="loginUserAccessRole.role=='owner'">
             <button class="button button-outline button-block icon-left button-assertive ion-ios-minus-outline more-button" ng-click="confirmDeleteUser(editUser.id)">Delete User</button>
         </div>
 
