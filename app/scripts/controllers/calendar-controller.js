@@ -7,6 +7,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.calendarAccessRole = $stateParams.accessRole;
     // Login User Id
     var userId = 1;
+    $scope.userId = 1;
 
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
@@ -2872,13 +2873,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         // Get Access Role of Login User
         $scope.loginUserAccessRole = { role: '' };
-        var index = 0;
+        //var index = 0;
         angular.forEach($scope.usersCalendar, function(value){
             if(value.user.id == userId) {
                 $scope.loginUserAccessRole.role = value.accessRole;
-                $scope.usersCalendar.splice(index, 1);
+                //$scope.usersCalendar.splice(index, 1);
             }
-            index++;
+            //index++;
         });
     };
     $scope.getUsersCalendar();
@@ -3031,24 +3032,30 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.selectedUser = { latestAccessRole: '' };
 
     // Edit Access Role for Selected User
-    $scope.editAccessRole = function(userCalendarId){
-        $scope.editUser =  usersCalendars('','','','','','','object')[userCalendarId];
-        $scope.editUser.id = userCalendarId;
-        $scope.selectedUser.latestAccessRole = $scope.editUser.accessRole;
+    $scope.editAccessRole = function(userCalendarId, thisUserId, event){
 
-        if($scope.editUser.accessRole == 'owner') {
-            $scope.editUser.accessRole = 'owner';
-        }
-        else if($scope.editUser.accessRole == 'writer') {
-            $scope.editUser.accessRole = 'writer';
-        }
-        else if($scope.editUser.accessRole == 'reader') {
-            $scope.editUser.accessRole = 'reader';
+        if(thisUserId == userId){
+            event.stopPropagation();
         } else {
-            $scope.editUser.accessRole = null;
-        }
 
-        $scope.editUserModal.show();
+            $scope.editUser = usersCalendars('', '', '', '', '', '', 'object')[userCalendarId];
+            $scope.editUser.id = userCalendarId;
+            $scope.selectedUser.latestAccessRole = $scope.editUser.accessRole;
+
+            if ($scope.editUser.accessRole == 'owner') {
+                $scope.editUser.accessRole = 'owner';
+            }
+            else if ($scope.editUser.accessRole == 'writer') {
+                $scope.editUser.accessRole = 'writer';
+            }
+            else if ($scope.editUser.accessRole == 'reader') {
+                $scope.editUser.accessRole = 'reader';
+            } else {
+                $scope.editUser.accessRole = null;
+            }
+
+            $scope.editUserModal.show();
+        }
     };
 
     // Save Access Role for Edit User
