@@ -90,17 +90,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 $scope.dateSelected = dateSelected;
                 $scope.getEventsDateSelected(dateSelected);
 
-                var dataMonth = dateSelected.getMonth()+1;
-                var dataDay = dateSelected.getDate();
-                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-                var dateNow = new Date();
+                //var dataMonth = dateSelected.getMonth()+1;
+                //var dataDay = dateSelected.getDate();
+                //var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
+                //var dateNow = new Date();
 
                 // change the day's background
-                if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    setDayRedBg(dataDate);
-                }else {
-                    setDayBlackBg(dataDate);
-                }
+                //if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
+                //    setDayRedBg(dataDate);
+                //}else {
+                //    setDayBlackBg(dataDate);
+                //}
             },
             eventClick: function(event, element) {
 
