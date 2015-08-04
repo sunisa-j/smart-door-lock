@@ -250,7 +250,7 @@ input[disabled] {
   font-size: 38px;
   color: #222;
   position: absolute;
-  top: -4px;
+  top: -4px !important;
   right: 5px;
 }
 .button-icon-size {
