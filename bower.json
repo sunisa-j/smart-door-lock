@@ -6,7 +6,7 @@
     "ngCordova": "v0.1.14-alpha",
     "angular-ui-router.stateHelper": "~1.3.0",
     "lodash": "~3.10.0",
-    "angular-ui-calendar": "~1.0.1",
+    "angular-ui-calendar": "https://github.com/sunisa-j/ui-calendar.git",
     "rrule": "~2.1.0"
   },
   "devDependencies": {
