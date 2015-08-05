@@ -210,6 +210,9 @@ input[disabled] {
 .bar-dark .button.button-clear {
   color: #222;
 }
+.bg-none {
+  background: none;
+}
 // Modal Popup ActionSheet ******************************
 .modal .bar-header {
   background-color: $light;
@@ -246,13 +249,6 @@ input[disabled] {
   color: $stable_font_color;
 }
 // Button & Toggle **************************************
-.custom-plus-icon {
-  font-size: 38px;
-  color: #222;
-  position: absolute;
-  top: -4px !important;
-  right: 5px;
-}
 .button-icon-size {
   font-size: $button-icon-size;
 }
