@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents) {
+window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents, uiCalendarConfig) {
 
     var doorUserId = $stateParams.doorUserId;
     var doorUser = doorsUsers('', 'object')[doorUserId];
@@ -153,39 +153,12 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
     }).then(function(modal) {
         $scope.calendarEventsModal = modal;
     });
-    $scope.$on('modal.shown', function() {
-        $scope.selectEventsData();
-    });
 
-    $scope.dateSelected = new Date();
+    $scope.dateSelected = moment();
+
     $scope.transformDate = function(date){
-        var dateNew;
-        if(date == ''){
-            dateNew = new Date();
-        } else {
-            dateNew = new Date(date);
-        }
-        return dateNew;
+        return moment(date).format('HH:mm');
     };
-
-    // Get events from date selected -------------------------------------------
-    $scope.getEventsDateSelected = function (dateUserSelected) {
-        $scope.dateSelected = new Date(dateUserSelected.setHours(0, 0, 0, 0));
-
-        var calendarEventsDateSelected = [];
-        var events = angular.copy(eventsData.value);
-
-        angular.forEach(events, function(value){
-            var startDate = $scope.transformDate(value.startDate);
-            var startDate2 = new Date(startDate.setHours(0, 0, 0, 0));
-
-            if(($scope.dateSelected).getTime() === startDate2.getTime()){
-                calendarEventsDateSelected.push(value);
-            }
-        });
-        $scope.calendarEventsDateSelected2 = calendarEventsDateSelected;
-    };
-    $scope.getEventsDateSelected($scope.dateSelected);
 
     // Reference month & weekday -----------------------------------------------
     $scope.month = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
@@ -205,27 +178,59 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
             textColor: color.text
         }
     ];
-    var setDayRedBg = function(dataDate) {
-        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
 
-        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-        if(isOtherMonth) {
-            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-        }
-        angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
-    };
-    var setDayBlackBg = function(dataDate) {
-        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-        angular.element("td.fc-day-number.fc-today div").removeClass('today-number-circle-bg');
-        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
+    var lastClickedDay;
 
-        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-        if(isOtherMonth) {
-            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
+    function markDate(date, element){
+        // Set day bg --------------------------------------------------
+        var day;
+        var current = angular.element(element);
+        var dataDate = date.format('YYYY-MM-DD');
+
+        if(current.hasClass('fc-day-number')){
+            day = current;
         }
-        angular.element("td.fc-day-number[data-date=" + dataDate + "] div").addClass('number-circle-bg');
+        else {
+            var parent = current.parents('.fc-week');
+            if(parent.context) {
+                day = parent.find("td.fc-day-number[data-date=" + dataDate + "]");
+            }
+            else {
+                day = angular.element("td.fc-day-number[data-date=" + dataDate + "]");
+            }
+        }
+
+        if(lastClickedDay){
+            lastClickedDay.find('div').removeAttr('class');
+        }
+        lastClickedDay = day;
+
+        if (date.isSame(new Date(), 'd')) {
+            day.html('<div class="today-number-circle-bg">' + date.date() + '</div>');
+        }
+        else {
+            day.html('<div class="number-circle-bg">' + date.date() + '</div>');
+        }
+    }
+
+    function selectDate(date, element) {
+        // When select day ---------------------------------------------
+        $scope.dateSelected = date;
+        markDate(date, element);
+
+        $scope.selectedDateEvents = [];
+        angular.forEach(eventsData.value, function (event) {
+            if($scope.dateSelected.isSame(event.startDate, 'd')){
+                $scope.selectedDateEvents.push(event);
+            }
+        });
     };
+
+    function selectToday(element) {
+        uiCalendarConfig.calendars['calendarsEventsSelected'].fullCalendar('today');
+        selectDate(moment(), element);
+    }
+
     $scope.uiConfig = {
         calendar:{
             header:{
@@ -233,69 +238,28 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
             },
             editable: false,
             height: 480,
-            dayClick: function(date, jsEvent, view) {
+            columnFormat: 'dd',
+            eventRender: function (event, element) {
 
-                // When select day ---------------------------------------------
-                var dateSelected = new Date(date._d);
-                $scope.dateSelected = dateSelected;
-                $scope.getEventsDateSelected(dateSelected);
+                var date = moment(event.start._d);
+                var eventTime = date.format('HH:mm');
 
-                var dataMonth = dateSelected.getMonth()+1;
-                var dataDay = dateSelected.getDate();
-                var dataDate = dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-                var dateNow = new Date();
-
-                // change the day's background
-                if(dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    setDayRedBg(dataDate);
-                }else {
-                    setDayBlackBg(dataDate);
-                }
+                angular.element(element).children().html('<span class="fc-time">' + eventTime + '</span> <span class="fc-title">' + event.title + '</span>');
             },
-            viewRender: function(view, element) {
-
-                // When change month (click prev,next button), focus day selected
-                $scope.getEventsDateSelected($scope.dateSelected);
-
-                var dataMonth = $scope.dateSelected.getMonth()+1;
-                var dataDay = $scope.dateSelected.getDate();
-                var dataDate = $scope.dateSelected.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-                var dateNow = new Date();
-
-                // change the day's background
-                if($scope.dateSelected.setHours(0,0,0,0) == dateNow.setHours(0,0,0,0)) {
-                    setDayRedBg(dataDate);
-                }else {
-                    setDayBlackBg(dataDate);
+            dayClick: function(date, jsEvent) {
+                selectDate(date, jsEvent.target);
+            },
+            dayRender: function (date, cell) {
+                if(date.isSame($scope.dateSelected, 'd')){
+                    selectDate(date, cell);
                 }
             }
         }
     };
 
     // bind my today button with ui-calendar ----------------------------------
-    $scope.todayActive = function() {
-        angular.element('.fc-today-button').click();
-        angular.element('#calendar').fullCalendar('today');
-
-        var dateNow = new Date();
-        var dateNow2 = new Date(dateNow.setHours(0,0,0,0));
-
-        $scope.dateSelected = dateNow;
-        $scope.getEventsDateSelected(dateNow);
-
-        var dataMonth = dateNow2.getMonth()+1;
-        var dataDay = dateNow2.getDate();
-        var dataDate = dateNow2.getFullYear() + '-' + ((dataMonth < 10)? ('0'+dataMonth):dataMonth) + '-' + ((dataDay < 10)? ('0'+dataDay):dataDay);
-
-        angular.element("td.fc-day-number.fc-other-month").css('opacity', 0.3);
-        angular.element("td.fc-day-number div").removeClass('number-circle-bg');
-
-        var isOtherMonth = angular.element("td.fc-day-number[data-date=" + dataDate + "]").hasClass('fc-other-month').toString();
-        if(isOtherMonth) {
-            angular.element("td.fc-day-number[data-date=" + dataDate + "]").css('opacity', 1);
-        }
-        angular.element("td.fc-day-number.fc-today[data-date=" + dataDate + "] div").addClass('today-number-circle-bg');
+    $scope.todayClick = function() {
+        selectToday();
     };
-
 
 });
