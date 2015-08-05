@@ -1171,6 +1171,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         // Set startDate & endDate to date -------------------------------------
         $scope.createEventData.startDate = new Date($scope.createEventData.startDate);
         $scope.createEventData.endDate = new Date($scope.createEventData.endDate);
+        $scope.repeat.status = false;
 
         $scope.createEventModal.show();
     };
