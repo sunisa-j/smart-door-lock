@@ -53,7 +53,7 @@
             </div>
         </div>
         <!--Frequency-->
-        <div class="list" ng-show="repeat.status">
+        <div class="list" ng-show="editEventData.rRule">
             <div class="item item-input small-item-input sub-item-input">
                 <span>Frequency</span>
                 <span class="flex align-items-center sub-input-padding" style="width: 180px">
@@ -312,7 +312,7 @@
         </div>
 
         <!--End Repeat------------------------------>
-        <div ng-show="repeat.status">
+        <div ng-show="editEventData.rRule">
             <!--Never-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input">
@@ -393,7 +393,7 @@
         </div>
 
         <!--Summary--------------------------------->
-        <div class="list" ng-show="repeat.status">
+        <div class="list" ng-show="editEventData.rRule">
             <div class="flex align-items-flex-start" style="border: 0; background: transparent; padding-top: 15px">
                 <span style="padding-left: 15px; min-width: 98px">Summary</span>
                 <span style="padding-left: 15px; padding-right: 5px; color: #333; white-space: pre-line; line-height: 24px">{{ editDataRrule.toText() }}</span>
