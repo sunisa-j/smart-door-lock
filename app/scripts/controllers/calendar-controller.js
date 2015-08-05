@@ -1451,6 +1451,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         backdropClickToClose: false
     }).then(function(modal) {
         $scope.editEventModal = modal;
+
     });
 
     // Set on the to rRule for Edit event modal
@@ -2107,7 +2108,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.editEventRrule = function() {
 
         if($scope.repeat.status == true) {
-            if ($scope.editEventData.rRule.frequency == 'DAILY') {
+            if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'DAILY') {
 
                 if ($scope.repeat.endRepeat == 'date') {
                     $scope.editDataRrule = new RRule({
@@ -2133,7 +2134,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     });
                 }
             }
-            else if ($scope.editEventData.rRule.frequency == 'WEEKLY') {
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
 
                 var byweekday = setByWeekDay();
 
@@ -2164,7 +2165,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     });
                 }
             }
-            else if ($scope.editEventData.rRule.frequency == 'MONTHLY') {
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY') {
                 var bymonthday = [];
                 var bymonthday = setByMonthDay();
 
@@ -2214,7 +2215,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     setEditOntheRrule();
                 }
             }
-            else if ($scope.editEventData.rRule.frequency == 'YEARLY') {
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY') {
                 var bymonth = [];
                 var bymonth = setByMonth();
 
@@ -2258,7 +2259,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         }
 
-        console.log($scope.editDataRrule);
+        console.log('rRule Data: ', $scope.editDataRrule);
     };
 
     // Calculate value in 'On the' ---------------------------------------------
@@ -2370,6 +2371,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.openEditEvent = function(event){
         storeOldEventData = event;
         $scope.editEventData = event;
+
+        if(!$scope.editEventData.rRule){
+            $scope.repeat.status = false;
+        }
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
