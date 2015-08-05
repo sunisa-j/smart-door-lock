@@ -1,27 +1,26 @@
 <ion-view title="{{calendarData.name}}">
 
-    <div style="display: none" ng-if="(runTodayActiveFirst.value)">{{ todayActive() }}</div>
+    <!--<div style="display: none" ng-if="(runTodayActiveFirst.value)">{{ todayActive() }}</div>-->
 
     <ion-nav-buttons side="right">
-        <button class="button button-clear" ng-click="openCreateEvent()">
-            <i class="ion-ios-plus-empty custom-plus-icon"></i>
+        <button class="button button-clear flaticon-plus79 bg-none" ng-click="openCreateEvent()">
         </button>
     </ion-nav-buttons>
 
     <ion-content style="margin-top: -1px">
 
-        <div ui-calendar="uiConfig.calendar" ng-model="uiCalendarEvents"></div>
+        <div ui-calendar="uiConfig.calendar" calendar={{calendarName}} ng-model="uiCalendarEvents"></div>
 
         <!--show events on date selected-->
         <div class="item item-divider date-selected-item-divider">
-            {{weekDay[dateSelected.getDay()]}}, {{dateSelected.getDate()}} {{ month[dateSelected.getMonth(dateSelected)] }} {{dateSelected.getFullYear()}}
+            {{dateSelected.format('ddd, D MMM YYYY')}}
         </div>
-        <div ng-if="calendarEventsDateSelected2.length == 0" style="text-align: center; margin-top: 15px" class="stable">No Events</div>
+        <div ng-if="selectedDateEvents.length == 0" style="text-align: center; margin-top: 15px" class="stable">No Events</div>
 
-        <div class="custom-time-row" ng-repeat="event in calendarEventsDateSelected2" ng-init="startDate2=transformDate(event.startDate);endDate2=transformDate(event.endDate)"
+        <div class="custom-time-row" ng-repeat="event in selectedDateEvents"
                 ng-click="openEditEvent(event)">
             <div class="custom-time-row-first-col">
-                {{startDate2.getHours()}}:{{(startDate2.getMinutes()==0)? '00':startDate2.getMinutes()}} - {{endDate2.getHours()}}:{{(endDate2.getMinutes()==0)? '00':endDate2.getMinutes()}}
+                {{transformDate(event.startDate)}} - {{transformDate(event.endDate)}}
             </div>
             <div class="custom-time-row-title">
                 <div class="overflow-hidden-text">{{event.name}}</div>
@@ -35,7 +34,7 @@
     <div class="bar bar-footer bar-light custom-bar-footer flex">
         <!--Calendar Today Button-->
         <div class="flex-1">
-            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px" id="today-button" ng-click="todayActive()">
+            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px" id="today-button" ng-click="todayClick()">
                 Today
             </button>
         </div>
