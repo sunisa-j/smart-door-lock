@@ -9,19 +9,19 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             status: 'confirmed',
             name: 'Technician Meeting',
             description: 'Test Monthly',
-            startDate: '2015-07-17T09:00:00.000Z',
-            endDate: '2015-07-17T11:00:00.000Z',
+            startDate: '2015-08-17T09:00:00.000Z',
+            endDate: '2015-08-17T11:00:00.000Z',
             rRule: {
                 frequency: 'MONTHLY',
                 interval: 1,
-                dateStart: '2015-07-17',
+                dateStart: '2015-08-17',
                 count: 2,
                 //until: '2015-12-31',
                 byMonthDay: [1,31]
             },
             recurringEvent: 'recurringId1',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-08-17T12:31:45.000Z',
+            updatedAt: '2015-08-17T12:31:45.000Z'
         },
         {
             id: 'calendarEvents2',
@@ -48,8 +48,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 ]
             },
             recurringEvent: 'recurringId2',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-07-30T12:31:45.000Z',
+            updatedAt: '2015-07-30T12:31:45.000Z'
         },
         {
             id: 'calendarEvents3',
@@ -62,7 +62,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             rRule: {
                 frequency: 'MONTHLY',
                 interval: 1,
-                dateStart: '2015-01-01',
+                dateStart: '2015-08-01',
                 until: '2015-12-31',
                 byWeekDay: [
                     'MO'
@@ -72,8 +72,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 ]
             },
             recurringEvent: 'recurringId3',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-08-01T12:31:45.000Z',
+            updatedAt: '2015-08-01T12:31:45.000Z'
         },
         {
             id: 'calendarEvents4',
@@ -86,15 +86,15 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             rRule: {
                 frequency: 'WEEKLY',
                 interval: 1,
-                dateStart: '2015-01-01',
+                dateStart: '2015-08-01',
                 until: '2015-12-31',
                 byWeekDay: [
                     'TU', 'TH'
                 ]
             },
             recurringEvent: 'recurringId4',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-08-01T12:31:45.000Z',
+            updatedAt: '2015-08-01T12:31:45.000Z'
         },
         {
             id: 'calendarEvents5',
@@ -107,12 +107,12 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             rRule: {
                 frequency: 'DAILY',
                 interval: 2,
-                dateStart: '2015-01-01',
+                dateStart: '2015-08-01',
                 until: '2015-12-31'
             },
             recurringEvent: 'recurringId5',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-08-01T13:30:00.000Z',
+            updatedAt: '2015-08-01T13:30:00.000Z'
         },
         {
             id: 'calendarEvents6',
@@ -122,8 +122,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Electric Maintenance',
             startDate: '2015-07-30T13:00:00.000Z',
             endDate: '2015-07-30T16:00:00.000Z',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-07-30T13:00:00.000Z',
+            updatedAt: '2015-07-30T13:00:00.000Z'
         },
         {
             id: 'calendarEvents7',
@@ -133,8 +133,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'Cleaning room',
             startDate: '2015-08-10T10:30:00.000Z',
             endDate: '2015-08-10T12:30:00.000Z',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-03-14T10:30:00.000Z',
+            updatedAt: '2015-03-14T10:30:00.000Z'
         },
         {
             id: 'calendarEvents8',
@@ -144,8 +144,8 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
             description: 'COE Big Cleaning',
             startDate: '2015-08-20T08:30:00.000Z',
             endDate: '2015-08-20T16:30:00.000Z',
-            createdAt: '2015-03-14T12:31:45.000Z',
-            updatedAt: '2015-03-14T12:31:45.000Z'
+            createdAt: '2015-08-20T08:30:00.000Z',
+            updatedAt: '2015-08-20T08:30:00.000Z'
         }
     ];
 
