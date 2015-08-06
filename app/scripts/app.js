@@ -210,16 +210,6 @@ app.config(function(stateHelperProvider, $urlRouterProvider) {
                                         ]
                                     }
                                 ]
-                            },
-                            {
-                                name: 'myActivityLog',
-                                url: '/my-activity-log',
-                                views: {
-                                    'menuContent@mainMenu': {
-                                        controller: 'DoorInfoController',
-                                        templateUrl: 'templates/my-activity-log.html'
-                                    }
-                                }
                             }
                         ]
                     }
