@@ -20,9 +20,9 @@
         </div>
 
         <div class="log-container">
-            <div class="flex log-row-padding flex-wrap" ng-repeat="myActivity in myActivityLogsData">
-                <div class="access-time-column" ng-init="logTime=transformDate(myActivity.createdAt)">
-                    {{logTime.getDate()}} {{ month[logTime.getMonth(logTime)] }} {{logTime.getFullYear()}} {{logTime.getHours()}}:{{(logTime.getMinutes()==0)? '00':logTime.getMinutes()}}
+            <div class="flex log-row-padding flex-wrap" ng-repeat="myActivity in myActivityLogsData | orderBy:'-createdAt'">
+                <div class="access-time-column" ng-init="logTime=transformDateToMoment(myActivity.createdAt)">
+                    {{ logTime.format('D MMM YYYY HH:mm') }}
                 </div>
                 <div class="log-detail">{{ myActivity.message }}</div>
             </div>
