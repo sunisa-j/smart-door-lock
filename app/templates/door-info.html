@@ -34,25 +34,25 @@
         <div class="item item-divider">My Access Time</div>
         <div class="access-time-container">
             <div class="access-time-row" ng-repeat="event in myAccessTime">
-                <div style="display: none">{{ myStartDate = transformDate(event.startDate) }}</div>
-                <div class="access-date-column">{{weekDay[myStartDate.getDay()]}}, {{myStartDate.getDate()}} {{ month[myStartDate.getMonth(myStartDate)] }} {{myStartDate.getFullYear()}}</div>
+                <div style="display: none">{{ myStartDate = transformDateToMoment(event.startDate) }}</div>
+                <div class="access-date-column">{{ myStartDate.format('ddd, D MMM YYYY') }}</div>
                 <div class="flex flex-direction-column access-time-detail-column">
                     <div ng-repeat="accessTime in event" ng-init="myStartDate2=transformDate(accessTime.startDate);myEndDate2=transformDate(accessTime.endDate)">
-                        {{myStartDate2.getUTCHours()}}:{{(myStartDate2.getUTCMinutes()==0)? '00':myStartDate2.getUTCMinutes()}} - {{myEndDate2.getUTCHours()}}:{{(myEndDate2.getUTCMinutes()==0)? '00':myEndDate2.getUTCMinutes()}}
+                        {{ transformDate(accessTime.startDate) }} - {{ transformDate(accessTime.endDate) }}
                         <span class="calendar-list-title"> {{accessTime.name}}</span>
                     </div>
                 </div>
             </div>
 
-            <button class="button button-outline button-block button-dark more-button" ng-click="showEventsDataName.value='myAccessTime';calendarEventsModal.show();todayActive()" ng-hide="myAccessTime.length==0">More ...</button>
+            <button class="button button-outline button-block button-dark more-button" ng-click="showEventsDataName.value='myAccessTime';calendarEventsModal.show();todayClick()" ng-hide="myAccessTime.length==0">More ...</button>
             <div style="text-align: center; padding: 15px 0" class="stable" ng-show="myAccessTime.length==0">No Events</div>
         </div>
         <!--My Recent Activity-->
         <div class="item item-divider">My Recent Activity</div>
         <div class="log-container">
-            <div class="flex log-row-padding flex-wrap" ng-repeat="myActivity in myActivityLogs5Latest">
-                <div class="access-time-column" ng-init="logTime=transformDate(myActivity.createdAt)">
-                    {{logTime.getDate()}} {{ month[logTime.getMonth(logTime)] }} {{logTime.getFullYear()}} {{logTime.getHours()}}:{{(logTime.getMinutes()==0)? '00':logTime.getMinutes()}}
+            <div class="flex log-row-padding flex-wrap" ng-repeat="myActivity in myActivityLogs5Latest | orderBy:'-createdAt'"">
+                <div class="access-time-column" ng-init="logTime=transformDateToMoment(myActivity.createdAt)">
+                    {{ logTime.format('D MMM YYYY HH:mm') }}
                 </div>
                 <div class="log-detail">{{ myActivity.message }}</div>
             </div>
@@ -154,9 +154,9 @@
         </div>
 
         <div class="log-container">
-            <div class="flex log-row-padding flex-wrap" ng-repeat="accessLog in accessLogsData">
-                <div class="access-time-column" ng-init="logTime=transformDate(accessLog.createdAt)">
-                    {{logTime.getDate()}} {{ month[logTime.getMonth(logTime)] }} {{logTime.getFullYear()}} {{logTime.getHours()}}:{{(logTime.getMinutes()==0)? '00':logTime.getMinutes()}}
+            <div class="flex log-row-padding flex-wrap" ng-repeat="accessLog in accessLogsData | orderBy:'-createdAt'" ng-init="logTime=transformDateToMoment(accessLog.createdAt)">
+                <div class="access-time-column">
+                    {{ logTime.format('D MMM YYYY HH:mm') }}
                 </div>
                 <div class="log-detail">{{ accessLog.message }} by {{ accessLog.userString }}</div>
             </div>
