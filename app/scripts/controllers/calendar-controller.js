@@ -1455,6 +1455,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     });
 
+    var storeOldEventData = {}; // when user cancel edit or close modal return value before
+
     // Set on the to rRule for Edit event modal
     var setEditOntheRrule = function(){
         if($scope.repeat.onThe.day == 'day'){
@@ -2258,9 +2260,9 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     setEditOntheRruleYearly();
                 }
             }
-        }
 
-        console.log('rRule Data: ', $scope.editDataRrule);
+            console.log('rRule Data: ', $scope.editDataRrule);
+        }
     };
 
     // Calculate value in 'On the' ---------------------------------------------
@@ -2366,12 +2368,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         }
     };
-    var storeOldEventData = {}; // when user cancel edit or close modal return value before
 
     // Transform event data to show in edit event modal ------------------------
     $scope.openEditEvent = function(event){
-        storeOldEventData = event;
-        $scope.editEventData = event;
+        $scope.editEventData = angular.copy(event);
 
         if(!$scope.editEventData.rRule){
             $scope.repeat.status = false;
@@ -2461,7 +2461,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             });
         }
 
-        $scope.editEventRrule();
+        if ($scope.editEventData.rRule){
+            $scope.editEventRrule();
+        }
+
+        storeOldEventData = angular.copy($scope.editEventData);
+        console.log('When Open. Event Data: ', storeOldEventData);
 
         $scope.editEventModal.show();
     };
@@ -2813,14 +2818,16 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         }
 
-        storeOldEventData = $scope.editEventData;
-        console.log('Save Event Data: ', $scope.editEventData);
-
         // if save success
         reportSaveEditEventData();
     };
 
+    $scope.cancelEditEvent = function(){
+        $scope.editEventData = storeOldEventData;
+        console.log('After Cancel. This Event Data: ', storeOldEventData);
 
+        $scope.editEventModal.hide();
+    };
 
     // -------------------------------------------------------------------------
     // Share Calendar ----------------------------------------------------------
