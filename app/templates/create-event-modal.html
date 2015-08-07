@@ -319,77 +319,54 @@
                     <span>End Repeat</span>
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="repeat.endRepeat" value="never" style="display: none">
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="repeat.endRepeat=='never'"
-                                    ng-class="{'fade-in':notSelectNever.value==false, 'opacity-0':notSelectNever.value==true,'fade-out':notSelectNever.value==true, 'opacity-1':notSelectNever.value==false}">
-                            </button>
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="repeat.endRepeat=='never'"
-                                    ng-click="repeat.endRepeat='never';notSelectNever.value=false;notSelectAfter.value=true;notSelectOnDate.value=true;calculateRrule()"
-                                    ng-class="{'fade-in':notSelectNever.value==true, 'opacity-0':notSelectNever.value==false,'fade-out':notSelectNever.value==false, 'opacity-1':notSelectNever.value==true}">
-                            </button>
+                            <label class="checkbox checkbox-energized custom-radio">
+                                <input type="radio" ng-model="repeat.endRepeat" value="never">
+                            </label>
                         </div>
                         <div class="dark-font-color flex-1">Never</div>
                     </span>
-
                 </div>
             </div>
             <!--After-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='after')? afterDisabled=false:afterDisabled=true}}</div>
+                    <span>&nbsp;</span>
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="repeat.endRepeat" value="after" style="display: none">
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="repeat.endRepeat=='after'"
-                                    ng-class="{'fade-in':notSelectAfter.value==false, 'opacity-0':notSelectAfter.value==true,'fade-out':notSelectAfter.value==true, 'opacity-1':notSelectAfter.value==false}">
-                            </button>
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="repeat.endRepeat=='after'"
-                                    ng-click="repeat.endRepeat='after';createEventData.rRule.count=1;notSelectAfter.value=false;afterDisabled=false;notSelectNever.value=true;notSelectOnDate.value=true;calculateRrule()"
-                                    ng-class="{'fade-in':notSelectAfter.value==true, 'opacity-0':notSelectAfter.value==false,'fade-out':notSelectAfter.value==false, 'opacity-1':notSelectAfter.value==true}">
-                            </button>
+                            <label class="checkbox checkbox-energized custom-radio">
+                                <input type="radio" ng-model="repeat.endRepeat" value="after">
+                            </label>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="min-width: 30px">After</div>
                             <div style="min-width: 80px; padding-right: 20px">
-                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" ng-disabled="afterDisabled" min="1" ng-change="calculateRrule()">
+                                <input type="number" ng-model="createEventData.rRule.count" class="sub-item-text-input" ng-disabled="repeat.endRepeat!='after'" min="1" ng-change="calculateRrule()">
                             </div>
-                            <div style="min-width: 50px" class="sub-item-unit">{{(createEventData.rRule.count<=1)? 'time':'times'}}</div>
+                            <div style="min-width: 50px" class="sub-item-unit">{{ (createEventData.rRule.count<=1)? 'time':'times' }}</div>
                         </div>
                     </span>
-
                 </div>
             </div>
             <!--On Date-->
             <div class="list">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
-                    <span>&nbsp;</span><div style="display: none">{{(repeat.endRepeat=='date')? onDateDisabled=false:onDateDisabled=true}}</div>
+                    <span>&nbsp;</span>
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
-                            <input type="radio" ng-model="repeat.endRepeat" value="date" style="display: none">
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="repeat.endRepeat=='date'"
-                                    ng-class="{'fade-in':notSelectOnDate.value==false, 'opacity-0':notSelectOnDate.value==true,'fade-out':notSelectOnDate.value==true, 'opacity-1':notSelectOnDate.value==false}">
-                            </button>
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="repeat.endRepeat=='date'"
-                                    ng-click="repeat.endRepeat='date';createEventData.rRule.until=dateUntil;notSelectOnDate.value=false;onDateDisabled=false;notSelectAfter.value=true;notSelectNever.value=true;calculateRrule()"
-                                    ng-class="{'fade-in':notSelectOnDate.value==true, 'opacity-0':notSelectOnDate.value==false,'fade-out':notSelectOnDate.value==false, 'opacity-1':notSelectOnDate.value==true}">
-                            </button>
+                            <label class="checkbox checkbox-energized custom-radio">
+                                <input type="radio" ng-model="repeat.endRepeat" value="date">
+                            </label>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
                             <div style="min-width: 70px">On Date</div>
-                            <div style="min-width: 128px">
-                                <label><input type="date" ng-model="createEventData.rRule.until" class="sub-item-date-input" ng-disabled="onDateDisabled" ng-change="calculateRrule()"></label>
+                            <div class="event-date-input">
+                                <label><input type="date" ng-model="createEventData.rRule.until" class="sub-item-date-input-width-auto" ng-disabled="repeat.endRepeat!='date'" ng-change="calculateRrule()"></label>
                             </div>
                         </div>
                     </span>
-
                 </div>
             </div>
+
         </div>
 
         <!--Summary--------------------------------->
