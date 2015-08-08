@@ -153,8 +153,9 @@ input::-webkit-datetime-edit, #date-time-edit {
   padding: 10px 0 !important;
   background-color: $light;
 }
-input[disabled] {
-  color: $item_divider_font_color;
+input[disabled], input[type=number][disabled] {
+  color: #5a5a5a !important;
+  border-color: $border_color !important;
 }
 // Background Class *************************************
 .light-stable-bg {
