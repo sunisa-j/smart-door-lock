@@ -122,62 +122,55 @@
             </div>
             <div class="list" style="margin-top: -7px">
                 <div class="item item-input month-item-input sub-item-input del-border-sub-item">
-                    <span class="flex align-items-center"><div style="display: none">{{(repeat.repeatBy=='each')? eachDisabled=false:eachDisabled=true}}</div>
+                    <span class="flex align-items-center">
                         <div class="custom-circle-radio-first-col">
-                            <input type="radio" ng-model="repeat.repeatBy" value="each" style="display: none">
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="repeat.repeatBy=='each'"
-                                    ng-class="{'fade-in':notSelectEach.value==false, 'opacity-0':notSelectEach.value==true,'fade-out':notSelectEach.value==true, 'opacity-1':notSelectEach.value==false}">
-                            </button>
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="repeat.repeatBy=='each'"
-                                    ng-click="repeat.repeatBy='each';notSelectEach.value=false;eachDisabled=false;notSelectOnThe.value=true;editEventRrule()"
-                                    ng-class="{'fade-in':notSelectEach.value==true, 'opacity-0':notSelectEach.value==false,'fade-out':notSelectEach.value==false, 'opacity-1':notSelectEach.value==true}">
-                            </button>
+                            <label class="checkbox checkbox-energized custom-radio">
+                                <input type="radio" ng-model="repeat.repeatBy" value="each" ng-click="editEventRrule()">
+                            </label>
                         </div>
                         <div class="custom-circle-text-first-col">Each</div>
                     </span>
                     <span class="sub-input-padding">
                         <div class="button-bar custom-event-button-bar">
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[0]}" ng-click="toggleMonthDaySelect(0);editEventRrule()" ng-disabled="eachDisabled">1</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[1]}" ng-click="toggleMonthDaySelect(1);editEventRrule()" ng-disabled="eachDisabled">2</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[2]}" ng-click="toggleMonthDaySelect(2);editEventRrule()" ng-disabled="eachDisabled">3</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[3]}" ng-click="toggleMonthDaySelect(3);editEventRrule()" ng-disabled="eachDisabled">4</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[4]}" ng-click="toggleMonthDaySelect(4);editEventRrule()" ng-disabled="eachDisabled">5</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[5]}" ng-click="toggleMonthDaySelect(5);editEventRrule()" ng-disabled="eachDisabled">6</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[6]}" ng-click="toggleMonthDaySelect(6);editEventRrule()" ng-disabled="eachDisabled">7</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[0]}" ng-click="toggleMonthDaySelect(0);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">1</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[1]}" ng-click="toggleMonthDaySelect(1);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">2</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[2]}" ng-click="toggleMonthDaySelect(2);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">3</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[3]}" ng-click="toggleMonthDaySelect(3);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">4</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[4]}" ng-click="toggleMonthDaySelect(4);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">5</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[5]}" ng-click="toggleMonthDaySelect(5);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">6</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[6]}" ng-click="toggleMonthDaySelect(6);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">7</button>
                         </div>
                         <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[7]}" ng-click="toggleMonthDaySelect(7);editEventRrule()" ng-disabled="eachDisabled">8</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[8]}" ng-click="toggleMonthDaySelect(8);editEventRrule()" ng-disabled="eachDisabled">9</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[9]}" ng-click="toggleMonthDaySelect(9);editEventRrule()" ng-disabled="eachDisabled">10</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[10]}" ng-click="toggleMonthDaySelect(10);editEventRrule()" ng-disabled="eachDisabled">11</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[11]}" ng-click="toggleMonthDaySelect(11);editEventRrule()" ng-disabled="eachDisabled">12</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[12]}" ng-click="toggleMonthDaySelect(12);editEventRrule()" ng-disabled="eachDisabled">13</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[13]}" ng-click="toggleMonthDaySelect(13);editEventRrule()" ng-disabled="eachDisabled">14</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[7]}" ng-click="toggleMonthDaySelect(7);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">8</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[8]}" ng-click="toggleMonthDaySelect(8);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">9</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[9]}" ng-click="toggleMonthDaySelect(9);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">10</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[10]}" ng-click="toggleMonthDaySelect(10);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">11</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[11]}" ng-click="toggleMonthDaySelect(11);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">12</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[12]}" ng-click="toggleMonthDaySelect(12);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">13</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[13]}" ng-click="toggleMonthDaySelect(13);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">14</button>
                         </div>
                         <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[14]}" ng-click="toggleMonthDaySelect(14);editEventRrule()" ng-disabled="eachDisabled">15</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[15]}" ng-click="toggleMonthDaySelect(15);editEventRrule()" ng-disabled="eachDisabled">16</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[16]}" ng-click="toggleMonthDaySelect(16);editEventRrule()" ng-disabled="eachDisabled">17</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[17]}" ng-click="toggleMonthDaySelect(17);editEventRrule()" ng-disabled="eachDisabled">18</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[18]}" ng-click="toggleMonthDaySelect(18);editEventRrule()" ng-disabled="eachDisabled">19</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[19]}" ng-click="toggleMonthDaySelect(19);editEventRrule()" ng-disabled="eachDisabled">20</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[20]}" ng-click="toggleMonthDaySelect(20);editEventRrule()" ng-disabled="eachDisabled">21</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[14]}" ng-click="toggleMonthDaySelect(14);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">15</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[15]}" ng-click="toggleMonthDaySelect(15);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">16</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[16]}" ng-click="toggleMonthDaySelect(16);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">17</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[17]}" ng-click="toggleMonthDaySelect(17);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">18</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[18]}" ng-click="toggleMonthDaySelect(18);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">19</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[19]}" ng-click="toggleMonthDaySelect(19);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">20</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[20]}" ng-click="toggleMonthDaySelect(20);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">21</button>
                         </div>
                         <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[21]}" ng-click="toggleMonthDaySelect(21);editEventRrule()" ng-disabled="eachDisabled">22</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[22]}" ng-click="toggleMonthDaySelect(22);editEventRrule()" ng-disabled="eachDisabled">23</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[23]}" ng-click="toggleMonthDaySelect(23);editEventRrule()" ng-disabled="eachDisabled">24</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[24]}" ng-click="toggleMonthDaySelect(24);editEventRrule()" ng-disabled="eachDisabled">25</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[25]}" ng-click="toggleMonthDaySelect(25);editEventRrule()" ng-disabled="eachDisabled">26</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[26]}" ng-click="toggleMonthDaySelect(26);editEventRrule()" ng-disabled="eachDisabled">27</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[27]}" ng-click="toggleMonthDaySelect(27);editEventRrule()" ng-disabled="eachDisabled">28</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[21]}" ng-click="toggleMonthDaySelect(21);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">22</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[22]}" ng-click="toggleMonthDaySelect(22);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">23</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[23]}" ng-click="toggleMonthDaySelect(23);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">24</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[24]}" ng-click="toggleMonthDaySelect(24);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">25</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[25]}" ng-click="toggleMonthDaySelect(25);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">26</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[26]}" ng-click="toggleMonthDaySelect(26);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">27</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[27]}" ng-click="toggleMonthDaySelect(27);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">28</button>
                         </div>
                         <div class="button-bar custom-event-button-bar" style="margin-top: -1px">
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[28]}" ng-click="toggleMonthDaySelect(28);editEventRrule()" ng-disabled="eachDisabled">29</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[29]}" ng-click="toggleMonthDaySelect(29);editEventRrule()" ng-disabled="eachDisabled">30</button>
-                            <button class="button" ng-class="{'energized-bg': eventMonthDay[30]}" ng-click="toggleMonthDaySelect(30);editEventRrule()" ng-disabled="eachDisabled" style="min-width: 31px">31</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[28]}" ng-click="toggleMonthDaySelect(28);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">29</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[29]}" ng-click="toggleMonthDaySelect(29);editEventRrule()" ng-disabled="repeat.repeatBy=='on'">30</button>
+                            <button class="button" ng-class="{'energized-bg': eventMonthDay[30]}" ng-click="toggleMonthDaySelect(30);editEventRrule()" ng-disabled="repeat.repeatBy=='on'" style="min-width: 31px">31</button>
                         </div>
                     </span>
                 </div>
@@ -185,27 +178,18 @@
             <div class="list" style="margin-top: -7px">
                 <div class="item item-input small-item-input sub-item-input del-border-sub-item">
 
-                    <div style="display: none">{{(repeat.repeatBy=='on')? onTheDisabled=false:onTheDisabled=true}}</div>
-
                     <span class="flex align-items-center">
                         <div class="custom-circle-radio-first-col">
-                            <input type="radio" ng-model="repeat.repeatBy" value="onThe" style="display: none">
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-filled custom-circle-radio-button"
-                                    ng-show="repeat.repeatBy=='on'"
-                                    ng-class="{'fade-in':notSelectOnThe.value==false, 'opacity-0':notSelectOnThe.value==true,'fade-out':notSelectOnThe.value==true, 'opacity-1':notSelectOnThe.value==false}">
-                            </button>
-                            <button class="button button-clear button-energized button-icon ion-ios-circle-outline custom-circle-radio-button"
-                                    ng-hide="repeat.repeatBy=='on'"
-                                    ng-click="repeat.repeatBy='on';notSelectOnThe.value=false;onTheDisabled=false;notSelectEach.value=true;editEventRrule()"
-                                    ng-class="{'fade-in':notSelectOnThe.value==true, 'opacity-0':notSelectOnThe.value==false,'fade-out':notSelectOnThe.value==false, 'opacity-1':notSelectOnThe.value==true}">
-                            </button>
+                            <label class="checkbox checkbox-energized custom-radio">
+                                <input type="radio" ng-model="repeat.repeatBy" value="on" ng-click="editEventRrule()">
+                            </label>
                         </div>
                         <div class="custom-circle-text-first-col">On the</div>
                     </span>
 
                     <span class="flex align-items-center sub-input-padding sub-input-text-with-unit">
                             <div style="width: 150px; padding-right: 10px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="onTheDisabled" ng-change="editEventRrule()">
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.sequent" ng-disabled="repeat.repeatBy=='each'" ng-change="editEventRrule()">
                                 <option value="first" ng-selected="repeat.onThe.sequent=='first'">first</option>
                                 <option value="second" ng-selected="repeat.onThe.sequent=='second'">second</option>
                                 <option value="third" ng-selected="repeat.onThe.sequent=='third'">third</option>
@@ -215,7 +199,7 @@
                             </select>
                         </div>
                         <div style="width: 180px">
-                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" ng-disabled="onTheDisabled" ng-change="editEventRrule()">
+                            <select class="custom-row-font-size" ng-model="repeat.onThe.day" ng-disabled="repeat.repeatBy=='each'" ng-change="editEventRrule()">
                                 <option value="day" ng-selected="repeat.onThe.day=='day'">day</option>
                                 <option value="weekday" ng-selected="repeat.onThe.day=='weekday'">weekday</option>
                                 <option value="weekend" ng-selected="repeat.onThe.day=='weekend'">weekend</option>
@@ -320,7 +304,7 @@
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <label class="checkbox checkbox-energized custom-radio">
-                                <input type="radio" ng-model="repeat.endRepeat" value="never">
+                                <input type="radio" ng-model="repeat.endRepeat" value="never" ng-click="editEventRrule()">
                             </label>
                         </div>
                         <div class="dark-font-color flex-1">Never</div>
@@ -334,7 +318,7 @@
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <label class="checkbox checkbox-energized custom-radio">
-                                <input type="radio" ng-model="repeat.endRepeat" value="after">
+                                <input type="radio" ng-model="repeat.endRepeat" value="after" ng-click="editEventRrule()">
                             </label>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
@@ -354,7 +338,7 @@
                     <span class="flex align-items-center sub-input-padding end-repeat-second-col">
                         <div class="custom-circle-radio-row">
                             <label class="checkbox checkbox-energized custom-radio">
-                                <input type="radio" ng-model="repeat.endRepeat" value="date">
+                                <input type="radio" ng-model="repeat.endRepeat" value="date" ng-click="editEventRrule()">
                             </label>
                         </div>
                         <div class="dark-font-color flex-1 flex align-items-center">
