@@ -257,6 +257,10 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
                 if(date.isSame($scope.dateSelected, 'd')){
                     selectDate(date, cell);
                 }
+            },
+            viewRender: function(view, element){
+
+                element.addTouch();
             }
         }
     };
