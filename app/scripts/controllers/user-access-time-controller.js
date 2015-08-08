@@ -253,6 +253,10 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                 if(date.isSame($scope.dateSelected, 'd')){
                     selectDate(date, cell);
                 }
+            },
+            viewRender: function(view, element){
+
+                element.addTouch();
             }
         }
     };
