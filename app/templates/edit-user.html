@@ -7,7 +7,7 @@
                 <span class="card-title">
                     <div class="profile-background-image" style="background: url(images/profile50x50.jpg) no-repeat"></div>
                 </span>
-                <span class="card-value" style="font-size: 16px">
+                <span class="card-value">
                     <div class="overflow-hidden-text">
                         <span>{{editUser.user.employeeNumber}}</span>
                         <span style="padding-left: 10px">{{editUser.user.firstName}} {{editUser.user.lastName}}</span>
@@ -110,8 +110,11 @@
             </div>
 
         </div>
-        <div class="item item-desc">
+        <div class="item item-desc" ng-hide="editUser.user.id==userId">
             Setting permission for this user to access {{doorName}} do you want.
+        </div>
+        <div class="item item-desc" ng-show="editUser.user.id==userId">
+            Your permission to manage {{doorName}}. You can read only. If you want to edit your permission, please contact other admin.
         </div>
 
         <!--Access Time-->
