@@ -112,9 +112,14 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             },
             dayRender: function (date, cell) {
+                //cell.addTouch();
+
                 if(date.isSame($scope.dateSelected, 'd')){
                     selectDate(date, cell);
                 }
+            },
+            viewRender: function(view, element){
+                element.addTouch();
             }
         }
     };
