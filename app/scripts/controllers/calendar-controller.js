@@ -119,6 +119,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             },
             viewRender: function(view, element){
+
                 element.addTouch();
             }
         }
@@ -213,7 +214,18 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // -------------------------------------------------------------------------
 
     $scope.toggleWeekDaySelect = function (weekDay){
-        $scope.eventWeekDay[weekDay] = !$scope.eventWeekDay[weekDay];
+
+        var trueKey = [];
+        angular.forEach($scope.eventWeekDay, function(value, key){
+            if(value == true){
+                trueKey.push(key);
+            }
+        });
+        if(trueKey.length == 1 && trueKey[0]==weekDay){
+            console.log('Select at least 1');
+        }else{
+            $scope.eventWeekDay[weekDay] = !$scope.eventWeekDay[weekDay];
+        }
     };
 
     $scope.toggleMonthDaySelect = function (monthDay){
@@ -2831,7 +2843,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     $scope.cancelEditEvent = function(){
         $scope.editEventData = storeOldEventData;
-        console.log('After Cancel. This Event Data: ', storeOldEventData);
+        console.log('After Cancel. This Event Data: ', $scope.editEventData);
 
         $scope.editEventModal.hide();
     };
