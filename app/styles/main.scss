@@ -153,8 +153,8 @@ input::-webkit-datetime-edit, #date-time-edit {
   padding: 10px 0 !important;
   background-color: $light;
 }
-input[disabled], input[type=number][disabled] {
-  color: #5a5a5a !important;
+input[disabled], select[disabled] {
+  color: $item_divider_font_color !important;
   border-color: $border_color !important;
 }
 // Background Class *************************************
@@ -322,6 +322,9 @@ ion-modal-view .item-input {
 }
 .item-input input {
   padding-right: 5px;
+}
+.item-input input[type=time] {
+  padding-right: 0px;
 }
 .item-divider.date-selected-item-divider{
   color: #333 !important;
