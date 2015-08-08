@@ -152,6 +152,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 if(date.isSame($scope.dateSelected, 'd')){
                     selectDate(date, cell);
                 }
+            },
+            viewRender: function(view, element){
+
+                element.addTouch();
             }
         }
     };
