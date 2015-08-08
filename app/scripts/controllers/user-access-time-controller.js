@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents, uiCalendarConfig) {
+window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicPopup, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents, uiCalendarConfig) {
 
     var doorUserId = $stateParams.doorUserId;
     var doorUser = doorsUsers('', 'object')[doorUserId];
@@ -13,7 +13,42 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
 
     // when click delete calendar
     $scope.deleteCalendar = function (id) {
-        console.log('delete ' + id);
+        var myPopup = $ionicPopup.confirm({
+            title: 'Confirm',
+            template: 'Do you want to remove this calendar ?',
+            buttons: [
+                {
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-close-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Cancel</span>' +
+                    '</div>',
+                    type: 'button-outline button-stable',
+                    onTap: function() {
+                        return false;
+                    }
+                },{
+                    text: '<div class="flex align-items-center">' +
+                    '<span class="flex-basis-30">' +
+                    '<i class="button-icon-size ion-ios-minus-outline"></i>' +
+                    '</span>' +
+                    '<span class="flex-1">Delete</span>' +
+                    '</div>',
+                    type: 'button-outline button-assertive',
+                    onTap: function() {
+                        return true;
+                    }
+                }
+            ]
+        });
+        myPopup.then(function(res) {
+            if(res) {
+                console.log('delete ' + id);
+            } else {
+                console.log('cancel');
+            }
+        });
     };
 
     // add calendars modal
