@@ -101,7 +101,6 @@ select.custom-row-font-size {
   right: 40px !important;
 }
 textarea, input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
-//  padding: 12px 5px 10px 15px;
   color: $base-color;
   background-color: $light;
   border: 0;
@@ -150,12 +149,14 @@ input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
 }
 input::-webkit-datetime-edit, #date-time-edit {
   font-size: $font-size-base;
-  padding: 10px 0 !important;
+  padding: 0 !important;
   background-color: $light;
 }
-input[disabled], select[disabled] {
-  color: $item_divider_font_color !important;
-  border-color: $border_color !important;
+input:disabled, textarea:disabled, select:disabled {
+  opacity: 0.4;
+}
+input[type=radio]:disabled {
+  opacity: 0.6 !important;
 }
 // Background Class *************************************
 .light-stable-bg {
@@ -349,6 +350,21 @@ ion-modal-view .item-input {
 }
 .small-item-input-datetime {
   margin-left: 15px !important;
+}
+.clear-border-left {
+  border-left: 0 !important;
+}
+.small-input-time {
+  margin-left: -2px !important;
+  padding-left: 0 !important;
+}
+.small-text-to {
+  @extend .flex, .justify-content-center;
+  color: $item_divider_font_color !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+  width: 30px;
+  border-left: 0 !important;
 }
 .month-item-input {
   @extend .align-items-flex-start;
@@ -939,13 +955,12 @@ ion-modal-view .item-input {
    -webkit-flex-basis: 80px;
    -moz-flex-basis: 80px;
    -ms-flex-basis: 80px;
-   font-size: $medium_font_size;
    color: $dark;
    text-align: left;
  }
 .card-value {
   @extend .flex-1;
-  font-size: $medium_font_size;
+  line-height: 32px;
 }
 .card-expiry-date-position {
   position: absolute;
