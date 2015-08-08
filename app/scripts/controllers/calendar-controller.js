@@ -1183,7 +1183,9 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         if($scope.repeat.status == true){
             $scope.createEventData.rRule = {
                 frequency: 'DAILY',
-                interval: 1
+                interval: 1,
+                until: createEventStartDate,
+                count: 1
             };
 
         }else if($scope.repeat.status == false){
