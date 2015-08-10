@@ -27,6 +27,10 @@ $tabs-icon-size: 28px;
 $input-height-base: 42px;
 $item-padding: 15px;
 $sheet-options-text-color: #333;
+$modal-inset-mode-top:    10%;
+$modal-inset-mode-right:  10%;
+$modal-inset-mode-bottom: 10%;
+$modal-inset-mode-left:   10%;
 
 // ******************************************************
 @import "../bower_components/ionic/scss/ionic";
@@ -110,7 +114,20 @@ textarea, input[type="text"], input[type="password"], input[type="number"], inpu
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -o-appearance: none;
   margin-left: 15px;
+}
+input[type="checkbox"] {
+  -moz-appearance: none;
+  -moz-appearance: checkbox;
+  -webkit-appearance: none;
+  -o-appearance: none;
+}
+input[type="radio"] {
+  -moz-appearance: none;
+  -moz-appearance: radio;
+  -webkit-appearance: none;
+  -o-appearance: none;
 }
 input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"] {
   color: $base-color;
@@ -122,14 +139,15 @@ input[type="datetime"], input[type="datetime-local"], input[type="date"], input[
   border-radius: 0;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -o-appearance: none;
 }
 .small-item-input textarea, input[type="text"], input[type="password"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"] {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
 }
 .small-item-input textarea, input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"] {
-  padding-top: 7px !important;
-  padding-bottom: 7px !important;
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
 }
 select {
   @extend .pointer;
@@ -141,6 +159,7 @@ select {
   font-size: $font-size-base;
   -webkit-appearance: none;
   -moz-appearance: none;
+  -o-appearance: none;
 }
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
   padding: 6px 0px;
@@ -236,7 +255,7 @@ input[type=radio]:disabled {
 }
 .action-sheet .button > i {
   font-size: 28px;
-  padding-right: 15px;
+  padding: 0 15px;
 }
 .action-sheet-cancel .button {
   background-color: #FAFAFA;
@@ -278,21 +297,26 @@ input[type=radio]:disabled {
   box-shadow: none;
 }
 .custom-button-right-text {
+  @extend .flex, .align-items-center, .justify-content-flex-end;
   margin-right: -10px;
   margin-top: 0px;
   white-space: normal !important;
 }
 .custom-button-right-text .text-before-arrow-right-small {
+  @extend .flex-1;
   font-size: $font-size-base;
   min-width: 70px;
-  padding: 0 10px;
+  padding: 0px 2px 2px 10px;
+  text-align: right;
 }
 .custom-button-right-text .text-before-arrow-right {
+  @extend .flex-1;
   font-size: $font-size-base;
   min-width: 100px;
-  padding: 0 10px;
+  padding: 0px 2px 0px 10px;
 }
 .custom-button-right-text i {
+  width: 20px;
   color: $bar-dark-border;
   font-size: $font-size-base;
 }
@@ -368,7 +392,7 @@ ion-modal-view .item-input {
 }
 .month-item-input {
   @extend .align-items-flex-start;
-  height: 168px !important;
+  height: 162px !important;
 }
 .month-item-input > span {
   margin-left: 0px;
@@ -450,7 +474,19 @@ ion-modal-view .item-input {
   width: 20px;
 }
 .item-button-right {
+  @extend .flex, .align-items-center;
   height: $custom_setting_row_height;
+  line-height: 14px;
+}
+.item-button-right .item-title {
+  @extend .flex-1;
+  color: $dark_font_color;
+  padding-left: 13px;
+}
+.item-button-right .item-button {
+  min-width: 100px;
+  padding: 0 12px 0 10px;
+  color: $dark_font_color;
 }
 .edit-button-item-divider {
   border: 0;
@@ -564,6 +600,7 @@ ion-modal-view .item-input {
 .footer-tab-icon {
   @extend .flex-1;
   height: 22px;
+  max-height: 22px;
 }
 .footer-tab-active {
   color: $energized;
@@ -810,6 +847,7 @@ ion-modal-view .item-input {
   text-align: left;
   padding: 0 5px;
   font-size: $custom_row_font_size;
+  min-width: 120px;
 }
 .custom-time-row-title {
   @extend .flex-1, .align-content-flex-start;
@@ -849,10 +887,7 @@ ion-modal-view .item-input {
   font-size: $font-size-base;
 }
 .custom-setting-row-arrow {
-  flex-basis: 6px;
-  -webkit-flex-basis: 6px;
-  -moz-flex-basis: 6px;
-  padding-right: 18px;
+  padding-right: 10px;
   color: $bar-dark-border;
   font-size: $font-size-base;
 }
@@ -1320,6 +1355,7 @@ ion-modal-view .item-input {
 }
 .sub-input-text-with-unit {
   width: 210px !important;
+  margin-top: 5px;
 }
 .sub-item-date-input {
   margin-left: -7px;
@@ -1358,6 +1394,8 @@ ion-modal-view .item-input {
   border: solid 1px $border_color;
   width: 100% !important;
   margin-left: 15px;
+  height: 30px;
+  line-height: 30px;
 }
 .sub-input-padding .button-bar .button {
   border-radius: 0 !important;
@@ -1370,18 +1408,19 @@ ion-modal-view .item-input {
   -webkit-flex-basis: 40px;
   -moz-flex-basis: 40px;
   width: 40px;
-  position: relative
+  min-width: 40px;
+  position: relative;
 }
 .custom-circle-radio-first-col {
   flex-basis: 30px;
   -webkit-flex-basis: 30px;
   -moz-flex-basis: 30px;
   width: 30px;
-  position: relative
+  position: relative;
 }
 .custom-circle-text-first-col {
   @extend .flex-1;
-  margin-left: 12px;
+  margin-left: 8px;
   font-size: 15px;
 }
 .custom-circle-radio-button {
@@ -1435,6 +1474,10 @@ ion-modal-view .item-input {
   display: flex;
   align-items: center;
   justify-content: center;
+  -moz-border-bottom-colors: transparent !important;
+  -moz-border-top-colors: transparent !important;
+  -moz-border-left-colors: transparent !important;
+  -moz-border-right-colors: transparent !important;
 }
 .custom-radio input {
   border: 0px !important;
@@ -1447,6 +1490,23 @@ ion-modal-view .item-input {
 }
 .custom-radio input:after {
   opacity: 0 !important;
+}
+/* use ionicons replace full calendar icons */
+.fc-prev-button {
+  @extend .ion-ios-arrow-left;
+  padding: 0 15px !important;
+  font-size: 23px !important;
+}
+.fc-icon-left-single-arrow {
+  visibility: hidden !important;
+}
+.fc-next-button {
+  @extend .ion-ios-arrow-right;
+  padding: 0 15px !important;
+  font-size: 23px !important;
+}
+.fc-icon-right-single-arrow {
+  visibility: hidden !important;
 }
 //.fc-toolbar {
 //  @extend .flex, .align-items-center;
