@@ -97,20 +97,20 @@
     border-right-width: 0px !important;
     height: 30px !important;
 }
-.fc-icon-left-single-arrow{
-    width: 0 !important;
-    height: 0 !important;
-    border-top: 9px solid transparent !important;
-    border-bottom: 9px solid transparent !important;
-    border-right: 10px solid #A7A7A7 !important;
-}
-.fc-icon-right-single-arrow {
-    width: 0 !important;
-    height: 0 !important;
-    border-top: 9px solid transparent !important;
-    border-bottom: 9px solid transparent !important;
-    border-left: 10px solid #A7A7A7 !important;
-}
+/*.fc-icon-left-single-arrow{*/
+    /*width: 0 !important;*/
+    /*height: 0 !important;*/
+    /*border-top: 9px solid transparent !important;*/
+    /*border-bottom: 9px solid transparent !important;*/
+    /*border-right: 10px solid #A7A7A7 !important;*/
+/*}*/
+/*.fc-icon-right-single-arrow {*/
+    /*width: 0 !important;*/
+    /*height: 0 !important;*/
+    /*border-top: 9px solid transparent !important;*/
+    /*border-bottom: 9px solid transparent !important;*/
+    /*border-left: 10px solid #A7A7A7 !important;*/
+/*}*/
 .fc-ltr .fc-basic-view .fc-day-number {
     padding-right: 5px !important;
     position: relative !important;
