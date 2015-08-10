@@ -168,11 +168,16 @@
     <ion-content ng-show="doorMenu.name=='manageAccess'" class="custom-ion-content-bg">
         <div class="list pointer" ui-sref="mainMenu.doors.doorInfo.userManagement({doorId: doorId})">
             <div class="item item-button-right">
-                User Management
-                <button class="button button-clear custom-button-right-text">
-                    <span class="text-before-arrow-right">{{doorUsers.length}} {{(doorUsers.length > 1 )? 'members':'member' }}</span>
+                <div class="item-title">User Management</div>
+                <div class="item-button">
+                    <button class="button button-clear custom-button-right-text">
+                        <span class="text-before-arrow-right" ng-show="doorUsers.length > 0">{{doorUsers.length}} {{(doorUsers.length > 1 )? 'members':'member' }}</span>
+                        <span class="text-before-arrow-right" ng-show="doorUsers.length == 0">No Members</span>
+                    </button>
+                </div>
+                <div class="custom-setting-row-arrow">
                     <i class="ion-ios-arrow-right"></i>
-                </button>
+                </div>
             </div>
         </div>
         <div class="item item-desc">
@@ -181,11 +186,16 @@
 
         <div class="list pointer" ui-sref="mainMenu.doors.doorInfo.passcodeUnlock">
             <div class="item item-button-right">
-                Passcode Unlock
-                <button class="button button-clear custom-button-right-text">
-                    <span class="text-before-arrow-right">{{passcodeDoorArray.length}} {{(passcodeDoorArray.length > 1 )? 'passcodes':'passcode' }}</span>
+                <div class="item-title">Passcode Unlock</div>
+                <div class="item-button">
+                    <button class="button button-clear custom-button-right-text">
+                        <span class="text-before-arrow-right" ng-show="passcodeDoorArray.length > 0">{{passcodeDoorArray.length}} {{(passcodeDoorArray.length > 1 )? 'passcodes':'passcode' }}</span>
+                        <span class="text-before-arrow-right" ng-show="passcodeDoorArray.length == 0">No Passcodes</span>
+                    </button>
+                </div>
+                <div class="custom-setting-row-arrow">
                     <i class="ion-ios-arrow-right"></i>
-                </button>
+                </div>
             </div>
         </div>
         <div class="item item-desc">
