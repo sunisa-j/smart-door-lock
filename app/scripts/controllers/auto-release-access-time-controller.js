@@ -6,8 +6,6 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
     $scope.acccessPolicyType = { value:''};
     var userId = 1; // Login User Id
     $scope.userCalendars = usersCalendars(userId, doorId,'autoReleasePolicies', '', '', '', 'array'); // Selected calendars this user can access
-    var RRule = RRule;
-    var moment = moment;
 
     //Get access time of title informaiton
     $scope.autoReleasePoliciesData = autoReleasePolicies(doorId, 'array');
@@ -1106,7 +1104,6 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
                 }
             }
             else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'MONTHLY') {
-                var byMonthDay = [];
                 var byMonthDay = setByMonthDay();
 
                 $scope.editDataRrule = new RRule({
@@ -1156,7 +1153,6 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
                 }
             }
             else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'YEARLY') {
-                var byMonth = [];
                 var byMonth = setByMonth();
 
                 $scope.editDataRrule = new RRule({
@@ -1400,7 +1396,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
     }
 
     function selectToday(element) {
-        uiCalendarConfig.calendars['calendarsEventsSelected'].fullCalendar('today');
+        uiCalendarConfig.calendars.calendarsEventsSelected.fullCalendar('today');
         selectDate(moment(), element);
     }
 
@@ -1430,7 +1426,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
 
                 element.addTouch();
             },
-            eventClick: function(event, element) {
+            eventClick: function(event) {
                 $scope.openViewEvent(event);
             }
         }
