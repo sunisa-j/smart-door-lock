@@ -210,6 +210,9 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             day: 'day' // 'day', 'weekday', 'weekend', 'monday', ..., 'sunday'
         }
     };
+
+
+
     // -------------------------------------------------------------------------
     // Calculate function send to RRule set summary ----------------------------
     // -------------------------------------------------------------------------
@@ -392,7 +395,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         }
     };
 
-    // Set on the to rRule for Edit event modal
+    // Set on the to rRule for Edit event modal --------------------------------
     var setEditOntheRrule = function(){
         if($scope.repeat.onThe.day === 'day'){
             if ($scope.repeat.endRepeat === 'date') {
@@ -706,7 +709,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         if($scope.repeat.onThe.day === 'day'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -716,7 +719,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -726,7 +729,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent),
@@ -737,7 +740,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'weekday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -748,7 +751,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -759,7 +762,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR],
@@ -771,7 +774,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'weekend'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -782,7 +785,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -793,7 +796,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SA, RRule.SU],
@@ -805,7 +808,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'monday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -816,7 +819,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -827,7 +830,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.MO],
@@ -839,7 +842,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'tuesday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -850,7 +853,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -861,7 +864,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.TU],
@@ -873,7 +876,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'wednesday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -884,7 +887,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -895,7 +898,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.WE],
@@ -907,7 +910,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'thursday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -918,7 +921,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -929,7 +932,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.TH],
@@ -941,7 +944,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'friday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -952,7 +955,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -963,7 +966,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.FR],
@@ -975,7 +978,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'saturday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -986,7 +989,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -997,7 +1000,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SA],
@@ -1009,7 +1012,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         else if($scope.repeat.onThe.day === 'sunday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1020,7 +1023,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1031,7 +1034,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
@@ -1042,7 +1045,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
         }
     };
 
-    // Calculate Repeat Summary (by RRule Module) for View Event Modal ---------
+    // Calculate Repeat Summary (by RRule Module) for Edit Event Modal ---------
     $scope.editEventRrule = function() {
 
         if($scope.repeat.status === true) {
@@ -1194,7 +1197,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
                 }
             }
 
-            console.log('rRule Data: ', $scope.editDataRrule);
+            //console.log('rRule Data: ', $scope.editDataRrule);
         }
     };
 
@@ -1210,9 +1213,11 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
 
     });
 
-    // Transform event data to show in view event modal ------------------------
-    $scope.openViewEvent = function(event){
+    // Set $scope.editEventData to show in edit & view modal -------------------
+    var setEventDataSelected = function(event){
         $scope.editEventData = angular.copy(event);
+        $scope.repeat.repeatBy = '';
+        $scope.repeat.onThe.checked = false;
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
@@ -1274,6 +1279,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
+                $scope.repeat.onThe.checked = true;
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
                 setOnSequent();
 
@@ -1289,6 +1295,7 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
             }
         }
         else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'WEEKLY') {
+            $scope.repeat.repeatBy = '';
             angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
                 if(weekday === 'MO') { $scope.eventWeekDay[weekday] = true; }
                 else if(weekday === 'TU') { $scope.eventWeekDay[weekday] = true; }
@@ -1298,14 +1305,24 @@ window.app.controller('AutoReleaseAccessTimeController', function ($scope, $stat
                 else if(weekday === 'SA') { $scope.eventWeekDay[weekday] = true; }
                 else if(weekday === 'SU') { $scope.eventWeekDay[weekday] = true; }
             });
+        }else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'DAILY'){
+            $scope.repeat.repeatBy = '';
         }
 
         if ($scope.editEventData.rRule){
             $scope.editEventRrule();
         }
 
+    };
+
+    // Transform event data to show in view event modal ------------------------
+    $scope.openViewEvent = function(event){
+
+        setEventDataSelected(event);
+
         $scope.viewEventModal.show();
     };
+
 
 
     // -------------------------------------------------------------------------

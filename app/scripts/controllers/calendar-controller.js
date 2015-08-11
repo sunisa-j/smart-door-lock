@@ -1480,7 +1480,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     var storeOldEventData = {}; // when user cancel edit or close modal return value before
 
-    // Set on the to rRule for Edit event modal
+    // Set on the to rRule for Edit event modal --------------------------------
     var setEditOntheRrule = function(){
         if($scope.repeat.onThe.day === 'day'){
             if ($scope.repeat.endRepeat === 'date') {
