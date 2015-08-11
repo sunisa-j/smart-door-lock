@@ -2,14 +2,13 @@
 
 window.app.controller('UserManagementController', function ($scope, $stateParams, doorsAccess, doorsUsers, users, $state, $ionicPopup) {
 
-    var doorId = $stateParams.doorId;
-    $scope.doorName = (doorsAccess(userId,'doors'))[doorId].name;
-    //$scope.doorUsers = doorsUsers(doorId, 'array');
-    var usersData = users('array');
-
     // Login user id
     var userId = 1;
     $scope.userId = userId;
+
+    var doorId = $stateParams.doorId;
+    $scope.doorName = (doorsAccess(userId,'doors'))[doorId].name;
+    var usersData = users('array');
 
     // Get Members
     $scope.doorUsers = doorsUsers(doorId, 'array');
@@ -18,7 +17,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
     $scope.loginUser = { permission: {} };
 
     angular.forEach($scope.doorUsers, function(value){
-        if(value.user.id == userId) {
+        if(value.user.id === userId) {
             $scope.loginUser.permission = value.permission;
         }
     });
@@ -28,7 +27,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
         $scope.usersRes = [];
         $scope.load = true;
 
-        if(req != '') {
+        if(req !== '') {
             // finding req user
             angular.forEach(usersData, function(user){
                 var employeeNumber = user.employeeNumber;
@@ -36,15 +35,15 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                 var res = employeeNumber.match(req);
                 var res2 = name.match(req);
 
-                if(res == req){
+                if(res === req){
                     $scope.usersRes.push(user);
                 }
-                else if(res2 == req){
+                else if(res2 === req){
                     $scope.usersRes.push(user);
                 }
             });
 
-            if($scope.usersRes.length == 0) {
+            if($scope.usersRes.length === 0) {
                 console.log('no user match');
             }
             else {
@@ -54,7 +53,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     $scope.usersRes[index].addedStatus = false;
 
                     angular.forEach($scope.doorUsers, function(doorUser){
-                        if(doorUser.user.employeeNumber == userRes.employeeNumber) {
+                        if(doorUser.user.employeeNumber === userRes.employeeNumber) {
                             $scope.usersRes[index].addedStatus = true;
                         }
                     });
@@ -84,8 +83,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -96,8 +94,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     '<span class="flex-1">Confirm</span>' +
                     '</div>',
                     type: 'button-outline button-balanced',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
@@ -132,8 +129,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -144,8 +140,7 @@ window.app.controller('UserManagementController', function ($scope, $stateParams
                     '<span class="flex-1">Delete</span>' +
                     '</div>',
                     type: 'button-outline button-assertive',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
