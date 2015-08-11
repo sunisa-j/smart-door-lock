@@ -10,6 +10,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     var userId = 1;
     $scope.userId = 1;
 
+
+
     // -------------------------------------------------------------------------
     // About calendar management -----------------------------------------------
     // -------------------------------------------------------------------------
@@ -85,6 +87,14 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         selectDate(moment(), element);
     }
 
+    $scope.showEventForReadOrEdit = function(event){
+        if($scope.calendarAccessRole === 'owner' || $scope.calendarAccessRole === 'writer'){
+            $scope.openEditEvent(event);
+        }else{
+            $scope.openViewEvent(event);
+        }
+    };
+
     $scope.uiConfig = {
         calendar:{
             header:{
@@ -97,20 +107,14 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 var date = moment(event.start._d);
                 var eventTime = date.format('HH:mm');
 
-                angular.element(element).children().html('<span class="fc-time">' + eventTime + '</span> <span class="fc-title">' + event.title + '</span>');
+                element.children().html('<span class="fc-time">' + eventTime + '</span> <span class="fc-title">' + event.title + '</span>');
             },
             dayClick: function(date, jsEvent) {
                 selectDate(date, jsEvent.target);
             },
             eventClick: function(event) {
 
-                // When select event -------------------------------------------
-                if($scope.calendarAccessRole !== 'reader'){
-                    $scope.openEditEvent(event);
-                }else{
-                    console.log('read only');
-                    $scope.openViewEvent(event);
-                }
+                $scope.showEventForReadOrEdit(event);
             },
             dayRender: function (date, cell) {
                 //cell.addTouch();
@@ -170,6 +174,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
         });
     };
+
+
 
     // -------------------------------------------------------------------------
     // Week Month Year & about Repeat value Default ----------------------------
@@ -1788,7 +1794,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         if($scope.repeat.onThe.day === 'day'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1798,7 +1804,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1808,7 +1814,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent),
@@ -1819,7 +1825,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'weekday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1830,7 +1836,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1841,7 +1847,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR],
@@ -1853,7 +1859,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'weekend'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1864,7 +1870,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1875,7 +1881,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SA, RRule.SU],
@@ -1887,7 +1893,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'monday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1898,7 +1904,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1909,7 +1915,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.MO],
@@ -1921,7 +1927,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'tuesday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1932,7 +1938,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1943,7 +1949,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.TU],
@@ -1955,7 +1961,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'wednesday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -1966,7 +1972,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -1977,7 +1983,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.WE],
@@ -1989,7 +1995,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'thursday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -2000,7 +2006,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -2011,7 +2017,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.TH],
@@ -2023,7 +2029,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'friday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -2034,7 +2040,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -2045,7 +2051,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.FR],
@@ -2057,7 +2063,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'saturday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -2068,7 +2074,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -2079,7 +2085,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SA],
@@ -2091,7 +2097,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else if($scope.repeat.onThe.day === 'sunday'){
             if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
@@ -2102,7 +2108,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
@@ -2113,7 +2119,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
-                    freq: RRule.MONTHLY,
+                    freq: RRule.YEARLY,
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
@@ -2384,8 +2390,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
 
-    // Transform event data to show in edit event modal ------------------------
-    $scope.openEditEvent = function(event){
+    // Set $scope.editEventData to show in edit & view modal -------------------
+    var setEventDataSelected = function(event){
         $scope.editEventData = angular.copy(event);
         $scope.repeat.repeatBy = '';
         $scope.repeat.onThe.checked = false;
@@ -2487,6 +2493,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         storeOldEventData = angular.copy($scope.editEventData);
         storeOldEventData.repeatBy = angular.copy($scope.repeat.repeatBy);
         //console.log('When Open. Event Data: ', storeOldEventData);
+    };
+
+    // Transform event data to show in edit event modal ------------------------
+    $scope.openEditEvent = function(event){
+
+        setEventDataSelected(event);
 
         $scope.editEventModal.show();
     };
@@ -2870,111 +2882,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // Transform event data to show in view event modal ------------------------
     $scope.openViewEvent = function(event){
-        $scope.editEventData = angular.copy(event);
 
-        if(!$scope.editEventData.rRule){
-            $scope.repeat.status = false;
-        }
-
-        // Set startDate & endDate to date -------------------------------------
-        $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
-        $scope.editEventData.endDate = new Date($scope.editEventData.endDate);
-
-        // Set on/off repeat ---------------------------------------------------
-        if($scope.editEventData.rRule) {
-            $scope.repeat.status = true;
-        }
-
-        // Set end repeat value (never, after, on date) ------------------------
-        if($scope.editEventData.rRule && !$scope.editEventData.rRule.until) {
-            $scope.repeat.endRepeat = 'never';
-        }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.until && !$scope.editEventData.rRule.count) {
-            $scope.repeat.endRepeat = 'date';
-            $scope.editEventData.rRule.until = new Date($scope.editEventData.rRule.until);
-        }
-        else if ($scope.editEventData.rRule && $scope.editEventData.rRule.until && $scope.editEventData.rRule.count){
-            $scope.repeat.endRepeat = 'after';
-        }
-
-        // Set value 'each' or 'on' ---------------------------------------------
-        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'MONTHLY'){
-            if($scope.editEventData.rRule.bySetPos){
-                $scope.repeat.repeatBy = 'on';
-                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
-                setOnSequent();
-
-                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
-                if($scope.editEventData.rRule.byMonthDay){
-                    $scope.repeat.onThe.day = 'day';
-                }
-                else if($scope.editEventData.rRule.byWeekDay){
-                    setOnDay();
-                }
-            } else {
-                $scope.repeat.repeatBy = 'each';
-                if($scope.editEventData.rRule.byMonthDay){
-                    angular.forEach($scope.editEventData.rRule.byMonthDay, function(value){
-                        var monthDay = parseInt(value);
-                        if(monthDay > 0){
-                            $scope.eventMonthDay[monthDay-1] = true;
-                        }
-                    });
-                }
-            }
-        }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'YEARLY'){
-            if($scope.editEventData.rRule.byMonth){
-                angular.forEach($scope.editEventData.rRule.byMonth, function(value){
-                    var month = parseInt(value);
-                    if(month > 0){
-                        $scope.eventMonth[month-1] = true;
-                    }
-                });
-            }
-            if($scope.editEventData.rRule.bySetPos){
-                $scope.repeat.repeatBy = 'on';
-                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
-                setOnSequent();
-
-                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
-                if($scope.editEventData.rRule.byMonthDay){
-                    $scope.repeat.onThe.day = 'day';
-                    $scope.repeat.checked = true;
-                }
-                else if($scope.editEventData.rRule.byWeekDay){
-                    $scope.repeat.checked = true;
-                    setOnDay();
-                }
-            }
-        }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'WEEKLY') {
-            angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
-                if(weekday === 'MO') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'TU') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'WE') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'TH') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'FR') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'SA') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday === 'SU') { $scope.eventWeekDay[weekday] = true; }
-            });
-        }
-
-        if ($scope.editEventData.rRule){
-            $scope.editEventRrule();
-        }
+        setEventDataSelected(event);
 
         $scope.viewEventModal.show();
-    };
-
-
-
-    $scope.showEventForReadOrEdit = function(event){
-        if($scope.calendarAccessRole === 'owner'){
-            $scope.openEditEvent(event);
-        }else{
-            $scope.openViewEvent(event);
-        }
     };
 
 
