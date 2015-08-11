@@ -20,7 +20,7 @@ window.app.controller('NotificationsController', function ($scope, $stateParams,
         var daysReturn = '';
         if(days > 1) {
             daysReturn = days + ' days ';
-        }else if (days == 1) {
+        }else if (days === 1) {
             daysReturn = days + ' day ';
         }
 
@@ -30,7 +30,7 @@ window.app.controller('NotificationsController', function ($scope, $stateParams,
         var calcHours = hours-daysToHours;
         if(calcHours > 1) {
             hoursReturn = calcHours + ' hours ';
-        }else if (calcHours == 1) {
+        }else if (calcHours === 1) {
             hoursReturn = calcHours + ' hour ';
         }
 
@@ -40,14 +40,14 @@ window.app.controller('NotificationsController', function ($scope, $stateParams,
         var calcMinutes = minutes-hoursToMinutes;
         if(calcMinutes > 1) {
             minutesReturn = calcMinutes + ' minutes ';
-        }else if (calcHours == 1) {
+        }else if (calcHours === 1) {
             minutesReturn = calcMinutes + ' minute ';
         }
 
         var pastMsg = 'ago';
         var valueReturn = daysReturn + hoursReturn + minutesReturn + pastMsg;
 
-        if((days == 0 && calcHours == 0 && calcMinutes == 0) || (days == 0 && calcHours == 0 && calcMinutes == 1)) {
+        if((days === 0 && calcHours === 0 && calcMinutes === 0) || (days === 0 && calcHours === 0 && calcMinutes === 1)) {
             valueReturn = 'Just now';
         }
 
