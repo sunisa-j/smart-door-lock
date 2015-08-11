@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers, _, accessLogs, activityLogs, uiCalendarConfig) {
+window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stateParams, doorsAccess, passcodeUnlock, $timeout, $ionicModal, calendarEvents, doorsUsers, RRule, moment, _, accessLogs, activityLogs, uiCalendarConfig) {
 
     var groupId = $stateParams.groupId;
     var doorId = $stateParams.doorId;
@@ -36,7 +36,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
         eventsData.value = [];
 
-        if($scope.showEventsDataName.value == 'myAccessTime'){
+        if($scope.showEventsDataName.value === 'myAccessTime'){
             eventsData.value = calendarEvents(userId, doorId, '','doorUserEvents');
         }
     };
@@ -1239,10 +1239,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         else {
             var parent = current.parents('.fc-week');
             if(parent.context) {
-                day = parent.find("td.fc-day-number[data-date=" + dataDate + "]");
+                day = parent.find('td.fc-day-number[data-date=' + dataDate + ']');
             }
             else {
-                day = angular.element("td.fc-day-number[data-date=" + dataDate + "]");
+                day = angular.element('td.fc-day-number[data-date=' + dataDate + ']');
             }
         }
 
@@ -1270,10 +1270,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 $scope.selectedDateEvents.push(event);
             }
         });
-    };
+    }
 
     function selectToday(element) {
-        uiCalendarConfig.calendars['calendarsEventsSelected'].fullCalendar('today');
+        uiCalendarConfig.calendars.calendarsEventsSelected.fullCalendar('today');
         selectDate(moment(), element);
     }
 
@@ -1303,7 +1303,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
                 element.addTouch();
             },
-            eventClick: function(event, element) {
+            eventClick: function(event) {
                 $scope.openViewEvent(event);
             }
         }
@@ -1325,18 +1325,18 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
 
         $scope.statusLoad.value = true;
 
-        if(latestLockStatus == 'locked') {
+        if(latestLockStatus === 'locked') {
             $scope.doorData.status.lockState = 'unlocked';
             $timeout(function () {
-                if ($scope.doorData.status.lockState == 'unlocked') {
+                if ($scope.doorData.status.lockState === 'unlocked') {
                     $scope.statusLoad.value = false;
                 }
             }, 1500);
         }
-        else if(latestLockStatus == 'unlocked') {
+        else if(latestLockStatus === 'unlocked') {
             $scope.doorData.status.lockState = 'locked';
             $timeout(function () {
-                if ($scope.doorData.status.lockState == 'locked') {
+                if ($scope.doorData.status.lockState === 'locked') {
                     $scope.statusLoad.value = false;
                 }
             }, 1500);
@@ -1373,7 +1373,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     });
 
     // Get latest 3 events
-    if(calcMyAccessTime.length != 0){
+    if(calcMyAccessTime.length !== 0){
         angular.forEach(calcMyAccessTime, function(value, key){
             if(runForEach) {
                 var tmp = angular.copy(value);
@@ -1381,7 +1381,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                 myAccessTime3Latest.push(tmp);
 
 
-                if(myAccessTime3Latest.length == 3){
+                if(myAccessTime3Latest.length === 3){
                     runForEach = false;
                 }
             }
@@ -1389,7 +1389,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     }
 
     // Sort by startDate (ASC)
-    if(myAccessTime3Latest.length != 0) {
+    if(myAccessTime3Latest.length !== 0) {
 
         $scope.myAccessTime = _.sortBy(myAccessTime3Latest, function (events) {
             return (new Date(events[0].startDate)).getTime();
@@ -1443,7 +1443,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         $scope.doorData.setting.pinRequired = !(valueBeforeChanged);
 
         $timeout( function(){
-            if($scope.doorData.setting.pinRequired == !(valueBeforeChanged)) {
+            if($scope.doorData.setting.pinRequired === !(valueBeforeChanged)) {
                 $scope.pinRequired.load = false;
             }
         }, 1500);
@@ -1452,10 +1452,10 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
         $scope.autoRelock.load = true;
         var valueBeforeChanged = !$scope.doorData.setting.autoRelock;
         // if autoRelock status changed;
-        $scope.doorData.setting.autoRelock = !(valueBeforeChanged);
+        $scope.doorData.setting.autoRelock = (!valueBeforeChanged);
 
         $timeout( function(){
-            if($scope.doorData.setting.autoRelock == !(valueBeforeChanged)) {
+            if($scope.doorData.setting.autoRelock === (!valueBeforeChanged)) {
                 $scope.autoRelock.load = false;
             }
         }, 1500);
@@ -1490,18 +1490,18 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
     $scope.changeStatusPasscode = function(passcodeId, latestStatus){
         $scope.passcodeUnlockObj[passcodeId].load = true;
 
-        if(latestStatus == 'Enabled') {
+        if(latestStatus === 'Enabled') {
             $scope.passcodeUnlockObj[passcodeId].status = 'Disabled';
             $timeout(function () {
-                if ($scope.passcodeUnlockObj[passcodeId].status == 'Disabled') {
+                if ($scope.passcodeUnlockObj[passcodeId].status === 'Disabled') {
                     $scope.passcodeUnlockObj[passcodeId].load = false;
                 }
             }, 1500);
         }
-        else if(latestStatus == 'Disabled') {
+        else if(latestStatus === 'Disabled') {
             $scope.passcodeUnlockObj[passcodeId].status = 'Enabled';
             $timeout(function () {
-                if ($scope.passcodeUnlockObj[passcodeId].status == 'Enabled') {
+                if ($scope.passcodeUnlockObj[passcodeId].status === 'Enabled') {
                     $scope.passcodeUnlockObj[passcodeId].load = false;
                 }
             }, 1500);
@@ -1522,8 +1522,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -1534,8 +1533,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     '<span class="flex-1">Delete</span>' +
                     '</div>',
                     type: 'button-outline button-assertive',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
