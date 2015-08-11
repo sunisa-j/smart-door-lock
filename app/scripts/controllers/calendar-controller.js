@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents, usersCalendars, users, RRule, uiCalendarConfig) {
+window.app.controller('CalendarController', function ($scope, $stateParams, calendars, $ionicModal, $ionicPopup, calendarEvents, usersCalendars, users, RRule, moment, uiCalendarConfig) {
 
     var calendarId = $stateParams.calendarId;
     $scope.calendarName = 'myCalendar';
@@ -47,10 +47,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         else {
             var parent = current.parents('.fc-week');
             if(parent.context) {
-                day = parent.find("td.fc-day-number[data-date=" + dataDate + "]");
+                day = parent.find('td.fc-day-number[data-date=' + dataDate + ']');
             }
             else {
-                day = angular.element("td.fc-day-number[data-date=" + dataDate + "]");
+                day = angular.element('td.fc-day-number[data-date=' + dataDate + ']');
             }
         }
 
@@ -78,7 +78,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 $scope.selectedDateEvents.push(event);
             }
         });
-    };
+    }
 
     function selectToday(element) {
         uiCalendarConfig.calendars[$scope.calendarName].fullCalendar('today');
@@ -102,10 +102,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             dayClick: function(date, jsEvent) {
                 selectDate(date, jsEvent.target);
             },
-            eventClick: function(event, element) {
+            eventClick: function(event) {
 
                 // When select event -------------------------------------------
-                if($scope.calendarAccessRole != 'reader'){
+                if($scope.calendarAccessRole !== 'reader'){
                     $scope.openEditEvent(event);
                 }else{
                     console.log('read only');
@@ -217,11 +217,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         var trueKey = [];
         angular.forEach($scope.eventWeekDay, function(value, key){
-            if(value == true){
+            if(value === true){
                 trueKey.push(key);
             }
         });
-        if(trueKey.length == 1 && trueKey[0]==weekDay){
+        if(trueKey.length === 1 && trueKey[0]===weekDay){
             console.log('Select at least 1');
         }else{
             $scope.eventWeekDay[weekDay] = !$scope.eventWeekDay[weekDay];
@@ -233,12 +233,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         var trueNumber = 0;
         var trueIndex = 0;
         angular.forEach($scope.eventMonthDay, function(value){
-            if(value == true){
+            if(value === true){
                 trueNumber++;
                 trueIndex = i;
             } i++;
         });
-        if(trueNumber == 1 && trueIndex==monthDay){
+        if(trueNumber === 1 && trueIndex===monthDay){
             console.log('Select at least 1');
         }else{
             $scope.eventMonthDay[monthDay] = !$scope.eventMonthDay[monthDay];
@@ -250,12 +250,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         var trueNumber = 0;
         var trueIndex = 0;
         angular.forEach($scope.eventMonth, function(value){
-            if(value == true){
+            if(value === true){
                 trueNumber++;
                 trueIndex = i;
             } i++;
         });
-        if(trueNumber == 1 && trueIndex==month){
+        if(trueNumber === 1 && trueIndex===month){
             console.log('Select at least 1');
         }else{
             $scope.eventMonth[month] = !$scope.eventMonth[month];
@@ -272,25 +272,25 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     var setByWeekDay = function(){
         var byweekday = [];
 
-        if($scope.eventWeekDay['MO'] == true) {
+        if($scope.eventWeekDay.MO === true) {
             byweekday.push(RRule.MO);
         }
-        if($scope.eventWeekDay['TU'] == true) {
+        if($scope.eventWeekDay.TU === true) {
             byweekday.push(RRule.TU);
         }
-        if($scope.eventWeekDay['WE'] == true) {
+        if($scope.eventWeekDay.WE === true) {
             byweekday.push(RRule.WE);
         }
-        if($scope.eventWeekDay['TH'] == true) {
+        if($scope.eventWeekDay.TH === true) {
             byweekday.push(RRule.TH);
         }
-        if($scope.eventWeekDay['FR'] == true) {
+        if($scope.eventWeekDay.FR === true) {
             byweekday.push(RRule.FR);
         }
-        if($scope.eventWeekDay['SA'] == true) {
+        if($scope.eventWeekDay.SA === true) {
             byweekday.push(RRule.SA);
         }
-        if($scope.eventWeekDay['SU'] == true) {
+        if($scope.eventWeekDay.SU === true) {
             byweekday.push(RRule.SU);
         }
 
@@ -302,7 +302,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         var bymonthday = [];
         var i = 1;
         angular.forEach($scope.eventMonthDay, function(value){
-            if(value == true) {
+            if(value === true) {
                 bymonthday.push(i);
             }
             i++;
@@ -316,7 +316,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         var bymonth = [];
         var i = 1;
         angular.forEach($scope.eventMonth, function(value){
-            if(value == true) {
+            if(value === true) {
                 bymonth.push(i);
             }
             i++;
@@ -327,25 +327,25 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // Convert 'On the' sequent from sting to number for bySetPos RRule
     var setBySetPos = function(sequent){
-        if(sequent == 'first'){
+        if(sequent === 'first'){
             return [1];
-        }else if(sequent == 'second'){
+        }else if(sequent === 'second'){
             return [2];
-        }else if(sequent == 'third'){
+        }else if(sequent === 'third'){
             return [3];
-        }else if(sequent == 'fourth'){
+        }else if(sequent === 'fourth'){
             return [4];
-        }else if(sequent == 'fifth'){
+        }else if(sequent === 'fifth'){
             return [5];
-        }else if(sequent == 'last'){
+        }else if(sequent === 'last'){
             return [-1];
         }
     };
 
     // Set on the to rRule for Create Event Modal
     var setOntheRrule = function(){
-        if($scope.repeat.onThe.day == 'day'){
-            if ($scope.repeat.endRepeat == 'date') {
+        if($scope.repeat.onThe.day === 'day'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -354,7 +354,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -363,7 +363,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -372,8 +372,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -383,7 +383,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -393,7 +393,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -403,8 +403,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekend'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekend'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -414,7 +414,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -424,7 +424,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -434,8 +434,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'monday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'monday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -445,7 +445,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -455,7 +455,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -465,8 +465,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'tuesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'tuesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -476,7 +476,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -486,7 +486,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -496,8 +496,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'wednesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'wednesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -507,7 +507,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -517,7 +517,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -527,8 +527,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'thursday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'thursday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -538,7 +538,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -548,7 +548,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -558,8 +558,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'friday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'friday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -569,7 +569,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -579,7 +579,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -589,8 +589,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'saturday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'saturday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -600,7 +600,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -610,7 +610,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -620,8 +620,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'sunday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'sunday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -631,7 +631,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -641,7 +641,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -653,8 +653,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
     var setOntheRruleYearly = function(){
-        if($scope.repeat.onThe.day == 'day'){
-            if ($scope.repeat.endRepeat == 'date') {
+        if($scope.repeat.onThe.day === 'day'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -664,7 +664,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -674,7 +674,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -684,8 +684,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -696,7 +696,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -707,7 +707,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -718,8 +718,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekend'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekend'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -730,7 +730,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -741,7 +741,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -752,8 +752,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'monday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'monday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -764,7 +764,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -775,7 +775,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -786,8 +786,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'tuesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'tuesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -798,7 +798,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -809,7 +809,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -820,8 +820,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'wednesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'wednesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -832,7 +832,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -843,7 +843,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -854,8 +854,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'thursday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'thursday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -866,7 +866,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -877,7 +877,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -888,8 +888,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'friday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'friday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -900,7 +900,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -911,7 +911,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -922,8 +922,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'saturday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'saturday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -934,7 +934,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -945,7 +945,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -956,8 +956,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'sunday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'sunday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -968,7 +968,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -979,7 +979,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.createEventData.rRule.interval,
@@ -1028,10 +1028,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calculate Repeat Summary (by RRule Module) for Create Event Modal ------
     $scope.calculateRrule = function() {
 
-        if($scope.repeat.status == true) {
-            if ($scope.createEventData.rRule.frequency == 'DAILY') {
+        if($scope.repeat.status === true) {
+            if ($scope.createEventData.rRule.frequency === 'DAILY') {
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1039,7 +1039,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         until: new Date($scope.createEventData.rRule.until)
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1047,7 +1047,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         dtstart: new Date($scope.createEventData.startDate)
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1055,11 +1055,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     });
                 }
             }
-            else if ($scope.createEventData.rRule.frequency == 'WEEKLY') {
+            else if ($scope.createEventData.rRule.frequency === 'WEEKLY') {
 
                 var byweekday = setByWeekDay();
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1068,7 +1068,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         byweekday: byweekday
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1077,7 +1077,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         byweekday: byweekday
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.createEventData.rRule.interval,
@@ -1086,9 +1086,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     });
                 }
             }
-            else if ($scope.createEventData.rRule.frequency == 'MONTHLY') {
-                var bymonthday = [];
-                var bymonthday = setByMonthDay();
+            else if ($scope.createEventData.rRule.frequency === 'MONTHLY') {
+                var byMonthDay = setByMonthDay();
 
                 $scope.createDataRrule = new RRule({
                     freq: RRule.MONTHLY,
@@ -1096,32 +1095,32 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.createEventData.startDate)
                 });
 
-                if($scope.repeat.repeatBy=='each'){
-                    if(bymonthday.length > 0){
-                        if ($scope.repeat.endRepeat == 'date') {
+                if($scope.repeat.repeatBy==='each'){
+                    if(byMonthDay.length > 0){
+                        if ($scope.repeat.endRepeat === 'date') {
                             $scope.createDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.createEventData.rRule.interval,
                                 dtstart: new Date($scope.createEventData.startDate),
                                 until: new Date($scope.createEventData.rRule.until),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
-                        else if ($scope.repeat.endRepeat == 'after') {
+                        else if ($scope.repeat.endRepeat === 'after') {
                             $scope.createDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.createEventData.rRule.interval,
                                 count: $scope.createEventData.rRule.count,
                                 dtstart: new Date($scope.createEventData.startDate),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
-                        else if ($scope.repeat.endRepeat == 'never') {
+                        else if ($scope.repeat.endRepeat === 'never') {
                             $scope.createDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.createEventData.rRule.interval,
                                 dtstart: new Date($scope.createEventData.startDate),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
                     }else{
@@ -1132,13 +1131,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         });
                     }
                 }
-                else if($scope.repeat.repeatBy=='on'){
+                else if($scope.repeat.repeatBy==='on'){
                     setOntheRrule();
                 }
             }
-            else if ($scope.createEventData.rRule.frequency == 'YEARLY') {
-                var bymonth = [];
-                var bymonth = setByMonth();
+            else if ($scope.createEventData.rRule.frequency === 'YEARLY') {
+                var byMonth = setByMonth();
 
                 $scope.createDataRrule = new RRule({
                     freq: RRule.YEARLY,
@@ -1146,35 +1144,35 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.createEventData.startDate)
                 });
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.createEventData.rRule.interval,
                         dtstart: new Date($scope.createEventData.startDate),
                         until: new Date($scope.createEventData.rRule.until),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.createEventData.rRule.interval,
                         count: $scope.createEventData.rRule.count,
                         dtstart: new Date($scope.createEventData.startDate),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.createDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.createEventData.rRule.interval,
                         dtstart: new Date($scope.createEventData.startDate),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
 
 
-                if($scope.repeat.onThe.checked==true){
+                if($scope.repeat.onThe.checked===true){
                     setOntheRruleYearly();
                 }
             }
@@ -1197,7 +1195,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     $scope.onOffRepeat = function(){
 
         // if frequency toggle value is true
-        if($scope.repeat.status == true){
+        if($scope.repeat.status === true){
             $scope.createEventData.rRule = {
                 frequency: 'DAILY',
                 interval: 1,
@@ -1205,11 +1203,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 count: 1
             };
 
-        }else if($scope.repeat.status == false){
+        }else if($scope.repeat.status === false){
             if($scope.createEventData.rRule){
 
                 delete $scope.createEventData.rRule;
-                console.log($scope.createEventData.rRule);
+                //console.log($scope.createEventData.rRule);
             }
         }
 
@@ -1219,56 +1217,56 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calculate 'On the' for save to db ---------------------------------------
     var setOnSequentToSave = function() {
 
-        if($scope.repeat.onThe.sequent == 'first') {
+        if($scope.repeat.onThe.sequent === 'first') {
             $scope.createEventData.rRule.bySetPos = [1];
         }
-        else if($scope.repeat.onThe.sequent == 'second') {
+        else if($scope.repeat.onThe.sequent === 'second') {
             $scope.createEventData.rRule.bySetPos = [2];
         }
-        else if($scope.repeat.onThe.sequent == 'third') {
+        else if($scope.repeat.onThe.sequent === 'third') {
             $scope.createEventData.rRule.bySetPos = [3];
         }
-        else if($scope.repeat.onThe.sequent == 'fourth') {
+        else if($scope.repeat.onThe.sequent === 'fourth') {
             $scope.createEventData.rRule.bySetPos = [4];
         }
-        else if($scope.repeat.onThe.sequent == 'fifth') {
+        else if($scope.repeat.onThe.sequent === 'fifth') {
             $scope.createEventData.rRule.bySetPos = [5];
         }
-        else if($scope.repeat.onThe.sequent == 'last') {
+        else if($scope.repeat.onThe.sequent === 'last') {
             $scope.createEventData.rRule.bySetPos = [-1];
         }
     };
     var setOnDayToSave = function(){
         $scope.createEventData.rRule.byWeekDay = [];
 
-        if($scope.repeat.onThe.day == 'monday') {
+        if($scope.repeat.onThe.day === 'monday') {
             $scope.createEventData.rRule.byWeekDay.push('MO');
         }
-        else if($scope.repeat.onThe.day == 'tuesday') {
+        else if($scope.repeat.onThe.day === 'tuesday') {
             $scope.createEventData.rRule.byWeekDay.push('TU');
         }
-        else if($scope.repeat.onThe.day == 'wednesday') {
+        else if($scope.repeat.onThe.day === 'wednesday') {
             $scope.createEventData.rRule.byWeekDay.push('WE');
         }
-        else if($scope.repeat.onThe.day == 'thursday') {
+        else if($scope.repeat.onThe.day === 'thursday') {
             $scope.createEventData.rRule.byWeekDay.push('TH');
         }
-        else if($scope.repeat.onThe.day == 'friday') {
+        else if($scope.repeat.onThe.day === 'friday') {
             $scope.createEventData.rRule.byWeekDay.push('FR');
         }
-        else if($scope.repeat.onThe.day == 'saturday') {
+        else if($scope.repeat.onThe.day === 'saturday') {
             $scope.createEventData.rRule.byWeekDay.push('SA');
         }
-        else if($scope.repeat.onThe.day == 'sunday') {
+        else if($scope.repeat.onThe.day === 'sunday') {
             $scope.createEventData.rRule.byWeekDay.push('SU');
         }
-        else if($scope.repeat.onThe.day == 'weekday') {
+        else if($scope.repeat.onThe.day === 'weekday') {
             $scope.createEventData.rRule.byWeekDay = ['MO', 'TU', 'WE', 'TH', 'FR'];
         }
-        else if($scope.repeat.onThe.day == 'weekend') {
+        else if($scope.repeat.onThe.day === 'weekend') {
             $scope.createEventData.rRule.byWeekDay = ['SA', 'SU'];
         }
-        else if($scope.repeat.onThe.day == 'day') {
+        else if($scope.repeat.onThe.day === 'day') {
             // delete byWeekDay (if any)
             if($scope.createEventData.rRule.byWeekDay) {
                 delete $scope.createEventData.rRule.byWeekDay;
@@ -1310,11 +1308,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     };
     $scope.saveEvent = function () {
 
-        if($scope.repeat.status == true) {
+        if($scope.repeat.status === true) {
 
             $scope.createEventData.rRule.dateStart = $scope.createEventData.startDate;
 
-            if($scope.createEventData.rRule.frequency == 'DAILY'){
+            if($scope.createEventData.rRule.frequency === 'DAILY'){
 
                 // delete byWeekDay (if any)
                 if($scope.createEventData.rRule.byWeekDay) {
@@ -1333,7 +1331,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     delete $scope.createEventData.rRule.byMonth;
                 }
             }
-            else if($scope.createEventData.rRule.frequency == 'WEEKLY') {
+            else if($scope.createEventData.rRule.frequency === 'WEEKLY') {
 
                 // delete byMonthDay (if any)
                 if($scope.createEventData.rRule.byMonthDay) {
@@ -1351,19 +1349,19 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 // Set byWeekDay
                 $scope.createEventData.rRule.byWeekDay = [];
                 angular.forEach($scope.eventWeekDay, function(value, key){
-                    if(value == true){
+                    if(value === true){
                         $scope.createEventData.rRule.byWeekDay.push(key);
                     }
                 });
             }
-            else if ($scope.createEventData.rRule.frequency == 'MONTHLY'){
+            else if ($scope.createEventData.rRule.frequency === 'MONTHLY'){
 
                 // delete byMonth (if any)
                 if($scope.createEventData.rRule.byMonth) {
                     delete $scope.createEventData.rRule.byMonth;
                 }
 
-                if($scope.repeat.repeatBy == 'each') {
+                if($scope.repeat.repeatBy === 'each') {
                     // delete byWeekDay (if any)
                     if($scope.createEventData.rRule.byWeekDay) {
                         delete $scope.createEventData.rRule.byWeekDay;
@@ -1376,12 +1374,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     // Set byMonthDay
                     $scope.createEventData.rRule.byMonthDay = [];
                     angular.forEach($scope.eventMonthDay, function(value, key){
-                        if(value == true){
+                        if(value === true){
                             $scope.createEventData.rRule.byMonthDay.push(key+1);
                         }
                     });
                 }
-                else if ($scope.repeat.repeatBy == 'on'){
+                else if ($scope.repeat.repeatBy === 'on'){
 
                     // delete byMonthDay (if any)
                     if($scope.createEventData.rRule.byMonthDay) {
@@ -1393,12 +1391,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     setOnDayToSave();
                 }
             }
-            else if ($scope.createEventData.rRule.frequency == 'YEARLY'){
+            else if ($scope.createEventData.rRule.frequency === 'YEARLY'){
 
                 // Set byMonth
                 $scope.createEventData.rRule.byMonth = [];
                 angular.forEach($scope.eventMonth, function(value, key){
-                    if(value == true){
+                    if(value === true){
                         $scope.createEventData.rRule.byMonth.push(key+1);
                     }
                 });
@@ -1434,7 +1432,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         // get end repeat value (never, after, on date) for save to db ---------
-        if($scope.repeat.endRepeat == 'never') {
+        if($scope.repeat.endRepeat === 'never') {
             if ($scope.createEventData.rRule.until) {
                 delete $scope.createEventData.rRule.until;
             }
@@ -1442,18 +1440,18 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 delete $scope.createEventData.rRule.count;
             }
         }
-        else if($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.endRepeat === 'date') {
             if ($scope.createEventData.rRule.count) {
                 delete $scope.createEventData.rRule.count;
             }
         }
-        else if ($scope.repeat.endRepeat == 'after'){
+        else if ($scope.repeat.endRepeat === 'after'){
             if ($scope.createEventData.rRule.until) {
                 delete $scope.createEventData.rRule.until;
             }
         }
 
-        console.log('Save Event Data: ', $scope.createEventData);
+        //console.log('Save Event Data: ', $scope.createEventData);
 
         // if save success
         reportSaveEventData();
@@ -1478,8 +1476,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     // Set on the to rRule for Edit event modal
     var setEditOntheRrule = function(){
-        if($scope.repeat.onThe.day == 'day'){
-            if ($scope.repeat.endRepeat == 'date') {
+        if($scope.repeat.onThe.day === 'day'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1488,7 +1486,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1497,7 +1495,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonthday: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1506,8 +1504,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1517,7 +1515,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1527,7 +1525,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1537,8 +1535,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekend'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekend'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1548,7 +1546,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1558,7 +1556,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1568,8 +1566,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'monday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'monday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1579,7 +1577,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1589,7 +1587,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1599,8 +1597,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'tuesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'tuesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1610,7 +1608,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1620,7 +1618,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1630,8 +1628,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'wednesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'wednesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1641,7 +1639,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1651,7 +1649,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1661,8 +1659,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'thursday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'thursday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1672,7 +1670,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1682,7 +1680,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1692,8 +1690,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'friday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'friday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1703,7 +1701,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1713,7 +1711,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1723,8 +1721,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'saturday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'saturday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1734,7 +1732,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1744,7 +1742,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1754,8 +1752,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'sunday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'sunday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1765,7 +1763,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1775,7 +1773,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1787,8 +1785,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
     };
     var setEditOntheRruleYearly = function(){
-        if($scope.repeat.onThe.day == 'day'){
-            if ($scope.repeat.endRepeat == 'date') {
+        if($scope.repeat.onThe.day === 'day'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1798,7 +1796,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1808,7 +1806,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1818,8 +1816,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1830,7 +1828,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1841,7 +1839,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1852,8 +1850,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'weekend'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'weekend'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1864,7 +1862,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1875,7 +1873,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1886,8 +1884,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'monday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'monday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1898,7 +1896,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1909,7 +1907,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1920,8 +1918,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'tuesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'tuesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1932,7 +1930,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1943,7 +1941,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1954,8 +1952,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'wednesday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'wednesday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1966,7 +1964,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1977,7 +1975,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -1988,8 +1986,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'thursday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'thursday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2000,7 +1998,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2011,7 +2009,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2022,8 +2020,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'friday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'friday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2034,7 +2032,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2045,7 +2043,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2056,8 +2054,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'saturday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'saturday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2068,7 +2066,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2079,7 +2077,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2090,8 +2088,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 });
             }
         }
-        else if($scope.repeat.onThe.day == 'sunday'){
-            if ($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.onThe.day === 'sunday'){
+            if ($scope.repeat.endRepeat === 'date') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2102,7 +2100,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'after') {
+            else if ($scope.repeat.endRepeat === 'after') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2113,7 +2111,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     bymonth: setByMonth()
                 });
             }
-            else if ($scope.repeat.endRepeat == 'never') {
+            else if ($scope.repeat.endRepeat === 'never') {
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
                     interval: $scope.editEventData.rRule.interval,
@@ -2129,10 +2127,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calculate Repeat Summary (by RRule Module) for Edit Event Modal ---------
     $scope.editEventRrule = function() {
 
-        if($scope.repeat.status == true) {
-            if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'DAILY') {
+        if($scope.repeat.status === true) {
+            if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'DAILY') {
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.editEventData.rRule.interval,
@@ -2140,7 +2138,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         until: new Date($scope.editEventData.rRule.until)
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.editEventData.rRule.interval,
@@ -2148,7 +2146,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         dtstart: new Date($scope.editEventData.startDate)
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.DAILY,
                         interval: $scope.editEventData.rRule.interval,
@@ -2156,40 +2154,39 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     });
                 }
             }
-            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'WEEKLY') {
 
-                var byweekday = setByWeekDay();
+                var byWeekDay = setByWeekDay();
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.editEventData.rRule.interval,
                         dtstart: new Date($scope.editEventData.startDate),
                         until: new Date($scope.editEventData.rRule.until),
-                        byweekday: byweekday
+                        byweekday: byWeekDay
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.editEventData.rRule.interval,
                         count: $scope.editEventData.rRule.count,
                         dtstart: new Date($scope.editEventData.startDate),
-                        byweekday: byweekday
+                        byweekday: byWeekDay
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.WEEKLY,
                         interval: $scope.editEventData.rRule.interval,
                         dtstart: new Date($scope.editEventData.startDate),
-                        byweekday: byweekday
+                        byweekday: byWeekDay
                     });
                 }
             }
-            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY') {
-                var bymonthday = [];
-                var bymonthday = setByMonthDay();
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'MONTHLY') {
+                var byMonthDay = setByMonthDay();
 
                 $scope.editDataRrule = new RRule({
                     freq: RRule.MONTHLY,
@@ -2197,32 +2194,32 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.editEventData.startDate)
                 });
 
-                if($scope.repeat.repeatBy=='each'){
-                    if(bymonthday.length > 0){
-                        if ($scope.repeat.endRepeat == 'date') {
+                if($scope.repeat.repeatBy==='each'){
+                    if(byMonthDay.length > 0){
+                        if ($scope.repeat.endRepeat === 'date') {
                             $scope.editDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.editEventData.rRule.interval,
                                 dtstart: new Date($scope.editEventData.startDate),
                                 until: new Date($scope.editEventData.rRule.until),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
-                        else if ($scope.repeat.endRepeat == 'after') {
+                        else if ($scope.repeat.endRepeat === 'after') {
                             $scope.editDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.editEventData.rRule.interval,
                                 count: $scope.editEventData.rRule.count,
                                 dtstart: new Date($scope.editEventData.startDate),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
-                        else if ($scope.repeat.endRepeat == 'never') {
+                        else if ($scope.repeat.endRepeat === 'never') {
                             $scope.editDataRrule = new RRule({
                                 freq: RRule.MONTHLY,
                                 interval: $scope.editEventData.rRule.interval,
                                 dtstart: new Date($scope.editEventData.startDate),
-                                bymonthday: bymonthday
+                                bymonthday: byMonthDay
                             });
                         }
                     }else{
@@ -2233,13 +2230,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                         });
                     }
                 }
-                else if($scope.repeat.repeatBy=='on'){
+                else if($scope.repeat.repeatBy==='on'){
                     setEditOntheRrule();
                 }
             }
-            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY') {
-                var bymonth = [];
-                var bymonth = setByMonth();
+            else if ($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'YEARLY') {
+                var byMonth = setByMonth();
 
                 $scope.editDataRrule = new RRule({
                     freq: RRule.YEARLY,
@@ -2247,109 +2243,109 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.editEventData.startDate)
                 });
 
-                if ($scope.repeat.endRepeat == 'date') {
+                if ($scope.repeat.endRepeat === 'date') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.editEventData.rRule.interval,
                         dtstart: new Date($scope.editEventData.startDate),
                         until: new Date($scope.editEventData.rRule.until),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'after') {
+                else if ($scope.repeat.endRepeat === 'after') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.editEventData.rRule.interval,
                         count: $scope.editEventData.rRule.count,
                         dtstart: new Date($scope.editEventData.startDate),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
-                else if ($scope.repeat.endRepeat == 'never') {
+                else if ($scope.repeat.endRepeat === 'never') {
                     $scope.editDataRrule = new RRule({
                         freq: RRule.YEARLY,
                         interval: $scope.editEventData.rRule.interval,
                         dtstart: new Date($scope.editEventData.startDate),
-                        bymonth: bymonth
+                        bymonth: byMonth
                     });
                 }
 
 
-                if($scope.repeat.onThe.checked==true){
+                if($scope.repeat.onThe.checked===true){
                     setEditOntheRruleYearly();
                 }
             }
 
-            console.log('rRule Data: ', $scope.editDataRrule);
+            //console.log('rRule Data: ', $scope.editDataRrule);
         }
     };
 
     // Calculate value in 'On the' ---------------------------------------------
     var setOnSequent = function() {
         if($scope.editEventData.rRule.bySetPos){
-            if($scope.editEventData.rRule.bySetPos[0] == 1) {
+            if($scope.editEventData.rRule.bySetPos[0] === 1) {
                 $scope.repeat.onThe.sequent = 'first';
             }
-            else if($scope.editEventData.rRule.bySetPos[0] == 2) {
+            else if($scope.editEventData.rRule.bySetPos[0] === 2) {
                 $scope.repeat.onThe.sequent = 'second';
             }
-            else if($scope.editEventData.rRule.bySetPos[0] == 3) {
+            else if($scope.editEventData.rRule.bySetPos[0] === 3) {
                 $scope.repeat.onThe.sequent = 'third';
             }
-            else if($scope.editEventData.rRule.bySetPos[0] == 4) {
+            else if($scope.editEventData.rRule.bySetPos[0] === 4) {
                 $scope.repeat.onThe.sequent = 'fourth';
             }
-            else if($scope.editEventData.rRule.bySetPos[0] == 5) {
+            else if($scope.editEventData.rRule.bySetPos[0] === 5) {
                 $scope.repeat.onThe.sequent = 'fifth';
             }
-            else if($scope.editEventData.rRule.bySetPos[0] == -1) {
+            else if($scope.editEventData.rRule.bySetPos[0] === -1) {
                 $scope.repeat.onThe.sequent = 'last';
             }
         }
         else if($scope.editEventData.rRule.byMonthDay) {
-            if($scope.editEventData.rRule.byMonthDay[0] == 1) {
+            if($scope.editEventData.rRule.byMonthDay[0] === 1) {
                 $scope.repeat.onThe.sequent = 'first';
             }
-            else if($scope.editEventData.rRule.byMonthDay[0] == 2) {
+            else if($scope.editEventData.rRule.byMonthDay[0] === 2) {
                 $scope.repeat.onThe.sequent = 'second';
             }
-            else if($scope.editEventData.rRule.byMonthDay[0] == 3) {
+            else if($scope.editEventData.rRule.byMonthDay[0] === 3) {
                 $scope.repeat.onThe.sequent = 'third';
             }
-            else if($scope.editEventData.rRule.byMonthDay[0] == 4) {
+            else if($scope.editEventData.rRule.byMonthDay[0] === 4) {
                 $scope.repeat.onThe.sequent = 'fourth';
             }
-            else if($scope.editEventData.rRule.byMonthDay[0] == 5) {
+            else if($scope.editEventData.rRule.byMonthDay[0] === 5) {
                 $scope.repeat.onThe.sequent = 'fifth';
             }
-            else if($scope.editEventData.rRule.byMonthDay[0] == -1) {
+            else if($scope.editEventData.rRule.byMonthDay[0] === -1) {
                 $scope.repeat.onThe.sequent = 'last';
             }
         }
     };
     var setOnDay = function(){
-        if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'MO') {
+        if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'MO') {
             $scope.repeat.onThe.day = 'monday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'TU') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'TU') {
             $scope.repeat.onThe.day = 'tuesday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'WE') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'WE') {
             $scope.repeat.onThe.day = 'wednesday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'TH') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'TH') {
             $scope.repeat.onThe.day = 'thursday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'FR') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'FR') {
             $scope.repeat.onThe.day = 'friday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'SA') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'SA') {
             $scope.repeat.onThe.day = 'saturday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 1 && $scope.editEventData.rRule.byWeekDay[0] == 'SU') {
+        else if($scope.editEventData.rRule.byWeekDay.length === 1 && $scope.editEventData.rRule.byWeekDay[0] === 'SU') {
             $scope.repeat.onThe.day = 'sunday';
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 5) {
+        else if($scope.editEventData.rRule.byWeekDay.length === 5) {
             var weekday = ['MO', 'TU', 'WE', 'TH', 'FR'];
             var weekdayValue = {
                 'MO': false,
@@ -2360,16 +2356,16 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             };
             angular.forEach(weekday, function(weekday){
                 angular.forEach($scope.editEventData.rRule.byWeekDay, function(value){
-                    if(value == weekday){
+                    if(value === weekday){
                         weekdayValue[weekday] = true;
                     }
                 });
             });
-            if(weekdayValue['MO']==true && weekdayValue['TU']==true && weekdayValue['WE']==true && weekdayValue['TH']==true && weekdayValue['FR']==true){
+            if(weekdayValue.MO===true && weekdayValue.TU===true && weekdayValue.WE===true && weekdayValue.TH===true && weekdayValue.FR===true){
                 $scope.repeat.onThe.day = 'weekday';
             }
         }
-        else if($scope.editEventData.rRule.byWeekDay.length == 2) {
+        else if($scope.editEventData.rRule.byWeekDay.length === 2) {
             var weekend = ['SA', 'SU'];
             var weekendValue = {
                 'MO': false,
@@ -2377,12 +2373,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             };
             angular.forEach(weekend, function(weekend){
                 angular.forEach($scope.editEventData.rRule.byWeekDay, function(value){
-                    if(value == weekend){
+                    if(value === weekend){
                         weekendValue[weekend] = true;
                     }
                 });
             });
-            if(weekendValue['SA']==true && weekendValue['SU']==true){
+            if(weekendValue.SA===true && weekendValue.SU===true){
                 $scope.repeat.onThe.day = 'weekend';
             }
         }
@@ -2391,10 +2387,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Transform event data to show in edit event modal ------------------------
     $scope.openEditEvent = function(event){
         $scope.editEventData = angular.copy(event);
-
-        if(!$scope.editEventData.rRule){
-            $scope.repeat.status = false;
-        }
+        $scope.repeat.repeatBy = '';
+        $scope.repeat.onThe.checked = false;
 
         // Set startDate & endDate to date -------------------------------------
         $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
@@ -2403,6 +2397,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         // Set on/off repeat ---------------------------------------------------
         if($scope.editEventData.rRule) {
             $scope.repeat.status = true;
+        }else{
+            $scope.repeat.status = false;
         }
 
         // Set end repeat value (never, after, on date) ------------------------
@@ -2418,7 +2414,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         // Set value 'each' or 'on' ---------------------------------------------
-        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){
+        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'MONTHLY'){
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
@@ -2443,7 +2439,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             }
         }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY'){
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'YEARLY'){
             if($scope.editEventData.rRule.byMonth){
                 angular.forEach($scope.editEventData.rRule.byMonth, function(value){
                     var month = parseInt(value);
@@ -2454,6 +2450,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             }
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
+                $scope.repeat.onThe.checked = true;
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
                 setOnSequent();
 
@@ -2468,16 +2465,19 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             }
         }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'WEEKLY') {
+            $scope.repeat.repeatBy = '';
             angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
-                if(weekday == 'MO') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'TU') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'WE') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'TH') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'FR') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'SA') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'SU') { $scope.eventWeekDay[weekday] = true; }
+                if(weekday === 'MO') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'TU') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'WE') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'TH') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'FR') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'SA') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'SU') { $scope.eventWeekDay[weekday] = true; }
             });
+        }else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'DAILY'){
+            $scope.repeat.repeatBy = '';
         }
 
         if ($scope.editEventData.rRule){
@@ -2485,7 +2485,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         storeOldEventData = angular.copy($scope.editEventData);
-        console.log('When Open. Event Data: ', storeOldEventData);
+        storeOldEventData.repeatBy = angular.copy($scope.repeat.repeatBy);
+        //console.log('When Open. Event Data: ', storeOldEventData);
 
         $scope.editEventModal.show();
     };
@@ -2528,10 +2529,10 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 ]
             });
             myPopup.then(function(res) {
-                if(res == 'delete once') {
+                if(res === 'delete once') {
                     console.log('Delete Only This Event: ', eventId);
                 }
-                else if(res == 'delete all') {
+                else if(res === 'delete all') {
                     console.log('Delete All: ', $scope.editEventData.recurringEvent);
                 }
                 else {
@@ -2539,7 +2540,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             });
         }else {
-            var myPopup = $ionicPopup.confirm({
+            var myPopup2 = $ionicPopup.confirm({
                 title: 'Confirm',
                 template: 'Do you want to delete this event "' + $scope.editEventData.name + '" ?',
                 buttons: [
@@ -2569,7 +2570,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     }
                 ]
             });
-            myPopup.then(function(res) {
+            myPopup2.then(function(res) {
                 if(res) {
                     console.log('Delete Event: ', eventId);
                 }
@@ -2583,17 +2584,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // When on/off repeat on edit event modal ----------------------------------
     $scope.editEventOnOffRepeat = function(){
         // if frequency toggle value is true
-        if($scope.repeat.status == true){
+        if($scope.repeat.status === true){
             $scope.editEventData.rRule = {
                 frequency: 'DAILY',
                 interval: 1
             };
 
-        }else if($scope.repeat.status == false){
+        }else if($scope.repeat.status === false){
             if($scope.editEventData.rRule){
 
                 delete $scope.editEventData.rRule;
-                console.log($scope.editEventData.rRule);
+                //console.log($scope.editEventData.rRule);
             }
         }
 
@@ -2603,56 +2604,56 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Calculate 'On the' for save to db ---------------------------------------
     var setEditOnSequentToSave = function() {
 
-        if($scope.repeat.onThe.sequent == 'first') {
+        if($scope.repeat.onThe.sequent === 'first') {
             $scope.editEventData.rRule.bySetPos = [1];
         }
-        else if($scope.repeat.onThe.sequent == 'second') {
+        else if($scope.repeat.onThe.sequent === 'second') {
             $scope.editEventData.rRule.bySetPos = [2];
         }
-        else if($scope.repeat.onThe.sequent == 'third') {
+        else if($scope.repeat.onThe.sequent === 'third') {
             $scope.editEventData.rRule.bySetPos = [3];
         }
-        else if($scope.repeat.onThe.sequent == 'fourth') {
+        else if($scope.repeat.onThe.sequent === 'fourth') {
             $scope.editEventData.rRule.bySetPos = [4];
         }
-        else if($scope.repeat.onThe.sequent == 'fifth') {
+        else if($scope.repeat.onThe.sequent === 'fifth') {
             $scope.editEventData.rRule.bySetPos = [5];
         }
-        else if($scope.repeat.onThe.sequent == 'last') {
+        else if($scope.repeat.onThe.sequent === 'last') {
             $scope.editEventData.rRule.bySetPos = [-1];
         }
     };
     var setEditOnDayToSave = function(){
         $scope.editEventData.rRule.byWeekDay = [];
 
-        if($scope.repeat.onThe.day == 'monday') {
+        if($scope.repeat.onThe.day === 'monday') {
             $scope.editEventData.rRule.byWeekDay.push('MO');
         }
-        else if($scope.repeat.onThe.day == 'tuesday') {
+        else if($scope.repeat.onThe.day === 'tuesday') {
             $scope.editEventData.rRule.byWeekDay.push('TU');
         }
-        else if($scope.repeat.onThe.day == 'wednesday') {
+        else if($scope.repeat.onThe.day === 'wednesday') {
             $scope.editEventData.rRule.byWeekDay.push('WE');
         }
-        else if($scope.repeat.onThe.day == 'thursday') {
+        else if($scope.repeat.onThe.day === 'thursday') {
             $scope.editEventData.rRule.byWeekDay.push('TH');
         }
-        else if($scope.repeat.onThe.day == 'friday') {
+        else if($scope.repeat.onThe.day === 'friday') {
             $scope.editEventData.rRule.byWeekDay.push('FR');
         }
-        else if($scope.repeat.onThe.day == 'saturday') {
+        else if($scope.repeat.onThe.day === 'saturday') {
             $scope.editEventData.rRule.byWeekDay.push('SA');
         }
-        else if($scope.repeat.onThe.day == 'sunday') {
+        else if($scope.repeat.onThe.day === 'sunday') {
             $scope.editEventData.rRule.byWeekDay.push('SU');
         }
-        else if($scope.repeat.onThe.day == 'weekday') {
+        else if($scope.repeat.onThe.day === 'weekday') {
             $scope.editEventData.rRule.byWeekDay = ['MO', 'TU', 'WE', 'TH', 'FR'];
         }
-        else if($scope.repeat.onThe.day == 'weekend') {
+        else if($scope.repeat.onThe.day === 'weekend') {
             $scope.editEventData.rRule.byWeekDay = ['SA', 'SU'];
         }
-        else if($scope.repeat.onThe.day == 'day') {
+        else if($scope.repeat.onThe.day === 'day') {
             // delete byWeekDay (if any)
             if($scope.editEventData.rRule.byWeekDay) {
                 delete $scope.editEventData.rRule.byWeekDay;
@@ -2694,11 +2695,11 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     };
     $scope.saveEditEvent = function () {
 
-        if($scope.repeat.status == true) {
+        if($scope.repeat.status === true) {
 
             $scope.editEventData.rRule.dateStart = $scope.editEventData.startDate;
 
-            if($scope.editEventData.rRule.frequency == 'DAILY'){
+            if($scope.editEventData.rRule.frequency === 'DAILY'){
 
                 // delete byWeekDay (if any)
                 if($scope.editEventData.rRule.byWeekDay) {
@@ -2717,7 +2718,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     delete $scope.editEventData.rRule.byMonth;
                 }
             }
-            else if($scope.editEventData.rRule.frequency == 'WEEKLY') {
+            else if($scope.editEventData.rRule.frequency === 'WEEKLY') {
 
                 // delete byMonthDay (if any)
                 if($scope.editEventData.rRule.byMonthDay) {
@@ -2735,19 +2736,19 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 // Set byWeekDay
                 $scope.editEventData.rRule.byWeekDay = [];
                 angular.forEach($scope.eventWeekDay, function(value, key){
-                    if(value == true){
+                    if(value === true){
                         $scope.editEventData.rRule.byWeekDay.push(key);
                     }
                 });
             }
-            else if ($scope.editEventData.rRule.frequency == 'MONTHLY'){
+            else if ($scope.editEventData.rRule.frequency === 'MONTHLY'){
 
                 // delete byMonth (if any)
                 if($scope.editEventData.rRule.byMonth) {
                     delete $scope.editEventData.rRule.byMonth;
                 }
 
-                if($scope.repeat.repeatBy == 'each') {
+                if($scope.repeat.repeatBy === 'each') {
                     // delete byWeekDay (if any)
                     if($scope.editEventData.rRule.byWeekDay) {
                         delete $scope.editEventData.rRule.byWeekDay;
@@ -2760,12 +2761,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     // Set byMonthDay
                     $scope.editEventData.rRule.byMonthDay = [];
                     angular.forEach($scope.eventMonthDay, function(value, key){
-                        if(value == true){
+                        if(value === true){
                             $scope.editEventData.rRule.byMonthDay.push(key+1);
                         }
                     });
                 }
-                else if ($scope.repeat.repeatBy == 'on'){
+                else if ($scope.repeat.repeatBy === 'on'){
 
                     // delete byMonthDay (if any)
                     if($scope.editEventData.rRule.byMonthDay) {
@@ -2777,12 +2778,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     setEditOnDayToSave();
                 }
             }
-            else if ($scope.editEventData.rRule.frequency == 'YEARLY'){
+            else if ($scope.editEventData.rRule.frequency === 'YEARLY'){
 
                 // Set byMonth
                 $scope.editEventData.rRule.byMonth = [];
                 angular.forEach($scope.eventMonth, function(value, key){
-                    if(value == true){
+                    if(value === true){
                         $scope.editEventData.rRule.byMonth.push(key+1);
                     }
                 });
@@ -2818,7 +2819,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         // get end repeat value (never, after, on date) for save to db ---------
-        if($scope.repeat.endRepeat == 'never') {
+        if($scope.repeat.endRepeat === 'never') {
             if ($scope.editEventData.rRule.until) {
                 delete $scope.editEventData.rRule.until;
             }
@@ -2826,12 +2827,12 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 delete $scope.editEventData.rRule.count;
             }
         }
-        else if($scope.repeat.endRepeat == 'date') {
+        else if($scope.repeat.endRepeat === 'date') {
             if ($scope.editEventData.rRule.count) {
                 delete $scope.editEventData.rRule.count;
             }
         }
-        else if ($scope.repeat.endRepeat == 'after'){
+        else if ($scope.repeat.endRepeat === 'after'){
             if ($scope.editEventData.rRule.until) {
                 delete $scope.editEventData.rRule.until;
             }
@@ -2843,7 +2844,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
     $scope.cancelEditEvent = function(){
         $scope.editEventData = storeOldEventData;
-        console.log('After Cancel. This Event Data: ', $scope.editEventData);
+        if(storeOldEventData.repeatBy && storeOldEventData.repeatBy === 'on'){
+            $scope.repeat.onThe.checked = true;
+        }else {
+            $scope.repeat.onThe.checked = false;
+        }
+
+        //console.log('After Cancel. This Event Data: ', $scope.editEventData);
 
         $scope.editEventModal.hide();
     };
@@ -2891,7 +2898,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         }
 
         // Set value 'each' or 'on' ---------------------------------------------
-        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){
+        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'MONTHLY'){
             if($scope.editEventData.rRule.bySetPos){
                 $scope.repeat.repeatBy = 'on';
                 // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
@@ -2916,7 +2923,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             }
         }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY'){
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'YEARLY'){
             if($scope.editEventData.rRule.byMonth){
                 angular.forEach($scope.editEventData.rRule.byMonth, function(value){
                     var month = parseInt(value);
@@ -2941,15 +2948,15 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             }
         }
-        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency === 'WEEKLY') {
             angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
-                if(weekday == 'MO') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'TU') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'WE') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'TH') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'FR') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'SA') { $scope.eventWeekDay[weekday] = true; }
-                else if(weekday == 'SU') { $scope.eventWeekDay[weekday] = true; }
+                if(weekday === 'MO') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'TU') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'WE') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'TH') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'FR') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'SA') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday === 'SU') { $scope.eventWeekDay[weekday] = true; }
             });
         }
 
@@ -2963,7 +2970,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
 
     $scope.showEventForReadOrEdit = function(event){
-        if($scope.calendarAccessRole == 'owner'){
+        if($scope.calendarAccessRole === 'owner'){
             $scope.openEditEvent(event);
         }else{
             $scope.openViewEvent(event);
@@ -2991,7 +2998,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         // Get Access Role of Login User
         $scope.loginUserAccessRole = { role: '' };
         angular.forEach($scope.usersCalendar, function(value){
-            if(value.user.id == userId) {
+            if(value.user.id === userId) {
                 $scope.loginUserAccessRole.role = value.accessRole;
             }
         });
@@ -3004,7 +3011,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.usersRes = [];
         $scope.load = true;
 
-        if(req != '') {
+        if(req !== '') {
             // finding req user
             angular.forEach(usersData, function(user){
                 var employeeNumber = user.employeeNumber;
@@ -3012,15 +3019,15 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 var res = employeeNumber.match(req);
                 var res2 = name.match(req);
 
-                if(res == req){
+                if(res === req){
                     $scope.usersRes.push(user);
                 }
-                else if(res2 == req){
+                else if(res2 === req){
                     $scope.usersRes.push(user);
                 }
             });
 
-            if($scope.usersRes.length == 0) {
+            if($scope.usersRes.length === 0) {
                 console.log('no user match');
             }
             else {
@@ -3030,7 +3037,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     $scope.usersRes[index].addedStatus = false;
 
                     angular.forEach($scope.usersCalendarData, function(userCalendar){
-                        if(userCalendar.user.employeeNumber == userRes.employeeNumber) {
+                        if(userCalendar.user.employeeNumber === userRes.employeeNumber) {
                             $scope.usersRes[index].addedStatus = true;
                         }
                     });
@@ -3147,7 +3154,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
     // Edit Access Role for Selected User --------------------------------------
     $scope.editAccessRole = function(userCalendarId, thisUserId, event){
 
-        if(thisUserId == userId){
+        if(thisUserId === userId){
             event.stopPropagation();
         } else {
 
@@ -3155,13 +3162,13 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             $scope.editUser.id = userCalendarId;
             $scope.selectedUser.latestAccessRole = $scope.editUser.accessRole;
 
-            if ($scope.editUser.accessRole == 'owner') {
+            if ($scope.editUser.accessRole === 'owner') {
                 $scope.editUser.accessRole = 'owner';
             }
-            else if ($scope.editUser.accessRole == 'writer') {
+            else if ($scope.editUser.accessRole === 'writer') {
                 $scope.editUser.accessRole = 'writer';
             }
-            else if ($scope.editUser.accessRole == 'reader') {
+            else if ($scope.editUser.accessRole === 'reader') {
                 $scope.editUser.accessRole = 'reader';
             } else {
                 $scope.editUser.accessRole = null;
