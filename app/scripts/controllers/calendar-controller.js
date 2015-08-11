@@ -109,6 +109,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     $scope.openEditEvent(event);
                 }else{
                     console.log('read only');
+                    $scope.openViewEvent(event);
                 }
             },
             dayRender: function (date, cell) {
@@ -2846,6 +2847,129 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         $scope.editEventModal.hide();
     };
+
+    // -------------------------------------------------------------------------
+    // View Event --------------------------------------------------------------
+    // -------------------------------------------------------------------------
+
+    $ionicModal.fromTemplateUrl('templates/view-event-modal.html', {
+        scope: $scope,
+        animation: 'slide-in-up',
+        backdropClickToClose: false
+    }).then(function(modal) {
+        $scope.viewEventModal = modal;
+
+    });
+
+    // Transform event data to show in view event modal ------------------------
+    $scope.openViewEvent = function(event){
+        $scope.editEventData = angular.copy(event);
+
+        if(!$scope.editEventData.rRule){
+            $scope.repeat.status = false;
+        }
+
+        // Set startDate & endDate to date -------------------------------------
+        $scope.editEventData.startDate = new Date($scope.editEventData.startDate);
+        $scope.editEventData.endDate = new Date($scope.editEventData.endDate);
+
+        // Set on/off repeat ---------------------------------------------------
+        if($scope.editEventData.rRule) {
+            $scope.repeat.status = true;
+        }
+
+        // Set end repeat value (never, after, on date) ------------------------
+        if($scope.editEventData.rRule && !$scope.editEventData.rRule.until) {
+            $scope.repeat.endRepeat = 'never';
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.until && !$scope.editEventData.rRule.count) {
+            $scope.repeat.endRepeat = 'date';
+            $scope.editEventData.rRule.until = new Date($scope.editEventData.rRule.until);
+        }
+        else if ($scope.editEventData.rRule && $scope.editEventData.rRule.until && $scope.editEventData.rRule.count){
+            $scope.repeat.endRepeat = 'after';
+        }
+
+        // Set value 'each' or 'on' ---------------------------------------------
+        if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'MONTHLY'){
+            if($scope.editEventData.rRule.bySetPos){
+                $scope.repeat.repeatBy = 'on';
+                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
+                setOnSequent();
+
+                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
+                if($scope.editEventData.rRule.byMonthDay){
+                    $scope.repeat.onThe.day = 'day';
+                }
+                else if($scope.editEventData.rRule.byWeekDay){
+                    setOnDay();
+                }
+            } else {
+                $scope.repeat.repeatBy = 'each';
+                if($scope.editEventData.rRule.byMonthDay){
+                    angular.forEach($scope.editEventData.rRule.byMonthDay, function(value){
+                        var monthDay = parseInt(value);
+                        if(monthDay > 0){
+                            $scope.eventMonthDay[monthDay-1] = true;
+                        }
+                    });
+                }
+            }
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'YEARLY'){
+            if($scope.editEventData.rRule.byMonth){
+                angular.forEach($scope.editEventData.rRule.byMonth, function(value){
+                    var month = parseInt(value);
+                    if(month > 0){
+                        $scope.eventMonth[month-1] = true;
+                    }
+                });
+            }
+            if($scope.editEventData.rRule.bySetPos){
+                $scope.repeat.repeatBy = 'on';
+                // Set 'on the' sequent to 'first', 'second', 'third', 'fourth', 'fifth' or 'last'
+                setOnSequent();
+
+                // Set 'on the' day to 'day', 'weekday', 'weekend', 'monday'...'sunday'
+                if($scope.editEventData.rRule.byMonthDay){
+                    $scope.repeat.onThe.day = 'day';
+                    $scope.repeat.checked = true;
+                }
+                else if($scope.editEventData.rRule.byWeekDay){
+                    $scope.repeat.checked = true;
+                    setOnDay();
+                }
+            }
+        }
+        else if($scope.editEventData.rRule && $scope.editEventData.rRule.frequency == 'WEEKLY') {
+            angular.forEach($scope.editEventData.rRule.byWeekDay, function(weekday){
+                if(weekday == 'MO') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'TU') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'WE') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'TH') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'FR') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'SA') { $scope.eventWeekDay[weekday] = true; }
+                else if(weekday == 'SU') { $scope.eventWeekDay[weekday] = true; }
+            });
+        }
+
+        if ($scope.editEventData.rRule){
+            $scope.editEventRrule();
+        }
+
+        $scope.viewEventModal.show();
+    };
+
+
+
+    $scope.showEventForReadOrEdit = function(event){
+        if($scope.calendarAccessRole == 'owner'){
+            $scope.openEditEvent(event);
+        }else{
+            $scope.openViewEvent(event);
+        }
+    };
+
 
     // -------------------------------------------------------------------------
     // Share Calendar ----------------------------------------------------------
