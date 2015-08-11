@@ -543,7 +543,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'after') {
@@ -553,7 +553,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'never') {
@@ -562,7 +562,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
         }
@@ -879,7 +879,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -890,7 +890,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -900,7 +900,7 @@ window.app.controller('DoorInfoController', function ($scope, $ionicPopup, $stat
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
