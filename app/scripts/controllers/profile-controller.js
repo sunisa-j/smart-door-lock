@@ -25,8 +25,7 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeo
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -37,8 +36,7 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeo
                     '<span class="flex-1">Confirm</span>' +
                     '</div>',
                     type: 'button-outline button-balanced',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
@@ -80,8 +78,7 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeo
                     '<span class="flex-1">Cancel</span>' +
                     '</div>',
                     type: 'button-outline button-stable',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return false;
                     }
                 },{
@@ -92,8 +89,7 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeo
                     '<span class="flex-1">Confirm</span>' +
                     '</div>',
                     type: 'button-outline button-balanced',
-                    onTap: function(e) {
-                        //e.preventDefault();
+                    onTap: function() {
                         return true;
                     }
                 }
@@ -104,21 +100,21 @@ window.app.controller('ProfileController', function ($scope, $ionicPopup, $timeo
             if(res) {
                 $scope.cardInfoObj[idCard].load = true;
 
-                if(latestStatus == 'Enabled') {
+                if(latestStatus === 'Enabled') {
 
                     $scope.cardInfoObj[idCard].status = 'Disabled';
 
                     $timeout( function (){
-                        if($scope.cardInfoObj[idCard].status == 'Disabled') {
+                        if($scope.cardInfoObj[idCard].status === 'Disabled') {
                             $scope.cardInfoObj[idCard].load = false;
                         }
                     }, 1500);
                 }
-                else if(latestStatus == 'Disabled') {
+                else if(latestStatus === 'Disabled') {
                     $scope.cardInfoObj[idCard].status = 'Enabled';
 
                     $timeout( function (){
-                        if($scope.cardInfoObj[idCard].status == 'Enabled') {
+                        if($scope.cardInfoObj[idCard].status === 'Enabled') {
                             $scope.cardInfoObj[idCard].load = false;
                         }
                     }, 1500);
