@@ -14,7 +14,7 @@ window.app.controller('MainMenuController', function ($scope, users, notificatio
     $scope.unreadMsg = 0;
 
     angular.forEach(notifData, function(value){
-        if(value.status == 'unread'){
+        if(value.status === 'unread'){
             $scope.unreadMsg++;
         }
     });
