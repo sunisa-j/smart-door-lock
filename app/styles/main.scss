@@ -1840,7 +1840,7 @@ ion-modal-view .item-input {
     border-right-color: transparent !important;
   }
   .fc-ltr .fc-basic-view .fc-day-number {
-    @extend .flex, .justify-content-center;
+    @extend .flex,.justify-content-center;
     text-align: center;
   }
   .today-number-circle-bg {
