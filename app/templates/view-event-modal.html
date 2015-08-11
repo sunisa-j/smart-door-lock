@@ -1,0 +1,71 @@
+<ion-modal-view>
+    <ion-header-bar>
+        <i class="ion-ios-close-empty modal-close-icon" ng-click="viewEventModal.hide()"></i>
+        <h1 class="title">Event Details</h1>
+    </ion-header-bar>
+
+    <ion-content class="custom-ion-content-bg">
+
+        <!--Title---------------------------------->
+        <div class="list">
+            <div class="item item-input small-item-input">
+                <span>Title</span>
+                <span style="color: #333; margin-left: 15px">{{editEventData.name}}</span>
+            </div>
+        </div>
+        <!--Description-->
+        <div class="list" style="padding-bottom: 15px">
+            <div class="item item-input small-item-input">
+                <span>Description</span>
+                <span style="color: #333; margin-left: 15px">{{editEventData.description}}</span>
+            </div>
+        </div>
+
+        <div class="item item-divider edit-button-item-divider">Date & Time</div>
+        <!--Start Date-->
+        <div class="list">
+            <label class="item item-input small-item-input">
+                <span>Start Date</span>
+                <span style="color: #333; margin-left: 15px">{{editEventData.startDate | date:"d MMM yyyy"}}</span>
+            </label>
+        </div>
+        <!--Start Time-->
+        <div class="list flex">
+            <label class="item item-input small-item-input flex-1">
+                <span>Start Time</span>
+                <span style="color: #333; margin-left: 15px">{{editEventData.startDate | date:"H:mm"}}</span>
+            </label>
+        </div>
+        <!--End Time-->
+        <div class="list flex">
+            <label class="item item-input small-item-input flex-1">
+                <span>End Time</span>
+                <span style="color: #333; margin-left: 15px">{{editEventData.endDate | date:"H:mm"}}</span>
+            </label>
+        </div>
+
+        <!--Show On the Data-->
+        <!--<div class="list flex" ng-show="repeat.repeatBy=='on'">-->
+            <!--<label class="item item-input small-item-input flex-1">-->
+                <!--<span>On the</span>-->
+                <!--{{repeat.onThe.sequent}} {{repeat.onThe.day}}-->
+            <!--</label>-->
+        <!--</div>-->
+
+
+        <!--Summary--------------------------------->
+        <div class="list" ng-show="editEventData.rRule">
+            <div class="flex align-items-flex-start" style="border: 0; background: transparent; padding-top: 15px">
+                <span style="padding-left: 15px; min-width: 98px">Summary</span>
+                <span style="padding-left: 15px; padding-right: 5px; color: #333; line-height: 24px">
+                    <span>{{ editDataRrule.toText() }}</span>
+                    <span ng-show="repeat.repeatBy=='on'" style="color: #898989">(On the {{repeat.onThe.sequent}} {{repeat.onThe.day}})</span>
+                </span>
+            </div>
+        </div>
+
+
+    </ion-content>
+
+</ion-modal-view>
+
