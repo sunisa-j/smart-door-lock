@@ -628,7 +628,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.createEventData.startDate),
                     until: new Date($scope.createEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'after') {
@@ -638,7 +638,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     count: $scope.createEventData.rRule.count,
                     dtstart: new Date($scope.createEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'never') {
@@ -647,7 +647,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     interval: $scope.createEventData.rRule.interval,
                     dtstart: new Date($scope.createEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
         }
@@ -964,7 +964,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.createEventData.startDate),
                     until: new Date($scope.createEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -975,7 +975,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     count: $scope.createEventData.rRule.count,
                     dtstart: new Date($scope.createEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -985,7 +985,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     interval: $scope.createEventData.rRule.interval,
                     dtstart: new Date($scope.createEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -1762,7 +1762,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'after') {
@@ -1772,7 +1772,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'never') {
@@ -1781,7 +1781,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
         }
@@ -2098,7 +2098,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -2109,7 +2109,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -2119,7 +2119,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
