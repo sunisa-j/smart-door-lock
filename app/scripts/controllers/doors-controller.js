@@ -16,18 +16,18 @@ window.app.controller('DoorsController', function ($scope, doorsAccess, $timeout
         e.stopPropagation();
         $scope.load[doorKey] = true;
 
-        if(latestLockStatus == 'locked') {
+        if(latestLockStatus === 'locked') {
             $scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState = 'unlocked';
             $timeout(function () {
-                if ($scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState == 'unlocked') {
+                if ($scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState === 'unlocked') {
                     $scope.load[doorKey] = false;
                 }
             }, 1500);
         }
-        else if(latestLockStatus == 'unlocked') {
+        else if(latestLockStatus === 'unlocked') {
             $scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState = 'locked';
             $timeout(function () {
-                if ($scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState == 'locked') {
+                if ($scope.doorsAccessData[groupKey].doorsAccess[doorKey].status.lockState === 'locked') {
                     $scope.load[doorKey] = false;
                 }
             }, 1500);
