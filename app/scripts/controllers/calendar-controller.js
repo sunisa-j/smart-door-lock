@@ -119,7 +119,6 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
                 }
             },
             viewRender: function(view, element){
-
                 element.addTouch();
             }
         }
