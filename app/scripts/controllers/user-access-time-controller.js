@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicPopup, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents, uiCalendarConfig) {
+window.app.controller('UserAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, RRule, moment, $ionicPopup, $ionicModal, usersCalendars, userAccessPolicies, doorsUsers, calendarEvents, uiCalendarConfig) {
 
     var doorUserId = $stateParams.doorUserId;
     var doorUser = doorsUsers('', 'object')[doorUserId];
@@ -63,7 +63,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
     // action sheet for select calendar type
     $scope.selectCalendarType = function() {
 
-        var hideSheet = $ionicActionSheet.show({
+        $ionicActionSheet.show({
             buttons: [
                 { text: '<i class="ion-ios-calendar-outline balanced"></i>Normal' },
                 { text: '<i class="ion-ios-calendar-outline energized"></i>Holiday' }
@@ -97,7 +97,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
         angular.forEach($scope.userCalendars, function(group){
             angular.forEach(group, function(value){
 
-                if($scope.calendarCheckbox[value.calendar.id] == true) {
+                if($scope.calendarCheckbox[value.calendar.id] === true) {
                     var calendarId = value.calendar.id;
                     //console.log("Selected: " + $scope.calendarCheckbox[calendarId]);
                     var dataAddtoUserAccessPolicies = {
@@ -140,7 +140,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
         normalEvents.value = [];
         holidayEvents.value = [];
 
-        if($scope.showEventsDataName.value == 'userAccess'){
+        if($scope.showEventsDataName.value === 'userAccess'){
             var userPolicyData = userAccessPolicies(doorUserId, 'object');
             var calendarEventsData = calendarEvents('', '', '','object');
             var calendarsSelected = [];
@@ -157,13 +157,13 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
             // Get Events from calendarsSelected to show when click 'View Access Time' button
             angular.forEach(calendarEventsData, function(event){
                 angular.forEach(calendarsSelected, function(calendar){
-                    if(event.calendar == calendar.calendar){
+                    if(event.calendar === calendar.calendar){
                         eventsData.value.push(event);
 
-                        if(calendar.type == 'normal'){
+                        if(calendar.type === 'normal'){
                             normalEvents.value.push(event);
                         }
-                        else if(calendar.type == 'holiday'){
+                        else if(calendar.type === 'holiday'){
                             holidayEvents.value.push(event);
                         }
                     }
@@ -1375,10 +1375,10 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
         else {
             var parent = current.parents('.fc-week');
             if(parent.context) {
-                day = parent.find("td.fc-day-number[data-date=" + dataDate + "]");
+                day = parent.find('td.fc-day-number[data-date=' + dataDate + ']');
             }
             else {
-                day = angular.element("td.fc-day-number[data-date=" + dataDate + "]");
+                day = angular.element('td.fc-day-number[data-date=' + dataDate + ']');
             }
         }
 
@@ -1406,10 +1406,10 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                 $scope.selectedDateEvents.push(event);
             }
         });
-    };
+    }
 
     function selectToday(element) {
-        uiCalendarConfig.calendars['calendarsEventsSelected'].fullCalendar('today');
+        uiCalendarConfig.calendars.calendarsEventsSelected.fullCalendar('today');
         selectDate(moment(), element);
     }
 
@@ -1439,7 +1439,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
 
                 element.addTouch();
             },
-            eventClick: function(event, element) {
+            eventClick: function(event) {
                 $scope.openViewEvent(event);
             }
         }
