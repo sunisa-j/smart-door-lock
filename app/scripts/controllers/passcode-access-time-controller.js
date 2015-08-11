@@ -9,7 +9,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
     $scope.userCalendars = usersCalendars(userId, '','passcodePolicies', passcodeUnlockId, '', '', 'array'); // Selected calendars this user can access
 
     // Get access time of title informaition
-    $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array', '');
+    $scope.passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'array');
 
     // Get passcode unlock name
     $scope.passcodeUnlockSelected = passcodeUnlock(doorId, passcodeUnlockId, 'selected');
@@ -1292,7 +1292,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
         holidayEvents.value = [];
 
         if($scope.showEventsDataName.value === 'passcodeUnlock'){
-            var passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'object', '');
+            var passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'object');
             var calendarEventsData = calendarEvents('', '', '','object');
             var calendarsSelected = [];
 
