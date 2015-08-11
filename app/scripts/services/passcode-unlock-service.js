@@ -54,7 +54,7 @@ window.app.factory('passcodeUnlock', function () {
         var passcodeUnlockDoorSelectedObj = {};
         angular.forEach(passcodeUnlockObj, function(passcode, key){
             var tmp = angular.copy(passcode);
-            if(tmp.door == doorId) {
+            if(tmp.door === doorId) {
                 passcodeUnlockDoorSelectedObj[key] = {};
                 passcodeUnlockDoorSelectedObj[key].name = tmp.name;
                 passcodeUnlockDoorSelectedObj[key].passcode = tmp.passcode;
@@ -77,10 +77,10 @@ window.app.factory('passcodeUnlock', function () {
             return passcodeUnlockSelected;
         }
         else if (data === 'passcodeDoorArray') {
-            var passcodeDoorArray = []
-            if(doorId != ''){
+            var passcodeDoorArray = [];
+            if(doorId !== ''){
                 angular.forEach(passcodeUnlock, function(passcode){
-                    if(passcode.door == doorId){
+                    if(passcode.door === doorId){
                         passcodeDoorArray.push(passcode);
                     }
                 });

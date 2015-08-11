@@ -11,8 +11,8 @@ window.app.factory('users', function () {
             lastName: 'จุลรัตน์',
             gender: 'F',
             picture: null,
-            createdAt: "2015-06-06T00:02:07.000Z",
-            updatedAt: "2015-06-06T00:02:07.000Z"
+            createdAt: '2015-06-06T00:02:07.000Z',
+            updatedAt: '2015-06-06T00:02:07.000Z'
         },
         {
             id: 2,
@@ -22,8 +22,8 @@ window.app.factory('users', function () {
             lastName: 'นพรัตน์',
             gender: 'M',
             picture: null,
-            createdAt: "2015-06-06T00:02:07.000Z",
-            updatedAt: "2015-06-06T00:02:07.000Z"
+            createdAt: '2015-06-06T00:02:07.000Z',
+            updatedAt: '2015-06-06T00:02:07.000Z'
         },
         {
             id: 3,
@@ -33,8 +33,8 @@ window.app.factory('users', function () {
             lastName: 'วิวัฒนานนท์',
             gender: 'F',
             picture: null,
-            createdAt: "2015-06-06T00:02:07.000Z",
-            updatedAt: "2015-06-06T00:02:07.000Z"
+            createdAt: '2015-06-06T00:02:07.000Z',
+            updatedAt: '2015-06-06T00:02:07.000Z'
         }
     ];
 

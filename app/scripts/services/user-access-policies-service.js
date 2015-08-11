@@ -109,10 +109,10 @@ window.app.factory('userAccessPolicies', function (calendars) {
             var userTmp = angular.copy(user);
             var calendarsTmp = angular.copy(calendarsData);
 
-            if(userTmp.type == 'normal' && userTmp.doorUser == doorUserId) {
+            if(userTmp.type === 'normal' && userTmp.doorUser === doorUserId) {
                 var normalObj = {};
                 normalObj.id = key;
-                normalObj.type = 'normal',
+                normalObj.type = 'normal';
                     normalObj.calendar = {
                         id: user.calendar,
                         public: calendarsTmp[userTmp.calendar].public,
@@ -122,10 +122,10 @@ window.app.factory('userAccessPolicies', function (calendars) {
 
                 userPoliciesArr[0].push(normalObj);
             }
-            else if(userTmp.type == 'holiday' && userTmp.doorUser == doorUserId) {
+            else if(userTmp.type === 'holiday' && userTmp.doorUser === doorUserId) {
                 var holidayObj = {};
                 holidayObj.id = key;
-                holidayObj.type = 'holiday',
+                holidayObj.type = 'holiday';
                 holidayObj.calendar = {
                     id: user.calendar,
                     public: calendarsTmp[userTmp.calendar].public,
@@ -139,7 +139,7 @@ window.app.factory('userAccessPolicies', function (calendars) {
 
         var userPoliciesDoorSelectedObj = {};
         angular.forEach(userPoliciesObj, function(value, key){
-            if(value.doorUser == doorUserId){
+            if(value.doorUser === doorUserId){
                 userPoliciesDoorSelectedObj[key] = {};
                 userPoliciesDoorSelectedObj[key].type = value.type;
                 userPoliciesDoorSelectedObj[key].doorUser = value.doorUser;
@@ -152,9 +152,9 @@ window.app.factory('userAccessPolicies', function (calendars) {
             }
         });
 
-        if(data == 'object') {
+        if(data === 'object') {
             return userPoliciesDoorSelectedObj;
-        }else if(data == 'array') {
+        }else if(data === 'array') {
             return userPoliciesArr;
         }
     };

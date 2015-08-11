@@ -35,7 +35,7 @@ window.app.factory('passcodePolicies', function (calendars) {
     // Get Calendars Data
     var calendarsData = calendars;
 
-    return function(passcodeUnlockId, data, addObj){
+    return function(passcodeUnlockId, data){
 
         // group follow passcode policy type
         var passcodePoliciesArr = [];
@@ -47,10 +47,10 @@ window.app.factory('passcodePolicies', function (calendars) {
             var passcodePolicyTmp = angular.copy(passcodePolicy);
             var calendarsTmp = angular.copy(calendarsData);
 
-            if(passcodePolicyTmp.type == 'normal' && passcodePolicyTmp.passcode == passcodeUnlockId) {
+            if(passcodePolicyTmp.type === 'normal' && passcodePolicyTmp.passcode === passcodeUnlockId) {
                 var normalObj = {};
                 normalObj.id = key;
-                normalObj.type = 'normal',
+                normalObj.type = 'normal';
                 normalObj.calendar = {
                     id: passcodePolicy.calendar,
                     public: calendarsTmp[passcodePolicyTmp.calendar].public,
@@ -60,10 +60,10 @@ window.app.factory('passcodePolicies', function (calendars) {
 
                 passcodePoliciesArr[0].push(normalObj);
             }
-            else if(passcodePolicyTmp.type == 'holiday' && passcodePolicyTmp.passcode == passcodeUnlockId) {
+            else if(passcodePolicyTmp.type === 'holiday' && passcodePolicyTmp.passcode === passcodeUnlockId) {
                 var holidayObj = {};
                 holidayObj.id = key;
-                holidayObj.type = 'holiday',
+                holidayObj.type = 'holiday';
                 holidayObj.calendar = {
                     id: passcodePolicy.calendar,
                     public: calendarsTmp[passcodePolicyTmp.calendar].public,
@@ -82,7 +82,7 @@ window.app.factory('passcodePolicies', function (calendars) {
             var passcodePolicyTmp = angular.copy(passcodePolicy);
             var calendarsTmp = angular.copy(calendarsData);
 
-            if(passcodePolicyTmp.passcode == passcodeUnlockId) {
+            if(passcodePolicyTmp.passcode === passcodeUnlockId) {
                 passcodePoliciesSelectedObj[key] = {};
                 passcodePoliciesSelectedObj[key].passcode = passcodeUnlockId;
                 passcodePoliciesSelectedObj[key].type = passcodePolicyTmp.type;
@@ -100,9 +100,6 @@ window.app.factory('passcodePolicies', function (calendars) {
         }
         else if(data === 'array') {
             return passcodePoliciesArr;
-        }
-        else if(data === 'add') {
-            console.log('add passcode unlock');
         }
     };
 });

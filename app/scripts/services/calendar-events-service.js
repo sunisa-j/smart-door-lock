@@ -173,9 +173,9 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
         // group events by calender selected
         var calendarSelectedEvents = [];
 
-        if(calendarId != '') {
+        if(calendarId !== '') {
             angular.forEach(calendarEvents, function(value){
-                if(value.calendar == calendarId){
+                if(value.calendar === calendarId){
                     var tmp = angular.copy(value);
                     tmp.title = value.name;
                     tmp.start = value.startDate;
@@ -202,13 +202,13 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
         }
         else if (data === 'doorUserEvents'){ // Events in any calendar association with doorId & userId
 
-            if(userId != '' && doorId != '') {
+            if(userId !== '' && doorId !== '') {
                 // group events by door and user selected (in calendars this user is 'owner')
                 var doorUserEvents = [];
                 var doorUsersData = doorsUsers(doorId, 'array');
                 var doorUserId = '';
                 angular.forEach(doorUsersData, function(doorUsers){
-                    if(doorUsers.user.id == userId){
+                    if(doorUsers.user.id === userId){
                         doorUserId = doorUsers.id;
                     }
                 });
@@ -220,7 +220,7 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                 angular.forEach(userAccessPoliciesData, function(userAccessPolicy){
                     angular.forEach(calendarEvents, function(event){
 
-                        if(userAccessPolicy.calendar.id == event.calendar){
+                        if(userAccessPolicy.calendar.id === event.calendar){
                             var tmp = angular.copy(event);
                             tmp.title = event.name;
                             tmp.start = event.startDate;
@@ -229,11 +229,11 @@ window.app.factory('calendarEvents', function (doorsUsers, userAccessPolicies) {
                     });
                 });
 
+                return doorUserEvents;
+
             }else{
                 console.log('userId or doorId is undefined');
             }
-
-            return doorUserEvents;
         }
     };
 });

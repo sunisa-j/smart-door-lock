@@ -17,7 +17,7 @@ window.app.factory('nfcDevices', function () {
 
     // transform calendars to obj
     var nfcDevicesObj = {};
-    angular.forEach(accessLogs, function(value){
+    angular.forEach(nfcDevices, function(value){
         nfcDevicesObj[value.id] = {};
         nfcDevicesObj[value.id].user = value.user;
         nfcDevicesObj[value.id].alias = value.alias;

@@ -52,10 +52,10 @@ window.app.factory('autoReleasePolicies', function (calendars) {
             var autoReleaseTmp = angular.copy(autoRelease);
             var calendarsTmp = angular.copy(calendarsData);
 
-            if(autoReleaseTmp.type == 'normal' && autoReleaseTmp.door == doorId) {
+            if(autoReleaseTmp.type === 'normal' && autoReleaseTmp.door === doorId) {
                 var normalObj = {};
                 normalObj.id = key;
-                normalObj.type = 'normal',
+                normalObj.type = 'normal';
                 normalObj.calendar = {
                     id: autoRelease.calendar,
                     public: calendarsTmp[autoReleaseTmp.calendar].public,
@@ -65,10 +65,10 @@ window.app.factory('autoReleasePolicies', function (calendars) {
 
                 autoReleasePoliciesArr[0].push(normalObj);
             }
-            else if(autoReleaseTmp.type == 'holiday' && autoReleaseTmp.door == doorId) {
+            else if(autoReleaseTmp.type === 'holiday' && autoReleaseTmp.door === doorId) {
                 var holidayObj = {};
                 holidayObj.id = key;
-                holidayObj.type = 'holiday',
+                holidayObj.type = 'holiday';
                 holidayObj.calendar = {
                     id: autoRelease.calendar,
                     public: calendarsTmp[autoReleaseTmp.calendar].public,
@@ -82,7 +82,7 @@ window.app.factory('autoReleasePolicies', function (calendars) {
 
         var autoReleasePoliciesDoorSelectedObj = {};
         angular.forEach(autoReleasePoliciesObj, function(value, key){
-            if(value.door == doorId){
+            if(value.door === doorId){
                 autoReleasePoliciesDoorSelectedObj[key] = {};
                 autoReleasePoliciesDoorSelectedObj[key].type = value.type;
                 autoReleasePoliciesDoorSelectedObj[key].door = value.door;

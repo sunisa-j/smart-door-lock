@@ -29,9 +29,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door2',
@@ -52,9 +52,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door3',
@@ -75,9 +75,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door4',
@@ -98,9 +98,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door5',
@@ -121,9 +121,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door6',
@@ -144,9 +144,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         },
         {
             id: 'door7',
@@ -167,9 +167,9 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
                 wrongCodeEntryLimit: 5,
                 userCodeTemporaryDisableTime: 180
             },
-            deviceUpdatedAt: "2015-05-17T14:49:18.000Z",
-            createdAt: "2015-02-27T12:31:45.000Z",
-            updatedAt: "2015-02-27T12:31:45.000Z"
+            deviceUpdatedAt: '2015-05-17T14:49:18.000Z',
+            createdAt: '2015-02-27T12:31:45.000Z',
+            updatedAt: '2015-02-27T12:31:45.000Z'
         }
     ];
 
@@ -215,7 +215,7 @@ window.app.factory('doorsAccess', function (doorGroups, doorsUsers) {
 
                 angular.forEach(doorsUsersData, function (doorUser, doorUserKey){
 
-                    if((group.id == door.group) && (doorUser.user.id == userId)){
+                    if((group.id === door.group) && (doorUser.user.id === userId)){
 
                         doorsAccess2[group.id].doorsAccess[door.id] = {};
                         doorsAccess2[group.id].doorsAccess[door.id].name = door.name;

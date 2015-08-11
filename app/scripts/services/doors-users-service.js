@@ -16,9 +16,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: false
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser12',
@@ -33,9 +33,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser13',
@@ -50,9 +50,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser14',
@@ -67,9 +67,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser15',
@@ -84,9 +84,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser16',
@@ -101,9 +101,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser17',
@@ -118,9 +118,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser2',
@@ -135,9 +135,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 1,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 1,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser22',
@@ -152,9 +152,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 2,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 2,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         },
         {
             id: 'doorUser3',
@@ -169,9 +169,9 @@ window.app.factory('doorsUsers', function (users) {
                 grant: true
             },
             createdBy: 3,
-            createdAt: "2015-06-18T08:47:09.000Z",
+            createdAt: '2015-06-18T08:47:09.000Z',
             updatedBy: 3,
-            updatedAt: "2015-06-18T08:47:09.000Z"
+            updatedAt: '2015-06-18T08:47:09.000Z'
         }
     ];
 
@@ -182,7 +182,7 @@ window.app.factory('doorsUsers', function (users) {
         var doorUsersObj = {};
         var doorUsersArr = [];
 
-        if(doorId == '') {
+        if(doorId === '') {
             angular.forEach(doorsUsers, function(value){
 
                 doorUsersObj[value.id] = {};
@@ -220,7 +220,7 @@ window.app.factory('doorsUsers', function (users) {
             });
         }else {
             angular.forEach(doorsUsers, function (value) {
-                if (value.door == doorId) {
+                if (value.door === doorId) {
                     doorUsersObj[value.id] = {};
                     doorUsersObj[value.id].id = value.id;
                     doorUsersObj[value.id].door = value.door;

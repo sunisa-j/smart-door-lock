@@ -27,7 +27,7 @@ window.app.factory('mifare', function () {
 
     // transform calendars to obj
     var mifareObj = {};
-    angular.forEach(accessLogs, function(value){
+    angular.forEach(mifare, function(value){
         mifareObj[value.id] = {};
         mifareObj[value.id].user = value.user;
         mifareObj[value.id].uid = value.uid;

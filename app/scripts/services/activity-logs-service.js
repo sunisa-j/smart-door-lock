@@ -80,6 +80,9 @@ window.app.factory('activityLogs', function () {
 
             // send msg, startDate, endDate to server
             // if success, return data
+            console.log('msg', msg);
+            console.log('startDate', startDate);
+            console.log('endDate', endDate);
 
             return activityLogs;
         }

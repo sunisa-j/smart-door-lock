@@ -78,10 +78,10 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
 
-                if(userCalendar.user.id == userId) {
+                if(userCalendar.user.id === userId) {
                     angular.forEach(passcodePoliciesData, function (passcodePolicy) {
 
-                        if ((passcodePolicy.passcode == passcodeId) && (passcodePolicy.calendar.id == userCalendar.calendar)) {
+                        if ((passcodePolicy.passcode === passcodeId) && (passcodePolicy.calendar.id === userCalendar.calendar)) {
                             //console.log(userCalendar);
                             delete userCalendarsNotSelected[userCalendarId];
                         }
@@ -99,10 +99,10 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
 
-                if(userCalendar.user.id == userId) {
+                if(userCalendar.user.id === userId) {
                     angular.forEach(autoReleasePoliciesData, function (autoReleasePolicy) {
 
-                        if ((autoReleasePolicy.door == doorId) && (autoReleasePolicy.calendar.id == userCalendar.calendar)) {
+                        if ((autoReleasePolicy.door === doorId) && (autoReleasePolicy.calendar.id === userCalendar.calendar)) {
                             //console.log(userCalendar);
                             delete userCalendarsNotSelected[userCalendarId];
                         }
@@ -119,10 +119,10 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
 
             angular.forEach(userCalendarsNotSelected, function(userCalendar, userCalendarId){
 
-                if(userCalendar.user.id == userId) {
+                if(userCalendar.user.id === userId) {
                     angular.forEach(userAccessPoliciesData, function (userAccessPolicy) {
 
-                        if ((userAccessPolicy.doorUser == doorUserId) && (userAccessPolicy.calendar.id == userCalendar.calendar)) {
+                        if ((userAccessPolicy.doorUser === doorUserId) && (userAccessPolicy.calendar.id === userCalendar.calendar)) {
                             //console.log(userCalendar);
                             delete userCalendarsNotSelected[userCalendarId];
                         }
@@ -136,7 +136,7 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
         angular.forEach(userCalendarsNotSelected, function(value, key){
             var userCalendarTmp = angular.copy(value);
 
-            if (userCalendarTmp.user.id == userId && userCalendarTmp.accessRole == 'owner') {
+            if (userCalendarTmp.user.id === userId && userCalendarTmp.accessRole === 'owner') {
                 var userCalendars = {};
                 userCalendars.id = key;
                 userCalendars.accessRole = userCalendarTmp.accessRole;
@@ -148,17 +148,17 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
                 };
                 accessRoleArr[0].push(userCalendars) ;
             }
-            else if (userCalendarTmp.user.id == userId && userCalendarTmp.accessRole != 'owner') {
-                var userCalendars = {};
-                userCalendars.id = key;
-                userCalendars.accessRole = userCalendarTmp.accessRole;
-                userCalendars.calendar = {
+            else if (userCalendarTmp.user.id === userId && userCalendarTmp.accessRole !== 'owner') {
+                var userCalendars2 = {};
+                userCalendars2.id = key;
+                userCalendars2.accessRole = userCalendarTmp.accessRole;
+                userCalendars2.calendar = {
                     id: userCalendarTmp.calendar,
                     public: calendarsTmp[userCalendarTmp.calendar].public,
                     name: calendarsTmp[userCalendarTmp.calendar].name,
                     description: calendarsTmp[userCalendarTmp.calendar].description
                 };
-                accessRoleArr[1].push(userCalendars) ;
+                accessRoleArr[1].push(userCalendars2) ;
             }
         });
 
@@ -174,9 +174,9 @@ window.app.factory('usersCalendars', function (calendars, passcodePolicies, auto
             var usersData = users('object');
 
             angular.forEach(usersCalendars, function(value){
-                if(value.calendar == calendarId){
+                if(value.calendar === calendarId){
                     var tmp = angular.copy(value);
-                    tmp['user'] = usersData[value.user];
+                    tmp.user = usersData[value.user];
                     tmp.user.id = value.user;
 
                     calendarUsers.push(tmp);
