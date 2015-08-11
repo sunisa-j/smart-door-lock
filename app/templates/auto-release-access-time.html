@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="custom-row" ng-repeat="autoReleasePolicy in group" style="cursor: default">
+            <div class="custom-row" ng-repeat="autoReleasePolicy in group" ng-click="openViewEvent(event)">
                 <div class="custom-row-icon">
                     <i class="ion-ios-calendar-outline" ng-class="{'balanced':autoReleasePolicy.type=='normal', 'energized':autoReleasePolicy.type=='holiday'}"></i>
                 </div>
