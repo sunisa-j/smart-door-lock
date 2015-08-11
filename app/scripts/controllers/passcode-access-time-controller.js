@@ -1,6 +1,6 @@
 'use strict';
 
-window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicPopup, $ionicModal, passcodePolicies, usersCalendars, calendarEvents, passcodeUnlock, uiCalendarConfig) {
+window.app.controller('PasscodeAccessTimeController', function ($scope, $stateParams, $ionicActionSheet, $ionicPopup, RRule, moment, $ionicModal, passcodePolicies, usersCalendars, calendarEvents, passcodeUnlock, uiCalendarConfig) {
 
     var doorId = $stateParams.doorId;
     var passcodeUnlockId = $stateParams.passcodeUnlockId;
@@ -66,7 +66,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
     // action sheet for select calendar type
     $scope.selectCalendarType = function() {
 
-        var hideSheet = $ionicActionSheet.show({
+        $ionicActionSheet.show({
             buttons: [
                 { text: '<i class="ion-ios-calendar-outline balanced"></i>Normal' },
                 { text: '<i class="ion-ios-calendar-outline energized"></i>Holiday' }
@@ -101,7 +101,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
         angular.forEach($scope.userCalendars, function(group){
             angular.forEach(group, function(value){
 
-                if($scope.calendarCheckbox[value.calendar.id] == true) {
+                if($scope.calendarCheckbox[value.calendar.id] === true) {
                     var calendarId = value.calendar.id;
                     //console.log("Selected: " + $scope.calendarCheckbox[calendarId]);
                     var dataAddtoPasscodePolicies = {
@@ -1291,7 +1291,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
         normalEvents.value = [];
         holidayEvents.value = [];
 
-        if($scope.showEventsDataName.value == 'passcodeUnlock'){
+        if($scope.showEventsDataName.value === 'passcodeUnlock'){
             var passcodePoliciesData = passcodePolicies(passcodeUnlockId, 'object', '');
             var calendarEventsData = calendarEvents('', '', '','object');
             var calendarsSelected = [];
@@ -1308,13 +1308,13 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
             // Get Events from calendarsSelected to show when click 'View Access Time' button
             angular.forEach(calendarEventsData, function(event){
                 angular.forEach(calendarsSelected, function(calendar){
-                    if(event.calendar == calendar.calendar){
+                    if(event.calendar === calendar.calendar){
                         eventsData.value.push(event);
 
-                        if(calendar.type == 'normal'){
+                        if(calendar.type === 'normal'){
                             normalEvents.value.push(event);
                         }
-                        else if(calendar.type == 'holiday'){
+                        else if(calendar.type === 'holiday'){
                             holidayEvents.value.push(event);
                         }
                     }
@@ -1379,10 +1379,10 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
         else {
             var parent = current.parents('.fc-week');
             if(parent.context) {
-                day = parent.find("td.fc-day-number[data-date=" + dataDate + "]");
+                day = parent.find('td.fc-day-number[data-date=' + dataDate + ']');
             }
             else {
-                day = angular.element("td.fc-day-number[data-date=" + dataDate + "]");
+                day = angular.element('td.fc-day-number[data-date=' + dataDate + ']');
             }
         }
 
@@ -1410,10 +1410,10 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
                 $scope.selectedDateEvents.push(event);
             }
         });
-    };
+    }
 
     function selectToday(element) {
-        uiCalendarConfig.calendars['calendarsEventsSelected'].fullCalendar('today');
+        uiCalendarConfig.calendars.calendarsEventsSelected.fullCalendar('today');
         selectDate(moment(), element);
     }
 
@@ -1443,7 +1443,7 @@ window.app.controller('PasscodeAccessTimeController', function ($scope, $statePa
 
                 element.addTouch();
             },
-            eventClick: function(event, element) {
+            eventClick: function(event) {
                 $scope.openViewEvent(event);
             }
         }
