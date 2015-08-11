@@ -146,8 +146,8 @@ input[type="datetime"], input[type="datetime-local"], input[type="date"], input[
   padding-bottom: 0 !important;
 }
 .small-item-input textarea, input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"] {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
+  padding-top: 7px !important;
+  padding-bottom: 7px !important;
 }
 select {
   @extend .pointer;
@@ -1840,7 +1840,7 @@ ion-modal-view .item-input {
     border-right-color: transparent !important;
   }
   .fc-ltr .fc-basic-view .fc-day-number {
-    @extend .flex,.justify-content-center;
+    @extend .flex, .justify-content-center;
     text-align: center;
   }
   .today-number-circle-bg {
@@ -1852,8 +1852,11 @@ ion-modal-view .item-input {
     margin: auto;
   }
   .fc-row.fc-week.fc-widget-content {
-    min-height: 48px !important;
-    height: 48px !important;
+    min-height: 46px !important;
+    height: 46px !important;
+  }
+  .fc-basic-view td.fc-day-number {
+    padding-top: 5px;
   }
 }
 @media (min-width: 421px){
@@ -1867,15 +1870,14 @@ ion-modal-view .item-input {
     border-left-color: transparent;
     border-right-color: transparent;
   }
-  .fc-ltr .fc-basic-view .fc-day-number {
-    @extend .flex, .justify-content-center;
-    text-align: right;
-  }
   .today-number-circle-bg {
     position: absolute;
   }
   .number-circle-bg {
     position: absolute;
+  }
+  .fc-basic-view td.fc-day-number {
+    padding-top: 2px;
   }
 }
 @media (min-width: 768px) {
