@@ -677,7 +677,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'after') {
@@ -687,7 +687,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
             else if ($scope.repeat.endRepeat == 'never') {
@@ -696,7 +696,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent)
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent)
                 });
             }
         }
@@ -1013,7 +1013,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     dtstart: new Date($scope.editEventData.startDate),
                     until: new Date($scope.editEventData.rRule.until),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -1024,7 +1024,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     count: $scope.editEventData.rRule.count,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
@@ -1034,7 +1034,7 @@ window.app.controller('UserAccessTimeController', function ($scope, $stateParams
                     interval: $scope.editEventData.rRule.interval,
                     dtstart: new Date($scope.editEventData.startDate),
                     byweekday: [RRule.SU],
-                    bysetpos: getBySetPos($scope.repeat.onThe.sequent),
+                    bysetpos: setBySetPos($scope.repeat.onThe.sequent),
                     bymonth: setByMonth()
                 });
             }
