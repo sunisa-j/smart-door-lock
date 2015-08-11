@@ -22,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="custom-row" ng-repeat="passcodePolicy in group" style="cursor: default">
+            <div class="custom-row" ng-repeat="passcodePolicy in group" ng-click="openViewEvent(event)">
                 <div class="custom-row-icon">
                     <i class="ion-ios-calendar-outline" ng-class="{'balanced':passcodePolicy.type=='normal', 'energized':passcodePolicy.type=='holiday'}"></i>
                 </div>
