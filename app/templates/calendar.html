@@ -17,8 +17,7 @@
         </div>
         <div ng-if="selectedDateEvents.length == 0" style="text-align: center; margin-top: 15px" class="stable">No Events</div>
 
-        <div class="custom-time-row" ng-repeat="event in selectedDateEvents"
-                ng-click="openEditEvent(event)">
+        <div class="custom-time-row" ng-repeat="event in selectedDateEvents" ng-click="showEventForReadOrEdit(event)">
             <div class="custom-time-row-first-col">
                 {{transformDate(event.startDate)}} - {{transformDate(event.endDate)}}
             </div>
