@@ -15,7 +15,9 @@
         <div class="item item-divider date-selected-item-divider">
             {{dateSelected.format('ddd, D MMM YYYY')}}
         </div>
-        <div ng-if="selectedDateEvents.length == 0" style="text-align: center; margin-top: 15px" class="stable">No Events</div>
+        <div ng-if="selectedDateEvents.length == 0" style="text-align: center; margin-top: 15px" class="stable">No
+            Events
+        </div>
 
         <div class="custom-time-row" ng-repeat="event in selectedDateEvents" ng-click="showEventForReadOrEdit(event)">
             <div class="custom-time-row-first-col">
@@ -33,12 +35,15 @@
     <div class="bar bar-footer bar-light custom-bar-footer flex">
         <!--Calendar Today Button-->
         <div class="flex-1">
-            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px" id="today-button" ng-click="todayClick()">
+            <button class="button button-clear button-assertive" style="font-size: 14px; padding: 0 15px"
+                    id="today-button" ng-click="todayClick()">
                 Today
             </button>
         </div>
         <div style="flex-basis: 148px; height: 100%" ng-show="calendarAccessRole=='owner'">
-            <button class="button button-clear button-dark" style="font-size: 14px; height: 100%; width: 148px; text-align: left" ui-sref="mainMenu.calendars.calendar.calendarSettings">
+            <button class="button button-clear button-dark"
+                    style="font-size: 14px; height: 100%; width: 148px; text-align: left"
+                    ui-sref="mainMenu.calendars.calendar.calendarSettings">
                 <i class="ion-ios-gear-outline" style="font-size: 20px"></i>&nbsp;
                 <span style="position: absolute; top: -1px; right: 0; width: 120px">Calendar Settings</span>
             </button>
