@@ -1814,7 +1814,7 @@ ion-modal-view .item-input {
   .event-date-input {
     width: 128px;
   }
-  /* Override full calendar style (Mobile Only) */
+  /* Override full calendar style (Mobile Only)
   .fc-event-container .fc-event {
     background-color: transparent !important;
     border-color: transparent !important;
@@ -1857,12 +1857,18 @@ ion-modal-view .item-input {
   .fc-basic-view td.fc-day-number {
     padding-top: 5px;
   }
+  .fc-content-skeleton tbody tr {
+    visibility: hidden;
+  }
+  .fc-content-skeleton tbody tr:first-child {
+    visibility: visible;
+  }*/
 }
 @media (min-width: 421px){
   .event-date-input {
     width: 160px;
   }
-  /* Override full calendar style (Mobile Only) */
+  /* Override full calendar style (Mobile Only)
   .fc td {
     border-bottom-color: transparent;
     border-left-color: transparent;
@@ -1876,7 +1882,7 @@ ion-modal-view .item-input {
   }
   .fc-basic-view td.fc-day-number {
     padding-top: 2px;
-  }
+  }*/
 }
 @media (min-width: 768px) {
   .main-menu-button {
