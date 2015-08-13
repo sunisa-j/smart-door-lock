@@ -155,10 +155,6 @@
 td {
     position: relative;
 }
-.fc-event-container .fc-event {
-    background-color: rgba(0, 201, 13, 0.2) !important;
-    border-color: rgba(0, 201, 13, 0.2) !important;
-}
 .fc-view, .fc-view > table td:first-child {
     border-left: 0;
 }
