@@ -312,7 +312,8 @@ input[type=radio]:disabled {
 .custom-button-right-text .text-before-arrow-right {
   @extend .flex-1;
   font-size: $font-size-base;
-  min-width: 100px;
+  min-width: 140px;
+  text-align: right;
   padding: 0px 2px 0px 10px;
 }
 .custom-button-right-text i {
