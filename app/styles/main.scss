@@ -1703,10 +1703,10 @@ ion-modal-view .item-input {
 }
 .fade-out {
   opacity:0;
-  transition: opacity .05s ease-out;
-  -moz-transition: opacity .05s ease-out;
-  -webkit-transition: opacity .05s ease-out;
-  -o-transition: opacity .05s ease-out;
+  transition: opacity 0s ease-out;
+  -moz-transition: opacity 0s ease-out;
+  -webkit-transition: opacity 0s ease-out;
+  -o-transition: opacity 0s ease-out;
 }
 .fade-in {
   opacity:1;
