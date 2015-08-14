@@ -103,22 +103,17 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
             height: 480,
             columnFormat: 'dd',
             eventRender: function (event, element) {
-
                 var date = moment(event.start._d);
                 var eventTime = date.format('HH:mm');
-
                 element.children().html('<span class="fc-time">' + eventTime + '</span> <span class="fc-title">' + event.title + '</span>');
             },
             dayClick: function(date, jsEvent) {
                 selectDate(date, jsEvent.target);
             },
             eventClick: function(event) {
-
                 $scope.showEventForReadOrEdit(event);
             },
             dayRender: function (date, cell) {
-                //cell.addTouch();
-
                 if(date.isSame($scope.dateSelected, 'd')){
                     selectDate(date, cell);
                 }
@@ -2867,6 +2862,8 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
         $scope.editEventModal.hide();
     };
 
+
+
     // -------------------------------------------------------------------------
     // View Event --------------------------------------------------------------
     // -------------------------------------------------------------------------
@@ -2887,6 +2884,7 @@ window.app.controller('CalendarController', function ($scope, $stateParams, cale
 
         $scope.viewEventModal.show();
     };
+
 
 
     // -------------------------------------------------------------------------
