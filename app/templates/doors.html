@@ -20,18 +20,21 @@
                     </div>
 
                     <div class="custom-row-title">
-                        <div>{{doorData.name}}</div>
+                        <div>{{doorData.name}} {{doorData.status.lockState}}</div>
                         <div class="custom-row-desc">{{doorData.description}}</div>
                     </div>
 
-                    <div class="custom-row-button" ng-show="(doorData.permission.remoteAccess==true)&&(load[doorKey]==false)">
+                    <div class="custom-row-button" ng-show="(doorData.permission.remoteAccess==true)&&(load[doorKey]==false)"
+                         ng-class="{'fade-in':load[doorKey]==false, 'opacity-0':load[doorKey]==true,'fade-out':load[doorKey]==true, 'opacity-1':load[doorKey]==false}">
                         <button class="button button-outline button-small button-dark" ng-click="changeLockStatus($event, groupKey, doorKey, doorData.status.lockState)">
                             <span ng-show="doorData.status.lockState=='unlocked'">Lock</span>
                             <span ng-show="doorData.status.lockState=='locked'">Unlock</span>
                         </button>
                     </div>
-                    <div class="custom-row-spinner" ng-show="load[doorKey]==true">
+                    <div class="custom-row-spinner" ng-show="load[doorKey]==true"
+                         ng-class="{'fade-in':load[doorKey]==true, 'opacity-0':load[doorKey]==false,'fade-out':load[doorKey]==false, 'opacity-1':load[doorKey]==true}">
                         <ion-spinner class="spinner-energized" icon="ripple"></ion-spinner>
+                        <!--<img src="../images/ripple.gif"/>-->
                     </div>
 
                 </div>
