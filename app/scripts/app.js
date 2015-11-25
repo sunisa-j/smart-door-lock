@@ -18,6 +18,7 @@ app.run(function($ionicPlatform) {
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+        console.log("ready");
     });
 });
 
